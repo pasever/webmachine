@@ -11,7 +11,7 @@ const merge =        require('deepmerge')
 const { g, b, gr, r, y } = require('../console');
 
 let webMsg1 = {
-  message: "Thank you for your inquiry. Our virtual agents are curently in training",
+  message: "Thank you for your inquiry. Our virtual agents are currently in training",
   link: undefined
 }
 
