@@ -16,9 +16,9 @@ This will start create the build and start the nodejs server
 
 The code base is isomorphic, with key configuration data shared between client and server functions
 
-# ----
+## --------------------------------------------
 
-# Configuration updates that are needed in order to run this app in development mode
+## Configuration updates that are needed in order to run this app in development mode
 
 1. First, follow the instructions in the developer docs for forking and clone the application
 2. Once, the application is cloned, copy the configExample, and create a folder named config
