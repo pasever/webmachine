@@ -1,0 +1,40 @@
+End User License Agreement
+Copyright (c)2017 Strategic Machines
+
+Terms of Use
+This is an agreement between the end user and Strategic Machines Inc. -
+
+By using this web application, you agree with these terms of use.
+
+1. This application (hereinafter referred to as "the Application") is a platform service published by Strategic Machines, Inc. (herein referred to as Machines).
+
+2. You cannot use the Application without accepting the terms and conditions of this End User License Agreement (EULA).
+Once you open the Application, it is considered that you accepted all of the terms and conditions of the EULA and you will be licensed to use the Application under the acceptable use policy of this platform.
+
+3. Scope of permitted use. This application is customers, partners and employees of Strategic Machines, Inc. You may not modify, copy, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, sublicense, transfer, assign, rent, sell or otherwise
+convey any information, software, products or services obtained from the Application without the prior written consent from Machines.  You may not disassemble, decompile or otherwise reverse engineer all or any portion of the Application. You acknowledge that the Application is subject
+to applicable export control laws and regulations of the United States. You agree not to export or re-export the Application, directly or indirectly, to any countries that are subject to U.S. export restrictions.
+
+4. Upon your acceptance of the EULA, it is considered that you agreed to changing the terms and conditions of EULA at any time by Machines without your separate acceptance. When such changes are made to EULA, you shall be bound to the updated version.
+
+5. All the rights in the Application are owned by Machines and/or any third parties from whom Machines received the rights to provide the Application.
+
+6. Under all conditions, Machines can stop distributing the Application at our sole decision.
+
+7. No warranty; limitations of liability
+
+a. Machines provides the application “as is,” “with all faults” and “as available.” Machines does not guarantee the accuracy or timeliness of information available from the application. Your use of the application is at your sole risk.
+Machines gives no express warranties, guarantees or conditions. Machines excludes any implied warranties including those of merchantability, fitness for a particular purpose, workmanlike effort, title and non-infringement.
+
+b. Machines makes no representations about the suitability, reliability, availability, timeliness, or lack of viruses or other harmful components related to the application.
+
+c. You understand and agree that Machines shall not be liable to you for any direct, indirect, punitive, incidental, special consequential damages or any damages whatsoever including, without limitation damages for loss of use, data, or profits,
+arising out of or in any way connected with the use or performance of the application, with delay or inability to use the application, or the provision or failure to provide the application, whether based on contract, tort, negligence, strict liability or otherwise, even if FRSI has been advised of the possibility of damages.
+
+d. Each provision of this clause excluding or limiting liability shall be construed separately, applying and surviving even if for any reason one or other of these provisions is held inapplicable or unenforceable in any circumstances and shall remain in force notwithstanding the expiration or termination of this agreement.
+
+8. At all times your information provided in conjunction with the use of the Application will be treated in accordance with Privacy Policy of Strategic Machines, which can be viewed at:
+http://www.strategicmachines/pages/privacypolicy
+
+9. Delaware state law governs the interpretation of this Agreement, regardless of conflict of laws principles.
+You and we irrevocably consent to the exclusive jurisdiction and venue of the state or federal courts in Delaware, USA for all disputes arising out of or relating to this Agreement

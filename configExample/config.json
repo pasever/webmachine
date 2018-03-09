@@ -1,0 +1,72 @@
+{
+	"org": {
+		"name": "Strategic Machines",
+		"addr1": "100 Main Street",
+		"addr2": "Suite 100",
+		"city": "Charlotte",
+		"state": "NC",
+		"zip": "28211",
+		"url": "www.strategicmachines.io",
+		"contact": "ChaoticBot",
+		"phone": "+18882223434"
+	},
+	"db": {
+		"username": "xio",
+		"password": "",
+		"host": "",
+		"port": "",
+		"name": "",
+		"uri": ""
+	},
+	"githubrepo": {
+		"reponame": "test",
+		"token": ""
+	},
+	"sessionSecret": "",
+	"facebook": {
+		"clientID": "",
+		"clientSecret": "",
+		"callbackURL": "/auth/facebook/callback",
+		"profileFields": ["id", "displayName", "photos"]
+	},
+	"twitter": {
+		"consumerKey": "",
+		"consumerSecret": "",
+		"token": "",
+		"tokenSecret": "",
+		"callbackURL": "/auth/twitter/callback",
+		"username": "@chaoticbots",
+		"profileFields": ["id", "displayName", "photos"]
+	},
+	"twilio": {
+		"sid": "",
+		"token": "",
+	  "tokenSecret": "",
+	  "username": "",
+		"chaotic": ""
+	},
+	"redis": {
+		"host": "",
+		"port": 12345,
+		"password": ""
+	},
+	"chaoticsms": {
+		"host": "http://localhost",
+		"port": "3000",
+		"url": "http://localhost:3000"
+	},
+	"watsonclassifier": {
+		"description": "The intentionsv3 training dataset demonstration",
+		"url": "",
+		"username": "",
+		"password": "",
+		"classifier1": ""
+	},
+	"testdb": {
+		"url": "http://localhost:5002/api/agent",
+		"uri": "mongodb://localhost:27017/chaoticbots"
+	},
+	"port": 3000,
+	"token": ""
+
+}

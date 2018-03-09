@@ -1,0 +1,16 @@
+[
+	{
+		"name": "Test Strategic Machines",
+		"description": "Test db with primary auth records for orgs and marketplace collections",
+		"collections": ["platform", "partners", "workitems"],
+		"contact": "ChaoticRoute",
+		"sms": "",
+		"web": "demo",
+		"db": "machines",
+		"uri": "mongodb://localhost:27017/",
+		"username": "",
+		"password": "",
+		"isLive": false
+	}
+
+]
