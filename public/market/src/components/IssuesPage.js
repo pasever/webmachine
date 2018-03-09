@@ -8,7 +8,7 @@ import Issue                from './Issue';
 import Navigation           from './Navigation';
 import FilterBy             from './IssuesFilterBy';
 import SearchBar            from './SearchBar';
-import { issues_url }       from '../config/config.json';
+let issues_url = "http://localhost:3000/api/github/issues/jsdev17";
 
 export default class IssuesPage extends Component {
   constructor(props) {

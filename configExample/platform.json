@@ -10,7 +10,8 @@
 		"uri": "mongodb://localhost:27017/",
 		"username": "",
 		"password": "",
-		"isLive": false
+    "isLive": false,
+    "isPlatform": true
 	}
 
 ]

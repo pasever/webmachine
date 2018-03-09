@@ -6,7 +6,7 @@
 
 const Workitem  =            require('../schemas/Workitem').Workitem
 const mongoose =             require('mongoose')
-const testWorkitems  =       require('../data/Workitems')
+const testWorkitems  =       require('../data/workitems')
 const { g, b, gr, r, y } =   require('../../console')
 
 const limit = 1;

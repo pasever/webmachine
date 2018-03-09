@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navigation = ({currentLocation}) => (
   <ol className="breadcrumb sticky-top">
-    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+    <li className="breadcrumb-item"><Link to="/market">Home</Link></li>
     <li className="breadcrumb-item active">{currentLocation}</li>
   </ol>
 );

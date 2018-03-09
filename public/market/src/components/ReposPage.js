@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import axios                from 'axios';
 import Repo                 from './Repo';
 import SearchBar            from './SearchBar';
-import { repos_url }        from '../config/config.json';
+let repos_url = "http://localhost:3000/api/github/repos/jsdev17";
 
 export default class ReposPage extends Component {
   constructor(props) {
