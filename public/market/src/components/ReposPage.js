@@ -3,11 +3,12 @@
 ////////         WorkItem Home Page           ///////
 ////////////////////////////////////////////////////
 
-import React, { Component } from 'react';
-import axios                from 'axios';
-import Repo                 from './Repo';
-import SearchBar            from './SearchBar';
-let repos_url = "http://localhost:3000/api/github/repos/jsdev17";
+import React, { Component }    from 'react';
+import axios                   from 'axios';
+import Repo                    from './Repo';
+import SearchBar               from './SearchBar'; 
+import config                  from '../../../../config/';
+const { repos_url }            = config.init().githubrepo;
 
 export default class ReposPage extends Component {
   constructor(props) {
