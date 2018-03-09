@@ -3,12 +3,13 @@
 // Displays all issues of a given repository
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
-import axios                from 'axios';
-import Issue                from './Issue';
-import Navigation           from './Navigation';
-import FilterBy             from './IssuesFilterBy';
-import SearchBar            from './SearchBar';
-import { issues_url }       from '../config/config.json';
+import axios                  from 'axios';
+import Issue                  from './Issue';
+import Navigation             from './Navigation';
+import FilterBy               from './IssuesFilterBy';
+import SearchBar              from './SearchBar';
+import config                 from '../../../../config/';
+const { issues_url }          = config.init().githubrepo;
 
 export default class IssuesPage extends Component {
   constructor(props) {

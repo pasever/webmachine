@@ -20,7 +20,9 @@
 	},
 	"githubrepo": {
 		"reponame": "test",
-		"token": ""
+    "token": "",
+    "repos_url": "http://localhost:3000/api/github/repos/jsdev17",
+    "issues_url": "http://localhost:3000/api/github/issues/jsdev17"
 	},
 	"sessionSecret": "",
 	"facebook": {
