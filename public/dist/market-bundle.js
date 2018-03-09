@@ -7439,7 +7439,7 @@ var Navigation = function Navigation(_ref) {
       { className: 'breadcrumb-item' },
       _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: '/' },
+        { to: '/market' },
         'Home'
       )
     ),
