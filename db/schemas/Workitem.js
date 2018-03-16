@@ -30,6 +30,7 @@ const workitemObject = {
       "Must be a valid stage"
     ]
   },
+  assignee: String,
   dueDate: Date,
   blockchain: {
     id: String,
