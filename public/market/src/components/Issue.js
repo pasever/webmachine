@@ -8,7 +8,7 @@ const Issue = ({issue}) => (
         <h5 className='card-title issue-title'>{issue.title}</h5>
         <h6 className='card-subtitle mb-2 issue-price'>{`$${issue.price}`}</h6>
         <p className='card-text issue-assignee'>
-          {issue.stage === 'active' ? <p>Assigned to: {issue.assignee}</p> : ''}
+          {issue.stage === 'active' ? `Assigned to: ${issue.assignee}` : ''}
         </p>
         <span className='card-text text-muted issue-due-date'> 
           Due on: {issue.due_date}
