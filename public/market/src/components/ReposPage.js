@@ -24,7 +24,7 @@ export default class ReposPage extends Component {
   };
 
   componentDidMount() {
-    // Fetch repositories for given user
+    // Fetch repositories for given user  
     axios.get(repos_url)
       .then(res => {
         // Save data to state

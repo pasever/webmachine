@@ -90,7 +90,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "43eff53cc1569fc0fd57"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "52422938abe6d117a609"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -1401,7 +1401,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(82);
+var	fixUrls = __webpack_require__(81);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1805,7 +1805,30 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 19 */,
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+//////////////////////////////////////////////////////////////////////////
+/////////////////       server configs             //////////////////////
+////////////////////////////////////////////////////////////////////////
+
+exports.port = process.env.PORT || 3000;
+exports.origin = process.env.ORIGIN || 'http://localhost:' + exports.port;
+exports.init = function () {
+  return __webpack_require__(77);
+};
+exports.error = function () {
+  return __webpack_require__(78);
+};
+exports.platform = function () {
+  return __webpack_require__(79);
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
 /* 20 */,
 /* 21 */,
 /* 22 */,
@@ -1816,7 +1839,8 @@ module.exports = ReactPropTypesSecret;
 /* 27 */,
 /* 28 */,
 /* 29 */,
-/* 30 */
+/* 30 */,
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1862,7 +1886,7 @@ if (process.env.NODE_ENV === 'production') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1901,7 +1925,7 @@ var ExecutionEnvironment = {
 module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1982,7 +2006,7 @@ module.exports = EventListener;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2024,7 +2048,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 module.exports = getActiveElement;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2095,7 +2119,7 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2138,7 +2162,7 @@ function containsNode(outerNode, innerNode) {
 module.exports = containsNode;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2168,7 +2192,6 @@ function focusNode(node) {
 module.exports = focusNode;
 
 /***/ }),
-/* 37 */,
 /* 38 */,
 /* 39 */,
 /* 40 */,
@@ -3593,7 +3616,7 @@ module.exports = react;
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),l=__webpack_require__(31),B=__webpack_require__(7),C=__webpack_require__(6),ba=__webpack_require__(32),da=__webpack_require__(33),ea=__webpack_require__(34),fa=__webpack_require__(35),ia=__webpack_require__(36),D=__webpack_require__(11);
+var aa=__webpack_require__(0),l=__webpack_require__(32),B=__webpack_require__(7),C=__webpack_require__(6),ba=__webpack_require__(33),da=__webpack_require__(34),ea=__webpack_require__(35),fa=__webpack_require__(36),ia=__webpack_require__(37),D=__webpack_require__(11);
 function E(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:E("227");
 var oa={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function pa(a,b){return(a&b)===b}
 var ta={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ta,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){ua.hasOwnProperty(f)?E("48",f):void 0;var g=f.toLowerCase(),h=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:pa(h,b.MUST_USE_PROPERTY),
@@ -3893,14 +3916,14 @@ if (process.env.NODE_ENV !== "production") {
 var React = __webpack_require__(0);
 var invariant = __webpack_require__(8);
 var warning = __webpack_require__(12);
-var ExecutionEnvironment = __webpack_require__(31);
+var ExecutionEnvironment = __webpack_require__(32);
 var _assign = __webpack_require__(7);
 var emptyFunction = __webpack_require__(6);
-var EventListener = __webpack_require__(32);
-var getActiveElement = __webpack_require__(33);
-var shallowEqual = __webpack_require__(34);
-var containsNode = __webpack_require__(35);
-var focusNode = __webpack_require__(36);
+var EventListener = __webpack_require__(33);
+var getActiveElement = __webpack_require__(34);
+var shallowEqual = __webpack_require__(35);
+var containsNode = __webpack_require__(36);
+var focusNode = __webpack_require__(37);
 var emptyObject = __webpack_require__(11);
 var checkPropTypes = __webpack_require__(17);
 var hyphenateStyleName = __webpack_require__(59);
@@ -19441,12 +19464,26 @@ module.exports = camelize;
 /* 74 */,
 /* 75 */,
 /* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
+/* 77 */
+/***/ (function(module, exports) {
+
+module.exports = {"org":{"name":"Strategic Machines","addr1":"100 Main Street","addr2":"Suite 100","city":"Charlotte","state":"NC","zip":"28211","url":"www.strategicmachines.io","contact":"ChaoticBot","phone":"+19145005391"},"db":{"username":"xio","password":"Charl0tte","host":"ds153352.mlab.com","port":"53352","name":"sessionio","uri":"mongodb://xio:Charl0tte@ds019936.mlab.com:19936/chaoticbots"},"githubrepo":{"reponame":"test","token":"e967e0c644f48492c3c473db29b3adbb2ded5e1f","repos_url":"http://localhost:3000/api/github/repos/strategicmarket","issues_url":"http://localhost:3000/api/github/issues/strategicmarket"},"sessionSecret":"superhards3cr3t","facebook":{"clientID":"309077476219184","clientSecret":"21f9ea80ef5bd0d517062fd50cc932a3","callbackURL":"/auth/facebook/callback","profileFields":["id","displayName","photos"]},"twitter":{"consumerKey":"JA4BIib9jLsunB6LimJBBMxfj","consumerSecret":"uS2BN9IV9lKmdsRHZu3ta2B8Xl0PpxeQNj8BYhFfjevyTCrC7G","token":"3014822554-LL4oDX0uFrDfyTlKP7US4oS11zdUqsgfZ2eEejD","tokenSecret":"wvOR0cEg6RQOTlPfQLJRxFKUbNyr9WeA7dJFZ3pwLfqdU","callbackURL":"/auth/twitter/callback","username":"@chaoticbots","profileFields":["id","displayName","photos"]},"twilio":{"sid":"ACe2f5abf6cf7c589a662a8e38097bbac1","token":"ACe2f5abf6cf7c589a662a8e38097bbac1","tokenSecret":"09d6cb826012afbe4f0bca7ad3dfe33d","username":"+19145005391","chaotic":"+19802294921"},"redis":{"host":"redis-15416.c12.us-east-1-4.ec2.cloud.redislabs.com","port":15416,"password":"nashv1ll"},"chaoticsms":{"host":"http://localhost","port":"3000","url":"http://localhost:3000"},"watsonclassifier":{"description":"The intentionsv3 training dataset demonstration","url":"https://gateway.watsonplatform.net/natural-language-classifier/api","username":"947a6405-d061-43d7-a696-51daa119c32e","password":"n70l6K7n2Tnt","classifier1":"8fc4f0x298-nlc-232"},"testdb":{"url":"http://localhost:5002/api/agent","uri":"mongodb://localhost:27017/chaoticbots"},"port":3000,"token":"secret","confidenceLevel":60,"expirationInterval":1200,"agentCallbackThreshold":8,"machineIterationThrehold":20}
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports) {
+
+module.exports = {"e200":{"code":"200","message":"Intent detected. But no state machine found","description":"The intent of the parsed message was determined. But a corresponding state machine was not found","link":""},"e300":{"code":"300","message":"State Machine found. But no agent found","description":"State machines govern the sequence in which an agent's skills are executed. A corresponding agent was not found in db","link":""},"e400":{"code":"400","message":"Microservices error: application issue ","description":"Contact support. An application error was returned from serverless platform","link":""},"e410":{"code":"410","message":"Microservices error: response not returned ","description":"Contact support. No response received from serverless platform","link":""},"e420":{"code":"420","message":"Microservices error: http not valid ","description":"Contact support. Not a valid http uri for the agent skill","link":""},"e900":{"code":"900","message":"Fatal error in executing microservices (agent skills)","description":"Contact support. An attempt to access and execute a microservice failed","link":""},"e910":{"code":"910","message":"Fatal error in executing microservices (agent skills)","description":"Contact support. Agent configured with unknown skill type","link":""},"e920":{"code":"920","message":"Probable infinite loop detected with agent skill","description":"Contact support. An agent skill is repeatedly calling back interactions, exceeding defined threhold level ","link":""},"e930":{"code":"930","message":"Unexpected Platform Error - State Stage","description":"Contact support. An unexpected condition was encountered in the state stage process ","link":""},"e940":{"code":"940","message":"Potential loop or runaway state machine.","description":"Contact support. Machine iterations exceeded threshold set in config ","link":""}}
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports) {
+
+module.exports = [{"name":"Strategic Machines","description":"Test db with primary auth records for orgs and marketplace collections","collections":["platform","partners","workitems"],"contact":"ChaoticRoute","sms":"","web":"demo","db":"machines","uri":"mongodb://localhost:27017/","username":"","password":"","isLive":false,"isPlatform":true}]
+
+/***/ }),
 /* 80 */,
-/* 81 */,
-/* 82 */
+/* 81 */
 /***/ (function(module, exports) {
 
 
