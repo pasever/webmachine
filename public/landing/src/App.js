@@ -16,7 +16,7 @@ class App extends Component {
       // various levels.
       <Router>
         <div id='developer-landing-page'>
-          <Route exact path='/' component={Banner} />
+          <Route exact path='/landing' component={Banner} />
           <Route path='/docs' component={Docs} />
         </div>
       </Router>
