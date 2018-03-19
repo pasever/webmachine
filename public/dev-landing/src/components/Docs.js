@@ -8,7 +8,7 @@ import Brand from './Brand';
 import Sidebar from './Sidebar';
 import { Route } from "react-router-dom";
 // Routes for dynamically rendering documentation content
-import content_routes from '../docs/content-routes';
+import content_routes from '../../docs/content-routes';
 
 const Docs = () => (
   <div id="documentation">

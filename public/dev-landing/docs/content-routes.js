@@ -8,7 +8,7 @@
 import React from 'react';
 // Content is the "Master Component" that will render the content
 // of any .md file whose path is passed into it.
-import Content from '../components/Content';
+import Content from '../src/components/Content';
 // import paths to .md files
 import WhatIs from './what-is-strategic-machines.md';
 import WhyContribute from './why-contribute.md';
