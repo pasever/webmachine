@@ -7,7 +7,8 @@ let commonsPlugin = new webpack.optimize.CommonsChunkPlugin({
 module.exports = {
   entry: {  
     web: './public/web/src/index.js',
-    market: './public/market/src/index.js'
+    market: './public/market/src/index.js',
+    platform: './public/platform/src/index.js'
     },
   module: {
     rules: [
