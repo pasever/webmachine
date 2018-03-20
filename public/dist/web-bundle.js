@@ -1,64 +1,6 @@
-webpackJsonp([1],{
+webpackJsonp([2],{
 
-/***/ 20:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(13)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 21:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(13)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "html {\n  box-sizing: border-box;\n}\n*, *:before, *:after {\n  box-sizing: inherit;\n}\nhtml, body, .root {\n  height: 100%;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif;\n  line-height: 1.5;\n}\nbody, .app {\n  background: #f5f5f5;\n}\n\n.conversation-container > .header {\n  background-color: red;\n}\n\n.message > .response {\n  background-color: black;\n  color: white;\n}\n.snippet {\n  background-color: black;\n  font-family: sans-serif;\n  font-size: 12x;\n  line-height: 30px;\n  line-height: 1.5;\n  color: white;\n}\n.snippet > .snippet-title {\n  background-color: black;\n  font-family: sans-serif;\n  font-size: 15px;\n  line-height: 30px;\n  line-height: 1.5;\n  color: white;\n}\n\n.snippet > .snippet-details {\n  background-color: black;\n  font-family: sans-serif;\n  font-size: 10px;\n  line-height: 30px;\n  line-height: 1.5;\n  color: white;\n}\na.link {\n  background-color: black;\n  font-family: sans-serif;\n  font-size: 10px;\n  line-height: 30px;\n  line-height: 1.5;\n  color: white;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 52:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(31);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _App = __webpack_require__(63);
-
-var _App2 = _interopRequireDefault(_App);
-
-__webpack_require__(82);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('root'));
-
-module.hot.accept();
-
-/***/ }),
-
-/***/ 63:
+/***/ 105:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -76,49 +18,49 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _About = __webpack_require__(64);
+var _About = __webpack_require__(106);
 
 var _About2 = _interopRequireDefault(_About);
 
-var _Contact = __webpack_require__(65);
+var _Contact = __webpack_require__(107);
 
 var _Contact2 = _interopRequireDefault(_Contact);
 
-var _Footer = __webpack_require__(66);
+var _Footer = __webpack_require__(108);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _Header = __webpack_require__(67);
+var _Header = __webpack_require__(109);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Portfolio = __webpack_require__(68);
+var _Portfolio = __webpack_require__(110);
 
 var _Portfolio2 = _interopRequireDefault(_Portfolio);
 
-var _Market = __webpack_require__(69);
+var _Market = __webpack_require__(111);
 
 var _Market2 = _interopRequireDefault(_Market);
 
-var _Testimonials = __webpack_require__(70);
+var _Testimonials = __webpack_require__(112);
 
 var _Testimonials2 = _interopRequireDefault(_Testimonials);
 
-var _reactChatWidget = __webpack_require__(71);
+var _reactChatWidget = __webpack_require__(113);
 
-var _v = __webpack_require__(72);
+var _v = __webpack_require__(114);
 
 var _v2 = _interopRequireDefault(_v);
 
-var _mark = __webpack_require__(76);
+var _mark = __webpack_require__(118);
 
 var _mark2 = _interopRequireDefault(_mark);
 
-var _config = __webpack_require__(19);
+var _config = __webpack_require__(33);
 
 var _config2 = _interopRequireDefault(_config);
 
-__webpack_require__(80);
+__webpack_require__(119);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -313,7 +255,7 @@ exports.default = App;
 
 /***/ }),
 
-/***/ 64:
+/***/ 106:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -460,7 +402,7 @@ exports.default = About;
 
 /***/ }),
 
-/***/ 65:
+/***/ 107:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -706,7 +648,7 @@ exports.default = Contact;
 
 /***/ }),
 
-/***/ 66:
+/***/ 108:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -849,7 +791,7 @@ exports.default = Footer;
 
 /***/ }),
 
-/***/ 67:
+/***/ 109:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1033,7 +975,7 @@ exports.default = Header;
 
 /***/ }),
 
-/***/ 68:
+/***/ 110:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1137,7 +1079,7 @@ exports.default = Portfolio;
 
 /***/ }),
 
-/***/ 69:
+/***/ 111:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1294,7 +1236,7 @@ exports.default = Resume;
 
 /***/ }),
 
-/***/ 70:
+/***/ 112:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1396,7 +1338,7 @@ exports.default = Testimonials;
 
 /***/ }),
 
-/***/ 71:
+/***/ 113:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -16983,14 +16925,14 @@ function toggleInputDisabled() {
 
 /***/ }),
 
-/***/ 72:
+/***/ 114:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Unique ID creation requires a high quality random # generator.  We feature
 // detect to determine the best RNG source, normalizing to a function that
 // returns 128-bits of randomness, since that's what's usually required
-var rng = __webpack_require__(73);
-var bytesToUuid = __webpack_require__(75);
+var rng = __webpack_require__(115);
+var bytesToUuid = __webpack_require__(117);
 
 // **`v1()` - Generate time-based UUID**
 //
@@ -17093,7 +17035,7 @@ module.exports = v1;
 
 /***/ }),
 
-/***/ 73:
+/***/ 115:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {// Unique ID creation requires a high quality random # generator.  In the
@@ -17130,11 +17072,11 @@ if (!rng) {
 
 module.exports = rng;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(74)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(116)))
 
 /***/ }),
 
-/***/ 74:
+/***/ 116:
 /***/ (function(module, exports) {
 
 var g;
@@ -17162,7 +17104,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 75:
+/***/ 117:
 /***/ (function(module, exports) {
 
 /**
@@ -17192,20 +17134,20 @@ module.exports = bytesToUuid;
 
 /***/ }),
 
-/***/ 76:
+/***/ 118:
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjQ0RkI5RjMxODRBMTFFNUI2NjhFREQ4MjQ4NDNBQkMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjQ0RkI5RjQxODRBMTFFNUI2NjhFREQ4MjQ4NDNBQkMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGNDRGQjlGMTE4NEExMUU1QjY2OEVERDgyNDg0M0FCQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGNDRGQjlGMjE4NEExMUU1QjY2OEVERDgyNDg0M0FCQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpjGYvQAAAMAUExURQCZos9XSL8e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"
 
 /***/ }),
 
-/***/ 80:
+/***/ 119:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(20);
+var content = __webpack_require__(40);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -17213,14 +17155,14 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(14)(content, options);
+var update = __webpack_require__(21)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(true) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept(20, function() {
-			var newContent = __webpack_require__(20);
+		module.hot.accept(40, function() {
+			var newContent = __webpack_require__(40);
 			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
 			update(newContent);
 		});
@@ -17231,13 +17173,13 @@ if(true) {
 
 /***/ }),
 
-/***/ 82:
+/***/ 121:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(21);
+var content = __webpack_require__(41);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -17245,14 +17187,14 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(14)(content, options);
+var update = __webpack_require__(21)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(true) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept(21, function() {
-			var newContent = __webpack_require__(21);
+		module.hot.accept(41, function() {
+			var newContent = __webpack_require__(41);
 			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
 			update(newContent);
 		});
@@ -17261,6 +17203,110 @@ if(true) {
 	module.hot.dispose(function() { update(); });
 }
 
+/***/ }),
+
+/***/ 33:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+//////////////////////////////////////////////////////////////////////////
+/////////////////       server configs             //////////////////////
+////////////////////////////////////////////////////////////////////////
+
+exports.port = process.env.PORT || 3000;
+exports.origin = process.env.ORIGIN || 'http://localhost:' + exports.port;
+exports.init = function () {
+  return __webpack_require__(37);
+};
+exports.error = function () {
+  return __webpack_require__(38);
+};
+exports.platform = function () {
+  return __webpack_require__(39);
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ }),
+
+/***/ 37:
+/***/ (function(module, exports) {
+
+module.exports = {"org":{"name":"Strategic Machines","addr1":"100 Main Street","addr2":"Suite 100","city":"Charlotte","state":"NC","zip":"28211","url":"www.strategicmachines.io","contact":"ChaoticBot","phone":"+18882223434"},"db":{"username":"xio","password":"","host":"","port":"","name":"","uri":""},"githubrepo":{"reponame":"test","token":"4064201a36cdd38b9967af2707a13f72c512dd5b","repos_url":"http://localhost:3000/api/github/repos/strategicmarket","issues_url":"http://localhost:3000/api/github/issues/strategicmarket"},"sessionSecret":"","facebook":{"clientID":"","clientSecret":"","callbackURL":"/auth/facebook/callback","profileFields":["id","displayName","photos"]},"twitter":{"consumerKey":"","consumerSecret":"","token":"","tokenSecret":"","callbackURL":"/auth/twitter/callback","username":"@chaoticbots","profileFields":["id","displayName","photos"]},"twilio":{"sid":"","token":"","tokenSecret":"","username":"","chaotic":""},"redis":{"host":"","port":12345,"password":""},"chaoticsms":{"host":"http://localhost","port":"3000","url":"http://localhost:3000"},"watsonclassifier":{"description":"The intentionsv3 training dataset demonstration","url":"","username":"","password":"","classifier1":""},"testdb":{"url":"http://localhost:5002/api/agent","uri":"mongodb://localhost:27017/chaoticbots"},"port":3000,"token":""}
+
+/***/ }),
+
+/***/ 38:
+/***/ (function(module, exports) {
+
+module.exports = {"e200":{"code":"200","message":"Intent detected. But no state machine found","description":"The intent of the parsed message was determined. But a corresponding state machine was not found","link":""},"e300":{"code":"300","message":"State Machine found. But no agent found","description":"State machines govern the sequence in which an agent's skills are executed. A corresponding agent was not found in db","link":""},"e400":{"code":"400","message":"Microservices error: application issue ","description":"Contact support. An application error was returned from serverless platform","link":""},"e410":{"code":"410","message":"Microservices error: response not returned ","description":"Contact support. No response received from serverless platform","link":""},"e420":{"code":"420","message":"Microservices error: http not valid ","description":"Contact support. Not a valid http uri for the agent skill","link":""},"e900":{"code":"900","message":"Fatal error in executing microservices (agent skills)","description":"Contact support. An attempt to access and execute a microservice failed","link":""},"e910":{"code":"910","message":"Fatal error in executing microservices (agent skills)","description":"Contact support. Agent configured with unknown skill type","link":""},"e920":{"code":"920","message":"Probable infinite loop detected with agent skill","description":"Contact support. An agent skill is repeatedly calling back interactions, exceeding defined threhold level ","link":""},"e930":{"code":"930","message":"Unexpected Platform Error - State Stage","description":"Contact support. An unexpected condition was encountered in the state stage process ","link":""},"e940":{"code":"940","message":"Potential loop or runaway state machine.","description":"Contact support. Machine iterations exceeded threshold set in config ","link":""}}
+
+/***/ }),
+
+/***/ 39:
+/***/ (function(module, exports) {
+
+module.exports = [{"name":"Test Strategic Machines","description":"Test db with primary auth records for orgs and marketplace collections","collections":["platform","partners","workitems"],"contact":"ChaoticRoute","sms":"","web":"demo","db":"machines","uri":"mongodb://localhost:27017/","username":"","password":"","isLive":false,"isPlatform":true}]
+
+/***/ }),
+
+/***/ 40:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(20)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 41:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(20)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "html {\n  box-sizing: border-box;\n}\n*, *:before, *:after {\n  box-sizing: inherit;\n}\nhtml, body, .root {\n  height: 100%;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif;\n  line-height: 1.5;\n}\nbody, .app {\n  background: #f5f5f5;\n}\n\n.conversation-container > .header {\n  background-color: red;\n}\n\n.message > .response {\n  background-color: black;\n  color: white;\n}\n.snippet {\n  background-color: black;\n  font-family: sans-serif;\n  font-size: 12x;\n  line-height: 30px;\n  line-height: 1.5;\n  color: white;\n}\n.snippet > .snippet-title {\n  background-color: black;\n  font-family: sans-serif;\n  font-size: 15px;\n  line-height: 30px;\n  line-height: 1.5;\n  color: white;\n}\n\n.snippet > .snippet-details {\n  background-color: black;\n  font-family: sans-serif;\n  font-size: 10px;\n  line-height: 30px;\n  line-height: 1.5;\n  color: white;\n}\na.link {\n  background-color: black;\n  font-family: sans-serif;\n  font-size: 10px;\n  line-height: 30px;\n  line-height: 1.5;\n  color: white;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 94:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(36);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _App = __webpack_require__(105);
+
+var _App2 = _interopRequireDefault(_App);
+
+__webpack_require__(121);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('root'));
+
+module.hot.accept();
+
 /***/ })
 
-},[52]);
+},[94]);
