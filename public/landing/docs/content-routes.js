@@ -10,9 +10,9 @@ import React from 'react';
 // of any .md file whose path is passed into it.
 import Content from '../src/components/Content';
 // import paths to .md files
-import WhatIs from './what-is-strategic-machines.md';
-import WhyContribute from './why-contribute.md';
-import HowToContribute from './how-to-contribute.md';
+import WhatIs from './what-is-strategic-machines/README.md';
+import WhyContribute from './why-contribute/README.md';
+import HowToContribute from './how-to-contribute/README.md';
 
 const root = '/docs';
 
