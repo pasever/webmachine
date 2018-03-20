@@ -2,6 +2,4 @@
 node_modules
 config
 public/web/bundle.jsgit
-public/dist/*
-!public/dist/.gitkeep
 .env
