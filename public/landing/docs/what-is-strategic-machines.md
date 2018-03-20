@@ -1,0 +1,3 @@
+# What is Strategic Machines?
+
+Strategic Machines is...
