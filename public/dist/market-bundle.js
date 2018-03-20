@@ -753,7 +753,30 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 /***/ }),
 /* 17 */,
 /* 18 */,
-/* 19 */,
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+//////////////////////////////////////////////////////////////////////////
+/////////////////       server configs             //////////////////////
+////////////////////////////////////////////////////////////////////////
+
+exports.port = process.env.PORT || 3000;
+exports.origin = process.env.ORIGIN || 'http://localhost:' + exports.port;
+exports.init = function () {
+  return __webpack_require__(77);
+};
+exports.error = function () {
+  return __webpack_require__(78);
+};
+exports.platform = function () {
+  return __webpack_require__(79);
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
 /* 20 */,
 /* 21 */,
 /* 22 */
@@ -2216,9 +2239,24 @@ exports.default = SearchBar;
 /* 74 */,
 /* 75 */,
 /* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
+/* 77 */
+/***/ (function(module, exports) {
+
+module.exports = {"org":{"name":"Strategic Machines","addr1":"100 Main Street","addr2":"Suite 100","city":"Charlotte","state":"NC","zip":"28211","url":"www.strategicmachines.io","contact":"ChaoticBot","phone":"+18882223434"},"db":{"username":"xio","password":"","host":"","port":"","name":"","uri":""},"githubrepo":{"reponame":"test","token":"3f66740b0c81fdd1eb8a0a4dc32f3dea46a8d4c6","repos_url":"http://localhost:3000/api/github/repos/jsdev17","issues_url":"http://localhost:3000/api/github/issues/jsdev17"},"sessionSecret":"","facebook":{"clientID":"","clientSecret":"","callbackURL":"/auth/facebook/callback","profileFields":["id","displayName","photos"]},"twitter":{"consumerKey":"","consumerSecret":"","token":"","tokenSecret":"","callbackURL":"/auth/twitter/callback","username":"@chaoticbots","profileFields":["id","displayName","photos"]},"twilio":{"sid":"","token":"","tokenSecret":"","username":"","chaotic":""},"redis":{"host":"","port":12345,"password":""},"chaoticsms":{"host":"http://localhost","port":"3000","url":"http://localhost:3000"},"watsonclassifier":{"description":"The intentionsv3 training dataset demonstration","url":"","username":"","password":"","classifier1":""},"testdb":{"url":"http://localhost:5002/api/agent","uri":"mongodb://localhost:27017/chaoticbots"},"port":3000,"token":"3f66740b0c81fdd1eb8a0a4dc32f3dea46a8d4c6"}
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports) {
+
+module.exports = {"e200":{"code":"200","message":"Intent detected. But no state machine found","description":"The intent of the parsed message was determined. But a corresponding state machine was not found","link":""},"e300":{"code":"300","message":"State Machine found. But no agent found","description":"State machines govern the sequence in which an agent's skills are executed. A corresponding agent was not found in db","link":""},"e400":{"code":"400","message":"Microservices error: application issue ","description":"Contact support. An application error was returned from serverless platform","link":""},"e410":{"code":"410","message":"Microservices error: response not returned ","description":"Contact support. No response received from serverless platform","link":""},"e420":{"code":"420","message":"Microservices error: http not valid ","description":"Contact support. Not a valid http uri for the agent skill","link":""},"e900":{"code":"900","message":"Fatal error in executing microservices (agent skills)","description":"Contact support. An attempt to access and execute a microservice failed","link":""},"e910":{"code":"910","message":"Fatal error in executing microservices (agent skills)","description":"Contact support. Agent configured with unknown skill type","link":""},"e920":{"code":"920","message":"Probable infinite loop detected with agent skill","description":"Contact support. An agent skill is repeatedly calling back interactions, exceeding defined threhold level ","link":""},"e930":{"code":"930","message":"Unexpected Platform Error - State Stage","description":"Contact support. An unexpected condition was encountered in the state stage process ","link":""},"e940":{"code":"940","message":"Potential loop or runaway state machine.","description":"Contact support. Machine iterations exceeded threshold set in config ","link":""}}
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports) {
+
+module.exports = [{"name":"Test Strategic Machines","description":"Test db with primary auth records for orgs and marketplace collections","collections":["platform","partners","workitems"],"contact":"ChaoticRoute","sms":"","web":"demo","db":"machines","uri":"mongodb://localhost:27017/","username":"","password":"","isPlatform":true,"isLive":false}]
+
+/***/ }),
 /* 80 */,
 /* 81 */,
 /* 82 */,
