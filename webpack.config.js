@@ -22,22 +22,12 @@ module.exports = {
         loaders: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(otf|svg|eot|woff|woff2|ttf|jpg|jpeg|png|gif)$/,
+        test: /\.(otf|svg|eot|woff|woff2|ttf|jpg|jpeg|png|gif|md)$/,
         loaders: ['url-loader']
       },
       {
         test: /\.json$/,
         loaders: ['json-loader']
-      },
-      {
-        test: /\.md$/,
-        use: [
-          {
-            loader: 'html-loader'
-          },
-          {
-            loader: 'markdown-loader'
-          }]
       }
     ]
   },
