@@ -1,9 +1,9 @@
 # Developer Landing Page
 
-This is the developer landing page for Strategic Machines (__SMs__). It's meant to serve as:
+This is the developer landing page for Strategic Machines (__SM__). It's meant to serve as:
 
-- an introduction for new developers wanting to learn about __SMs__.
-- a _hub_ of useful information for developers already associated with __SMs__.
+- an introduction for new developers wanting to learn about __SM__.
+- a _hub_ of useful information for developers already associated with __SM__.
 
 ----
 
