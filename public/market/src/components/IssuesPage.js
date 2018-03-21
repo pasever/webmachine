@@ -9,7 +9,6 @@ import Navigation             from './Navigation';
 import FilterBy               from './IssuesFilterBy';
 import SearchBar              from './SearchBar';
 import CreateWorkItem         from './admin/CreateWorkItem';
-import Modal                  from './Modal';
 import config                 from '../../../../config/';
 const { issues_url }          = config.init().githubrepo;
 
@@ -86,7 +85,6 @@ export default class IssuesPage extends Component {
           updateSearch={this.updateSearch}
         />
         <CreateWorkItem />
-        <Modal />
         <ul id="issue-list" className="">
           {this.state.loaded ? this.renderPage() : null}
         </ul>
