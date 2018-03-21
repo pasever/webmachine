@@ -16,6 +16,7 @@ export default class IssuesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: this.props.match.params.user,
       repo: this.props.match.params.repo,
       loaded: false,
       criteria: 'open',
@@ -42,9 +43,9 @@ export default class IssuesPage extends Component {
   }
 
   renderPage() {
-    var issues;
+    let issues;
     // Filter issues based on *search criteria*
-    var filteredIssues = this.state.issues.filter(issue => (
+    let filteredIssues = this.state.issues.filter(issue => (
       issue.title.toLowerCase().includes(this.state.search)
     ));
     // Create issue components based on current *filtering criteria*.
@@ -86,6 +87,8 @@ export default class IssuesPage extends Component {
         />
         <CreateWorkItem
           issueNumber={this.state.issues.length + 1}
+          user={this.state.user}
+          repo={this.state.repo}
         />
         <ul id="issue-list" className="">
           {this.state.loaded ? this.renderPage() : null}
