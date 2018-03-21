@@ -1,5 +1,12 @@
 'use strict';
 
+//////////////////////////////////////////////////////
+////////          github interactions         ///////
+////////////////////////////////////////////////////
+
+// method for posting workitems to DB
+// and creating an issue on GitHub not created yet
+const api = require('../../api/git/index');
 const Workitem  = require('../../db/schemas/Workitem').Workitem;
 
 const createIssue = (router) => {
@@ -16,4 +23,4 @@ const createIssue = (router) => {
   });
 }
 
-module.exports = createIssue
+module.exports = createIssue;
