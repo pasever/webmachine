@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CreateWorkitem = () => (
+const CreateWorkitem = ({ issueNumber }) => (
   <div>
     {/* Button  */}
     <button
@@ -24,7 +24,7 @@ const CreateWorkitem = () => (
               </button>
             </div>
             <div className="modal-body">
-              <p>Modal body text goes here.</p>
+              <p>This will be issue number {issueNumber}</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-primary">Save changes</button>

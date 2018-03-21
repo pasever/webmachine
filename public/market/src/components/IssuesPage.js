@@ -84,7 +84,9 @@ export default class IssuesPage extends Component {
           value={this.state.search}
           updateSearch={this.updateSearch}
         />
-        <CreateWorkItem />
+        <CreateWorkItem
+          issueNumber={this.state.issues.length + 1}
+        />
         <ul id="issue-list" className="">
           {this.state.loaded ? this.renderPage() : null}
         </ul>
