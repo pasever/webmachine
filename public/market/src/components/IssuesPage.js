@@ -86,9 +86,11 @@ export default class IssuesPage extends Component {
           updateSearch={this.updateSearch}
         />
         <CreateWorkItem
-          issueNumber={this.state.issues.length + 1}
-          user={this.state.user}
-          repo={this.state.repo}
+          modalData={{
+            issueNumber: this.state.issues.length + 1,
+            user: this.state.user,
+            repo: this.state.repo
+          }}
         />
         <ul id="issue-list" className="">
           {this.state.loaded ? this.renderPage() : null}
