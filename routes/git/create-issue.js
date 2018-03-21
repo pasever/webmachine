@@ -13,11 +13,12 @@ const createIssue = (router) => {
   router.post('/:repo', (req, res, next) => {
     // insert workitem into into DB
     // post to github
-    console.log('you\'ve reached create-issue route');
-    console.log(req.params.repo);
+    let workitem = req.body;
+    console.log('got it!', workitem);
     res.json({
-      msg: 'you\'ve hit create-issue route',
-      repo: req.params.repo
+      msg: 'workitem received successfully!',
+      repo: req.params.repo,
+      workitem
     });
     next()
   });

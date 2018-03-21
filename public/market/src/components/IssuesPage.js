@@ -42,6 +42,14 @@ export default class IssuesPage extends Component {
     });
   }
 
+  showIssuesCount() {
+    // Determines proper grammar based on number of repos available
+    return this.state.issues.length > 1 ?
+      `${this.state.issues.length} work items available`
+      :
+      `${this.state.issues.length} work item available`
+  }
+
   renderPage() {
     let issues;
     // Filter issues based on *search criteria*
@@ -77,6 +85,16 @@ export default class IssuesPage extends Component {
         <Navigation
           currentLocation={this.state.repo}
         />
+        
+        {/* Work item count message will display after data has been fetched
+        and ONLY if there's data to render
+        {this.state.loaded && this.state.issues.length > 0 ? (
+          <span id="issues-count" className="d-flex justify-content-center">
+            {this.showIssuesCount()}
+          </span>
+          ) : null
+        } */}
+
         <FilterBy
           criteria={this.state.criteria}
           handleCriteriaChange={this.handleCriteriaChange}

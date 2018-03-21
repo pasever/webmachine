@@ -59,6 +59,10 @@
   color: rgba(238, 238, 238, 0.63);
 }
 
+#issues-count {
+  margin-bottom: 5px;
+}
+
 #issue-list {
   list-style: none;
   display: flex;

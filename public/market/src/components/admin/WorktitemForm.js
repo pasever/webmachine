@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class WorkitemForm extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class WorkitemForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.resetForm = this.resetForm.bind(this);
   }
 
   handleChange(e) {
@@ -20,11 +22,26 @@ class WorkitemForm extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    console.log(e.target);
+    let endpoint = `http://localhost:3000/api/github/create-issue/${this.props.repo}`;
+    axios.post(endpoint, this.state)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  resetForm() {
+    this.setState({
+      title: '',
+      price: '',
+      duration: '',
+      description: ''
+    });
   }
 
   render() {
-    console.log(this.state);
     let { title, price, duration, description } = this.state;
     return (
       <form onSubmit={this.submitForm}>
@@ -59,6 +76,7 @@ class WorkitemForm extends Component {
         <div className="modal-footer">
           <button type="submit" className="btn btn-primary">Submit</button>
           <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" className="btn btn-warning" onClick={this.resetForm}>Reset</button>
         </div>
       </form>
     ); 
