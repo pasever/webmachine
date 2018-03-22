@@ -11,6 +11,9 @@ import './App.css';
 
 const origin = config.origin;
 
+
+
+// ENTRY POINT
 export default class App extends Component {
     
     constructor(props) {
@@ -23,11 +26,13 @@ export default class App extends Component {
         };
     }
     
+    /// GRABS OUR PAGE DATA.  THIS IS WHERE ALL THE TEXT EXISTS FOR THE PLATFORM PAGES.  TO MAKE CHANGES SEE ../static/platformPageData.json
     getPlatformPageData() {
         fetch(origin + '/platform/static/platformPageData.json')
             .then(resp => resp.json())
             .then(json => { this.setState({pageData: json })} )
     }
+
     updateFormField = event => {
         event.preventDefault();
         const { name, value } = event.target;
