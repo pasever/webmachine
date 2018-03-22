@@ -40,11 +40,8 @@ app.use('/machine', express.static('public'));
 app.use('/market', express.static('public'));
 app.use('/member', express.static('public'));
 app.use('/web', express.static('public'));
-<<<<<<< HEAD
 app.use('/landing', express.static('public'));
-=======
 app.use('/platform', express.static('public'));
->>>>>>> platform-creation
 app.use(favicon(path.join(__dirname, '..', '/public/assets/favicon.ico')));
 app.use(cors())
 

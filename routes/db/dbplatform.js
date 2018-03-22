@@ -11,6 +11,9 @@ const dbplatform = (router) => {
 
 	router.use(bodyParser.json());
     
+    // THIS IS FOR TESTING PURPOSES.  THIS PASSES THE PLATFORM.JSON
+    router.get("/user")
+
     router.delete("/:id", (req, res, next) => {
  	    console.log("-----------DB Platforms ROUTE -----------");
  	    pApi.deletePlatform(req.token, req.params.id, req.conn, (response) => {
