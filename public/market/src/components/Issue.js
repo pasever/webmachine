@@ -28,12 +28,12 @@ const Issue = ({issue}) => (
             ''
           )}
         <span className='card-text text-muted issue-due-date'> 
-          Due on: {issue.due_date}
+          Due on: <span>{issue.due_date}</span>
         </span>
       </div>
       <div className='card-footer text-center issue-card-footer'>
         <Link to={issue.html_url} target="_blank">
-          <span className="">View on GitHub</span>
+          View on GitHub
         </Link>
       </div>
     </div>

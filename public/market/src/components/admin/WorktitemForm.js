@@ -23,13 +23,25 @@ class WorkitemForm extends Component {
   submitForm(e) {
     e.preventDefault();
     let endpoint = `http://localhost:3000/api/github/create-issue/${this.props.repo}`;
-    axios.post(endpoint, this.state)
+    let msg = 'Are you sure you want to create this workitem?';
+    // Make sure admin intends to create this work item
+    if(confirm(msg)) {
+      axios.post(endpoint, this.state)
       .then(response => {
-        console.log(response);
+        console.log(response.data.workitem);
+        // Clear form
+        this.resetForm();
+        // Show success alert
+        document.getElementById('successAlert').style.display = '';
+        // Hide it after 3 seconds
+        setTimeout(function hideAlert(){
+          document.getElementById('successAlert').style.display = 'none';
+        }, 3000);
       })
       .catch(err => {
         console.log(err);
       });
+    }
   }
 
   resetForm() {
@@ -45,6 +57,11 @@ class WorkitemForm extends Component {
     let { title, price, duration, description } = this.state;
     return (
       <form onSubmit={this.submitForm}>
+        <div id="successAlert" className="alert alert-success" role="alert"
+          style={{display: 'none'}}
+        >
+          Work Item created.
+        </div>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="title">Title</label>

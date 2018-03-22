@@ -11,14 +11,6 @@ body {
   
 }
 
-/* .language-js {
-  background: #333;
-  color: #eee;
-  padding: 10px;
-  border-radius: 5px;
-  display: inline-block;
-} */
-
 #showcase {
   background-image: url('./assets/banner.jpeg');
   background-size: cover;

@@ -99,7 +99,13 @@
 
 #issue-list .issue-due-date,
 .issue-card-footer {
-  font-size: 12px
+  font-size: 12px;
+}
+
+/* Highlight due date in red */
+.issue-due-date > span {
+  color: red;
+  font-weight: bold;
 }
 
 #issue-list .issue-card-footer {
