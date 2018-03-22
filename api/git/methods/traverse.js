@@ -1,12 +1,10 @@
 
 
 
-const GitHubAPI =           require('github');
+const github =              require('@octokit/rest')();
 const getNextPage =         require('./getNextPage');
-// require('dotenv').load();
-var { githubrepo } =        require('../../../config').init();
 
-const github = new GitHubAPI();
+var { githubrepo } =        require('../../../config').init();
 
 github.authenticate({
   type: 'oauth',

@@ -1,12 +1,11 @@
 
 
 
-const GitHubAPI =           require('github');
+const github =              require('@octokit/rest')();
 const getIssues =           require('./getIssuesForRepo');
 const cleanUp =             require('./cleanUpObj');
 const traverse =            require('./traverse');
-// require('dotenv').load();
-const github = new GitHubAPI();
+
 const { githubrepo } =      require('../../../config').init();
 
 github.authenticate({

@@ -33,6 +33,7 @@
     "conversational economy"
   ],
   "dependencies": {
+    "@octokit/rest": "^15.2.5",
     "axios": "^0.17.1",
     "babel-preset-env": "^1.6.1",
     "body-parser": "^1.16.0",
@@ -45,7 +46,6 @@
     "escape-string-regexp": "^1.0.5",
     "express": "^4.16.2",
     "form-serialize": "^0.7.2",
-    "github": "^13.1.0",
     "moment": "^2.21.0",
     "mongoose": "^5.0.6",
     "morgan": "^1.7.0",

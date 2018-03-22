@@ -4,7 +4,7 @@
 ////////            github interactions       ///////
 ////////////////////////////////////////////////////
 
-const github =          require('@octokit/rest')();
+const github =             require('@octokit/rest')();
 const { githubrepo } =     require('../../../config').init();
 
 github.authenticate({
@@ -12,4 +12,4 @@ github.authenticate({
   token: githubrepo.token
 });
 
-console.log(github);
+// console.log(github);

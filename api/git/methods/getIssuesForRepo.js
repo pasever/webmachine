@@ -2,13 +2,10 @@
 
 
 
-const GitHubAPI =             require('github');
+const github =                require('@octokit/rest')();
 const getNextPage =           require('./getNextPage');
 const traverse =              require('./traverse');
 const set_price_and_others =  require('./setPriceAndOthers');
-// require('dotenv').load();
-
-const github = new GitHubAPI();
 
 var { githubrepo } = require('../../../config').init();
 
