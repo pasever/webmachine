@@ -93,7 +93,7 @@ class WorkitemForm extends Component {
         <div className="modal-footer">
           <button type="submit" className="btn btn-primary">Submit</button>
           <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" className="btn btn-warning" onClick={this.resetForm}>Reset</button>
+          {/* <button type="button" className="btn btn-warning" onClick={this.resetForm}>Reset</button> */}
         </div>
       </form>
     ); 
