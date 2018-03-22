@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////
 
 const github =             require('@octokit/rest')();
-const { githubrepo } =     require('../../../config').init()
+const { githubrepo } =     require('../../../config').init();
 
 github.authenticate({
   type: 'oauth',
