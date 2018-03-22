@@ -5,7 +5,6 @@
 const clone =           require('clone-deep')
 const uuidv1 =          require('uuid/v1')
 const db =              require('./db')
-const config =          require('../../config').init()
 
 
 // Gets all platforms
