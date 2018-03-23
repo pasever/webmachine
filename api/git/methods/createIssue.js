@@ -32,14 +32,3 @@ async function createIssue(req) {
 createIssue(req).then(res => console.log(res));
 
 module.exports = createIssue;
-
-// github.issues.create({
-//   owner: 'strategicmarket',
-//   repo: 'workitem-lab',
-//   title: 'first test',
-//   body: 'I am the first issue being created with the GitHub Node.js client!'
-// }).then(result => {
-//   console.log(result.data);
-// }).catch(error => {
-//   console.log(error);
-// })
