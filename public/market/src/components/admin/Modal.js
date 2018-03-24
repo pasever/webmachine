@@ -1,5 +1,6 @@
 import React from 'react';
 import WorkitemForm from './WorktitemForm';
+import TestForm from './TestForm';
 
 const Modal = ({ issueNumber, user, repo }) => (
   <div className="modal fade" id="createWorkitem" tabIndex="-1" role="dialog" aria-labelledby="createWorkitemLabel" aria-hidden="true">
@@ -15,10 +16,11 @@ const Modal = ({ issueNumber, user, repo }) => (
         </div>
         <div className="modal-body">
           {/* Form needs these props for POST endpoint */}
-          <WorkitemForm
+          {/* <WorkitemForm
             user={user}
             repo={repo}
-          />
+          /> */}
+          <TestForm />
         </div>
       </div>
     </div>
