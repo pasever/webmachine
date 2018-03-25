@@ -7,20 +7,63 @@
 // method for posting workitems to DB
 // and creating an issue on GitHub not created yet
 const api = require('../../api/git/index');
+const moment = require('moment');
 const Workitem  = require('../../db/schemas/Workitem').Workitem;
+const { y, r } = require('../../console');
 
 const createIssue = (router) => {
   router.post('/:repo', (req, res, next) => {
-    // insert workitem into into DB
-    // post to github
-    let workitem = req.body;
-    console.log('got it!', workitem);
-    res.json({
-      msg: 'workitem received successfully!',
-      repo: req.params.repo,
-      workitem
-    });
-    next()
+    // Build workitem object
+    // DOING VALIDATION WOULD BE WORTH CONSIDERING
+    // PRICE AND DURATION CANNOT BE LESS THAN 0
+    // IS DESCRIPTION RLY NECESSARY FOR DB?
+    let workitem = {
+      itemId: req.body.issueNumber,
+      title: req.body.title,
+      repo: req.body.repo,
+      price: parseFloat(req.body.price),
+      duration: req.body.duration,
+      dueDate: moment().add(req.body.duration, 'days').format(),
+      description: req.body.description
+    };
+    // Save wi into DB
+    Workitem.create(workitem)
+    .then(doc => {
+
+      let msg = {
+        db: 'Work item successfully created'
+      };
+      console.log(y(msg.db), doc);
+      // Now create issue on GitHub
+      api.createIssue(doc.repo, doc.title, doc.description)
+      .then(response => {
+        msg.github = 'Issue successfully created';
+        console.log(y(msg.github), response);
+        res.json({
+          msg: msg
+        });
+        next()
+      })
+      .catch(err => {
+        msg.github = 'Error creating issue on GitHub';
+        console.log(r(msg.github) + '\n' + err);
+        res.json({
+          msg: msg
+        });
+        next();
+      });
+     
+    })
+    .catch(err => {
+      if (err) {
+        let msg = 'Error creating workitem. Didn\'t attempt to create on GitHub';
+        console.log(r(msg) + '\n' + err);
+        res.json({
+          error: msg
+        });
+        next();
+      }
+    })
   });
 }
 
