@@ -20,7 +20,7 @@
 	},
 	"githubrepo": {
 		"reponame": "test",
-    "token": "0006198fc96f156ad672f73cb904f291ec245a0f",
+    "token": "",
     "repos_url": "http://localhost:3000/api/github/repos/strategicmarket",
     "issues_url": "http://localhost:3000/api/github/issues/strategicmarket"
 	},
@@ -67,6 +67,10 @@
 	"testdb": {
 		"url": "http://localhost:5002/api/agent",
 		"uri": "mongodb://localhost:27017/chaoticbots"
+	},
+	"stripe": {
+		"publishKey": "",
+		"secretKey": ""
 	},
 	"port": 3000,
 	"token": ""

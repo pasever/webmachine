@@ -38,8 +38,9 @@ const auth = (router) => {
 
 		switch(apiPath) {
 			case '/db/agent':
-			case '/db/client':
-      case '/github':
+            case '/db/client':
+            case '/db/platform':
+            case '/github':
 				const token = req.get('Authorization')
 				if (token) {
 					req.token = token }
