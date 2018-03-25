@@ -10,6 +10,7 @@ module.exports = {
     market: './public/market/src/index.js',
     landing: './public/landing/src/index.js'
     },
+    devtool: 'source-map',
   module: {
     rules: [
       {
