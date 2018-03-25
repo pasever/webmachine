@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import config from '../../../../../config';
+const { create_issue_url } = config.init().githubrepo;
 
 class WorkitemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
+      repo: this.props.repo,
       price: '',
       duration: '',
       description: ''
@@ -16,19 +19,25 @@ class WorkitemForm extends Component {
     this.resetForm = this.resetForm.bind(this);
   }
 
+  componentDidUpdate() {
+    // this.setState({issueNumber: this.props.issueNumber});
+  }
+
   handleChange(e) {
     this.setState({[e.target.id]: e.target.value});
   }
 
   submitForm(e) {
+    // Attach issue number to work item object
+    this.state.issueNumber = this.props.issueNumber;
     e.preventDefault();
-    let endpoint = `http://localhost:3000/api/github/create-issue/${this.props.repo}`;
+    let endpoint = `${create_issue_url}/${this.props.repo}`;
     let msg = 'Are you sure you want to create this workitem?';
     // Make sure admin intends to create this work item
     if(confirm(msg)) {
       axios.post(endpoint, this.state)
       .then(response => {
-        console.log(response.data.workitem);
+        console.log(response.data);
         // Clear form
         this.resetForm();
         // Show success alert
@@ -54,6 +63,7 @@ class WorkitemForm extends Component {
   }
 
   render() {
+    console.log(this.state);
     let { title, price, duration, description } = this.state;
     return (
       <form onSubmit={this.submitForm}>

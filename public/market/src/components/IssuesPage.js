@@ -37,7 +37,8 @@ export default class IssuesPage extends Component {
     .then(res => {
       this.setState({
         issues: res.data,
-        loaded: true
+        loaded: true,
+        nextIssue: res.data.length + 1
       })
     });
   }
