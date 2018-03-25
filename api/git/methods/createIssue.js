@@ -12,15 +12,13 @@ github.authenticate({
   token: githubrepo.token
 });
 
-const req = {
-  owner: 'strategicmarket',
-  repo: 'workitem-lab',
-  title: '',
-  body: ''
-};
-
-async function createIssue(req) {
-  let result = await github.issues.create(req)
+async function createIssue(repo, title, body) {
+  let result = await github.issues.create({
+    owner: 'strategicmarket',
+    repo: repo,
+    title: title,
+    body: body
+  })
   .catch(err => { throw err });
   let resObj = {
     status: result.meta.status,
@@ -28,7 +26,5 @@ async function createIssue(req) {
   };
   return resObj;
 }
-
-createIssue(req).then(res => console.log(res));
 
 module.exports = createIssue;
