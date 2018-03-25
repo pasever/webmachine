@@ -11,11 +11,9 @@ const dbplatform = (router) => {
 
 	router.use(bodyParser.json());
     
-    // THIS IS FOR TESTING PURPOSES.  THIS PASSES THE PLATFORM.JSON
-    router.get("/user")
 
     router.delete("/:id", (req, res, next) => {
- 	    console.log("-----------DB Platforms ROUTE -----------");
+ 	    console.log("-----------DB Platforms DELETE ROUTE -----------");
  	    pApi.deletePlatform(req.token, req.params.id, req.conn, (response) => {
             res.status(200).send(response);
 		    next();
@@ -23,21 +21,28 @@ const dbplatform = (router) => {
     });
 
 	router.get('/', (req, res, next) => {
-        console.log("-----------DB Platforms ROUTE -----------");
+        console.log("-----------DB Platforms GET ROUTE -----------");
 		pApi.getPlatforms(req.token, req.conn, (response) => {
 			res.status(200).send(response);
 			next();
         });
     });
-    router.get('/:id', (req, res, next) => {
+    router.get('/:id?/:pid?', (req, res, next) => {
         console.log("-----------DB Platforms ROUTE -----------");
-        pApi.getPlatform(req.token, req.params.id, req.conn, (response) => {
-            res.status(200).send(response);
-            next();
-        });
+        if(req.params.id) {
+            pApi.getPlatform(req.token, req.params.id, req.conn, (response) => {
+                res.status(200).send(response);
+            });
+        } else if(req.params.pid) {
+            pApi.getPlatformByPId(req.token, req.params.pid, req.conn, (response) => {
+                res.status(200).send(response);
+            })
+        }
+        next();
     });
+    1
     router.post('/', function(req, res, next) {
-        console.log("-----------DB Platforms ROUTE -----------");
+        console.log("-----------DB Platforms POST ROUTE -----------");
         if (req.body) {
             pApi.updateClient(req.token, req.body, req.conn, function(response){
                 res.status(200).send(response);
@@ -51,7 +56,8 @@ const dbplatform = (router) => {
     });
 
     router.put('/', function(req, res, next) {
-        console.log("-----------DB Platforms ROUTE -----------");
+        console.log("-----------DB Platforms PUT ROUTE -----------");
+        
         if (req.body) {
             pApi.addPlatform(req.token, req.body, req.conn, function(response) {
 		        res.status(200).send(response);

@@ -35,6 +35,20 @@ exports.getPlatform = (token, id, conn, cb) => {
         return result;
     }
 }
+
+// Gets a single platform by profile id
+exports.getPlatformByPId = (token, pid, conn, cb) => {
+    thread(conn).then((result) => {
+        cb(result);
+    }).catch((err) => {
+        console.log("ERROR IN GET Platform PROCESSING");
+        console.log(err);
+    });
+    async function thread(conn) {
+        let result = await db.getPlatformByPId(pid, conn);
+        return result;
+    }
+}
   
 // Adds a platform to the db
 exports.addPlatform = (token, platform, conn, cb) => {

@@ -3,6 +3,10 @@
 //////////////////////////////////////////////////////
 // DGO - 03/19/18
 
+'use strict';
+
+const { Platform } = require('../../db/schemas/Platform');
+
 
 /// Gets all platforms in the DB Collection
 exports.getPlatforms = () => {
@@ -35,8 +39,25 @@ exports.getPlatform = (id) => {
     })
 }
 
+// Gets platform by Profile Id
+exports.getPlatformByPId = (pid) => {
+    return new Promise((resolve, reject) => {
+        Platform.find({ where: { profileId: pid }}, (err, response) => {
+            if(err) {
+                if(err.error !== 'not_found') {
+                    resolve(err);
+                } else {
+                    reject(err);
+                }
+            }
+            resolve(response);
+        })
+    })
+}
+
 // Adds a platform to the DB
 exports.putPlatform = (params) => {
+    console.log("API/PUT PLATFORM")
     let platform = new Platform(params);
     return new Promise((resolve, reject) => {
         platform.save((err, response) => {
@@ -52,7 +73,7 @@ exports.putPlatform = (params) => {
 // Updates a platform
 exports.updatePlatform = (platform) => {
     return new Promise((resolve, reject) => {
-        Platform.findOneAndUpdate({id: platform.id}, platform, {upsert: true}, (err, response) => {
+        platform.findOneAndUpdate({id: platform.id}, platform, {upsert: true}, (err, response) => {
             if (err) {
                 console.log(r("Error When Updating Platform"))
                 reject(err)

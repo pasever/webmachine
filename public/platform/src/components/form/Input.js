@@ -3,6 +3,8 @@
 ///////////////////////////////////////////////////////////////////////
 // DGO
 
+'use strict';
+
 import React from 'react';
 import '../../styles/forms.css';
 import InputMask from 'react-input-mask';

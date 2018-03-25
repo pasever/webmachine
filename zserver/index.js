@@ -51,7 +51,7 @@ app.use(cors())
 
 const mailObject = {
   from: '"ChaoticBots 👥" <chaoticbotshelp@gmail.com>',
-  to: 'patrick.howard@hotmail.com',
+  to: 'dangorlov@yahoo.com',
   subject: 'Platform Error',
   text: ''
 }

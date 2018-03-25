@@ -81,7 +81,10 @@ const platformObject = {
         default: false,
     },
     // Unique ID
-    id: { type: String, default: uuidv1() }
+    id: { type: String, default: uuidv1() },
+
+    // Id to the authenticated user
+    profileId: String,
 }
 
 const platformSchema = new Schema(platformObject, { collection: "Platform" });

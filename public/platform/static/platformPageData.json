@@ -3,6 +3,11 @@
         "title": "Welcome to our Platform"
     },
     "signup": {
-        "title": "Create your Platform Account"
+        "title": "Sign Up",
+        "body": "Creating a new platform account will bridge the communication gap between you and your members."
+    },
+    "maintenance": {
+        "mainTitle": "Manage your account",
+        "mainBody": "Manage your services, billing, members, and more."
     }
 }

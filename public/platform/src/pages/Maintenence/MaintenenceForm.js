@@ -1,32 +1,25 @@
 ///////////////////////////////////////////////////////////////////////
-////////////////////   Platform Signup Page    ////////////////////////
+//////////////////   Platform Maintenance Page    /////////////////////
 ///////////////////////////////////////////////////////////////////////
 // DGO
+
+
 'use strict';
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Container, Col, Row } from '../../components/grid/';
 import { Input, TextArea, Button } from '../../components/form/';
-import '../../styles/signuppage.css';
+import '../../styles/maintenancepage.css';
 
-// Handles Signup for the Platform
-/* 
-PROPS: 
-    user - the user object
-    updateFormField (method) - the method to be used to handle the updating of the form data
-    errors - error object, modelled after the user object to display errors on the form
-*/
-
-const SignupPage = ({ user, updateFormField, onSubmit, errors, text }) => (
-    <Container>
-        <Row>
+export const MaintenanceForm = ({errors, text, user, onSubmit, updateFormField }) => (
+        <div>
             { /* PADDING */ }
             <Col size="md-2" />
             <Col size="md-8">
                 <div className="jumbotron">
-                    <h2>{ !text.title  ? "" : text.title }</h2>
-                    <p>{ !text.body ? "" : text.body }</p>
-                </div>
+                    <h2>{ !text.mainTitle  ? "" : text.mainTitle }</h2>
+                    <p>{ !text.body ? "" : text.mainBody }</p>
+                </div>0
                 <form onSubmit={ onSubmit }>
                     <Input value={ user.name } 
                         name="name" onChange={ updateFormField } 
@@ -67,9 +60,8 @@ const SignupPage = ({ user, updateFormField, onSubmit, errors, text }) => (
             </Col>
             { /* PADDING */ }
             <Col size="md-2" />
-        </Row>
-    </Container>
+        </div>
 );
 
-export default SignupPage;
 
+export default Maintenance;

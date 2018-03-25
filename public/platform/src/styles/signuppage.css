@@ -1,0 +1,9 @@
+.jumbotron {
+    background-color: transparent;
+    text-align: center;
+}
+
+.jumbotron > p {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
