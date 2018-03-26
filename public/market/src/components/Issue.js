@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Manage from './admin/buttons/Manage';
 
 const Issue = ({issue}) => (
   <li id={issue.id} number={issue.number} className="issue">
@@ -9,24 +10,18 @@ const Issue = ({issue}) => (
         <h6 className='card-subtitle mb-2 issue-price'>{`$${issue.price}`}</h6>
         {/* Display developer name if stage is active */}
         {issue.stage === 'active' ? (
-            <p className='card-text issue-assignee'>
-              Assigned to: {issue.assignee}
-            </p>
-          ): (
-            ''
-        )}
+          <p className='card-text issue-assignee'>
+            Assigned to: {issue.assignee}
+          </p> ): ('')}
         {/* Display claim button is stage is open */}
         {issue.stage === 'open' ? (
-            <button
-              type="button"
-              className="btn btn-success"
-              style={claim}
-            >
-              Claim
-            </button>
-            ) : (
-            ''
-          )}
+          <button
+            type="button"
+            className="btn btn-success"
+            style={claim}
+          >
+            Claim
+          </button> ) : ('')}
         <span className='card-text text-muted issue-due-date'> 
           Due on: <span>{issue.due_date}</span>
         </span>
@@ -35,6 +30,7 @@ const Issue = ({issue}) => (
         <Link to={issue.html_url} target="_blank">
           View on GitHub
         </Link>
+        <Manage />
       </div>
     </div>
   </li>

@@ -108,7 +108,8 @@ export default class IssuesPage extends Component {
           modalData={{
             issueNumber: this.state.issues.length + 1,
             user: this.state.user,
-            repo: this.state.repo
+            repo: this.state.repo,
+            updatePage: this.updatePage
           }}
         />
         <ul id="issue-list" className="">

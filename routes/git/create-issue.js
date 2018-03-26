@@ -4,8 +4,6 @@
 ////////          github interactions         ///////
 ////////////////////////////////////////////////////
 
-// method for posting workitems to DB
-// and creating an issue on GitHub not created yet
 const api = require('../../api/git/index');
 const moment = require('moment');
 const Workitem  = require('../../db/schemas/Workitem').Workitem;
@@ -14,7 +12,7 @@ const { y, r } = require('../../console');
 const createIssue = (router) => {
   router.post('/:repo', (req, res, next) => {
     // Build workitem object
-    // DOING VALIDATION WOULD BE WORTH CONSIDERING
+    // DOING VALIDATION WOULD BE USEFUL
     // PRICE AND DURATION CANNOT BE LESS THAN 0
     // IS DESCRIPTION RLY NECESSARY FOR DB?
     let workitem = {

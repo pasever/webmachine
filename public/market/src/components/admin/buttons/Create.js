@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Button = () => (
+const Create = () => (
   <button
       type="button"
       className="btn btn-info"
@@ -12,4 +12,4 @@ const Button = () => (
     </button>
 )
 
-export default Button;
+export default Create;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Button from './Button';
+import Create from './buttons/Create';
 import Modal from './Modal';
 
 const CreateWorkitem = ({ modalData }) => (
   <div>
     {/* Triggers modal */}
-    <Button />
+    <Create />
     {/* Contains form for adding workitems */}
     <Modal
       {...modalData}

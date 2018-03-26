@@ -63,7 +63,6 @@ class WorkitemForm extends Component {
   }
 
   render() {
-    console.log(this.state);
     let { title, price, duration, description } = this.state;
     return (
       <form onSubmit={this.submitForm}>
@@ -72,16 +71,16 @@ class WorkitemForm extends Component {
         >
           Work Item created.
         </div>
+        <div className="form-group">
+          <label htmlFor="title">Title</label>
+          <input onChange={this.handleChange} type="text" value={title} className="form-control" id="title" required/>
+        </div>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="title">Title</label>
-            <input onChange={this.handleChange} type="text" value={title} className="form-control" id="title" required/>
-          </div>
-          <div className="form-group col-md-3">
             <label htmlFor="price">Price</label>
             <input onChange={this.handleChange} type="number" value={price} className="form-control" id="price" required/>
           </div>
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-6">
             <label htmlFor="duration">Duration</label>
             <input onChange={this.handleChange} type="number" value={duration} className="form-control" id="duration"
               placeholder="days" required
