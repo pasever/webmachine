@@ -1,4 +1,8 @@
+'use strict';
 
+/////////////////////////////////////////////
+////////        db interactions      ///////
+///////////////////////////////////////////
 
 const moment =            require('moment');
 const { Workitem } =      require('../../../db/schemas/Workitem');

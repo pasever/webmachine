@@ -1,6 +1,8 @@
+'use strict';
 
-
-
+//////////////////////////////////////////////////////
+////////            github interactions       ///////
+////////////////////////////////////////////////////
 
 const github =                require('@octokit/rest')();
 const getNextPage =           require('./getNextPage');
