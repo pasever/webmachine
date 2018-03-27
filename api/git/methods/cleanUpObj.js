@@ -20,11 +20,11 @@ module.exports = function (repo) {
         description: repo.description,
         private: repo.private,
         html_url: repo.html_url,
-        forks_url: repo.forks_url,
+        // forks_url: repo.forks_url,
         // teams, hooks, and issue events url?
-        assignees_url: repo.assignees_url,
-        commits_url: repo.commits_url,
-        git_commits_url: repo.git_commits_url,
+        // assignees_url: repo.assignees_url,
+        // commits_url: repo.commits_url,
+        // git_commits_url: repo.git_commits_url,
         // issues_url: repo.issues_url,
         // pulls_url: repo.pulls_url,
         labels_url: repo.labels_url,
@@ -35,7 +35,7 @@ module.exports = function (repo) {
         clone_url: repo.clone_url,
         homepage: repo.homepage,
         open_issues_count: repo.open_issues_count,
-        default_branch: repo.default_branch,
+        // default_branch: repo.default_branch,
         forks: repo.forks
     } 
 }

@@ -24,7 +24,7 @@ module.exports = async function (username, repo, per_page = 100) {
     let result = await github.issues.getForRepo({
         owner: username,
         repo: repo,
-        state: 'open',
+        state: 'all',
         direction: 'asc',
         per_page: per_page
     }).catch(err => { throw err });

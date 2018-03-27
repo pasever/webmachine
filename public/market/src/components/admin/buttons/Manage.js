@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Manage = () => (
+const Manage = ({ wiNumber }) => (
   <button 
+    number={wiNumber}
     type="button"
     className="btn btn-outline-primary btn-sm btn-block"
     data-toggle="modal"

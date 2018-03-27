@@ -30,7 +30,7 @@ const Issue = ({issue}) => (
         <Link to={issue.html_url} target="_blank">
           View on GitHub
         </Link>
-        <Manage />
+        <Manage wiNumber={issue.number}/>
       </div>
     </div>
   </li>

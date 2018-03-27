@@ -53,7 +53,7 @@ export default class ReposPage extends Component {
         let filteredRepos = this.state.repos.filter(repo => (
           repo.name.toLowerCase().includes(this.state.search)
         ));
-        let repos = filteredRepos.map(repo => <Repo key={repo.id} repo={repo}/>);
+        let repos = filteredRepos.map(repo => <Repo key={repo.id} repo={repo} />);
         return repos;
       } else {
         // If there aren't repo to display, don't even bother
@@ -74,6 +74,7 @@ export default class ReposPage extends Component {
   }
 
   render() {
+    console.log(this.state.repos);
     return (
       <div>
         {/* Repos count message will display after data has been fetched
