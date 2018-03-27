@@ -3,13 +3,20 @@ import React, { Component } from 'react';
 export default class EditWorkitemForm extends Component {
   constructor(props) {
     super(props);
+    let issue = this.props.issue;
     this.state = {
-      title: 'workitem-title',
-      price: 1,
-      duration: 5,
-      stage: 'open',
-      assignee: '...',
-      description: 'workitem-description'
+      // title: 'issue.title',
+      // price: issue.price,
+      // duration: issue.due_date,
+      // stage: issue.stage,
+      // assignee: issue.assignee === null ? '...' : issue.assignee,
+      // description: issue.body
+      title: '',
+      price: '',
+      duration: '',
+      stage: '',
+      assignee: '',
+      description: ''
     };
 
     // component method bindings
@@ -17,6 +24,7 @@ export default class EditWorkitemForm extends Component {
     this.liveValidation = this.liveValidation.bind(this);
     this.handleSubmit = this.handleChange.bind(this);
   }
+
 
   liveValidation() {
     //IF STAGE == ASSIGNED, ASSIGNEE CANNOT BE EMPTY
@@ -32,8 +40,9 @@ export default class EditWorkitemForm extends Component {
   }
   
   render() {
-    let { title, price, stage, assignee, duration, description } = this.state;
-    console.log(this.state);
+    let { title, price, stage, assignee, due_date, body } = this.props.issue;
+    console.log(this.props.issue);
+    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -46,15 +55,15 @@ export default class EditWorkitemForm extends Component {
             <input onChange={this.handleChange} type="number" value={price} className="form-control" id="price"/>
           </div>
           <div className="form-group col-md-6">
-            <label htmlFor="duration">Duration</label>
-            <input onChange={this.handleChange} type="number" value={duration} className="form-control" id="duration"
+            <label htmlFor="duration">Due Date</label>
+            <input onChange={this.handleChange} type="text" value={due_date} className="form-control" id="duration"
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="price">Stage</label>
-            <select id="stage" className="form-control" onChange={this.handleChange} defaultValue={stage}>
+            <select id="stage" className="form-control" onChange={this.handleChange} >
               <option value="open">open</option>
               <option value="assigned">assigned</option>
               <option value="closed">closed</option>
@@ -62,7 +71,7 @@ export default class EditWorkitemForm extends Component {
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="duration">Assignee</label>
-            <input onChange={this.handleChange} type="text" value={assignee} className="form-control" id="assignee"
+            <input onChange={this.handleChange} type="text" value={assignee === null ? '...' : assignee} className="form-control" id="assignee"
             />
           </div>
         </div>
@@ -73,7 +82,7 @@ export default class EditWorkitemForm extends Component {
             className="form-control"
             id="description"
             style={{overflow: 'auto', resize: 'none'}}
-            value={description}
+            value={body}
             rows="3"
           ></textarea>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Manage from './admin/buttons/Manage';
 
-const Issue = ({ issue, h }) => (
+const Issue = ({ issue, modalHandler }) => (
   <li id={issue.id} number={issue.number} className="issue">
     <div className='card text-center issue-card'> 
       <div className='card-body'>
@@ -31,7 +31,7 @@ const Issue = ({ issue, h }) => (
           View on GitHub
         </Link>
         <Manage
-          modalHandler={h} 
+          modalHandler={modalHandler} 
           wiNumber={issue.number}
         />
       </div>

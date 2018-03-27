@@ -10,7 +10,11 @@ const Modal = (props) => (
         <div className="modal-header">
           <h5 className="modal-title" id="createWorkitemLabel">
             {/* condition here too; display # of new wi or wi being edited. manage btn has wi # */}
-            Work Item #{ props.issueNumber }
+            {!(props.issue === '') ? (
+              `Work Item #${props.issueNumber}`
+            ) : (
+              `Work Item #${props.issue.number}`
+            )}
           </h5>
           <button type="button" className="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -24,7 +28,9 @@ const Modal = (props) => (
               {...props} 
             />
           ) : (
-            <EditWorkitemForm />
+            <EditWorkitemForm
+              issue={props.issue}
+            />
           )}
           {/* Form needs props to POST */}
           

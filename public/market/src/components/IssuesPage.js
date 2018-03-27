@@ -23,7 +23,9 @@ export default class IssuesPage extends Component {
       search: '',
       issues: [],
       modal: {
-        triggeredBy: ''
+        triggeredBy: '',
+        getIssue: '',
+        issue: ''
       }
     }
     // Bind `this` to these methods so they can access state
@@ -31,6 +33,8 @@ export default class IssuesPage extends Component {
     this.handleCriteriaChange = this.handleCriteriaChange.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
     this.handleModalTrigger = this.handleModalTrigger.bind(this);
+    this.setIssue = this.setIssue.bind(this);
+    this.getIssue = this.setIssue.bind(this);
   }
 
   componentDidMount() {
@@ -64,13 +68,13 @@ export default class IssuesPage extends Component {
     // Create issue components based on current *filtering criteria*.
     if (this.state.criteria === 'open') {
         issues = filteredIssues.filter(issue => issue.stage === 'open');
-        issues = issues.map(issue => <Issue key={issue.number} issue={issue} h={this.handleModalTrigger} />)
+        issues = issues.map(issue => <Issue key={issue.number} issue={issue} modalHandler={this.handleModalTrigger} />)
     } else if (this.state.criteria === 'active') {
         issues = filteredIssues.filter(issue => issue.stage === 'active');
-        issues = issues.map(issue => <Issue key={issue.number} issue={issue} h={this.handleModalTrigger} />)
+        issues = issues.map(issue => <Issue key={issue.number} issue={issue} modalHandler={this.handleModalTrigger} />)
     } else if (this.state.criteria === 'closed') {
         issues = filteredIssues.filter(issue => issue.stage === 'closed');
-        issues = issues.map(issue => <Issue key={issue.number} issue={issue} h={this.handleModalTrigger} />)
+        issues = issues.map(issue => <Issue key={issue.number} issue={issue} modalHandler={this.handleModalTrigger} />)
     }
     // If there's issues to display, render them. Otherwise, render message.
     return issues.length > 0 ? issues : <p>No {this.state.criteria} issues found</p>;
@@ -84,12 +88,31 @@ export default class IssuesPage extends Component {
     this.setState({search: event.target.value});
   }
 
-  handleModalTrigger(tb) {
-    this.setState({ modal: { triggeredBy: tb }})
+  // takes triggredBy string value (tb) and optional issue number (n)
+  handleModalTrigger(tb, n) {
+    if(n === undefined) {
+      this.setState({ modal: { triggeredBy: tb }});
+    } else {
+      let modal = this.state.modal;
+      modal.triggeredBy = tb, modal.getIssue = n;
+      // this.setState({ modal });
+      this.setIssue(modal);
+    }
+  }
+
+  setIssue(modal) {
+    // filter returns an array. [0] at the end will return the only match, a single object
+    let issue = this.state.issues.filter(issue => issue.number === this.state.modal.getIssue)[0];
+    modal.issue = issue;
+    this.setState({ modal });
+  }
+
+  getIssue() {
+   return this.state.modal.issue;
   }
 
   render() {
-    // console.log(this.state);
+    console.log(this.state);
     return (
       <div>
         <Navigation
@@ -115,11 +138,12 @@ export default class IssuesPage extends Component {
         />
         <CreateWorkItem
           modalData={{
-            triggeredBy: this.state.modal.triggeredBy,
             issueNumber: this.state.issues.length + 1,
             user: this.state.user,
             repo: this.state.repo,
-            updatePage: this.updatePage
+            updatePage: this.updatePage,
+            triggeredBy: this.state.modal.triggeredBy,
+            issue: this.state.modal.issue
           }}
           modalHandler={this.handleModalTrigger}
         />
