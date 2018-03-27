@@ -14,6 +14,7 @@ class WorkitemForm extends Component {
       description: ''
     }
 
+    // component method bindings
     this.handleChange = this.handleChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.resetForm = this.resetForm.bind(this);
@@ -95,6 +96,7 @@ class WorkitemForm extends Component {
             id="description"
             style={{overflow: 'auto', resize: 'none'}}
             value={description}
+            rows="3"
             required
           ></textarea>
         </div>
