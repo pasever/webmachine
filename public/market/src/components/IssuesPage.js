@@ -89,7 +89,7 @@ export default class IssuesPage extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         <Navigation
@@ -115,6 +115,7 @@ export default class IssuesPage extends Component {
         />
         <CreateWorkItem
           modalData={{
+            triggeredBy: this.state.modal.triggeredBy,
             issueNumber: this.state.issues.length + 1,
             user: this.state.user,
             repo: this.state.repo,
