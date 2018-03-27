@@ -1,7 +1,8 @@
 import React from 'react'
 
-const Create = () => (
+const Create = ({ modalHandler }) => (
   <button
+      onClick={() => modalHandler('create')}
       type="button"
       className="btn btn-info"
       style={{display: 'block', margin: '0 auto'}}

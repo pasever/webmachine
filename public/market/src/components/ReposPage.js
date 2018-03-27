@@ -74,7 +74,6 @@ export default class ReposPage extends Component {
   }
 
   render() {
-    console.log(this.state.repos);
     return (
       <div>
         {/* Repos count message will display after data has been fetched

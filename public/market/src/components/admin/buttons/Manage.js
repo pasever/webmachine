@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Manage = ({ wiNumber }) => (
-  <button 
+const Manage = ({ wiNumber, modalHandler }) => (
+  <button
+    onClick={() => modalHandler('manage')} 
     number={wiNumber}
     type="button"
     className="btn btn-outline-primary btn-sm btn-block"

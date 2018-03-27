@@ -21,12 +21,16 @@ export default class IssuesPage extends Component {
       loaded: false,
       criteria: 'open',
       search: '',
-      issues: []
+      issues: [],
+      modal: {
+        triggeredBy: ''
+      }
     }
     // Bind `this` to these methods so they can access state
     this.renderPage = this.renderPage.bind(this);
     this.handleCriteriaChange = this.handleCriteriaChange.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
+    this.handleModalTrigger = this.handleModalTrigger.bind(this);
   }
 
   componentDidMount() {
@@ -60,13 +64,13 @@ export default class IssuesPage extends Component {
     // Create issue components based on current *filtering criteria*.
     if (this.state.criteria === 'open') {
         issues = filteredIssues.filter(issue => issue.stage === 'open');
-        issues = issues.map(issue => <Issue key={issue.number} issue={issue} />)
+        issues = issues.map(issue => <Issue key={issue.number} issue={issue} h={this.handleModalTrigger} />)
     } else if (this.state.criteria === 'active') {
         issues = filteredIssues.filter(issue => issue.stage === 'active');
-        issues = issues.map(issue => <Issue key={issue.number} issue={issue} />)
+        issues = issues.map(issue => <Issue key={issue.number} issue={issue} h={this.handleModalTrigger} />)
     } else if (this.state.criteria === 'closed') {
         issues = filteredIssues.filter(issue => issue.stage === 'closed');
-        issues = issues.map(issue => <Issue key={issue.number} issue={issue} />)
+        issues = issues.map(issue => <Issue key={issue.number} issue={issue} h={this.handleModalTrigger} />)
     }
     // If there's issues to display, render them. Otherwise, render message.
     return issues.length > 0 ? issues : <p>No {this.state.criteria} issues found</p>;
@@ -80,7 +84,12 @@ export default class IssuesPage extends Component {
     this.setState({search: event.target.value});
   }
 
+  handleModalTrigger(tb) {
+    this.setState({ modal: { triggeredBy: tb }})
+  }
+
   render() {
+    console.log(this.state);
     return (
       <div>
         <Navigation
@@ -111,6 +120,7 @@ export default class IssuesPage extends Component {
             repo: this.state.repo,
             updatePage: this.updatePage
           }}
+          modalHandler={this.handleModalTrigger}
         />
         <ul id="issue-list" className="">
           {this.state.loaded ? this.renderPage() : null}
