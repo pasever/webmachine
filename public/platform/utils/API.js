@@ -1,17 +1,20 @@
 import axios from 'axios';
 
 
-const platform = require('../../../config/').platform();
-
 export default {
     getAuthorizedUser: () => {
+        return axios.get('/api/db/platform?pid=' + localStorage.profileId);
         
-
-        return platform;//axios.get('../../../../config/platform.json');
+    },
+    addUser: (user) => {
+        localStorage.profileId = user.profileId;
+        return axios.put('/api/db/platform', user);
+    },
+    updateUser: (user) => {
+        return axios.post('/api/db/platform', user);
     },
 
-    addUser: (user, isLive) => {
-        user.isLive = isLive;
-        return axios.put('/api/db/platform', user);
-    }
+    testDbConnection: (user) => {
+        
+    },
 }

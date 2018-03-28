@@ -2,12 +2,16 @@
     "main": {
         "title": "Welcome to our Platform"
     },
-    "signup": {
-        "title": "Sign Up",
-        "body": "Creating a new platform account will bridge the communication gap between you and your members."
+    "userMaintenance": {
+        "title": "General Information",
+        "body": "General platform information"
     },
-    "maintenance": {
-        "mainTitle": "Manage your account",
-        "mainBody": "Manage your services, billing, members, and more."
+    "dbMaintenance": {
+        "title": "Data Store Information",
+        "body": "Ensure you have a connection to a datastore."
+    },
+    "billingMaintenance": {
+        "title": "Billing information",
+        "body": "Add or update billing information."
     }
 }

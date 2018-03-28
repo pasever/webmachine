@@ -8,7 +8,7 @@ import React from 'react';
 import '../../styles/forms.css';
 
 /* 
-PROPS: 
+REQUIRED PROPS: 
     name - the name of the input field, 
     type - type e.g. submit, reset
     style - bootstrap style e.g. primary, default, success, etc. 
