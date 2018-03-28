@@ -40,8 +40,11 @@ const auth = (router) => {
 			case '/db/agent':
             case '/db/client':
             case '/db/platform':
+            case '/db/platform?pid=undefined':    // THIS NEEDS TO BE FIXED!!! -  THIS ROUTE SHOULD NOT BE HARDCODED.
+            case '/db/platform?pid=testprofile':  // THIS NEEDS TO BE FIXED!!!! - IT SHOULD ALLOW ANYTHING WITH ?pid= --- NEED ASSIST DGO
             case '/github':
-				const token = req.get('Authorization')
+                const token = req.get('Authorization')
+                
 				if (token) {
 					req.token = token }
 			 	else {

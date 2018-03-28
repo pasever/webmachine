@@ -17,7 +17,7 @@ const platformObject = {
     name: {
         type: String,
         unique: true,
-        required: true,
+        default: uuidv1(),
     },
     // Description
     description: {
@@ -36,8 +36,8 @@ const platformObject = {
     },
     // Number for SMS service to originate
     sms: { 
-        type: Number,
-        default: 0,
+        type: String,
+        default: "",
     },
     // Web
     web: {
@@ -57,13 +57,17 @@ const platformObject = {
     // Username for Mongo DB
     username: {
         type: String,
-        required: true,
-        unique: true,
+        default: "",
     },
     // password for Mongo DB
     password: {
         type: String,
-        required: true,
+        default: "",
+    },
+    // if the connection string is live
+    dbConnected: {
+        type: Boolean,
+        default: false,
     },
     // isPlatform?
     isPlatform: {
@@ -84,10 +88,21 @@ const platformObject = {
     id: { type: String, default: uuidv1() },
 
     // Id to the authenticated user
-    profileId: String,
+    clientId: { 
+        type: String, 
+        default: "",
+    },
+    // Stripe customer ID
+    stripeCustomerId: {
+        type: String,
+        default: "",
+    },
+
 }
 
-const platformSchema = new Schema(platformObject, { collection: "Platform" });
+const platformSchema = new Schema(platformObject, { collection: "Platform", versionKey: false });
+
+
 
 let Platform = mongoose.model("Platform", platformSchema);
 

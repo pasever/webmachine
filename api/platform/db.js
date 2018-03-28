@@ -5,8 +5,24 @@
 
 'use strict';
 
+const MongoClient = require('mongodb').MongoClient;
 const { Platform } = require('../../db/schemas/Platform');
+const {r,g,y,b} = require('../../console');
 
+
+/// TESTS IF WE CAN CONNECT TO THE MONGODB SERVER
+const testDb = (platform) => {
+    let client = new MongoClient(platform.uri);
+    return new Promise((resolve, reject) => { 
+        client.connect((error, client) => {
+            if(error) {
+                return resolve(false);
+            }
+            client.close();
+            return resolve(true);
+        });
+    });
+}
 
 /// Gets all platforms in the DB Collection
 exports.getPlatforms = () => {
@@ -42,7 +58,7 @@ exports.getPlatform = (id) => {
 // Gets platform by Profile Id
 exports.getPlatformByPId = (pid) => {
     return new Promise((resolve, reject) => {
-        Platform.find({ where: { profileId: pid }}, (err, response) => {
+        Platform.find({ where: { client: pid }}, (err, response) => {
             if(err) {
                 if(err.error !== 'not_found') {
                     resolve(err);
@@ -56,29 +72,37 @@ exports.getPlatformByPId = (pid) => {
 }
 
 // Adds a platform to the DB
-exports.putPlatform = (params) => {
+exports.putPlatform = platform => {
     console.log("API/PUT PLATFORM")
-    let platform = new Platform(params);
-    return new Promise((resolve, reject) => {
-        platform.save((err, response) => {
-            if (err) {
-                console.log("Error When Saving Platform")
-                reject(err)
-            }
-            resolve(response)
+    let p = new Platform(platform);
+    testDb(platform).then(resp => { 
+        platform.dbConnected = resp;
+        return new Promise((resolve, reject) => {
+            p.save((err, response) => {
+                if (err) {
+                    console.log("Error When Saving Platform")
+                    reject(err)
+                }
+                resolve(response)
+            })
         })
     })
 }
 
 // Updates a platform
 exports.updatePlatform = (platform) => {
-    return new Promise((resolve, reject) => {
-        platform.findOneAndUpdate({id: platform.id}, platform, {upsert: true}, (err, response) => {
-            if (err) {
-                console.log(r("Error When Updating Platform"))
-                reject(err)
-            }
-            resolve(response);
+    testDb(platform).then(resp => { 
+        console.log(resp);
+        platform.dbConnected = resp;
+        console.log("UPDATED PLATFORM", platform);
+        return new Promise((resolve, reject) => {
+            Platform.findOneAndUpdate({id: platform.id}, platform, {upsert: true}, (err, response) => {
+                if (err) {
+                    console.log(r("Error When Updating Platform"));
+                    reject(err)
+                }
+                resolve(response);
+            })
         })
     })
 }

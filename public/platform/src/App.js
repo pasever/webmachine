@@ -9,12 +9,16 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import API from '../utils/API';
 import LoadingPage from './pages/LoadingPage';
-//import SignupPage from './pages/Signup/';
-import MaintenanceForm from './pages/Maintenence';
+import { UserMaintenance, DbMaintenance, BillingMaintenance } from './pages/Maintenence';
 import config from '../../../config';
-// import { Link } from 'react-router-dom';
+import {Container, Row, Col } from './components/grid';
+import { Tab, TabPanel, Tabs, TabList } from 'react-tabs';
+import ErrorBoundary from './components/error/ErrorBoundary';
+import 'react-tabs/style/react-tabs.css';
 import './App.css';
 
+//////// DEFAULT PLATFORM
+const Platform = require('../../../config/').platform()
 const origin = config.origin;
 
 
@@ -30,6 +34,8 @@ export default class App extends Component {
             user:  null,        //{},  //res.data  /// should be passed in the response from Authorization
             errors: {},         
             pageData: null,
+            hasErrors: false,
+            isSaved: false,
         };
     }
     
@@ -40,6 +46,32 @@ export default class App extends Component {
             fetch(origin + '/platform/static/platformPageData.json')
                 .then(resp => { let json = resp; return { json, resolve }})
                 .then(({ json, resolve }) => resolve(json) )
+        })
+    }
+
+    /// When the component mounts, we will try and get all of the platform text and the user object from token.
+    componentDidMount() {
+        // Gets our platform page data
+        const data = this.getPlatformPageData().then(resp => resp.json());
+        
+        // Gets our localized user.  Preferably from a localStorage.profileId
+        const user = API.getAuthorizedUser(); // get user from localStorage.token through api
+        
+        // Waits till all promises are fulfilled to proceed.
+        Promise.all([data, user]).then(values => {
+            let user = values[1];
+            /// SEE'S IF WE HAVE THE OBJECT IN THE DB.  IF NOT WE RELY ON......  SOMETHING ELSE.  FOR NOW, PLATFORM.JSON
+            if(user.data.length <= 0) {
+                user = Platform[0];            
+                /// If the user doesn't exist in the database, put them there now
+                API.addUser(user).then((resp) => {         
+                    console.log(resp.data);
+                    this.setState({ pageData: values[0], user: resp.data })
+                }).catch(err => console.log(err));
+            } else {
+                this.setState({ pageData: values[0], user: user.data[0]});
+            }
+            
         })
     }
 
@@ -67,27 +99,20 @@ export default class App extends Component {
     
     submitSignupForm = event => {
         event.preventDefault();
-        API.addUser(this.state.user, true).then(resp => console.log(resp));
+        API.updateUser(this.state.user).then(resp => {
+            if(resp.data.errors) {
+                this.setState({ errors: resp.data.errors, hasErrors: true  });
+                console.log(resp.data.errors);
+            } else {
+                this.setState({ errors: {}, hasErrors: false });
+            }
+        }).catch(err => console.log(err));
     }
 
-    /// When the component mounts, we will try and get all of the platform text and the user object from token.
-    componentDidMount() {
-        // Gets our platform page data
-        const data = this.getPlatformPageData().then(resp => resp.json());
-        
-        /////////// FUTURE ----
-        let token = localStorage.token;     
-        //////////  FUTURE  
-        ////////// TURN TOKEN INTO PROFILE ID AND SEE IF WE HAVE A MATCHING PROFILE ID THAT'S ALREADY IN MONGO.  IF SO,
-        ////////// RETURN THAT USER DATA!
-
-        // Gets our localized user.  Preferably from a localStorage.token
-        const user = API.getAuthorizedUser()[0]; // get user from localStorage.token through api
-        
-        // Waits till all promises are fulfilled to proceed.
-        Promise.all([data, user]).then(values => {
-            this.setState({ pageData: values[0], user: values[1] })
-        })
+    toggleSystem = () => {
+        let user = this.state.user;
+        user.isLive = !user.isLive;
+        this.setState({ user: user });
     }
 
     render() {
@@ -97,24 +122,62 @@ export default class App extends Component {
                 { this.state.pageData === null ? ( 
                     <LoadingPage />
                 ) : (
-                    <div>
-                        <header className="app-header">
-                            <h1 className="header-title">{ this.state.pageData.main.title }</h1>
-                        </header>
-                        <main className="app-content">
-                            { /* IF THE USER IS NOT YET LIVE, HAVE THEM COMPLETE THE SIGNUP PROCESS */ }
-                            <Container>
-                                <Row>
-                                    <MaintenanceForm
-                                        user={ this.state.user } 
-                                        updateFormField={ this.updateFormField } 
-                                        onSubmit={ this.submitSignupForm }
-                                        errors={ this.state.errors }
-                                        text={ this.state.pageData.signup } />      
-                                </Row>
-                            </Container>
-                        </main>
-                    </div>
+                <div>
+                    <header className="app-header">
+                        <h1 className="header-title">{ this.state.pageData.main.title }</h1>
+                    </header>
+                    <main className="app-content">
+                        <ErrorBoundary>
+                        <Container>
+                            <Row>
+                                <Col size="md-12">
+                                    { this.state.user.isLive ? ( 
+                                        <h6><i onClick={ this.toggleSystem } className="fa fa-toggle-on toggle"></i> system is live.</h6> ) : ( 
+                                        <h6><i onClick={this.toggleSystem} className="fa fa-toggle-off toggle"></i> system is off.</h6>
+                                    )}
+                                    { this.state.hasErrors ? ( 
+                                        <h6 className="badge badge-warning">Please check the forms for errors</h6>
+                                    ) : ( "" ) }
+                                </Col>
+                                <Tabs>
+                                    <TabList>
+                                        <Tab>Organization</Tab>
+                                        <Tab>Database</Tab>
+                                        <Tab>Billing</Tab>
+                                    </TabList>
+                                
+                                    <TabPanel>
+                                        <Col size="8">
+                                            <UserMaintenance
+                                                user={ this.state.user } 
+                                                updateFormField={ this.updateFormField } 
+                                                onSubmit={ this.submitSignupForm }
+                                                errors={ this.state.errors }
+                                                text={ this.state.pageData.userMaintenance } />      
+                                        </Col>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <Col size="8">
+                                            <DbMaintenance
+                                                user={ this.state.user } 
+                                                updateFormField={ this.updateFormField } 
+                                                onSubmit={ this.submitSignupForm }
+                                                errors={ this.state.errors }
+                                                text={ this.state.pageData.dbMaintenance }
+                                                onTestDb={ this.state.testDb } />      
+                                        </Col>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <Col size="8">
+                                            <BillingMaintenance text={this.state.pageData.billingMaintenance } />
+                                        </Col>
+                                    </TabPanel>
+                                </Tabs>
+                            </Row>
+                        </Container>
+                        </ErrorBoundary>
+                    </main>
+                </div>
                 
                 )}
             </div>

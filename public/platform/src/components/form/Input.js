@@ -23,7 +23,7 @@ PROPS:
 */
 export const Input = (props) => (
     <div className="form-group">
-        <label htmlFor={ props.name }>{ props.displayName }</label>
+        <label htmlFor={ props.name } className="control-label">{ props.displayName }</label>
         { !props.maskPhone ? ( 
             <input type={ props.type } value={ props.value } placeholder={ props.placeholder } 
                 name={props.name} id={props.name} onChange={ props.onChange } className="form-control"/>
@@ -38,11 +38,9 @@ export const Input = (props) => (
         ) : ( 
             "" 
         )}
-        { props.errorText !== "" ? (
-            <label className="label label-danger">{ props.errorText }</label>
-        ) : (
-            ""
-        )}
+        { props.errorText !== undefined ? props.errorText.message !== undefined ? (
+            <label className="badge badge-danger">{ props.errorText.message }</label>
+        ) : ( "" ) : ("")}
     </div>
 );
 

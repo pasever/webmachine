@@ -24,7 +24,7 @@ PROPS:
 
 export const TextArea = (props) => (
     <div className="form-group">
-        <label htmlFor={ props.name }>{ props.displayName }</label>
+        <label htmlFor={ props.name } className="control-label">{ props.displayName }</label>
             <textarea name={props.name} id={props.name} 
                 onChange={ props.onChange } rows={ props.rows } cols={ props.cols }
                 className="form-control" value={ props.value }></textarea>

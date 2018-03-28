@@ -14,6 +14,7 @@ exports.getPlatforms = (token, conn, cb) => {
     }).catch((err) => {
         console.log("ERROR IN GET Platforms PROCESSING");
         console.log(err);
+        cb(err);
     });
     async function thread(conn) {
         let result = await db.getPlatforms(conn);
@@ -29,6 +30,7 @@ exports.getPlatform = (token, id, conn, cb) => {
     }).catch((err) => {
         console.log("ERROR IN GET Platform PROCESSING");
         console.log(err);
+        cb(err);
     });
     async function thread(conn) {
         let result = await db.getPlatform(id, conn);
@@ -43,6 +45,7 @@ exports.getPlatformByPId = (token, pid, conn, cb) => {
     }).catch((err) => {
         console.log("ERROR IN GET Platform PROCESSING");
         console.log(err);
+        cb(err);
     });
     async function thread(conn) {
         let result = await db.getPlatformByPId(pid, conn);
@@ -58,6 +61,7 @@ exports.addPlatform = (token, platform, conn, cb) => {
     }).catch((err) => {
         console.log("ERROR IN Add Platform PROCESSING")
         console.log(err)
+        cb(err);
     });
     // async await function to drive synchronous processing of db update
     async function thread(contact, conn) {
@@ -73,6 +77,7 @@ exports.updatePlatform = (token, platform, conn, cb) => {
     }).catch((err) => {
         console.log("ERROR IN updatePlatform PROCESSING")
         console.log(err);
+        cb(err);
     })
     async function thread(platform, conn) {
         let result = await db.updatePlatform(platform, conn);
@@ -88,6 +93,7 @@ exports.deletePlatform = (token, id, conn, cb) => {
     }).catch((err) => {
         console.log("ERROR IN DELETE Platform PROCESSING");
         console.log(err);
+        cb(err);
     })
     async function thread(id, conn) {
         let result = await db.deletePlatform(id, conn)
