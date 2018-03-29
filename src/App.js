@@ -21,7 +21,7 @@ class App extends Component {
   state = {
     agents: [ ],
     clients: [ ],
-    currentPage: "Home"
+    currentPage: ""
   }
 
   removeAgentContact = (contact) => {

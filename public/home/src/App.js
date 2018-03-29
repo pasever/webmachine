@@ -10,6 +10,7 @@ import About                  from './Component/About';
 import Contact                from './Component/Contact';
 import Footer                 from './Component/Footer';
 import Header                 from './Component/Header';
+import Jumbotron              from './Component/Jumbotron';
 import Portfolio              from './Component/Portfolio';
 import Market                 from './Component/Market';
 import Testimonials           from './Component/Testimonials';
@@ -160,6 +161,7 @@ class App extends Component {
       <div>
       <div className="App">
         <Header data={this.state.portfolioData.main} />
+        <Jumbotron data={this.state.portfolioData.main} />
         <About data={this.state.portfolioData.main} />
         <Market data={this.state.portfolioData.market} />
         <Portfolio data={this.state.portfolioData.portfolio} />
