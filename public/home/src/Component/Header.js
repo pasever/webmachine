@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   render() {
@@ -20,12 +20,24 @@ class Header extends Component {
 	       <a className="mobile-btn" href="" title="Hide navigation">Hide navigation</a>
 
          <ul id="nav" className="nav">
-            <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
-            <li><a className="smoothscroll" href="#about">About Us</a></li>
-	          <li><a className="smoothscroll" href="#resume">Market Place</a></li>
-            <li><a className="smoothscroll" href="#portfolio">Works</a></li>
-            <li><a className="smoothscroll" href="#testimonials">Testimonials</a></li>
-            <li><a className="smoothscroll" href="#contact">Contact</a></li>
+            <Link to='/'><li className="current"><a className="smoothscroll" href="#home">Home</a></li></Link>
+            <Link to='/products' ><li><a className="smoothscroll" href="#about">Products</a></li></Link>
+	          <Link to='/solution'><li><a className="smoothscroll" href="#resume">Solution</a></li></Link>
+            <Link to='/market'><li><a className="smoothscroll" href="#portfolio">Market</a></li></Link>
+            {/*
+            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+              <Link to='/marketitems'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
+              <Link to='/marketmywork'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
+              <Link to='/marketdocs'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
+            </div>
+            */}
+            <Link to='/agents'><li><a className="smoothscroll" href="#testimonials">Agents</a></li></Link>
+            <Link to='/pricing'><li><a className="smoothscroll" href="#contact">Pricing</a></li></Link>
+            <Link to='/registration'><li><a className="smoothscroll" href="#contact">Member Registration</a></li></Link>
+            <Link to='/blog'><li><a className="smoothscroll" href="#contact">Blog</a></li></Link>
+            <Link to='/login'><li><a className="smoothscroll" href="#contact">Login</a></li></Link>
+            <Link to='/about'><li><a className="smoothscroll" href="#contact">About</a></li></Link>
          </ul>
       
       </nav>

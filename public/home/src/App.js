@@ -13,7 +13,9 @@ import Header                 from './Component/Header';
 import Jumbotron              from './Component/Jumbotron';
 import Portfolio              from './Component/Portfolio';
 import Market                 from './Component/Market';
+import Main                   from './Component/Main';
 import Testimonials           from './Component/Testimonials';
+import { Switch, Route } from 'react-router-dom'
 import { Widget,
          addResponseMessage,
          addLinkSnippet,
@@ -161,12 +163,14 @@ class App extends Component {
       <div>
       <div className="App">
         <Header data={this.state.portfolioData.main} />
-        <Jumbotron data={this.state.portfolioData.main} />
+        <Main data={this.state.portfolioData} />
+        
+       {/* <Jumbotron data={this.state.portfolioData.main} />
         <About data={this.state.portfolioData.main} />
         <Market data={this.state.portfolioData.market} />
         <Portfolio data={this.state.portfolioData.portfolio} />
         <Testimonials  data={this.state.portfolioData.testimonials} />
-        <Contact data={this.state.portfolioData.main} />
+    <Contact data={this.state.portfolioData.main} /> */ }
         <Footer />
       </div>
       <div className="App">
