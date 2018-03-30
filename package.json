@@ -33,6 +33,7 @@
     "conversational economy"
   ],
   "dependencies": {
+    "auth0-js": "^9.4.2",
     "axios": "^0.17.1",
     "babel-preset-env": "^1.6.1",
     "body-parser": "^1.16.0",
@@ -54,6 +55,7 @@
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-chat-widget": "2.1.2",
     "react-dom": "^16.2.0",
     "react-markdown-renderer": "^1.4.0",

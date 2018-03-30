@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Log from './Log'
 
 class Header extends Component {
   render() {
@@ -39,7 +40,6 @@ class Header extends Component {
             <Link to='/login'><li><a className="smoothscroll" href="#contact">Login</a></li></Link>
             <Link to='/about'><li><a className="smoothscroll" href="#contact">About</a></li></Link>
          </ul>
-      
       </nav>
       </div>
       </header>      
