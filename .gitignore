@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
 config
-public/web/bundle.jsgit
 public/dist
 .env
