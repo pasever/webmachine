@@ -6,7 +6,6 @@ export default class EditWorkitemForm extends Component {
     this.state = {
       title: '',
       price: '',
-      duration: '',
       stage: '',
       due_date: '',
       assignee: '',
@@ -17,10 +16,12 @@ export default class EditWorkitemForm extends Component {
     // component method bindings
     this.handleChange = this.handleChange.bind(this);
     this.liveValidation = this.liveValidation.bind(this);
-    this.handleSubmit = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidUpdate() {
+    // if, after an update (a re-render), the issue prop is an object, meaning it's not empty,
+    // AND if that object has not been loaded into state, load it into state.
     if(typeof this.props.issue === 'object' && this.state.issueLoaded === false) {
       this.setState({
         title: this.props.issue.title,
@@ -32,8 +33,6 @@ export default class EditWorkitemForm extends Component {
         issueLoaded: true
       });
     }
-
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   liveValidation() {
@@ -44,16 +43,24 @@ export default class EditWorkitemForm extends Component {
     this.setState({[e.target.id]: e.target.value});
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
     console.log(this.state);
+    let endpoint = '';
+    axios.post() 
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
   
   render() {
     let { title, price, stage, assignee, due_date, description } = this.state;
-    console.log(typeof this.props.issue);
-    console.log(this.props.issue);
-    console.log(this.state)
+    // console.log(typeof this.props.issue);
+    // console.log(this.props.issue);
+    // console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
