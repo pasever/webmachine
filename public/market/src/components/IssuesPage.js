@@ -112,7 +112,7 @@ export default class IssuesPage extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         <Navigation

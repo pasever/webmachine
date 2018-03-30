@@ -3,20 +3,15 @@ import React, { Component } from 'react';
 export default class EditWorkitemForm extends Component {
   constructor(props) {
     super(props);
-    let issue = this.props.issue;
     this.state = {
-      // title: 'issue.title',
-      // price: issue.price,
-      // duration: issue.due_date,
-      // stage: issue.stage,
-      // assignee: issue.assignee === null ? '...' : issue.assignee,
-      // description: issue.body
       title: '',
       price: '',
       duration: '',
       stage: '',
+      due_date: '',
       assignee: '',
-      description: ''
+      description: '',
+      issueLoaded: false
     };
 
     // component method bindings
@@ -25,6 +20,21 @@ export default class EditWorkitemForm extends Component {
     this.handleSubmit = this.handleChange.bind(this);
   }
 
+  componentDidUpdate() {
+    if(typeof this.props.issue === 'object' && this.state.issueLoaded === false) {
+      this.setState({
+        title: this.props.issue.title,
+        price: this.props.issue.price,
+        due_date: this.props.issue.due_date,
+        stage: this.props.issue.stage,
+        assignee: this.props.issue.assignee,
+        description: this.props.issue.body,
+        issueLoaded: true
+      });
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   liveValidation() {
     //IF STAGE == ASSIGNED, ASSIGNEE CANNOT BE EMPTY
@@ -34,13 +44,14 @@ export default class EditWorkitemForm extends Component {
     this.setState({[e.target.id]: e.target.value});
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    console.log('submitted');
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state);
   }
   
   render() {
-    let { title, price, stage, assignee, due_date, body } = this.props.issue;
+    let { title, price, stage, assignee, due_date, description } = this.state;
+    console.log(typeof this.props.issue);
     console.log(this.props.issue);
     console.log(this.state)
     return (
@@ -63,7 +74,7 @@ export default class EditWorkitemForm extends Component {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="price">Stage</label>
-            <select id="stage" className="form-control" onChange={this.handleChange} >
+            <select id="stage" className="form-control" value={stage === 'active' ? 'assigned' : stage} onChange={this.handleChange} >
               <option value="open">open</option>
               <option value="assigned">assigned</option>
               <option value="closed">closed</option>
@@ -71,7 +82,7 @@ export default class EditWorkitemForm extends Component {
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="duration">Assignee</label>
-            <input onChange={this.handleChange} type="text" value={assignee === null ? '...' : assignee} className="form-control" id="assignee"
+            <input onChange={this.handleChange} type="text" value={assignee === null ? '' : assignee} className="form-control" id="assignee"
             />
           </div>
         </div>
@@ -82,7 +93,7 @@ export default class EditWorkitemForm extends Component {
             className="form-control"
             id="description"
             style={{overflow: 'auto', resize: 'none'}}
-            value={body}
+            value={description}
             rows="3"
           ></textarea>
         </div>
