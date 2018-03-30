@@ -47,7 +47,7 @@ export default class EditWorkitemForm extends Component {
     e.preventDefault();
     console.log(this.state);
     let endpoint = '';
-    axios.post() 
+    axios.put() 
       .then(res => {
         console.log(res.data);
       })
