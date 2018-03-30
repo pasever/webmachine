@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class EditWorkitemForm extends Component {
   constructor(props) {
@@ -46,8 +47,8 @@ export default class EditWorkitemForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    let endpoint = '';
-    axios.put() 
+    let endpoint = 'http://localhost:3000/api/github/edit-issue/workitem-lab';
+    axios.put(endpoint, this.state) 
       .then(res => {
         console.log(res.data);
       })
@@ -59,7 +60,7 @@ export default class EditWorkitemForm extends Component {
   render() {
     let { title, price, stage, assignee, due_date, description } = this.state;
     // console.log(typeof this.props.issue);
-    // console.log(this.props.issue);
+    console.log(this.props.issue);
     // console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>

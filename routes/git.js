@@ -9,11 +9,13 @@ const bodyParser =  	 require('body-parser')
 const issues =       	 require('express').Router();
 const repos =        	 require('express').Router();
 const createIssue = 	 require('express').Router();
+const editIssue =      require('express').Router();
 
 // register routes
 require('./git/issues')(issues);
 require('./git/repos')(repos);
 require('./git/create-issue')(createIssue);
+require('./git/edit-issue')(editIssue);
 
 const git = (router) => {
 	router.use(bodyParser.json());
@@ -22,7 +24,9 @@ const git = (router) => {
 	// api/db/client
 	router.use('/repos', repos);
 	// api/github/create-issue
-	router.use('/create-issue', createIssue);
+  router.use('/create-issue', createIssue);
+  // api/github/edit-issue
+  router.use('/edit-issue', editIssue);
 }
 
 module.exports = git
