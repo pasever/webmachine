@@ -2,11 +2,7 @@
   "name": "strategicmachines",
   "version": "0.5.0",
   "description": "web portal for intelligent interactions",
-  "main": "server.js",
-  "engines": {
-    "node": "^8.6.0",
-    "npm": "^3.0.0"
-  },
+  "main": "server.js",  
   "scripts": {
     "webpack-watch": "webpack -w",
     "express-server": "node ./server.js",

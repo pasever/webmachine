@@ -29,7 +29,7 @@ export default class IssuesPage extends Component {
 
   componentDidMount() {
     let repo = this.state.repo;
-    let endpoint = `${issues_url}/${repo}`;
+    let endpoint = `${issues_url}/${repo}`;  
     // Fetch issues for repo and save them into state
     axios.get(endpoint)
     .then(res => {
