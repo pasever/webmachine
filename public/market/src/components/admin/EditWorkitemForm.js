@@ -21,7 +21,7 @@ export default class EditWorkitemForm extends Component {
     this.resetForm = this.resetForm.bind(this);
   }
 
-  componentDidUpdate() {
+  componentWillUpdate() {
     // if, after an update (a re-render), the issue prop is an object, meaning it's not empty,
     // AND if that object has not been loaded into state, load it into state.
     if(typeof this.props.issue === 'object' && this.state.issueLoaded === false) {
