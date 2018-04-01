@@ -22,19 +22,23 @@ const Modal = (props) => {
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            {/* {console.log(props)} */}
+            {console.log(props)}
           </div>
           <div className="modal-body">
             {/* conditionally render forms */}
-            {props.triggeredBy === 'create' ? (
-              <WorkitemForm
-                {...props} 
-              />
-            ) : (
-              <EditWorkitemForm
-                issue={props.issue}
-              />
-            )}
+            {props.triggeredBy !== '' ? (
+
+                props.triggeredBy === 'create' ? (
+                  <WorkitemForm
+                    {...props} 
+                  />
+                ) : (
+                  <EditWorkitemForm
+                    issue={props.issue}
+                  />
+                )
+
+            ) : null}
           </div>
         </div>
       </div>
@@ -44,7 +48,8 @@ const Modal = (props) => {
 
 export default Modal;
 
-/*
+/* Lines 23-26: Which number is it?
+
   *The Modal can display two possible issue numbers in its header*:
   The to-be issue# of an issue being created (assuming "Create Work Item 
   was clicked"), OR the issue# of an existing issue (assuming "Manage/Edit" 
@@ -64,4 +69,20 @@ export default Modal;
 
   Lines 23-26 attempt to determine which issue# to display in the Modal's header;
   "is it a new work item, or is it an existing one being edited?"
+*/
+
+/* Lines 29-29: Nested Ternary
+
+  We use a nested ternary expression here to enforce conditional rendering.
+  The Modals "mode" ("create" or "manage", kept track of by the triggeredBy
+  property in the HOC's state), determines which form to render within the
+  modal's body. Upon initial mounting, triggeredBy is an empty string. Upon
+  initial mounting, even though the modal itself is not visible until triggered,
+  its code gets rendered in the DOM, and along it, the code for any form which 
+  the ternary expression outputs. Ideally, we don't want the code for a form to
+  be sitting in the DOM until it's needed (that is, until the modal is triggered).
+  So, we use a nested ternary to render a form (by first checking in which mode
+  the modal has been triggered) ONLY if triggeredBy[prop] is not empty. If
+  triggeredBy[prop] is not empty, that means one of the two button that trigger the
+  modal has been clicked. Then, and only then, do we bring in our respective form.
 */
