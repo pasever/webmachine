@@ -4,11 +4,11 @@ import Modal from './Modal';
 
 const CreateWorkitem = ({ modalData, modalHandler }) => (
   <div>
-    {/* Triggers modal */}
+    {/* Triggers modal in 'create' mode */}
     <Create 
       modalHandler={modalHandler}
     />
-    {/* Contains form for adding workitems */}
+    {/* Contains form for creatin and editing workitems */}
     <Modal
       {...modalData}
     />

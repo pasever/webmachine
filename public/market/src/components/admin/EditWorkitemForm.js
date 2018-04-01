@@ -18,6 +18,7 @@ export default class EditWorkitemForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.liveValidation = this.liveValidation.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetForm = this.resetForm.bind(this);
   }
 
   componentDidUpdate() {
@@ -56,11 +57,24 @@ export default class EditWorkitemForm extends Component {
         console.log(err);
       })
   }
+
+  resetForm() {
+    console.log('resetting');
+    this.setState({
+      title: '',
+      price: '',
+      stage: '',
+      due_date: '',
+      assignee: '',
+      description: '',
+      issueLoaded: false
+    });
+  }
   
   render() {
     let { title, price, stage, assignee, due_date, description } = this.state;
     // console.log(typeof this.props.issue);
-    console.log(this.props.issue);
+    // console.log(this.props.issue);
     // console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
