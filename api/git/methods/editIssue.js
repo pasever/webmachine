@@ -12,22 +12,16 @@ github.authenticate({
   token: githubrepo.token
 });
 
-async function editIssue() {
+async function editIssue(repo, number, title, body, state = 'open') {
   var result = await github.issues.edit({
     owner: 'strategicmarket',
-    repo: 'workitem-lab',
-    number: 3,
-    title: 'closing test',
-    body: 'running tests from my machine',
-    state: 'open'
+    repo: repo,
+    number: number,
+    title: title,
+    body: body,
+    state: state
   }).catch(err => { throw err });
   return result;
-}
+};
 
-// editIssue()
-//   .then(res => {
-//     console.log(res);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   })
+module.exports = editIssue;
