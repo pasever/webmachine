@@ -11,14 +11,41 @@ const { y, r } = require('../../console');
 
 const editIssue = (router) => {
   router.put('/:repo', (req, res, next) => {
-    let param = req.params.repo;
+    let repo = req.params.repo;
     let wi = req.body;
     console.log(wi);
-    res.json({
-      msg: 'Received work item edit',
-      wi: wi
-    });
-    next();
+    // Find work item by # and repo
+    Workitem.findOneAndUpdate({
+      $and: [
+        { itemId: wi.number },
+        { repo: wi.repo }
+      ]
+    }, {
+      // Update some properties in Workitems collection
+      $set: {
+        title: wi.title,
+        price: wi.price,
+        stage: wi.stage,
+        assignee: wi.assignee === '' ? null : wi.assignee,
+        description: wi.description
+      }
+    })
+      .then(doc => {
+        let msg = `Updated workitem#${doc.itemId} of repo ${doc.repo}`;
+        console.log(msg + '\n' + doc);
+        res.json({
+          msg,
+          work_item: doc
+        });
+        next();
+      })
+      .catch(err => {
+        let msg = `Error updating workitem#${doc.itemId} of repo ${doc.repo}`;
+        console.log(msg + '\n' + err);
+        res.json({ msg })
+        next();
+      });
+    
   });
 }
 
