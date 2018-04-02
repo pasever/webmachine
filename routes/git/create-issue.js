@@ -25,52 +25,56 @@ const createIssue = (router) => {
       description: req.body.description
     };
 
-    console.log(workitem);
-    res.json({
-      msg: 'Received',
-      work_item: workitem
-    })
-    next();
     // Save wi into DB
-    // Workitem.create(workitem)
-    // .then(doc => {
+    Workitem.create(workitem)
+    .then(doc => {
 
-    //   let msg = {
-    //     db: 'Work item successfully created'
-    //   };
-    //   console.log(y(msg.db), doc);
-    //   // Now create issue on GitHub
-    //   api.createIssue(doc.repo, doc.title, doc.description)
-    //   .then(response => {
-    //     msg.github = 'Issue successfully created';
-    //     console.log(y(msg.github), response);
-    //     res.json({
-    //       msg: msg
-    //     });
-    //     next()
-    //   })
-    //   .catch(err => {
-    //     msg.github = 'Error creating issue on GitHub';
-    //     console.log(r(msg.github) + '\n' + err);
-    //     res.json({
-    //       msg: msg
-    //     });
-    //     next();
-    //   });
+      let msg = {
+        db: 'Work item successfully created'
+      };
+      console.log(y(msg.db), doc);
+      // Now create issue on GitHub
+      api.createIssue(doc.repo, doc.title, doc.description)
+      .then(response => {
+        msg.github = 'Issue successfully created';
+        console.log(y(msg.github), response);
+        res.json({
+          msg: msg
+        });
+        next()
+      })
+      .catch(err => {
+        msg.github = 'Error creating issue on GitHub';
+        console.log(r(msg.github) + '\n' + err);
+        res.json({
+          msg: msg
+        });
+        next();
+      });
      
-    // })
-    // .catch(err => {
-    //   if (err) {
-    //     let msg = 'Error creating workitem. Didn\'t attempt to create on GitHub';
-    //     console.log(r(msg) + '\n' + err);
-    //     res.json({
-    //       error: msg
-    //     });
-    //     next();
-    //   }
-    // })
+    })
+    .catch(err => {
+      if (err) {
+        let msg = 'Error creating workitem. Didn\'t attempt to create on GitHub';
+        console.log(r(msg) + '\n' + err);
+        res.json({
+          error: msg
+        });
+        next();
+      }
+    })
 
   });
 }
 
 module.exports = createIssue;
+
+// TESTING BLOCK
+// {
+//    console.log(workitem);
+//     res.json({
+//       msg: 'Received',
+//       work_item: workitem
+//     })
+//     next();
+// }
