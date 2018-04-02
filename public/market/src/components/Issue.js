@@ -25,11 +25,11 @@ const Issue = ({ issue, modalHandler }) => (
         <span className='card-text text-muted issue-due-date'> 
           Due on: <span>{issue.due_date}</span>
         </span>
+        <Link to={issue.html_url} target="_blank">
+          <i className="fab fa-github github-icon"></i>
+        </Link>
       </div>
       <div className='card-footer text-center issue-card-footer'>
-        <Link to={issue.html_url} target="_blank">
-          View on GitHub
-        </Link>
         <Manage
           modalHandler={modalHandler} 
           wiNumber={issue.number}

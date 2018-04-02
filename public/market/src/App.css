@@ -79,9 +79,21 @@
   margin: 10px 0px; /* fits 4 into one line */
 }
 
+#issue-list .card-body {
+  padding: 10px 20px !important;
+}
+
+.fa-github {
+  color: #333;
+  font-size: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
 #issue-list .issue-card {
   width: 20rem;
-  padding: 10px;
+  height: 10rem;
+  /* padding: 5px; */
   background: #eee;
 }
 
