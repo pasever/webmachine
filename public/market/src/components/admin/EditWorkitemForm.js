@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import config from '../../../../../config';
+const { edit_issue_url } = config.init().githubrepo;
 
 export default class EditWorkitemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      price: '',
-      stage: '',
-      due_date: '',
-      assignee: '',
-      description: '',
-      issueLoaded: false
+      repo: this.props.repo,
+      number: this.props.issue.number,
+      title: this.props.issue.title,
+      price: this.props.issue.price,
+      due_date: this.props.issue.due_date,
+      stage: this.props.issue.stage,
+      assignee: this.props.issue.assignee,
+      description: this.props.issue.body,
     };
 
     // component method bindings
@@ -21,20 +24,17 @@ export default class EditWorkitemForm extends Component {
     this.resetForm = this.resetForm.bind(this);
   }
 
-  componentWillUpdate() {
-    // if, after an update (a re-render), the issue prop is an object, meaning it's not empty,
-    // AND if that object has not been loaded into state, load it into state.
-    if(typeof this.props.issue === 'object' && this.state.issueLoaded === false) {
-      this.setState({
-        title: this.props.issue.title,
-        price: this.props.issue.price,
-        due_date: this.props.issue.due_date,
-        stage: this.props.issue.stage,
-        assignee: this.props.issue.assignee,
-        description: this.props.issue.body,
-        issueLoaded: true
-      });
-    }
+  componentWillReceiveProps(nextProps) {
+    let { number, title, price, due_date, stage, assignee, body } = nextProps.issue;
+    this.setState({
+      title,
+      price,
+      due_date,
+      stage,
+      assignee,
+      description: body,
+    });
+
   }
 
   liveValidation() {
@@ -47,11 +47,11 @@ export default class EditWorkitemForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
-    let endpoint = 'http://localhost:3000/api/github/edit-issue/workitem-lab';
+    let endpoint = `${edit_issue_url}/${this.state.repo}`;
     axios.put(endpoint, this.state) 
       .then(res => {
         console.log(res.data);
+        this.resetForm();
       })
       .catch(err => {
         console.log(err);
@@ -59,23 +59,19 @@ export default class EditWorkitemForm extends Component {
   }
 
   resetForm() {
-    console.log('resetting');
     this.setState({
+      number: '',
       title: '',
       price: '',
       stage: '',
       due_date: '',
       assignee: '',
-      description: '',
-      issueLoaded: false
+      description: ''
     });
   }
   
   render() {
     let { title, price, stage, assignee, due_date, description } = this.state;
-    // console.log(typeof this.props.issue);
-    // console.log(this.props.issue);
-    // console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -96,9 +92,9 @@ export default class EditWorkitemForm extends Component {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="price">Stage</label>
-            <select id="stage" className="form-control" value={stage === 'active' ? 'assigned' : stage} onChange={this.handleChange} >
+            <select id="stage" className="form-control" value={stage === 'active' ? 'active' : stage} onChange={this.handleChange} >
               <option value="open">open</option>
-              <option value="assigned">assigned</option>
+              <option value="active">active</option>
               <option value="closed">closed</option>
             </select>
           </div>
