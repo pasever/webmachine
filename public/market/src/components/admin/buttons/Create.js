@@ -9,7 +9,7 @@ const Create = ({ modalHandler }) => (
       data-toggle="modal"
       data-target="#createWorkitem"
     >
-      Create Work Item
+      Create Workitem
     </button>
 )
 

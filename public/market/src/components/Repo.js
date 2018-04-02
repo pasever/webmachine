@@ -10,7 +10,11 @@ const Repo = ({ repo }) => (
         <Link to={repo.html_url} target="_blank" className='repo-title'>
           <h5 className="card-title">{repo.name}</h5>
         </Link>
-        <h6 className="card-subtitle mb-2 text-muted">Open Workitems: {repo.open_issues_count}</h6>
+        <h6 className="card-subtitle mb-2 text-muted"
+          style={{fontSize: '14px'}}
+        >
+          Active Workitems: {repo.open_issues_count}
+        </h6>
         <p className="card-text">{repo.description}</p>
       </div>
     </div>
@@ -18,7 +22,7 @@ const Repo = ({ repo }) => (
         <Link to={`/${repo.owner.login}/${repo.name}/issues`}
           className="card-link repo-view-issues"
         >
-          View Work Items
+          View Workitems
         </Link>
     </div>
   </li>

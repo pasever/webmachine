@@ -48,8 +48,8 @@ export default class IssuesPage extends Component {
     .then(res => {
       this.setState({
         issues: res.data,
-        loaded: true
-        // nextIssue: res.data.length + 1
+        loaded: true,
+        nextIssue: res.data.length + 1
       })
     });
   }
@@ -130,7 +130,6 @@ export default class IssuesPage extends Component {
   }
 
   render() {
-    // console.log(this.state);
     return (
       <div>
         <Navigation
@@ -159,16 +158,19 @@ export default class IssuesPage extends Component {
 
         {/*Administrative "layer" to be rendered conditionally
           based on authorization priviledges.*/}
-        <CreateWorkItem
-          modalData={{
-            issueNumber: this.state.issues.length + 1,
-            user: this.state.user,
-            repo: this.state.repo,
-            triggeredBy: this.state.modal.triggeredBy,
-            issue: this.state.modal.issue
-          }}
-          modalHandler={this.handleModalTrigger}
-        />
+          {this.state.loaded ? (
+            <CreateWorkItem
+            modalData={{
+              issueNumber: this.state.nextIssue,
+              user: this.state.user,
+              repo: this.state.repo,
+              triggeredBy: this.state.modal.triggeredBy,
+              issue: this.state.modal.issue,
+              repo: this.state.repo
+            }}
+            modalHandler={this.handleModalTrigger}
+          />
+          ) : null}
 
         {/* Render workitem cards only after issues have been
             loaded into state to avoid seeing "No workitems found"
@@ -177,6 +179,7 @@ export default class IssuesPage extends Component {
           {this.state.loaded ? this.renderPage() : null}
         </ul>
       </div>
+      
     );
   }
 };

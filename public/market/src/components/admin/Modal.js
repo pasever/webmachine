@@ -17,25 +17,31 @@ const Modal = (props) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="createWorkitemLabel">
-              Work Item #{issueNumber}
+              Workitem #{issueNumber}
             </h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            {console.log(props)}
           </div>
           <div className="modal-body">
             {/* conditionally render forms */}
-            {props.triggeredBy !== '' ? (
 
+            {/* has the modal been triggered? */}
+            {props.triggeredBy !== '' ? (
+                // if so, in which mode?
                 props.triggeredBy === 'create' ? (
                   <WorkitemForm
                     {...props} 
                   />
                 ) : (
-                  <EditWorkitemForm
-                    issue={props.issue}
-                  />
+                  // Are there props to pass?
+                  // props.issue ? (
+                    <EditWorkitemForm
+                      issue={props.issue}
+                      repo={props.repo}
+                    />
+
+                  // ) : null
                 )
 
             ) : null}
