@@ -9,7 +9,7 @@ import Market                 from '../Component/Market';
 import Testimonials           from '../Component/Testimonials';
 import { Switch, Route }      from 'react-router-dom'
 import ChatWidget                 from '../Component/Widget';
-
+import Auth from './Auth/Auth';
 
 
 class Home extends Component {
@@ -20,17 +20,16 @@ class Home extends Component {
       }
     }
 
+   
     
-
 
 render() {
 
     
-    console.log(this.state.portfolioData);
+    console.log("Props: " + this.props);
     return (
       <div>
-      <div className="App">
-        <Header data={this.props.data.main} />        
+      <div className="App">      
         <Jumbotron data={this.props.data.main} />
         <About data={this.props.data.main} />
         <Market data={this.props.data.market} />

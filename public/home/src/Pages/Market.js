@@ -4,8 +4,6 @@ import ChatWidget                 from '../Component/Widget';
 import Footer                 from '../Component/Footer';
 import Header                 from '../Component/Header';
 
-
-
 class MarketPage extends Component {
     constructor(props){
       super(props);
@@ -14,9 +12,6 @@ class MarketPage extends Component {
       }
     }
 
-    
-
-
 render() {
 
     
@@ -24,7 +19,6 @@ render() {
     return (
       <div>
       <div className="App">
-        <Header data={this.props.data.main} />
         <Market />
         <Footer />
       </div>

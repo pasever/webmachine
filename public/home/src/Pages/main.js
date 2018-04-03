@@ -14,29 +14,21 @@ import Auth from './Auth/Auth';
 import History from './Auth/History';
 import Callback from './Auth/Callback';
 
-const auth = new Auth();
-
-const handleAuthentication = ({location}) => {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication();
-  }
-}
-
 // The Main component renders one of the the provided
 // Routes (provided that one matches). Both the /roster
 // and /schedule routes will match any pathname that starts
 // with /roster or /schedule. The / route will only match
 // when the pathname is exactly the string "/"
-const Main = ({data}) => (
+const Main = ({data, auth}) => (
   <main>
-    <Switch history={history}>
-      <Route exact path="/" render={ () => <Home auth={ auth } data={ data } /> } />
+    <Switch history={history} component={Home}>
+      <Route exact path="/" render={ (props) => <Home auth={ auth } data={ data } {...props} /> } />
       {/*<Route exact path="/callback" render={() => <Redirect to="/"/>}/>*/}
       <Route path='/about' component={About} auth={ auth }/>
       <Route path='/agents' component={Agents} auth={ auth }/>
       <Route path='/blog' component={Blog} auth={ auth }/>
       <Route path='/login' render={ (props) => <Login auth={ auth } {...props} /> } />
-      <Route path='/market' render={ () => <MarketPage data={ data } auth={ auth } /> }  />
+      <Route path='/market' render={ (props) => <MarketPage data={ data } auth={ auth } {...props} /> }  />
       <Route path='/pricing' component={Pricing} auth={ auth }/>
       <Route path='/products' component={Products} auth={ auth }/>
       <Route path='/registration' component={Registration} auth={ auth }/>

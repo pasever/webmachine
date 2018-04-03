@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Log from './Log'
+import history from '../Pages/Auth/History'
+
 
 class Header extends Component {
+
+  componentWillMount() {
+    console.log("Props Auth: " + this.props.auth)
+  }
+  
+
+goTo(route) {
+  this.props.history.replace(`/${route}`)
+}
+
+login() {
+  this.props.auth.login();
+}
+
+logout() {
+  this.props.auth.logout();
+}
+
   render() {
+    const { isAuthenticated } = this.props.auth;
+
     if(this.props.data){
         var name = this.props.data.name;
         var occupation = this.props.data.occupation;
@@ -35,10 +56,21 @@ class Header extends Component {
             */}
             <Link to='/agents'><li><a className="smoothscroll" href="#testimonials">Agents</a></li></Link>
             <Link to='/pricing'><li><a className="smoothscroll" href="#contact">Pricing</a></li></Link>
-            <Link to='/registration'><li><a className="smoothscroll" href="#contact">Member Registration</a></li></Link>
-            <Link to='/blog'><li><a className="smoothscroll" href="#contact">Blog</a></li></Link>
-            <Link to='/login'><li><a className="smoothscroll" href="#contact">Login</a></li></Link>
             <Link to='/about'><li><a className="smoothscroll" href="#contact">About</a></li></Link>
+            <Link to='/blog'><li><a className="smoothscroll" href="#contact">Blog</a></li></Link>
+            |
+            {
+                !isAuthenticated() && (
+                  <li><a className="smoothscroll" href="#" onClick={this.login.bind(this)}>Log In</a></li>
+                  )
+              }
+              {
+                isAuthenticated() && (
+                  <li><a className="smoothscroll" href="#" onClick={this.logout.bind(this)}>Log Out</a></li>
+                  )
+              }
+            <Link to='/registration'><li><a className="smoothscroll" href="#contact">Sign Up</a></li></Link>
+            
          </ul>
       </nav>
       </div>
