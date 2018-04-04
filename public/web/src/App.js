@@ -79,7 +79,8 @@ class App extends Component {
   }
    getPortfolioData(){
      //Ajax request
-     fetch(origin + '/web/static/portfolioData.json')
+     //fetch(origin + '/web/static/portfolioData.json')
+     fetch('/web/static/portfolioData.json')
       .then(r => r.json())
       .then(json => {
         this.db = json
@@ -111,7 +112,8 @@ class App extends Component {
       }
 
     msgObj.Body = newMessage
-    fetch(`${apiProfile}/api/sms`, {
+    //fetch(`${apiProfile}/api/sms`, {
+    fetch('/api/sms', {
         method: 'POST',
         headers: {
           ...headers,

@@ -18,8 +18,7 @@ const transport =          require('../config/gmail')
 
 const { g, b, gr, r, y } = require('../console');
 
-const app =   express();
-const port =  keys.port;
+const app =   express();;
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////// db config to capture messages   //////////////////////
@@ -106,6 +105,8 @@ app.use(unk)
 app.use(errs)
 
 // server
+
+let port = process.env.PORT || keys.port;
 app.listen(port, () => {
   console.log(b('listening on port '), port)
 });

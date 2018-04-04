@@ -37,6 +37,9 @@ header {
    text-align: center;
    overflow: hidden;
    background-color: #fff;
+   text-align: center;
+   display: flex;
+   flex-direction: row;
 }
 
 /* vertically center banner section */
@@ -143,15 +146,22 @@ header b {
 
 /* nav-wrap */
 #nav-wrap {
-   font: 12px 'opensans-bold', sans-serif;
    width: 100%;
    text-transform: uppercase;
-   letter-spacing: 2.5px;
    margin: 0 auto;
    z-index: 100;
-   position: fixed;
    left: 0;
    top: 0;
+   font-size: 12px;
+   font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+   padding: 10px;
+   
+}
+
+/* sign up button */
+
+#signup {
+  color: coral !important;
 }
 .opaque { background-color: #333; }
 
@@ -164,6 +174,9 @@ ul#nav {
 
    /* center align the menu */
    text-align: center;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
 }
 ul#nav li {
    position: relative;

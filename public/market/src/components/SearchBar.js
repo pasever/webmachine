@@ -5,6 +5,7 @@ const SearchBar = ({value, updateSearch}) => (
     <input type="text" className="form-control"
       aria-label="Default" aria-describedby="inputGroup-sizing-default"
       placeholder="Search..." value={value} onChange={updateSearch}
+      style={{margin: '0 30px'}}
     />
   </div>
 )

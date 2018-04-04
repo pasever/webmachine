@@ -19,7 +19,7 @@ const help = (router) => {
 	  fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})
 	  Endpoints vary by dbstore being modeled. Check the code for details
 
-		For poroduction, JWT is in force
+		For production, JWT is in force
 
 	  &copy2016 Strategic Machines all rights reserved
 	  </pre> `
