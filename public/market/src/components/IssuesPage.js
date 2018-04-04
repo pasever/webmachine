@@ -42,8 +42,8 @@ export default class IssuesPage extends Component {
   componentWillMount() {
     // Construct API endpoint from which to fetch issues.
     let repo = this.state.repo;
-    let endpoint = `${issues_url}/${repo}`;
-    // Fetch issues for current and save them into state
+    let endpoint = `${issues_url}/${repo}`;  
+    // Fetch issues for repo and save them into state
     axios.get(endpoint)
     .then(res => {
       this.setState({

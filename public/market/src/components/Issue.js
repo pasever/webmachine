@@ -5,7 +5,7 @@ import Manage from './admin/buttons/Manage';
 const Issue = ({ issue, modalHandler }) => (
   <li id={issue.id} number={issue.number} className="issue">
     <div className='card text-center issue-card'> 
-      <div className='card-body'>
+      <div className='card-body issue-card-body'>
         <h5 className='card-title issue-title'>{issue.title}</h5>
         <h6 className='card-subtitle mb-2 issue-price'>{`$${issue.price}`}</h6>
         {/* Display developer name if stage is active */}

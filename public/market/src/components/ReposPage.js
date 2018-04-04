@@ -89,7 +89,7 @@ export default class ReposPage extends Component {
           updateSearch={this.updateSearch}
         />
 
-        <ul id="repos-content">
+        <ul id="repos-list">
           {this.renderPage()}
         </ul>
       </div>
