@@ -24,7 +24,28 @@ class Login extends Component {
               >
                 Home
               </Button>
-              
+              {
+                !isAuthenticated() && (
+                    <Button
+                      bsStyle="primary"
+                      className="btn-margin"
+                      onClick={this.login.bind(this)}
+                    >
+                      Log In
+                    </Button>
+                  )
+              }
+              {
+                isAuthenticated() && (
+                    <Button
+                      bsStyle="primary"
+                      className="btn-margin"
+                      onClick={this.logout.bind(this)}
+                    >
+                      Log Out
+                    </Button>
+                  )
+              }
             </Navbar.Header>
           </Navbar>
         </div>
