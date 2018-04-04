@@ -1,6 +1,6 @@
 /* Wraps around everything */
 .app-container {
-  width: 100%;
+  width: 100% !important;
 }
 
 /* "Brand bar" at top of page */
