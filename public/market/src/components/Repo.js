@@ -26,7 +26,7 @@ const Repo = ({repo}) => (
             className="card-link repo-view-issues"
           >
           {/* View Work Items */}
-          <i class="far fa-folder-open"></i>
+          <i className="far fa-folder-open"></i>
         </Link>
 
       </div>
