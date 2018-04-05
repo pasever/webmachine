@@ -19,6 +19,7 @@ PROPS:
     onChange (method) - the method to handle the changing of the values, 
     byline - a byline, small text, if it exists 
     maskPhone - whether or not we should display an input box with a phone number mask
+    width - in bootstrap columns.  1-12
     errorText - the errorText, if it exists
 */
 export const Input = (props) => (
@@ -26,7 +27,8 @@ export const Input = (props) => (
         <label htmlFor={ props.name } className="control-label">{ props.displayName }</label>
         { !props.maskPhone ? ( 
             <input type={ props.type } value={ props.value } placeholder={ props.placeholder } 
-                name={props.name} id={props.name} onChange={ props.onChange } className="form-control"/>
+                name={props.name} id={props.name} onChange={ props.onChange } 
+                className={`${ props.width ? "col-" + props.width : "" } form-control`} />
         ) : (
             <InputMask type={ props.type } value={ props.value } name={props.name} 
                 id={props.name} onChange={ props.onChange } className="form-control"

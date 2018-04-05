@@ -1,3 +1,4 @@
+
 .app-header {
   text-align: center;
   background-color: #222;
@@ -42,4 +43,37 @@
   padding: 20px;
   border-left: 1px solid;
   border-color: rgba(0,0,0,.1);
+}
+
+.btn-default {
+  background-color: #000;
+  border: 5px solid #000;
+  padding: 10px;
+  padding: 10px 45px;
+  font-weight: 600;
+  color: #eee;
+  transition: all 250ms ease-in;
+}
+
+.btn-default:hover {
+
+  background-color: #eee;
+  color: #000;
+}
+
+button {
+  margin-top: 20px;
+}
+.maintenance-header {
+  width: 100%;
+}
+.toggle-section {
+  float: left;
+}
+.delete-section {
+  float: right;
+}
+
+.delete-section > button {
+  margin-top: 0;
 }
