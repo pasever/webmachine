@@ -86,6 +86,10 @@
   justify-content: center;
 }
 
+#no-wi-found-alert {
+  text-align: center;
+}
+
 #issue-list li {
   display: inline-block;
   margin: 30px;

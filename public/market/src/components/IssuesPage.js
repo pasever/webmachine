@@ -57,9 +57,9 @@ export default class IssuesPage extends Component {
   showIssuesCount() {
     // Determines proper grammar based on number of repos available
     return this.state.issues.length > 1 ?
-      `${this.state.issues.length} work items available`
+      `${this.state.issues.length} workitems available`
       :
-      `${this.state.issues.length} work item available`
+      `${this.state.issues.length} workitem available`
   }
 
   renderPage() {
@@ -80,7 +80,7 @@ export default class IssuesPage extends Component {
         issues = issues.map(issue => <Issue key={issue.number} issue={issue} modalHandler={this.handleModalTrigger} />)
     }
     // If there's issues to display, render them. Otherwise, render message.
-    return issues.length > 0 ? issues : <p>No work items found</p>;
+    return issues.length > 0 ? issues : <p id='no-wi-found-alert'>No workitems created yet</p>;
   };
 
   // Handles changes to Work Item Stage tabs at top of page.

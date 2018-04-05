@@ -18,14 +18,19 @@ module.exports = async function(issues, repo) {
     In the end we're left with a new array of issues, all with
     prices, etc.
   */
-  issues = issues.map(issue => {
-    let issue_number = issue.number.toString();
-    let workitem = data.find(wi => wi.itemId === issue_number);
-    issue.price = workitem.price;
-    issue.stage = workitem.stage;
-    issue.assignee = workitem.assignee;
-    issue.due_date = moment(workitem.dueDate).format("MMMM Do, YYYY");
-    return issue;
-  });
+  try {
+    issues = issues.map(issue => {
+      let issue_number = issue.number.toString();
+      let workitem = data.find(wi => wi.itemId === issue_number);
+      issue.price = workitem.price;
+      issue.stage = workitem.stage;
+      issue.assignee = workitem.assignee;
+      issue.due_date = moment(workitem.dueDate).format("MMMM Do, YYYY");
+      return issue;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  
   return issues;
 }
