@@ -23,12 +23,5 @@ If an issue is opened requesting for a modification to be made in the docs:
 
 #### Adding new content
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus culpa ipsa maiores, ea unde consectetur sed facilis provident aliquid assumenda doloribus molestiae asperiores ullam adipisci dolorum dicta quam alias aperiam.
-
-<!-- 1. Add section title to sidebar
-1. Wrap it in a `<Link>` component
-1. Create a new `.md` file
-1. Add content
-1. Create a new route for the new section -->
-
-
+For detailed instructions on how to do this, please check
+the `template.js` file inside `docs/adding-content`.

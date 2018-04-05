@@ -1,7 +1,5 @@
 # How to contribute?
 
-Contributing to Strategic Machines is fairly simple. All you have to do is:
+To contribute to Strategic Machines, you must first become a part of the organization. Once you have joined and are ready to code, checkout our [_codex_][codex-wiki] for detailed instructions!
 
-- Step 1
-- Step 2
-- Step 3
+[codex-wiki]: https://github.com/strategicmarket/codex/wiki
