@@ -14,7 +14,4 @@ export default {
         return axios.post('/api/db/platform', user);
     },
 
-    testDbConnection: (user) => {
-        
-    },
 }
