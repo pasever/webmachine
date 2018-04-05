@@ -5,7 +5,7 @@
 const clone =           require('clone-deep')
 const uuidv1 =          require('uuid/v1')
 const db =              require('./db')
-
+const { r, g } =           require('../../console');
 
 // Gets all platforms
 exports.getPlatforms = (token, conn, cb) => {
@@ -39,7 +39,7 @@ exports.getPlatform = (token, id, conn, cb) => {
 }
 
 // Gets a single platform by profile id
-exports.getPlatformByPId = (token, pid, conn, cb) => {
+exports.getPlatformByCId = (token, cid, conn, cb) => {
     thread(conn).then((result) => {
         cb(result);
     }).catch((err) => {
@@ -48,23 +48,23 @@ exports.getPlatformByPId = (token, pid, conn, cb) => {
         cb(err);
     });
     async function thread(conn) {
-        let result = await db.getPlatformByPId(pid, conn);
+        let result = await db.getPlatformByCId(cid, conn);
         return result;
     }
 }
   
 // Adds a platform to the db
 exports.addPlatform = (token, platform, conn, cb) => {
-    platform.id = uuidv1()
+    platform.id = uuidv1();
     thread(platform, conn).then((result) => {
         cb(result)
     }).catch((err) => {
-        console.log("ERROR IN Add Platform PROCESSING")
+        console.log(r("ERROR IN Add Platform PROCESSING"))
         console.log(err)
         cb(err);
     });
     // async await function to drive synchronous processing of db update
-    async function thread(contact, conn) {
+    async function thread(platform, conn) {
         let result = await db.putPlatform(platform, conn)
         return result
     }
@@ -100,5 +100,21 @@ exports.deletePlatform = (token, id, conn, cb) => {
         return result
     }
 }
+
+// Adds a stripe source
+exports.addStripeSource = (token, cId, sId, conn, cb) => {
+    thread(cId, sId, conn).then((result) => {
+        cb(result);
+    }).catch((err) => {
+        console.log("ERROR IN StripeSource Platform PROCESSING");
+        console.log(err);
+        cb(err);
+    })
+    async function thread(cId, sId, conn) {
+        let result = await db.addStripeSource(cId, sId, conn)
+        return result
+    }
+}
+
 
 
