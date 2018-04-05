@@ -12,37 +12,48 @@ const dbplatform = (router) => {
 	router.use(bodyParser.json());
     
 
-    router.delete("/:id", (req, res, next) => {
- 	    console.log("-----------DB Platforms DELETE ROUTE -----------");
- 	    pApi.deletePlatform(req.token, req.params.id, req.conn, (response) => {
+    router.delete("/", (req, res, next) => {
+        console.log("-----------DB Platforms DELETE ROUTE -----------");
+        pApi.deletePlatform(req.token, req.body.id, req.conn, (response) => {
             res.status(200).send(response);
 		    next();
  	    });
     });
-
+/*
 	router.get('/', (req, res, next) => {
         console.log("-----------DB Platforms GET ROUTE -----------");
 		pApi.getPlatforms(req.token, req.conn, (response) => {
 			res.status(200).send(response);
 			next();
         });
-    });
-    router.get('/:id?/:pid?', (req, res, next) => {
+    });*/
+    router.get('/', (req, res, next) => {
         console.log("-----------DB Platforms GET ROUTE -----------");
-        
-        if(req.params.id) {
-            pApi.getPlatform(req.token, req.params.id, req.conn, (response) => {
+        if(req.query.cid) {            
+            pApi.getPlatformByCId(req.token, req.query.cid, req.conn, (response) => {
                 res.status(200).send(response);
             });
-        } else if(req.params.pid) {
-            pApi.getPlatformByPId(req.token, req.params.pid, req.conn, (response) => {
+        } else {
+            let err = new Error('Error GET DB - Client ID Not Provided!');
+            res.status(403).send(err.message);
+            next(err);
+        }
+        
+        
+        /*else if(req.body.cid) {
+            console.log("GET BY CID");
+            pApi.getPlatformByCId(req.token, req.body.cid, req.conn, (response) => {
                 res.status(200).send(response);
             })
-        }
-        next();
+        } else {
+            pApi.getPlatforms(req.token, req.conn, (response) => {
+                res.status(200).send(response);
+                next();
+            });    
+        }*/
     });
     
-    router.post('/', function(req, res, next) {
+    router.post('/', (req, res, next) => {
         console.log("-----------DB Platforms POST ROUTE -----------");
         if (req.body) {
             pApi.updatePlatform(req.token, req.body, req.conn, function(response){
@@ -56,7 +67,7 @@ const dbplatform = (router) => {
         }
     });
 
-    router.put('/', function(req, res, next) {
+    router.put('/', (req, res, next) => {
         console.log("-----------DB Platforms PUT ROUTE -----------");
         
         if (req.body) {
@@ -71,6 +82,20 @@ const dbplatform = (router) => {
             next(err);
         }
     });
+    router.post('/addStripeSource', (req, res, next) => {
+        if(req.body.cId && req.body.sId) {
+            pApi.addStripeSource(req.token, req.body.cId, req.body.sId, req.conn, (response) => {
+                console.log("RESPONSE --- ", response);
+                res.status(200).send(response);
+                next();
+            })
+        } else {
+            let err = new Error('Error Post Stripe Source - Please Provide All Required Data');
+            res.status(403).send(err.message);
+            next(err);
+        }
+
+    })
 
 }
 

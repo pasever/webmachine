@@ -9,15 +9,21 @@ const MongoClient = require('mongodb').MongoClient;
 const { Platform } = require('../../db/schemas/Platform');
 const {r,g,y,b} = require('../../console');
 
+const config = require('../../config').init();
+const stripe = require('stripe')(config.stripe.secretKey);
 
 /// TESTS IF WE CAN CONNECT TO THE MONGODB SERVER
 const testDb = (platform) => {
+    //  Assign a new mongo client
     let client = new MongoClient(platform.uri);
     return new Promise((resolve, reject) => { 
+        /// Attempts to connect
         client.connect((error, client) => {
             if(error) {
+                /// In case of an error, we resolve false
                 return resolve(false);
             }
+            // Close the client and resolve we did connect.
             client.close();
             return resolve(true);
         });
@@ -29,11 +35,12 @@ exports.getPlatforms = () => {
     return new Promise((resolve, reject) => {
         Platform.find({}, (err, response) => {
             if (err) {
-            if (err.error !== 'not_found') {
-                resolve(err)
-            } else {
-                reject(err)
-            }};
+                if (err.error !== 'not_found') {
+                    resolve(err)
+                } else {
+                    reject(err)
+                }
+            };
             resolve(response);
         });
     })  
@@ -55,10 +62,20 @@ exports.getPlatform = (id) => {
     })
 }
 
-// Gets platform by Profile Id
-exports.getPlatformByPId = (pid) => {
+// Gets platform by Client Id
+exports.getPlatformByCId = (cId) => {
     return new Promise((resolve, reject) => {
-        Platform.find({ where: { client: pid }}, (err, response) => {
+        Platform.find({ clientId: cId }).lean().then(response => {
+            let user = response[0];
+            stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {                
+                if(err) {
+                    user["stripeCustomer"] = null;
+                } else {
+                    user["stripeCustomer"] = stripeCust;
+                }
+                resolve(user);
+            })
+        }).catch(err => {
             if(err) {
                 if(err.error !== 'not_found') {
                     resolve(err);
@@ -66,24 +83,30 @@ exports.getPlatformByPId = (pid) => {
                     reject(err);
                 }
             }
-            resolve(response);
         })
     })
 }
 
 // Adds a platform to the DB
-exports.putPlatform = platform => {
-    console.log("API/PUT PLATFORM")
+exports.putPlatform = (platform) => {
+    // Creates a new platform from the Mongo Schema
     let p = new Platform(platform);
-    testDb(platform).then(resp => { 
-        platform.dbConnected = resp;
-        return new Promise((resolve, reject) => {
-            p.save((err, response) => {
-                if (err) {
-                    console.log("Error When Saving Platform")
-                    reject(err)
+    // Checks if we can connect to the DB provided
+    return new Promise((resolve, reject) => {
+        testDb(platform).then(resp => { 
+            // Assign the boolean response to dbConnected
+            p.dbConnected = resp;
+            stripe.customers.create({
+                email: p.email
+            }, (err, customer) => {
+                if(err) {
+                    console.log(r("Error when creating Stripe customer.  Bailing."));
+                    console.log(err);
                 }
-                resolve(response)
+                p.stripeCustomerId = customer.id;
+                p.save().then(response => {
+                    resolve(p)
+                }).catch(err => reject(err));
             })
         })
     })
@@ -91,18 +114,16 @@ exports.putPlatform = platform => {
 
 // Updates a platform
 exports.updatePlatform = (platform) => {
-    testDb(platform).then(resp => { 
-        console.log(resp);
-        platform.dbConnected = resp;
-        console.log("UPDATED PLATFORM", platform);
-        return new Promise((resolve, reject) => {
-            Platform.findOneAndUpdate({id: platform.id}, platform, {upsert: true}, (err, response) => {
-                if (err) {
-                    console.log(r("Error When Updating Platform"));
-                    reject(err)
-                }
-                resolve(response);
-            })
+    // Checks if we can connect to the database provided
+    return new Promise((resolve, reject) => {
+        testDb(platform).then(resp => { 
+            // Assigns the returned boolean to dbConnected
+            platform.dbConnected = resp;
+            Platform.findOneAndUpdate({ id: platform.id }, platform, {upsert: true, new: true}).then(response => {
+                console.log(g("Response from updatePlatform"));
+                console.log(response);
+                resolve(platform);
+            }).catch(err => reject(err));
         })
     })
 }
@@ -110,7 +131,7 @@ exports.updatePlatform = (platform) => {
 // Deletes a platform.  SOFTDELETE only - flags isDeleted to TRUE
 exports.deletePlatform = (id) => {
     return new Promise((resolve, reject) => {
-        Platform.findOneAndUpdate({id: id}, { $set:{ isDeleted: true }}, (err, response) => {
+        Platform.findOneAndUpdate({id: id}, { $set:{ isDeleted: true }}, { new: true }, (err, response) => {
             if (err) {
                 if (err.error !== 'not_found') {
                     resolve(err)
@@ -120,5 +141,17 @@ exports.deletePlatform = (id) => {
             };
             resolve(response);
         });
+    })
+}
+
+/// Adds a payment source 
+// cId - stripe customer id
+// sId - stripe source id
+exports.addStripeSource = (cId, sId) => {
+    return new Promise((resolve, reject) => {
+        stripe.customers.createSource(cId, {
+            source: sId,
+        }).then(response => resolve(response))
+        .catch(err => reject(err));
     })
 }

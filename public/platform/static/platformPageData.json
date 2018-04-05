@@ -1,6 +1,6 @@
 {
     "main": {
-        "title": "Welcome to our Platform"
+        "title": "Manage Your Platform"
     },
     "userMaintenance": {
         "title": "General Information",
@@ -13,5 +13,8 @@
     "billingMaintenance": {
         "title": "Billing information",
         "body": "Add or update billing information."
+    },
+    "header": {
+        "deleteButton": "Remove my platform"
     }
 }

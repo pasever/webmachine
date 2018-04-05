@@ -32,6 +32,8 @@ const auth = (router) => {
     if (test) {
       apiPath = '/github'
     }
+    let pltfrm = apiPath.match(/platform/g);
+    if(pltfrm) apiPath = '/platform';
     console.log(req.url)
     console.log(apiPath)
     console.log(test)
@@ -39,10 +41,8 @@ const auth = (router) => {
 		switch(apiPath) {
 			case '/db/agent':
             case '/db/client':
-            case '/db/platform':
-            case '/db/platform?pid=undefined':    // THIS NEEDS TO BE FIXED!!! -  THIS ROUTE SHOULD NOT BE HARDCODED.
-            case '/db/platform?pid=testprofile':  // THIS NEEDS TO BE FIXED!!!! - IT SHOULD ALLOW ANYTHING WITH ?pid= --- NEED ASSIST DGO
             case '/github':
+            case '/platform':
                 const token = req.get('Authorization')
                 
 				if (token) {
@@ -62,7 +62,7 @@ const auth = (router) => {
 			default:
 		}
 
-
+        
 	// configured for future capabilities, processing messages from various channels
 	// as of 2/2018 - only configured for web http and sms channels
 

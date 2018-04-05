@@ -19,6 +19,39 @@ const platformObject = {
         unique: true,
         default: uuidv1(),
     },
+    firstName: {
+        type: String,
+        default: "",
+    },
+    surname: {
+        type: String,
+        default: "",
+    },
+    addressLine1: {
+        type: String,
+        default: "",
+    },
+    addressLine2: {
+        type: String,
+        default: "",
+    },
+    city: {
+        type: String,
+        default: "",
+    },
+    state: {
+        type: String,
+        default: "",
+    },
+    zip: {
+        type: String,
+        default: "",
+    },
+    email: {
+        type: String,
+        unique: true,
+        default: "",
+    },
     // Description
     description: {
         type: String,
