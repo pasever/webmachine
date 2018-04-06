@@ -37,11 +37,34 @@ export default class EditWorkitemForm extends Component {
 
   }
 
-  liveValidation() {
-    //IF STAGE == ASSIGNED, ASSIGNEE CANNOT BE EMPTY
+  liveValidation(id, value) {
+    //IF STAGE == ASSIGNED OR CLOSED, ASSIGNEE CANNOT BE EMPTY
+    let stage = document.getElementById('stage');
+    let assignee = document.getElementById('assignee');
+    console.log(id, value);
+    if(id === 'stage' && (value === 'active' || value === 'closed') && assignee.value === '') {
+      console.log('assignee cannot be empty');
+      assignee.required = true;
+      // assignee.value = this.state.assignee;
+    } else {
+      assignee.required = false;
+      // assignee.value = null;
+    }
+
+    // if stage changes to open and assignee field has value, clear it
+
+    if(id === 'assignee' && stage.value === 'open') {
+      console.log('if stage is open, assignee must be empty');
+      assignee.value = '';
+    }
+
+
+      
   }
 
   handleChange(e) {
+    if(e.target.id === 'stage' || e.target.id === 'assignee')
+      this.liveValidation(e.target.id, e.target.value);
     this.setState({[e.target.id]: e.target.value});
   }
 
@@ -52,6 +75,15 @@ export default class EditWorkitemForm extends Component {
       .then(res => {
         console.log(res.data);
         this.resetForm();
+        // Show success alert
+        document.getElementById('successAlert').style.display = '';
+        // Hide it after 3 seconds
+        setTimeout(function hideAlert(){
+          document.getElementById('successAlert').style.display = 'none';
+        }, 3000);
+        // history.pushState(null, '/market');
+        // history.pushState(null, this.props.url);
+        // this.forceUpdate();
       })
       .catch(err => {
         console.log(err);
@@ -75,6 +107,11 @@ export default class EditWorkitemForm extends Component {
     let { title, price, stage, assignee, due_date, description } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
+        <div id="successAlert" className="alert alert-success" role="alert"
+          style={{display: 'none'}}
+        >
+          Workitem updated.
+        </div>
         <div className="form-group">
           <label htmlFor="title">Title</label>
           <input onChange={this.handleChange} type="text" value={title} className="form-control" id="title"/>
