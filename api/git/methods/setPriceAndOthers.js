@@ -47,7 +47,7 @@ module.exports = async function(issues, repo) {
     // determine which one of the above cases happened when we catch an error?
     // This is something to think about. At least for now, we have prevented the program
     // from crashing whenever an error is caught.
-    console.log(r('!--- An error has occured inside setPriceAndOthers.js ---!'));
+    console.log(r('!--- An error has been caught inside setPriceAndOthers.js ---!'));
     console.log(r('One of two possible things have happened; please refer to the comments in the file for more details.'));
     console.log(r('For now, however, we have prevented the program from crashing.'));
     console.log(r('Be advised that we are working on a more effective and graceful way of handling this error.'))
