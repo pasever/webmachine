@@ -71,6 +71,7 @@ export default class EditWorkitemForm extends Component {
   }
   
   render() {
+    console.log(this.props.url);
     let { title, price, stage, assignee, due_date, description } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>

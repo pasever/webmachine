@@ -39,6 +39,7 @@ const Modal = (props) => {
                     <EditWorkitemForm
                       issue={props.issue}
                       repo={props.repo}
+                      url={props.url}
                     />
 
                   // ) : null

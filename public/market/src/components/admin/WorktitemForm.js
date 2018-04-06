@@ -64,6 +64,7 @@ class WorkitemForm extends Component {
   }
 
   render() {
+    console.log(this.props.url);
     let { title, price, duration, description } = this.state;
     return (
       <form onSubmit={this.submitForm}>

@@ -80,7 +80,7 @@ export default class IssuesPage extends Component {
         issues = issues.map(issue => <Issue key={issue.number} issue={issue} modalHandler={this.handleModalTrigger} />)
     }
     // If there's issues to display, render them. Otherwise, render message.
-    return issues.length > 0 ? issues : <p id='no-wi-found-alert'>No workitems created yet</p>;
+    return issues.length > 0 ? issues : <p id='no-wi-found-alert'>No {this.state.criteria} workitems found</p>;
   };
 
   // Handles changes to Work Item Stage tabs at top of page.
@@ -166,7 +166,8 @@ export default class IssuesPage extends Component {
               repo: this.state.repo,
               triggeredBy: this.state.modal.triggeredBy,
               issue: this.state.modal.issue,
-              repo: this.state.repo
+              repo: this.state.repo,
+              url: this.props.match.url
             }}
             modalHandler={this.handleModalTrigger}
           />
