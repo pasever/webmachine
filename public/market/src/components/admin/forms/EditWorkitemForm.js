@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import config from '../../../../../../config';
-const { edit_issue_url } = config.init().githubrepo;
+import React, { Component }             from 'react';
+import moment                           from 'moment';
+import axios                            from 'axios';
+import config                           from '../../../../../../config';
+const { edit_issue_url }                = config.init().githubrepo;
 
 export default class EditWorkitemForm extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class EditWorkitemForm extends Component {
       number: this.props.issue.number,
       title: this.props.issue.title,
       price: this.props.issue.price,
-      due_date: this.props.issue.due_date,
+      duration: +this.props.issue.duration,
       stage: this.props.issue.stage,
       assignee: this.props.issue.assignee,
       description: this.props.issue.body,
@@ -25,16 +26,26 @@ export default class EditWorkitemForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let { number, title, price, due_date, stage, assignee, body } = nextProps.issue;
-    this.setState({
-      title,
-      price,
-      due_date,
-      stage,
-      assignee,
-      description: body,
-    });
+    let { number, title, price, duration, stage, assignee, body } = nextProps.issue;
+    this.setState({ title, price, duration, stage, assignee, description: body });
+  }
 
+  calculateDueDate() {
+    let dateFormat = 'MMMM D, YYYY, h:mm:ss a';
+    let duration = this.state.duration;
+    // Calculate due date by adding X days to today's date.
+    let dueDate = moment().add(duration, 'days').format(dateFormat);
+    // Set due time at 11:59:00 PM
+    dueDate = new Date(dueDate).setHours(23, 59, 0);
+    // Format final dueDate
+    dueDate = moment(dueDate).format(dateFormat);
+    return dueDate;
+  }
+
+  handleChange(e) {
+    if(e.target.id === 'stage' || e.target.id === 'assignee')
+      this.liveValidation(e.target.id, e.target.value);
+    this.setState({[e.target.id]: e.target.value});
   }
 
   liveValidation(id, value) {
@@ -56,36 +67,28 @@ export default class EditWorkitemForm extends Component {
     if(id === 'assignee' && stage.value === 'open') {
       console.log('if stage is open, assignee must be empty');
       assignee.value = '';
-    }
-
-
-      
-  }
-
-  handleChange(e) {
-    if(e.target.id === 'stage' || e.target.id === 'assignee')
-      this.liveValidation(e.target.id, e.target.value);
-    this.setState({[e.target.id]: e.target.value});
+    } 
   }
 
   handleSubmit(e) {
     e.preventDefault();
     let endpoint = `${edit_issue_url}/${this.state.repo}`;
+    // Make PUT request and send edits to server
     axios.put(endpoint, this.state) 
       .then(res => {
         console.log(res.data);
+        // if the request is successful, reset the form
+        // and show a success alert for 3 secons
         this.resetForm();
-        // Show success alert
         document.getElementById('successAlert').style.display = '';
-        // Hide it after 3 seconds
         setTimeout(function hideAlert(){
           document.getElementById('successAlert').style.display = 'none';
         }, 3000);
-        // history.pushState(null, '/market');
-        // history.pushState(null, this.props.url);
-        // this.forceUpdate();
       })
       .catch(err => {
+        // if there is an error, catch it and
+        // log it to the console. (Preferably, let user
+        // know)
         console.log(err);
       })
   }
@@ -96,15 +99,15 @@ export default class EditWorkitemForm extends Component {
       title: '',
       price: '',
       stage: '',
-      due_date: '',
+      duration: '',
       assignee: '',
       description: ''
     });
   }
   
   render() {
-    console.log(this.props.url);
-    let { title, price, stage, assignee, due_date, description } = this.state;
+    console.log(this.props);
+    let { title, price, stage, assignee, duration, description } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div id="successAlert" className="alert alert-success" role="alert"
@@ -122,10 +125,13 @@ export default class EditWorkitemForm extends Component {
             <input onChange={this.handleChange} type="number" value={price} className="form-control" id="price"/>
           </div>
           <div className="form-group col-md-6">
-            <label htmlFor="duration">Due Date</label>
-            <input onChange={this.handleChange} type="text" value={due_date} className="form-control" id="duration"
+            <label htmlFor="duration">Duration (days)</label>
+            <input onChange={this.handleChange} type="text" value={duration} className="form-control" id="duration"
             />
           </div>
+        </div>
+        <div className="form-group text-center">
+          <p>Expected delivery date: {this.calculateDueDate()}</p>
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
