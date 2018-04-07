@@ -24,6 +24,7 @@ module.exports = async function(issues, repo) {
       let issue_number = issue.number.toString();
       let workitem = data.find(wi => wi.itemId === issue_number);
       issue.price = workitem.price;
+      issue.duration = workitem.duration;
       issue.stage = workitem.stage;
       issue.assignee = workitem.assignee;
       issue.due_date = moment(workitem.dueDate).format("MMMM Do, YYYY");
