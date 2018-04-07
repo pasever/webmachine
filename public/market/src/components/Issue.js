@@ -1,6 +1,18 @@
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import Manage from './admin/buttons/Manage';
+
+function calculateDate(duration) {
+  let dateFormat = 'MMMM D, YYYY, h:mm:ss a';
+  // Calculate due date by adding X days to today's date.
+  let dueDate = moment().add(duration, 'days').format(dateFormat);
+  // Set due time at 11:59:00 PM
+  dueDate = new Date(dueDate).setHours(23, 59, 0);
+  // Format final dueDate
+  dueDate = moment(dueDate).format(dateFormat);
+  return String('If assigned today, due on \n' + dueDate);
+}
 
 const Issue = ({ issue, modalHandler }) => (
   <li id={issue.id} number={issue.number} className="issue">
@@ -23,7 +35,9 @@ const Issue = ({ issue, modalHandler }) => (
             Claim
           </button> ) : ('')}
         <span className='card-text text-muted issue-due-date'> 
-          Due on: <span>{issue.due_date}</span>
+          {/* Due on: <span>{issue.due_date}</span> */}
+          Due 
+          <span data-toggle='tooltip' data-placement='bottom' title={calculateDate(issue.duration)}> {issue.duration} {+issue.duration > 1 ? 'days' : 'day'} </span>after assignment date
         </span>
         <Link to={issue.html_url} target="_blank">
           <i className="fab fa-github github-icon"></i>
