@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Create from './buttons/Create';
 import Modal from './Modal';
 
-const CreateWorkitem = ({ modalData, modalHandler }) => (
+const AdminLayer = ({ modalData, modalHandler }) => (
   <div>
     {/* Triggers modal in 'create' mode */}
     <Create 
@@ -15,4 +15,4 @@ const CreateWorkitem = ({ modalData, modalHandler }) => (
   </div>
 )
 
-export default CreateWorkitem;
+export default AdminLayer;

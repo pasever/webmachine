@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import WorkitemForm from './WorktitemForm';
-import EditWorkitemForm from './EditWorkitemForm';
+import React, { Component }     from 'react';
+import CreateWorkitemForm       from './forms/CreateWorkitemForm';
+import EditWorkitemForm         from './forms/EditWorkitemForm';
 
 // If you're struggling to understand "what is happening here", 
 // scroll to the bottom of this file for elucidating commentaries
@@ -30,7 +30,7 @@ const Modal = (props) => {
             {props.triggeredBy !== '' ? (
                 // if so, in which mode?
                 props.triggeredBy === 'create' ? (
-                  <WorkitemForm
+                  <CreateWorkitemForm
                     {...props} 
                   />
                 ) : (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import config from '../../../../../config';
+import config from '../../../../../../config';
 const { edit_issue_url } = config.init().githubrepo;
 
 export default class EditWorkitemForm extends Component {

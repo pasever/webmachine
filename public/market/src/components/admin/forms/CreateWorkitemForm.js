@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import config from '../../../../../config';
+import config from '../../../../../../config';
 const { create_issue_url } = config.init().githubrepo;
 
-class WorkitemForm extends Component {
+class CreateWorkitemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -113,4 +113,4 @@ class WorkitemForm extends Component {
   
 }
 
-export default WorkitemForm;
+export default CreateWorkitemForm;

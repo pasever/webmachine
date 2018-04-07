@@ -10,7 +10,7 @@ import Issue                  from './Issue';
 import Navigation             from './Navigation';
 import FilterBy               from './IssuesFilterBy';
 import SearchBar              from './SearchBar';
-import CreateWorkItem         from './admin/CreateWorkItem';
+import AdminLayer             from './admin/AdminLayer';
 import config                 from '../../../../config/';
 const { issues_url }          = config.init().githubrepo;
 
@@ -159,7 +159,7 @@ export default class IssuesPage extends Component {
         {/*Administrative "layer" to be rendered conditionally
           based on authorization priviledges.*/}
           {this.state.loaded ? (
-            <CreateWorkItem
+            <AdminLayer
             modalData={{
               issueNumber: this.state.nextIssue,
               user: this.state.user,
