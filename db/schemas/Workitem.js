@@ -18,11 +18,11 @@ const workitemObject = {
     trim: true,
     required: true
   },
-  title: {
+  repo: {
     type: String,
     required: true
   },
-  repo: {
+  title: {
     type: String,
     required: true
   },
@@ -30,9 +30,15 @@ const workitemObject = {
     type: Number,
     required: true
   },
-  duration: String,
+  duration: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
   dueDate: Date,
-  description: String,
   currency: String,
   stage: {
     type: String,
