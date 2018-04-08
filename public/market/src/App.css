@@ -56,8 +56,8 @@
   text-decoration: none;
 }
 
-#repo-card-wi-count {
-  font-size: 14px;
+.repo-card-wi-count {
+  font-size: 18px;
 }
 
 #repos-list .repo-card-footer {
