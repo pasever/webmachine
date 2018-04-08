@@ -12,26 +12,49 @@ const { y, r } = require('../../console');
 
 const createIssue = (router) => {
   router.post('/:repo', (req, res, next) => {
-    // Build workitem object
-    // DOING VALIDATION WOULD BE USEFUL
-    // PRICE AND DURATION CANNOT BE LESS THAN 0
-    // IS DESCRIPTION RLY NECESSARY FOR DB?
-    let workitem = {
-      itemId: req.body.issueNumber,
-      title: req.body.title,
-      repo: req.body.repo,
-      price: parseFloat(req.body.price),
-      duration: req.body.duration,
-      // dueDate should get assigned the moment the workitem gets assigned to a dev
-      // dueDate: moment().add(req.body.duration, 'days').format(),
-      description: req.body.description
-    };
 
-    console.log(req.body);
-    res.json({
-      msg: 'workitem captured, verifying...'
-    });
-    next();
+    // Basic back end validation
+    req.checkBody('issueNumber',  'Workitem number is required').notEmpty();
+    req.checkBody('title',        'Cannot create a workitem without a title').notEmpty();
+    req.checkBody('repo',         'Repo name is required').notEmpty();
+    req.checkBody('price',        'Workitem must have a price').notEmpty();
+    req.checkBody('price',        'Workitem price must be a number').isFloat(true);
+    req.checkBody('price',        'Workitem price must be greater than 0').isFloat({ gt: 0.0 });
+    req.checkBody('duration',     'Workitem duration is required.').notEmpty();
+    req.checkBody('duration',     'Workitem duration must be a number').isInt(true);
+    req.checkBody('duration',     'Workitem duration must be greater than 0').isInt({ gt: 0 });
+    req.checkBody('description',  'Please provide a brief description for the workitem').notEmpty();
+    // Run validators and catch potential errors
+    const errors = req.validationErrors();
+    // If there are errors, notify client side and end request.
+    // In other words, if errors, workitem doesn't get created.
+    if (errors) {
+      console.log(r('! Validation Error !') + '\n' + JSON.stringify(errors, null, 2));
+      res.json({
+        errorType: "VALIDATION",
+        errors 
+      });
+      next();
+    } else {
+      // If validation passes, build workitem object
+      let workitem = {
+        itemId: req.body.issueNumber,
+        title: req.body.title,
+        repo: req.body.repo,
+        price: parseFloat(req.body.price),
+        duration: req.body.duration,
+        // dueDate should get assigned the moment the workitem gets assigned to a dev
+        // dueDate: moment().add(req.body.duration, 'days').format(),
+        description: req.body.description
+      };
+      console.log(req.body);
+      console.log(y('no errors!'));
+      res.json({
+        msg: 'workitem captured, verifying...'
+      });
+      next();
+    }
+  
     /*
     // Save wi into DB
     Workitem.create(workitem)
