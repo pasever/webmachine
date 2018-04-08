@@ -117,6 +117,7 @@
 
 #issue-list .issue-title {
   font-size: 17px;
+  margin: 0 15px;
 }
 
 #issue-list .issue-price {

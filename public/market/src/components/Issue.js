@@ -42,8 +42,6 @@ const Issue = ({ issue, modalHandler }) => (
         <Link to={issue.html_url} target="_blank">
           <i className="fab fa-github github-icon"></i>
         </Link>
-      </div>
-      <div className='card-footer text-center issue-card-footer'>
         <Manage
           modalHandler={modalHandler} 
           wiNumber={issue.number}
