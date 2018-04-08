@@ -39,14 +39,14 @@ const editIssue = (router) => {
     } else {
       // Capture values sent from client-side
       let wi = req.body;
-      // Find workitem by id and repo
+      // Find workitem by id (issue number) and repo
       Workitem.findOneAndUpdate({
         $and: [
           { itemId: wi.number },
           { repo: wi.repo }
         ]
       }, {
-        // Update some properties in Workitem document
+        // Update properties in Workitem document
         $set: {
           title: wi.title,
           price: wi.price,
