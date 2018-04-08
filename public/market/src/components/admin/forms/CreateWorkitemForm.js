@@ -37,7 +37,6 @@ class CreateWorkitemForm extends Component {
     if(confirm(msg)) {
       axios.post(endpoint, this.state)
       .then(response => {
-        // console.log(response);
         // Clear form
         this.resetForm();
         // Show success alert
@@ -54,7 +53,7 @@ class CreateWorkitemForm extends Component {
         response.errors.forEach(err => {
           console.error(`${err.param.toUpperCase()} VALIDATION ERROR: \n ${err.msg}` );
         });
-        // Render error alerts for Modal
+        // Render error alerts
         this.renderErrorAlerts(response.errors);
       });
     }
@@ -64,10 +63,8 @@ class CreateWorkitemForm extends Component {
     let container = document.getElementById('errorAlerts');
     // Render an Alert for every potential error message
     let alerts = errors.map((err, i) => <Alert key={i} msg={err.msg} type='danger' />);
-    // Set them to state
+    // Set errors to state
     this.setState({ errors: alerts });
-    // alerts.forEach(alert => { container.innerHTML += alert })
-    // container.innerText = alerts;
   }
 
   resetForm() {
@@ -76,7 +73,8 @@ class CreateWorkitemForm extends Component {
       price: '',
       duration: '',
       description: '',
-      errors: false // setting this to false removes any error alerts
+      // setting this to false removes any error alerts
+      errors: false
     });
   }
 
@@ -133,9 +131,3 @@ class CreateWorkitemForm extends Component {
 }
 
 export default CreateWorkitemForm;
-
-/*
-comment on line 30
-Aim to fix this by assigning it directly to state.
-Was getting issue where
-*/

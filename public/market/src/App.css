@@ -144,3 +144,9 @@
 #issue-list .issue-card-footer {
   background: none;
 }
+
+#editNotice {
+  font-size: 12px;
+  color: tomato;
+  padding: 3px;
+}

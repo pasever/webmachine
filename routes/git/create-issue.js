@@ -4,11 +4,11 @@
 ////////          github interactions         ///////
 ////////////////////////////////////////////////////
 
-const api = require('../../api/git/index');
-const expressValidator =   require('express-validator');
-const moment = require('moment');
-const Workitem  = require('../../db/schemas/Workitem').Workitem;
-const { y, r } = require('../../console');
+const api                   = require('../../api/git/index');
+const expressValidator      = require('express-validator');
+const moment                = require('moment');
+const Workitem              = require('../../db/schemas/Workitem').Workitem;
+const { y, r }              = require('../../console');
 
 const createIssue = (router) => {
   router.post('/:repo', (req, res, next) => {
@@ -32,7 +32,7 @@ const createIssue = (router) => {
     // In other words, if errors, workitem doesn't get created.
     if (errors) {
       console.log(r('! Validation Error !') + '\n' + JSON.stringify(errors, null, 2));
-      // Set 409 "Internal Server Error" status
+      // Set 500 "Internal Server Error" status
       res.status(500).json({
         errorType: "VALIDATION",
         errors 
@@ -46,8 +46,7 @@ const createIssue = (router) => {
         repo: req.body.repo,
         price: parseFloat(req.body.price),
         duration: req.body.duration,
-        // dueDate should get assigned the moment the workitem gets assigned to a dev
-        // dueDate: moment().add(req.body.duration, 'days').format(),
+        // dueDate gets assigned the moment the workitem gets assigned to someone
         description: req.body.description
       };
 
