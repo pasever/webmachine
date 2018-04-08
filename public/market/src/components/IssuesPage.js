@@ -39,7 +39,7 @@ export default class IssuesPage extends Component {
     this.getIssue = this.setIssue.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Construct API endpoint from which to fetch issues.
     let repo = this.state.repo;
     let endpoint = `${issues_url}/${repo}`;  
@@ -47,7 +47,7 @@ export default class IssuesPage extends Component {
     axios.get(endpoint)
     .then(res => {
       this.setState({
-        issues: res.data,
+        issues: res.data.length > 0 ? res.data : [],
         loaded: true,
         nextIssue: res.data.length + 1
       })
