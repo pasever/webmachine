@@ -17,6 +17,7 @@ const platformObject = {
     name: {
         type: String,
         unique: true,
+        required: true,
         default: uuidv1(),
     },
     firstName: {

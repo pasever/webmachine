@@ -77,3 +77,37 @@ button {
 .delete-section > button {
   margin-top: 0;
 }
+
+.billing-form-section {
+  flex-grow: 1;
+  margin: 10px;
+  padding: 10px;
+}
+
+.billing-form-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.stripe-data-wrapper {
+  display: flex;
+  flex-direction: row;  
+}
+
+.stripe-item {
+  margin: 5px;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.light-shadow {
+  box-shadow: 0 0 15px #ccc;
+}
+
+.form-styles {
+  padding: 20px;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}

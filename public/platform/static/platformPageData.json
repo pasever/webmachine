@@ -12,7 +12,7 @@
     },
     "billingMaintenance": {
         "title": "Billing information",
-        "body": "Add or update billing information."
+        "body": "Add a payment method and view your current account details."
     },
     "header": {
         "deleteButton": "Remove my platform"

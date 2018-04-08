@@ -31,7 +31,7 @@ export default class App extends Component {
         super(props);
         
         this.state = {
-            user:  null,        //{},  //res.data  /// should be passed in the response from Authorization
+            user:  null,            //  should be passed in the response from Authorization
             errors: {},             //  errors object
             pageData: null,         //  page data object
             hasErrors: false,       //  flags if we should display a message about errors
@@ -59,29 +59,19 @@ export default class App extends Component {
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, user]).then(values => {
             let user = values[1];
-            console.log(user);
             /// SEE'S IF WE HAVE THE OBJECT IN THE DB.  IF NOT WE RELY ON......  SOMETHING ELSE.  FOR NOW, PLATFORM.JSON
             /* 
             THE FOLLOWING HAS BEEN COMMENTED OUT BECAUSE WE ARE NOW ASSUMING THERE IS IN FACT A PLATFORM THAT EXISTS IN THE
             DATABASE, AND THERE IS A LOCAL TOKEN FOR THE CLIENT ID OR IT'S SENT THROUGH RES.DATA
 
             ^^  THIS NEEDS TO BE WORKED OUT.
-            if(user.data.name == "") {
-                user = Platform[0];            
-                /// If the user doesn't exist in the database, put them there now
-                API.addPlatform(user).then((resp) => {        
-                    console.log(resp); 
-                    this.setState({ pageData: values[0], user: resp.data })
-                }).catch(err => console.log(err));
-            } else { */
-            
+            */
+            console.log(user.data);
             this.setState({ pageData: values[0], user: user.data});
-            
-            
         })
     }
 
-    // HANDLES UPDATING FORMS ON BOTH THE SIGNUP AND MAINTENANCE PAGES
+    // HANDLES UPDATING
     updateFormField = event => {
         event.preventDefault();
         // Grabs the attributes from the target
@@ -104,7 +94,7 @@ export default class App extends Component {
     }
     
     // Method that handles saving the user
-    submitSignupForm = event => {
+    submitForm = event => {
         event.preventDefault();
         API.updatePlatform(this.state.user).then(resp => {
         
@@ -171,7 +161,7 @@ export default class App extends Component {
                                             <UserMaintenance
                                                 user={ this.state.user } 
                                                 updateFormField={ this.updateFormField } 
-                                                onSubmit={ this.submitSignupForm }
+                                                onSubmit={ this.submitForm }
                                                 errors={ this.state.errors }
                                                 text={ this.state.pageData.userMaintenance } />      
                                         </Col>
@@ -181,13 +171,13 @@ export default class App extends Component {
                                             <DbMaintenance
                                                 user={ this.state.user } 
                                                 updateFormField={ this.updateFormField } 
-                                                onSubmit={ this.submitSignupForm }
+                                                onSubmit={ this.submitForm }
                                                 errors={ this.state.errors }
                                                 text={ this.state.pageData.dbMaintenance } />      
                                         </Col>
                                     </TabPanel>
                                     <TabPanel>
-                                        <Col size="12 md-8">
+                                        <Col size="12">
                                             <BillingMaintenance 
                                                 text={ this.state.pageData.billingMaintenance } 
                                                 user={ this.state.user } 
