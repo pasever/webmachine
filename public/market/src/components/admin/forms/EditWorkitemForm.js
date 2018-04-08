@@ -49,17 +49,28 @@ export default class EditWorkitemForm extends Component {
   }
 
   liveValidation(id, value) {
-    //IF STAGE == ASSIGNED OR CLOSED, ASSIGNEE CANNOT BE EMPTY
+    /* Enforces the following rules:
+      - IF STAGE == OPEN ASSIGNEE FIELD IS DISABLED
+      - IF STAGE == ASSIGNED OR CLOSED, ASSIGNEE FIELD IS
+        UNLOCKED AND IT BECOMES REQUIRED
+      - IF STAGE CHANGES BACK TO OPEN, ASSIGNEE FIELD IS
+        DISABLED AND ITS VALUE CLEARED
+    */
     let stage = document.getElementById('stage');
     let assignee = document.getElementById('assignee');
     console.log(id, value);
-    if(id === 'stage' && (value === 'active' || value === 'closed') && assignee.value === '') {
-      console.log('assignee cannot be empty');
+    if (id === 'stage' && (value === 'active' || value === 'closed')) {
+      assignee.removeAttribute('disabled');
       assignee.required = true;
+      console.log(`stage = ${value}; assignee cannot be empty`);
       // assignee.value = this.state.assignee;
-    } else {
+    } else if (id === 'assignee' && (this.state.stage === 'active' || this.state.stage === 'closed')) {
+      console.log(`stage = ${this.state.stage}; assignee cannot be empty`);
+    } else if (id === 'stage' && value === 'open') {
+      console.log('here');
+      this.state.assignee = null;
+      assignee.setAttribute('disabled', 'disabled');
       assignee.required = false;
-      // assignee.value = null;
     }
 
     // if stage changes to open and assignee field has value, clear it
@@ -106,7 +117,7 @@ export default class EditWorkitemForm extends Component {
   }
   
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     let { title, price, stage, assignee, duration, description } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
@@ -131,7 +142,7 @@ export default class EditWorkitemForm extends Component {
           </div>
         </div>
         <div className="form-group text-center">
-          <p>Expected delivery date: {this.calculateDueDate()}</p>
+          <p><strong>Expected delivery date: {this.calculateDueDate()}</strong></p>
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
@@ -144,7 +155,7 @@ export default class EditWorkitemForm extends Component {
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="duration">Assignee</label>
-            <input onChange={this.handleChange} type="text" value={assignee === null ? '' : assignee} className="form-control" id="assignee"
+            <input onChange={this.handleChange} type="text" value={assignee === null ? '' : assignee} className="form-control" id="assignee" disabled
             />
           </div>
         </div>
