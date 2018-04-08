@@ -72,7 +72,10 @@
 		"publishKey": "",
 		"secretKey": ""
 	},
+	"netlify": {
+		"token": ""
+	},
+
 	"port": 3000,
 	"token": ""
-
 }

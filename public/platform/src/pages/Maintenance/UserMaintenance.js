@@ -22,38 +22,40 @@ REQUIRED PROPS:
 */
 export const UserMaintenance = ({errors, text, user, onSubmit, updateFormField }) => (
         <ErrorBoundary>
-            { text.title ? ( <h2>{text.title}</h2>): ("")}
-            { text.body ? (<p>{text.body}</p>) : ("") }
-            <form onSubmit={ onSubmit }>
-                
-                <Input value={ user.name } 
-                    name="name" onChange={ updateFormField } 
-                    displayName="Name" type="text" errorText={ errors.name } />
-                
-                <TextArea 
-                    value={ user.description } name="description"
-                    onChange={ updateFormField } displayName="Description"
-                    cols={10} rows={3} errorText={ errors.description } 
-                    byline="A short description of your organization" />
-                
-                <Input value={ user.contact } 
-                    name="contact" onChange={ updateFormField }
-                    displayName="Contact" type="text" errorText={ errors.contact } placeholder="Contact" />
-                
-                <Input value={ user.email } 
-                    name="contact" onChange={ updateFormField }
-                    displayName="Email" type="email" errorText={ errors.email } placeholder="name@yourdomain.com" />
-                
-                <Input value={ user.sms } name="sms" onChange={ updateFormField } 
-                    displayName="SMS Phone #" type="text"
-                    errorText={ errors.sms } placeholder="5555555555" maskPhone={true} />
-                
-                <Input value={ user.web } name="web" errorText={ errors.web } placeholder="Web"
-                    displayName="Web URL" type="text" onChange={ updateFormField } />
-                
-                <Button type="submit"  text="Save" style="default" name="signup" />
-                
-            </form>
+            <div className="form-styles light-shadow">
+                { text.title ? ( <h2>{text.title}</h2>): ("")}
+                { text.body ? (<p>{text.body}</p>) : ("") }
+                <form onSubmit={ onSubmit }>
+                    
+                    <Input value={ user.name } 
+                        name="name" onChange={ updateFormField } 
+                        displayName="Name" type="text" errorText={ errors.name } />
+                    
+                    <TextArea 
+                        value={ user.description } name="description"
+                        onChange={ updateFormField } displayName="Description"
+                        cols={10} rows={3} errorText={ errors.description } 
+                        byline="A short description of your organization" />
+                    
+                    <Input value={ user.contact } 
+                        name="contact" onChange={ updateFormField }
+                        displayName="Contact" type="text" errorText={ errors.contact } placeholder="Contact" />
+                    
+                    <Input value={ user.email } 
+                        name="contact" onChange={ updateFormField }
+                        displayName="Email" type="email" errorText={ errors.email } placeholder="name@yourdomain.com" />
+                    
+                    <Input value={ user.sms } name="sms" onChange={ updateFormField } 
+                        displayName="SMS Phone #" type="text"
+                        errorText={ errors.sms } placeholder="5555555555" maskPhone={true} />
+                    
+                    <Input value={ user.web } name="web" errorText={ errors.web } placeholder="Web"
+                        displayName="Web URL" type="text" onChange={ updateFormField } />
+                    
+                    <Button type="submit"  text="Save" style="default" name="signup" />
+                    
+                </form>
+            </div>
         </ErrorBoundary>
 );
 

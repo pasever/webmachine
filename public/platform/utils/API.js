@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const config = require('../../../config').init();
 
 export default {
     getAuthorizedPlatform: () => {
@@ -16,14 +17,16 @@ export default {
     updatePlatform: (platform) => {
         return axios.post('/api/db/platform', platform);
     },
-<<<<<<< Updated upstream
-
-=======
     deletePlatform: (platform) => {
         return axios.delete('/api/db/platform', { data: { id: platform.id }});
     },
     addSourceToCustomer: (customerId, sourceId) => {
         return axios.post('/api/db/platform/addStripeSource', { cId: customerId, sId: sourceId });
+    },
+    generateNetlify: (platform) => {
+        const options = {
+            method: 'POST',
+            url: 'https://app.netlify.com/authorize/sites'
+        }
     }
->>>>>>> Stashed changes
 }

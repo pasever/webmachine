@@ -15,7 +15,7 @@ import { Col } from '../../components/grid';
     updateFormField (method) - method that is fired when an input is 
 */
 export const NameAndAddressSection = ({ user, updateFormField }) => 
-    <Col size="12 md-6">
+    <div>
         <Input value={ user.addressLine1 } 
             name="addressLine1" onChange={ updateFormField } 
             displayName="Address" type="text" placeholder="123 Main St" />
@@ -27,9 +27,9 @@ export const NameAndAddressSection = ({ user, updateFormField }) =>
             displayName="City" type="text" placeholder="New York" />
         <Input value={ user.state } 
             name="state" onChange={ updateFormField } 
-            displayName="State" type="text" placeholder="NY" />
+            displayName="State" type="text" placeholder="NY" width="2" />
         <Input value={ user.zip } 
             name="zip" onChange={ updateFormField } 
             displayName="Zip" type="text" placeholder="12345" />
-    </Col>  
+    </div>  
 
