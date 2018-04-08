@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////
 
 const api = require('../../api/git/index');
+const expressValidator =   require('express-validator');
 const moment = require('moment');
 const Workitem  = require('../../db/schemas/Workitem').Workitem;
 const { y, r } = require('../../console');
@@ -21,10 +22,17 @@ const createIssue = (router) => {
       repo: req.body.repo,
       price: parseFloat(req.body.price),
       duration: req.body.duration,
-      dueDate: moment().add(req.body.duration, 'days').format(),
+      // dueDate should get assigned the moment the workitem gets assigned to a dev
+      // dueDate: moment().add(req.body.duration, 'days').format(),
       description: req.body.description
     };
 
+    console.log(req.body);
+    res.json({
+      msg: 'workitem captured, verifying...'
+    });
+    next();
+    /*
     // Save wi into DB
     Workitem.create(workitem)
     .then(doc => {
@@ -63,6 +71,7 @@ const createIssue = (router) => {
         next();
       }
     })
+    */
 
   });
 }
