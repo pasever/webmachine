@@ -97,7 +97,9 @@ exports.putPlatform = (platform) => {
             // Assign the boolean response to dbConnected
             p.dbConnected = resp;
             stripe.customers.create({
-                email: p.email
+                email: p.email,
+                account_balance: 0,
+                description: p.description,
             }, (err, customer) => {
                 if(err) {
                     console.log(r("Error when creating Stripe customer.  Bailing."));
@@ -119,10 +121,15 @@ exports.updatePlatform = (platform) => {
         testDb(platform).then(resp => { 
             // Assigns the returned boolean to dbConnected
             platform.dbConnected = resp;
-            Platform.findOneAndUpdate({ id: platform.id }, platform, {upsert: true, new: true}).then(response => {
-                console.log(g("Response from updatePlatform"));
-                console.log(response);
-                resolve(platform);
+            Platform.findOneAndUpdate({ id: platform.id }, platform, {upsert: true, new: true}).lean().then(user => {
+                stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {       
+                    if(err) {
+                        user["stripeCustomer"] = null;
+                    } else {
+                        user["stripeCustomer"] = stripeCust;
+                    }
+                    resolve(user);
+                }).catch(err => resolve(user));
             }).catch(err => reject(err));
         })
     })

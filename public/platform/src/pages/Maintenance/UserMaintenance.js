@@ -20,7 +20,7 @@ REQUIRED PROPS:
     text - text to display
     updateFormField (method) - method that fires when a form value is updated
 */
-export const UserMaintenance = ({errors, text, user, onSubmit, updateFormField }) => (
+export const UserMaintenance = ({errors, text, user, onSubmit, updateFormField, isSaving }) => (
         <ErrorBoundary>
             <div className="form-styles light-shadow">
                 { text.title ? ( <h2>{text.title}</h2>): ("")}
@@ -51,8 +51,10 @@ export const UserMaintenance = ({errors, text, user, onSubmit, updateFormField }
                     
                     <Input value={ user.web } name="web" errorText={ errors.web } placeholder="Web"
                         displayName="Web URL" type="text" onChange={ updateFormField } />
-                    
-                    <Button type="submit"  text="Save" style="default" name="signup" />
+                    { isSaving ? ( <i className="fa fa-gear fa-spin fa-2x margin-top-10"></i> ) : 
+                    ( <Button type="submit"  text="Save" style="default" name="signup" /> ) }
+    
+
                     
                 </form>
             </div>

@@ -21,8 +21,11 @@ class StripeForm extends Component {
         warnings: [],       // Warnings handled as an array are listed at the top of the form    
         isUpdated: false,
         isSaving: false,
+        user: this.props.user,
     }
-
+    componentDidMount() {
+        console.log(this.props.user.stripeCustomer);
+    }
 
     /// Makes sure the necessary data exists on the form.
     validateInfo() {
@@ -58,17 +61,18 @@ class StripeForm extends Component {
                     line1: u.addressLine1,
                     line2: u.addressLine2,
                     city: u.city,
+                    state: u.state,
                 },
 
             }, 
             usage: 'reusable', 
         }).then(resp => {
             
-            let promises = [ API.addSourceToCustomer(this.props.user.stripeCustomerId, resp.source.id),
-                        API.updatePlatform(this.props.user) ];
+            let promises = [ API.addSourceToCustomer(this.state.user.stripeCustomerId, resp.source.id),
+                        API.updatePlatform(this.state.user) ];
 
             Promise.all(promises).then(values => {
-                this.setState({ isSaving: false, isUpdated: true });
+                this.setState({ isSaving: false, isUpdated: true, user: values[1].data });
             })
         })
         
@@ -84,16 +88,16 @@ class StripeForm extends Component {
                         { this.state.warnings.map((current, index) => (<div key={index}><h2 className="badge badge-warning">{ current }</h2></div>)) }
                         { this.state.isUpdated ? (<h2 className="badge badge-success">User Updated!</h2>) : "" }
                         <NameAndAddressSection 
-                            user={ this.props.user} 
+                            user={ this.state.user} 
                             updateFormField={ this.props.updateFormField } />
                         <CardSection />
-                        { this.state.isSaving ? ( <i className="fa fa-spinner fa-spin fa-2x margin-top-10"></i> ) : 
+                        { this.state.isSaving ? ( <i className="fa fa-cog fa-spin fa-2x margin-top-10"></i> ) : 
                         ( <Button type="submit" text="Submit" style="default" name="signup" /> ) }
                     </form>
                 </div>
                 <div className="billing-form-section light-shadow">
-                    {this.props.user.stripeCustomer === null ? (<h2>No stripe customer loaded.</h2> ) : (
-                        <StripeData stripeCust={ this.props.user.stripeCustomer } />
+                    {this.state.user.stripeCustomer === null ? (<h2>No stripe customer loaded.</h2> ) : (
+                        <StripeData stripeCust={ this.state.user.stripeCustomer } />
                     )}
                 </div>
             </div> 
