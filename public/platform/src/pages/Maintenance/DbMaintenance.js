@@ -20,7 +20,7 @@ REQUIRED PROPS:
     text - text to display
     updateFormField (method) - method that fires when a form value is updated
 */
-export const DbMaintenance = ({errors, text, user, onSubmit, updateFormField }) => (
+export const DbMaintenance = ({errors, text, user, onSubmit, updateFormField, isSaving }) => (
     <ErrorBoundary>
         <div className="form-styles light-shadow">
             { text.title ? ( <h2>{text.title}</h2>): ("")}
@@ -42,8 +42,10 @@ export const DbMaintenance = ({errors, text, user, onSubmit, updateFormField }) 
 
                 <Input value={ user.password } name="password" errorText={ errors.password } placeholder=""
                     displayName="Database Password" type="password" onChange={ updateFormField } />
+                    { isSaving ? ( <i className="fa fa-spin fa-gear fa-2x margin-top-10"></i> ) : 
+                    ( <Button type="submit"  text="Save" style="default" name="signup" /> ) }
 
-                <Button type="submit"  text="Save" style="default" name="signup" />
+                
             </form>
         </div>
     </ErrorBoundary>

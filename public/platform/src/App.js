@@ -36,6 +36,7 @@ export default class App extends Component {
             pageData: null,         //  page data object
             hasErrors: false,       //  flags if we should display a message about errors
             isSaved: false,         //  flags if we should inform the user data has been saved
+            isSaving: false,        //  shows the "saving" cog
         };
     }
     
@@ -59,15 +60,15 @@ export default class App extends Component {
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, user]).then(values => {
             let user = values[1];
-            /// SEE'S IF WE HAVE THE OBJECT IN THE DB.  IF NOT WE RELY ON......  SOMETHING ELSE.  FOR NOW, PLATFORM.JSON
-            /* 
-            THE FOLLOWING HAS BEEN COMMENTED OUT BECAUSE WE ARE NOW ASSUMING THERE IS IN FACT A PLATFORM THAT EXISTS IN THE
-            DATABASE, AND THERE IS A LOCAL TOKEN FOR THE CLIENT ID OR IT'S SENT THROUGH RES.DATA
 
-            ^^  THIS NEEDS TO BE WORKED OUT.
-            */
-            console.log(user.data);
-            this.setState({ pageData: values[0], user: user.data});
+            /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
+            if(Object.keys(user.data).length === 0) {
+                API.addPlatform(Platform[0]).then(resp => {
+                    this.setState({pageData: values[0], user: resp.data})
+                })
+            } else {
+                this.setState({ pageData: values[0], user: user.data});
+            }
         })
     }
 
@@ -95,15 +96,19 @@ export default class App extends Component {
     
     // Method that handles saving the user
     submitForm = event => {
+        this.setState({ isSaving: true });
         event.preventDefault();
         API.updatePlatform(this.state.user).then(resp => {
         
             if(resp.data.errors) {
-                this.setState({ errors: resp.data.errors, hasErrors: true, isSaved: false });
+                this.setState({ errors: resp.data.errors, hasErrors: true, isSaved: false, isSaving: false });
             } else {
-                this.setState({ errors: {}, hasErrors: false, user: resp.data, isSaved: true });
+                this.setState({ errors: {}, hasErrors: false, user: resp.data, isSaved: true, isSaving: false });
             }
-        }).catch(err => console.log(err));
+        }).catch(err => { 
+            console.log(err) 
+            this.setState({ isSaving: false, isSaved: false });
+        });
     }
 
     // Method that handles the clicking of the DELETE PLATFORM button.  
@@ -159,21 +164,17 @@ export default class App extends Component {
                                     <TabPanel>
                                         <Col size="12 md-8">
                                             <UserMaintenance
-                                                user={ this.state.user } 
-                                                updateFormField={ this.updateFormField } 
-                                                onSubmit={ this.submitForm }
-                                                errors={ this.state.errors }
-                                                text={ this.state.pageData.userMaintenance } />      
+                                                user={ this.state.user } updateFormField={ this.updateFormField } 
+                                                onSubmit={ this.submitForm } errors={ this.state.errors }
+                                                text={ this.state.pageData.userMaintenance } isSaving={this.state.isSaving } />      
                                         </Col>
                                     </TabPanel>
                                     <TabPanel>
                                         <Col size="12 md-8">
                                             <DbMaintenance
-                                                user={ this.state.user } 
-                                                updateFormField={ this.updateFormField } 
-                                                onSubmit={ this.submitForm }
-                                                errors={ this.state.errors }
-                                                text={ this.state.pageData.dbMaintenance } />      
+                                                user={ this.state.user } updateFormField={ this.updateFormField } 
+                                                onSubmit={ this.submitForm } errors={ this.state.errors }
+                                                text={ this.state.pageData.dbMaintenance } isSaving={this.state.isSaving } />      
                                         </Col>
                                     </TabPanel>
                                     <TabPanel>

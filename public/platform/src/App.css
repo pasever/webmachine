@@ -111,3 +111,20 @@ button {
 .margin-top-10 {
   margin-top: 10px;
 }
+
+.stripe-source {
+  width: 100%;
+  padding: 15px 0 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* CC Colors */
+
+.fa-cc-amex { color: #007bc1; margin-right: 5px; vertical-align: middle; }
+.fa-cc-diners-club{ color: #004A97; margin-right: 5px; vertical-align: middle; }
+.fa-cc-discover {color : #f68121; margin-right: 5px; vertical-align: middle; }
+.fa-cc-jcb { color: #003A8F; margin-right: 5px; vertical-align: middle; }
+.fa-cc-mastercard { color: #0a3a82; margin-right: 5px; vertical-align: middle; }
+.fa-cc-paypal {color: #253b80; margin-right: 5px; vertical-align: middle; }
+.fa-cc-stripe { color: #00afe1; margin-right: 5px; vertical-align: middle; }
+.fa-cc-visa { color: #0157a2; margin-right: 5px; vertical-align: middle; }

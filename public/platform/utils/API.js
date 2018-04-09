@@ -8,10 +8,7 @@ export default {
         
     },
     addPlatform: (platform) => {
-        if(!platform.clientId) {
-            platform.clientId = "testprofile";
-            localStorage.clientId = platform.clientId;
-        }
+        localStorage.clientId = platform.clientId;
         return axios.put('/api/db/platform', platform);
     },
     updatePlatform: (platform) => {
