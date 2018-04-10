@@ -35,7 +35,7 @@ export const DbMaintenance = ({errors, text, user, onSubmit, updateFormField, is
 
                 <Input value={ user.uri } name="uri" errorText={ errors.uri } placeholder="db.example.net"
                     displayName="Database URI" type="text" byline="Do not include your username and password" 
-                    onChange={ updateFormField } />
+                    onChange={ updateFormField } classPrepend="fa fa-database" />
                 
                 <Input value={ user.username } name="username" errorText={ errors.username } placeholder="username"
                     displayName="Database Username" type="text" onChange={ updateFormField } />

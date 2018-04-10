@@ -25,5 +25,11 @@ export default {
             method: 'POST',
             url: 'https://app.netlify.com/authorize/sites'
         }
+    },
+    setDefaultSource: (customerId, sourceId) => {
+        return axios.post('/api/db/platform/setDefaultSource', { cId: customerId, sId: sourceId });
+    },
+    removeSource: (customerId, sourceId) => {
+        return axios.post('/api/db/platform/removeSource', { cId: customerId, sId: sourceId });
     }
 }
