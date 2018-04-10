@@ -4,11 +4,8 @@
 ////////            github interactions       ///////
 ////////////////////////////////////////////////////
 
-const GitHubAPI =          require('github');
-const { githubrepo } =     require('../../../config').init()
-
-const github = new GitHubAPI();
-// require('dotenv').load();
+const github =             require('@octokit/rest')();
+const { githubrepo } =     require('../../../config').init();
 
 github.authenticate({
   type: 'oauth',

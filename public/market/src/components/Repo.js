@@ -15,7 +15,8 @@ const Repo = ({repo}) => (
           <h5 className="card-title">{repo.name}</h5>
         </Link>
         <h6 className="card-subtitle mb-2 text-muted repo-card-wi-count">
-          Workitems: {repo.open_issues_count}
+          {/* Active Workitems: {repo.open_issues_count} */}
+          <i className="fas fa-clipboard-list"></i> {repo.open_issues_count}
         </h6>
         <p className="card-text">{repo.description}</p>
 
