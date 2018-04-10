@@ -3,8 +3,8 @@ import CreateWorkitemForm       from './forms/CreateWorkitemForm';
 import EditWorkitemForm         from './forms/EditWorkitemForm';
 
 // If you're struggling to understand "what is happening here", 
-// scroll to the bottom of this file for elucidating commentaries
-// on the behavior of this component.
+// scroll to the bottom of this file for commentaries on the 
+// behavior of this component.
 
 const Modal = (props) => {
   let issueNumber = props.issueNumber;
@@ -34,17 +34,12 @@ const Modal = (props) => {
                     {...props} 
                   />
                 ) : (
-                  // Are there props to pass?
-                  // props.issue ? (
                     <EditWorkitemForm
                       issue={props.issue}
                       repo={props.repo}
                       url={props.url}
                     />
-
-                  // ) : null
                 )
-
             ) : null}
           </div>
         </div>

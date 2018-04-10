@@ -4,6 +4,8 @@ body {
   font-family: sans-serif;
 }
 
+/* Removes control arrows of input fields
+  of type number */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 

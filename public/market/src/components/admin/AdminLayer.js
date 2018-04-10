@@ -1,3 +1,8 @@
+////////////////////////////////////////////////////////
+////   Administrative layer providing workitem    /////
+///            management features               /////
+/////////////////////////////////////////////////////
+
 import React, { Component } from 'react';
 import Create from './buttons/Create';
 import Modal from './Modal';
@@ -8,7 +13,7 @@ const AdminLayer = ({ modalData, modalHandler }) => (
     <Create 
       modalHandler={modalHandler}
     />
-    {/* Contains form for creatin and editing workitems */}
+    {/* Contains forms for creating and editing workitems */}
     <Modal
       {...modalData}
     />

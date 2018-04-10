@@ -29,16 +29,16 @@ const Issue = ({ issue, modalHandler }) => (
         {issue.stage === 'open' ? (
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-success btn-sm"
             style={claim}
           >
-            Claim
+            Request
+            {/* <i className="fas fa-registered" ></i> */}
           </button> ) : ('')}
         <span className='card-text text-muted issue-due-date'> 
-          {/* Due on: <span>{issue.due_date}</span> */}
-          Due 
+          Due
           <span data-toggle='tooltip' data-placement='bottom' title={calculateDate(issue.duration)}> {issue.duration} {+issue.duration > 1 ? 'days' : 'day'} </span>after assignment date
-        </span>
+        </span> <br/>
         <Link to={issue.html_url} target="_blank">
           <i className="fab fa-github github-icon"></i>
         </Link>

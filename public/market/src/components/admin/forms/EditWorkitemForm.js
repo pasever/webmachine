@@ -1,8 +1,14 @@
+
+/////////////////////////////////////////////////////
+/////   Form for EDITING an existing Workitem   /////
+/////////////////////////////////////////////////////
+
 import React, { Component }             from 'react';
 import moment                           from 'moment';
 import axios                            from 'axios';
 import config                           from '../../../../../../config';
 import Alert                            from './Alert';
+
 const { edit_issue_url }                = config.init().githubrepo;
 
 export default class EditWorkitemForm extends Component {
@@ -62,15 +68,14 @@ export default class EditWorkitemForm extends Component {
     let assignee = document.getElementById('assignee');
     let notice = document.getElementById('editNotice');
 
-    console.log(id, value);
+    // console.log(id, value);
     if (id === 'stage' && (value === 'active' || value === 'closed')) {
       assignee.removeAttribute('disabled');
       assignee.required = true;
       notice.innerHTML = 'Assignee cannot be empty';
     } else if (id === 'assignee' && (this.state.stage === 'active' || this.state.stage === 'closed')) {
-      console.log(`stage = ${this.state.stage}; assignee cannot be empty`);
+      // console.log(`stage = ${this.state.stage}; assignee cannot be empty`);
     } else if (id === 'stage' && value === 'open') {
-      console.log('here');
       this.state.assignee = null;
       assignee.setAttribute('disabled', 'disabled');
       assignee.required = false;

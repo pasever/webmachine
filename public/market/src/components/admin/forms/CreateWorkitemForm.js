@@ -1,8 +1,14 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import config from '../../../../../../config';
-import Alert from './Alert';
-const { create_issue_url } = config.init().githubrepo;
+
+////////////////////////////////////////////////
+/////   Form for CREATING a new Workitem   /////
+////////////////////////////////////////////////
+
+import React, { Component }         from 'react';
+import axios                        from 'axios';
+import config                       from '../../../../../../config';
+import Alert                        from './Alert';
+
+const { create_issue_url }          = config.init().githubrepo;
 
 class CreateWorkitemForm extends Component {
   constructor(props) {

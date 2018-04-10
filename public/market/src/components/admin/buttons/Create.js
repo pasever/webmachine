@@ -4,7 +4,7 @@ const Create = ({ modalHandler }) => (
   <button
       onClick={() => modalHandler('create')}
       type="button"
-      className="btn btn-info"
+      className="btn btn-primary"
       style={{display: 'block', margin: '0 auto'}}
       data-toggle="modal"
       data-target="#createWorkitem"

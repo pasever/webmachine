@@ -56,7 +56,7 @@ export default class ReposPage extends Component {
         let repos = filteredRepos.map(repo => <Repo key={repo.id} repo={repo} />);
         return repos;
       } else {
-        // If there aren't repo to display, don't even bother
+        // If there aren't repos to display, don't bother
         // with more operations and just display a message
         return (
           <p>

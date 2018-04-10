@@ -103,7 +103,7 @@
 .fa-github {
   color: #333;
   font-size: 20px;
-  display: block;
+  /* display: block; */
   margin: 0 auto;
 }
 
@@ -142,10 +142,22 @@
   font-weight: bold;
 }
 
-#issue-list .issue-card-footer {
+/* Workitem card edit button */
+.edit-workitem {
+  position: absolute;
+  top: 0; right: 0;
+  /* margin: 0; */
   background: none;
+  border: none;
+  margin: 5px 5px 2px 0;
+  outline: none;
 }
 
+.fa-edit {
+  color: #333;
+}
+
+/* Notice about the workitem's assignee based on its stage */
 #editNotice {
   font-size: 12px;
   color: tomato;
