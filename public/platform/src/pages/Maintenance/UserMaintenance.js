@@ -29,7 +29,7 @@ export const UserMaintenance = ({errors, text, user, onSubmit, updateFormField, 
                     
                     <Input value={ user.name } 
                         name="name" onChange={ updateFormField } 
-                        displayName="Name" type="text" errorText={ errors.name } />
+                        displayName="Name" type="text" errorText={ errors.name } classPrepend="fa fa-users" />
                     
                     <TextArea 
                         value={ user.description } name="description"
@@ -38,19 +38,20 @@ export const UserMaintenance = ({errors, text, user, onSubmit, updateFormField, 
                         byline="A short description of your organization" />
                     
                     <Input value={ user.contact } 
-                        name="contact" onChange={ updateFormField }
-                        displayName="Contact" type="text" errorText={ errors.contact } placeholder="Contact" />
+                        name="contact" onChange={ updateFormField } displayName="Contact" type="text" 
+                        errorText={ errors.contact } placeholder="Contact" classPrepend="fa fa-user" />
                     
                     <Input value={ user.email } 
-                        name="contact" onChange={ updateFormField }
+                        name="contact" onChange={ updateFormField } classPrepend="fa fa-envelope"
                         displayName="Email" type="email" errorText={ errors.email } placeholder="name@yourdomain.com" />
                     
                     <Input value={ user.sms } name="sms" onChange={ updateFormField } 
-                        displayName="SMS Phone #" type="text"
+                        displayName="SMS Phone #" type="text" classPrepend="fa fa-phone"
                         errorText={ errors.sms } placeholder="5555555555" maskPhone={true} />
                     
                     <Input value={ user.web } name="web" errorText={ errors.web } placeholder="Web"
-                        displayName="Web URL" type="text" onChange={ updateFormField } />
+                        displayName="Web URL" type="text" onChange={ updateFormField } classPrepend="fa fa-link" />
+
                     { isSaving ? ( <i className="fa fa-gear fa-spin fa-2x margin-top-10"></i> ) : 
                     ( <Button type="submit"  text="Save" style="default" name="signup" /> ) }
     

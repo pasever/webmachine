@@ -116,5 +116,30 @@ exports.addStripeSource = (token, cId, sId, conn, cb) => {
     }
 }
 
+exports.setDefaultSource = (token, cId, sId, conn, cb) => {
+    thread(cId, sId, conn).then((result) => {
+        cb(result);
+    }).catch((err) => {
+        console.log("ERROR IN Stripe Set Source Platform PROCESSING");
+        console.log(err);
+        cb(err);
+    })
+    async function thread(cId, sId, conn) {
+        let result = await db.setDefaultSource(cId, sId, conn)
+        return result;
+    }    
+}
 
-
+exports.removeSource = (token, cId, sId, conn, cb) => {
+    thread(cId, sId, conn).then((result) => {
+        cb(result);
+    }).catch((err) => {
+        console.log("ERROR IN Stripe Remove Source Platform PROCESSING");
+        console.log(err);
+        cb(err);        
+    })
+    async function thread(cId, sId, conn) {
+        let result = await db.removeSource(cId, sId, conn);
+        return result;
+    }
+}

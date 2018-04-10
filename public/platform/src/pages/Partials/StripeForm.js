@@ -23,9 +23,6 @@ class StripeForm extends Component {
         isSaving: false,
         user: this.props.user,
     }
-    componentDidMount() {
-        console.log(this.props.user.stripeCustomer);
-    }
 
     /// Makes sure the necessary data exists on the form.
     validateInfo() {
@@ -44,6 +41,37 @@ class StripeForm extends Component {
         this.setState({ errors: errors, warnings: warnings });
         // If there is one or more errors we fail validation
         return errors.length > 0 ? false : true;
+    }
+
+    finishSave = (stripeCustomer) => {
+        // Extract the user from the state
+        const user = this.state.user;
+        // Assign the returned stripeCustomer to our extracted user
+        user.stripeCustomer = stripeCustomer;
+        // Sets the state.
+        this.setState({ isSaved: true, user: user, isSaving: false});
+    }
+
+    ///  Calls the API to change the default source
+    changeDefaultSource = event => {
+        event.preventDefault();
+        // Flags to the form that we are saving to show the animation
+        this.setState({ isSaving: true });
+        // Make our call to the server, passing our customer Id and Source Id
+        API.setDefaultSource(this.state.user.stripeCustomer.id, event.target.dataset.sourceId).then(response => {
+            this.finishSave(response.data);
+        })
+    }
+
+    ///  Calls the API to remove a source
+    removeSource = event => {
+        event.preventDefault();
+        // Flags to the form that we are saving to show the animation
+        this.setState({ isSaving: true });
+        // Make our call to the server, passing the source we want to remove
+        API.removeSource(this.state.user.stripeCustomer.id, event.target.dataset.sourceId).then(response => {
+            this.finishSave(response.data);
+        })
     }
 
     /// Function called at the submit event.
@@ -97,7 +125,7 @@ class StripeForm extends Component {
                 </div>
                 <div className="billing-form-section light-shadow">
                     {this.state.user.stripeCustomer === null ? (<h2>No stripe customer loaded.</h2> ) : (
-                        <StripeData stripeCust={ this.state.user.stripeCustomer } />
+                        <StripeData stripeCust={ this.state.user.stripeCustomer } changeSource={ this.changeDefaultSource } removeSource={ this.removeSource } />
                     )}
                 </div>
             </div> 

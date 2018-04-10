@@ -38,19 +38,6 @@ const dbplatform = (router) => {
             res.status(403).send(err.message);
             next(err);
         }
-        
-        
-        /*else if(req.body.cid) {
-            console.log("GET BY CID");
-            pApi.getPlatformByCId(req.token, req.body.cid, req.conn, (response) => {
-                res.status(200).send(response);
-            })
-        } else {
-            pApi.getPlatforms(req.token, req.conn, (response) => {
-                res.status(200).send(response);
-                next();
-            });    
-        }*/
     });
     
     router.post('/', (req, res, next) => {
@@ -95,6 +82,31 @@ const dbplatform = (router) => {
             next(err);
         }
 
+    })
+    router.post('/setDefaultSource', (req, res, next) => {
+        
+        if(req.body.cId && req.body.sId) {
+            pApi.setDefaultSource(req.token, req.body.cId, req.body.sId, req.conn, (response) => {
+                console.log(g("RESPONSE --- ", response));
+                res.status(200).send(response);
+            })
+        } else {
+            let err = new Error('Error Update Stripe Source - Please Provide All Required Data');
+            res.status(403).send(err.message);
+            next(err);            
+        }
+    }) 
+    router.post('/removeSource', (req, res, next) => {
+        if(req.body.cId && req.body.sId) {
+            pApi.removeSource(req.token, req.body.cId, req.body.sId, req.conn, (response) => {
+                console.log(g("RESPONSE --- ", response));
+                res.status(200).send(response);
+            })
+        } else {
+            let err = new Error('Error Remove Stripe Source - Please Provide All Required Data');
+            res.status(403).send(err.message);
+            next(err);            
+        }
     })
 
 }

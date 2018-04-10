@@ -162,3 +162,27 @@ exports.addStripeSource = (cId, sId) => {
         .catch(err => reject(err));
     })
 }
+
+// Sets a default payment source via API
+exports.setDefaultSource = (cId, sId) => {
+    return new Promise((resolve, reject) => {
+        stripe.customers.update(cId, { 
+            default_source: sId 
+        }).then(response => resolve(response))
+        .catch(err => reject(err));
+    })
+}
+
+// Removes a payment source via API
+// The deleteSource only sends back a copy of the source, so we need to grab a new copy of
+// our stripe customer to return back to the client
+exports.removeSource = (cId, sId) => {
+    return new Promise((resolve, reject) => {
+        stripe.customers.deleteSource(cId, sId).then(response => { 
+            stripe.customers.retrieve(cId, (err, stripeCust) => {
+                
+                resolve(stripeCust);
+            })
+        }).catch(err => reject(err));
+    })
+}
