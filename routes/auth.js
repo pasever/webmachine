@@ -32,8 +32,8 @@ const auth = (router) => {
     if (test) {
       apiPath = '/github'
     }
-    let pltfrm = apiPath.match(/platform/g);
-    if(pltfrm) apiPath = '/platform';
+    test = apiPath.match(/platform/g);
+    if(test) apiPath = '/platform';
     console.log(req.url)
     console.log(apiPath)
     console.log(test)

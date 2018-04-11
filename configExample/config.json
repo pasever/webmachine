@@ -73,7 +73,9 @@
 		"secretKey": ""
 	},
 	"netlify": {
-		"token": ""
+		"token": "",
+		"clientId": "",
+		"secret": ""
 	},
 
 	"port": 3000,

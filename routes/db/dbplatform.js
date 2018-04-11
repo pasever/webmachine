@@ -19,24 +19,21 @@ const dbplatform = (router) => {
 		    next();
  	    });
     });
-/*
-	router.get('/', (req, res, next) => {
-        console.log("-----------DB Platforms GET ROUTE -----------");
-		pApi.getPlatforms(req.token, req.conn, (response) => {
-			res.status(200).send(response);
-			next();
-        });
-    });*/
+
     router.get('/', (req, res, next) => {
         console.log("-----------DB Platforms GET ROUTE -----------");
         if(req.query.cid) {            
             pApi.getPlatformByCId(req.token, req.query.cid, req.conn, (response) => {
                 res.status(200).send(response);
             });
+        } else if(req.query.id) {
+            pApi.getPlatform(req.token, req.query.id, req.conn, (response) => {
+                res.status(200).send(response);
+            });
         } else {
-            let err = new Error('Error GET DB - Client ID Not Provided!');
-            res.status(403).send(err.message);
-            next(err);
+            pApi.getPlatforms(req.token, req.conn, (response) => {
+                res.status(200).send(response);
+            });
         }
     });
     
