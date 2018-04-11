@@ -32,15 +32,19 @@ const auth = (router) => {
     if (test) {
       apiPath = '/github'
     }
+    test = apiPath.match(/platform/g);
+    if(test) apiPath = '/platform';
     console.log(req.url)
     console.log(apiPath)
     console.log(test)
 
 		switch(apiPath) {
 			case '/db/agent':
-			case '/db/client':
-      case '/github':
-				const token = req.get('Authorization')
+            case '/db/client':
+            case '/github':
+            case '/platform':
+                const token = req.get('Authorization')
+                
 				if (token) {
 					req.token = token }
 			 	else {
@@ -58,7 +62,7 @@ const auth = (router) => {
 			default:
 		}
 
-
+        
 	// configured for future capabilities, processing messages from various channels
 	// as of 2/2018 - only configured for web http and sms channels
 

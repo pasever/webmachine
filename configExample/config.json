@@ -68,7 +68,16 @@
 		"url": "http://localhost:5002/api/agent",
 		"uri": "mongodb://localhost:27017/chaoticbots"
 	},
+	"stripe": {
+		"publishKey": "",
+		"secretKey": ""
+	},
+	"netlify": {
+		"token": "",
+		"clientId": "",
+		"secret": ""
+	},
+
 	"port": 3000,
 	"token": ""
-
 }
