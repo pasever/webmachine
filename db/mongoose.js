@@ -36,7 +36,8 @@ module.exports = function (platformarray) {
       process.exit(1)
     }
     // should be only 1 config obj
-    let dburi = platform[0].uri + platform[0].db
+    /// MONGOOSE DOES NOT ALLOW A DOCUMENT TO HAVE A db FIELD.
+    let dburi = platform[0].uri + platform[0].dbname
 
     if (utils.isValidUrl(dburi)) {
         mongoose.connect(dburi, options)
