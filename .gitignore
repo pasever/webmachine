@@ -3,3 +3,5 @@ node_modules
 config
 public/dist
 .env
+package-lock.json
+npm-debug.log

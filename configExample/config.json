@@ -22,7 +22,9 @@
 		"reponame": "test",
     "token": "",
     "repos_url": "/api/github/repos/strategicmarket",
-    "issues_url": "/api/github/issues/strategicmarket"
+    "issues_url": "/api/github/issues/strategicmarket",
+    "create_issue_url": "/api/github/create-issue",
+    "edit_issue_url": "/api/github/edit-issue"
 	},
 	"sessionSecret": "",
 	"facebook": {
@@ -68,7 +70,16 @@
 		"url": "http://localhost:5002/api/agent",
 		"uri": "mongodb://localhost:27017/chaoticbots"
 	},
+	"stripe": {
+		"publishKey": "",
+		"secretKey": ""
+	},
+	"netlify": {
+		"token": "",
+		"clientId": "",
+		"secret": ""
+	},
+
 	"port": 3000,
 	"token": ""
-
 }

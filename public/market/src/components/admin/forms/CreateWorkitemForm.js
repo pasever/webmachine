@@ -98,17 +98,17 @@ class CreateWorkitemForm extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="title">Title</label>
-          <input onChange={this.handleChange} type="text" value={title} className="form-control" id="title" />
+          <input onChange={this.handleChange} type="text" value={title} className="form-control" id="title" required/>
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="price">Price</label>
-            <input onChange={this.handleChange} type="number" value={price} className="form-control" id="price" />
+            <input onChange={this.handleChange} type="number" value={price} className="form-control" id="price" required/>
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="duration">Duration</label>
             <input onChange={this.handleChange} type="number" value={duration} className="form-control" id="duration"
-              placeholder="days" 
+              placeholder="days" required
             />
           </div>
         </div>
@@ -121,7 +121,7 @@ class CreateWorkitemForm extends Component {
             style={{overflow: 'auto', resize: 'none'}}
             value={description}
             rows="3"
-            
+            required
           ></textarea>
         </div>
         {/* Using modal footer as form footer because it works */}
