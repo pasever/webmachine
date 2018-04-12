@@ -23,8 +23,8 @@
     "token": "",
     "repos_url": "/api/github/repos/strategicmarket",
     "issues_url": "/api/github/issues/strategicmarket",
-    "create_issue_url": "http://localhost:3000/api/github/create-issue",
-    "edit_issue_url": "http://localhost:3000/api/github/edit-issue"
+    "create_issue_url": "/api/github/create-issue",
+    "edit_issue_url": "/api/github/edit-issue"
 	},
 	"sessionSecret": "",
 	"facebook": {
