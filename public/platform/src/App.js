@@ -44,7 +44,7 @@ export default class App extends Component {
     getPlatformPageData() {
         
         return new Promise((resolve, reject) => { 
-            fetch(origin + '/platform/static/platformPageData.json')
+            fetch('/platform/static/platformPageData.json')
                 .then(resp => { let json = resp; return { json, resolve }})
                 .then(({ json, resolve }) => resolve(json) )
         })
