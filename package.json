@@ -1,12 +1,16 @@
 {
   "name": "strategicmachines",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "web portal for intelligent interactions",
   "main": "server.js",
+  "engines": {
+    "node": "^8.6.0",
+    "npm": "^3.0.0"
+  },
   "scripts": {
     "webpack-watch": "webpack -w",
     "express-server": "node ./server.js",
-    "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
+    "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\" ",
     "build": "node node_modules/webpack/bin/webpack.js --colors --progress -p",
     "machine": "node ./server.js"
   },
@@ -29,6 +33,7 @@
     "conversational economy"
   ],
   "dependencies": {
+    "@octokit/rest": "^15.2.6",
     "axios": "^0.17.1",
     "babel-preset-env": "^1.6.1",
     "body-parser": "^1.16.0",
@@ -40,19 +45,19 @@
     "dotenv": "^5.0.0",
     "escape-string-regexp": "^1.0.5",
     "express": "^4.16.3",
+    "express-validator": "^5.1.2",
     "form-serialize": "^0.7.2",
-    "github": "^13.1.0",
     "moment": "^2.21.0",
-    "mongoose": "^5.0.12",
+    "mongoose": "^5.0.14",
     "morgan": "^1.7.0",
     "nodemailer": "^2.6.0",
-    "nodemon": "^1.17.2",
+    "nodemon": "^1.17.3",
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
-    "react": "^16.3.0",
+    "react": "^16.3.1",
     "react-chat-widget": "2.1.2",
-    "react-input-mask": "^1.2.2",
     "react-dom": "^16.3.0",
+    "react-input-mask": "^1.2.2",
     "react-markdown-renderer": "^1.4.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",

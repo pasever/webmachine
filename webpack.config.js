@@ -11,6 +11,7 @@ module.exports = {
     landing: './public/landing/src/index.js',
     platform: './public/platform/src/index.js'
     },
+    devtool: 'source-map',
   module: {
     rules: [
       {

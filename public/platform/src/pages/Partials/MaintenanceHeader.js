@@ -3,9 +3,8 @@
 ///////////////////////////////////////////////////////////////////////
 // DGO
 
-import React from 'react';
-import { Col } from '../../components/grid/'; 
-
+import React from "react";
+import { Col } from "../../components/grid/";
 
 /* 
 REQUIRED PROPS: 
@@ -15,18 +14,31 @@ REQUIRED PROPS:
     toggleSystem (method) - toggles when to go live, if we can go life
 */
 export const MaintenanceHeader = ({ headerText, user, hasErrors, toggleSystem, deletePlatform }) => (
-    <div className="maintenance-header">
-        <div className="toggle-section">
-            { user.isLive ? ( 
-                <h6><i onClick={ toggleSystem } className="fa fa-toggle-on toggle"></i> system is live.</h6> ) : ( 
-                <h6><i onClick={ toggleSystem} className="fa fa-toggle-off toggle"></i> system is off.</h6>
-            )}
-            { hasErrors ? ( 
-                <h6 className="badge badge-warning">Please check the forms for errors</h6>
-            ) : ( "" ) }
-        </div>
-        <div className="delete-section">
-            <button onClick={ deletePlatform } className="btn btn-danger">{ headerText.deleteButton }</button>
-        </div>
+  <div className="maintenance-header">
+    <div className="toggle-section">
+      {user.isLive ? (
+        <h6>
+          <i onClick={toggleSystem} className="fa fa-toggle-on toggle" /> system
+          is live.
+        </h6>
+      ) : (
+        <h6>
+          <i onClick={toggleSystem} className="fa fa-toggle-off toggle" />{" "}
+          system is off.
+        </h6>
+      )}
+      {hasErrors ? (
+        <h6 className="badge badge-warning">
+          Please check the forms for errors
+        </h6>
+      ) : (
+        ""
+      )}
     </div>
-)
+    <div className="delete-section">
+      <button onClick={deletePlatform} className="btn btn-danger">
+        {headerText.deleteButton}
+      </button>
+    </div>
+  </div>
+);
