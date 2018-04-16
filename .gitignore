@@ -4,3 +4,4 @@ config
 public/dist
 .env
 config.zip
+package-lock.json
