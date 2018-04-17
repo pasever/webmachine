@@ -6,7 +6,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'machines.auth0.com',
     clientID: '2TaeX3bxJKAXWZi5ZSxX5BQi1ugnbRHw',
-    redirectUri: 'http://localhost:3000/callback',
+    redirectUri: 'http://localhost:3000/',
     audience: 'https://machines.auth0.com/userinfo',
     responseType: 'token id_token',
     scope: 'openid'
@@ -17,10 +17,13 @@ export default class Auth {
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.getAccessToken = this.getAccessToken.bind(this);
+    this.getProfile = this.getProfile.bind(this);
   }
 
   login() {
     this.auth0.authorize();
+    
   }
 
   handleAuthentication() {
@@ -33,6 +36,7 @@ export default class Auth {
         console.log(err);
       }
     });
+    
   }
 
   setSession(authResult) {
@@ -41,9 +45,40 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    webAuth.parseHash({ hash: window.location.hash }, function(err, authResult) {
+      if (err) {
+        return console.log(err);
+      }
+    
+      webAuth.client.userInfo(authResult.accessToken, function(err, user) {
+        // Now you have the user's information
+        console.log(user);
+        alert(user)
+      });
+    });
     // navigate to the home route
     history.replace('/');
+    
   }
+
+  getAccessToken() {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('No access token found');
+    }
+    return accessToken;
+  }
+
+  getProfile(cb) {
+    let accessToken = this.getAccessToken();
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        this.userProfile = profile;
+      }
+      cb(err, profile);
+    });
+  }
+
 
   logout() {
     // Clear Access Token and ID Token from local storage
@@ -60,5 +95,7 @@ export default class Auth {
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   }
+
+  
 }
 
