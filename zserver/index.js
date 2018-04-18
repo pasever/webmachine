@@ -14,7 +14,6 @@ const favicon =            require('serve-favicon');
 const logger =             require("morgan");
 const api =                require("../api")
 const keys =               require('../config').init();
-const platform =           require('../config').platform()
 const transport =          require('../config/gmail')
 
 const { g, b, gr, r, y } = require('../console');
@@ -22,10 +21,14 @@ const { g, b, gr, r, y } = require('../console');
 const app =   express();;
 
 //////////////////////////////////////////////////////////////////////////
-////////////////// db config to capture messages   //////////////////////
+/////////////    Seed test data if test env detected          ///////////
 ////////////////////////////////////////////////////////////////////////
 
-require('../db/mongoose')(platform)
+let envState = true
+if ( process.env.isLive == 'false' ) {
+    envState = false
+    require('../db/seedTestDb')(envState)
+  }
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////////  Register Middleware       /////////////////////////

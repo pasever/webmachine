@@ -1,6 +1,6 @@
 'use strict';
 
-const Client =              require('../schemas/Client').Client
+const clientObj =           require('../schemas/Client')
 const mongoose =            require('mongoose')
 const testClients =         require('../data/clients')
 const { g, b, gr, r, y } =  require('../../console')
@@ -8,6 +8,7 @@ const { g, b, gr, r, y } =  require('../../console')
 const limit = 1;
 
 function getClients (conn) {
+      let Client = conn.model('Client', clientObj.clientSchema);
       Client.find({}).limit(limit).exec(function (err, collection){
           if (collection.length === 0) {
             // iterate over the array for initialization and create entries
@@ -20,11 +21,11 @@ function getClients (conn) {
                   }
                 })
               })
-            console.log(g('Clients Initialized'))
+            console.log(g('Clients Initialized: ' + conn.name + ' at ' + conn.host))
             return
           }
           else {
-            console.log(g('Clients Exist in db ' ))
+            console.log(g('Clients Exist in db ' + conn.name + ' at ' + conn.host))
           }
         })
       }

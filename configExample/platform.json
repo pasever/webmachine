@@ -1,28 +1,23 @@
 [
 	{
-		"name": "Test Strategic Machines",
-		"email": "",
-		"firstName": "",
-    	"surname": "",
-	    "addressLine1": "",
-    	"addressLine2": "",
-		"city": "",
-		"state": "",
-		"zip": "",
-		"description": "Test db with primary auth records for orgs and marketplace collections",
-		"collections": ["platform", "partners", "workitems"],
-		"contact": "ChaoticRoute",
-		"sms": "",
-		"web": "demo",
-		"dbname": "machines",
-		"dbConnected": false,
-		"uri": "mongodb://localhost:27017/",
+		"name": "xio",
+		"description": "Platform owner - test database holding client collections ",
+		"location": "urbancoder account",
+		"db": "machines",
+		"uri": "",
 		"username": "",
 		"password": "",
-		"stripeCustomerId": "",
-		"isPlatform": true,
-		"isLive": false,
-		"clientId": ""
+		"isLive": false
+	},
+	{
+		"name": "xio",
+		"description": "Platform owner - production db holding client collections",
+		"location": "urbancoder account",
+		"db": "machines",
+		"uri": "",
+		"username": "",
+		"password": "",
+		"isLive": true
 	}
 
 ]

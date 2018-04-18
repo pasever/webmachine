@@ -14,8 +14,16 @@ const clientObject = {
   state: String,
   zip: String,
   contact: String,
-  phone: String,
+  sms: String,
+  web: String,
   email: String,
+  dbname: String,
+  urilocal: String,
+  uri: String,
+  username: String,
+  password: String,
+  isPrivate: { type: Boolean, default: true },
+  isActivated: { type: Boolean, default: false },
   postdate: { type: Date, default: Date.now },
   id: { type: String, default: uuidv1() }
 }
@@ -24,4 +32,4 @@ const clientSchema = new Schema(clientObject, { collection: 'Client' });
 
 var Client = mongoose.model("Client", clientSchema);
 
-module.exports = { Client, clientSchema }
+module.exports = { Client, clientSchema, clientObject }
