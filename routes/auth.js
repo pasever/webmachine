@@ -44,7 +44,7 @@ const auth = (router) => {
             case '/github':
             case '/platform':
                 const token = req.get('Authorization')
-                
+
 				if (token) {
 					req.token = token }
 			 	else {
@@ -62,7 +62,7 @@ const auth = (router) => {
 			default:
 		}
 
-        
+
 	// configured for future capabilities, processing messages from various channels
 	// as of 2/2018 - only configured for web http and sms channels
 
@@ -129,6 +129,8 @@ const auth = (router) => {
   let platform = platformarray.filter((p) => p.isLive == productionState)
 
 	// find unique configuration from the array of authorized platform subscribers
+  // AUTH DISABLED FOR WEBMACHINES PENDING INTEGRATION OF AUTH0 process
+  /*
   let authToken = []
 
 	if (req.body.ChaoticSource == "sms") {
@@ -156,7 +158,7 @@ const auth = (router) => {
 	}
 	// db conection already made for strategic machines web site
 	// no dynamic assignment for web site unlike the messaging site
-
+  */
   next()
  })
 }
