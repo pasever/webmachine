@@ -11,7 +11,7 @@
 		"phone": "+18882223434"
 	},
 	"db": {
-		"local": {
+		"localhost": {
 			"username": "xio",
 			"password": "",
 			"host": "",
@@ -19,7 +19,7 @@
 			"name": "",
 			"uri": ""
 		},
-		"remote": {
+		"workitemsBackup": {
 			"user": "xio",
 			"password": "",
 			"name": "",
