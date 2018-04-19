@@ -12,7 +12,8 @@
     "express-server": "node ./server.js",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\" ",
     "build": "node node_modules/webpack/bin/webpack.js --colors --progress -p",
-    "machine": "node ./server.js"
+    "machine": "node ./server.js",
+    "backup-wis": "node utils/backup-workitems-test-data.js"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
     "express-validator": "^5.1.2",
     "form-serialize": "^0.7.2",
     "moment": "^2.21.0",
+    "mongodb": "^3.0.7",
     "mongoose": "^5.0.14",
     "morgan": "^1.7.0",
     "nodemailer": "^2.6.0",
