@@ -3,23 +3,19 @@
 ///////////////////////////////////////////////////////////////////////
 // DGO
 
-
-import React from 'react';
+import React from "react";
 
 export const StripeData = ({ stripeCust, changeSource, removeSource }) => (
-    <div>
-        
-        <div className="stripe-data-wrapper">
-            {stripeCust.account_balance ? (
-                <div>
-                    <div className="stripe-item">
-                        <span>Account Balance : </span>
-                    </div>
-                    <div className="stripe-item">
-                        <span>${ stripeCust.account_balance }</span>
-                    </div>
-                </div>
-            ) : ""}
+  <div>
+    <div className="stripe-data-wrapper">
+      {stripeCust.account_balance ? (
+        <div>
+          <div className="stripe-item">
+            <span>Account Balance : </span>
+          </div>
+          <div className="stripe-item">
+            <span>${stripeCust.account_balance}</span>
+          </div>
         </div>
         <div className="stripe-data-wrapper">
             { stripeCust.sources.data.length === 0 ? (
@@ -57,6 +53,7 @@ export const StripeData = ({ stripeCust, changeSource, removeSource }) => (
             </div>
         )}
         </div>
-        
+      )}
     </div>
+  </div>
 );

@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 const express =            require('express');
+const expressValidator =   require('express-validator');
 const path =               require('path');
 const bodyParser =         require('body-parser');
 const cors =               require('cors')
@@ -32,6 +33,7 @@ require('../db/mongoose')(platform)
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(expressValidator());
 app.use(express.static('public'));
 app.use('/dist', express.static('public'));
 app.use('/form', express.static('public'));

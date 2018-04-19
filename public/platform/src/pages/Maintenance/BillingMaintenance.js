@@ -4,6 +4,7 @@
 // DGO
 
 
+
 'use strict';
 
 import React, { Component } from 'react';
@@ -19,19 +20,18 @@ const config = require('../../../../../config/').init();
 
 /// FUTURE - Send User object, and check if the user is in Stripe.
 export class BillingMaintenance extends Component {
-
-    render() {
-        return(
-            <ErrorBoundary>
-                { this.props.text.title ? ( <h2>{ this.props.text.title }</h2> ): ("")}
-                { this.props.text.body ? ( <p>{ this.props.text.body }</p> ) : ("") }
-                <StripeProvider apiKey={ config.stripe.publishKey }>
-                    <StripeFormWrapper 
-                        user= { this.props.user } 
-                        updateFormField={ this.props.updateFormField } />
-                </StripeProvider>
-            </ErrorBoundary>        
-        )
-    }
+  render() {
+    return (
+      <ErrorBoundary>
+        {this.props.text.title ? <h2>{this.props.text.title}</h2> : ""}
+        {this.props.text.body ? <p>{this.props.text.body}</p> : ""}
+        <StripeProvider apiKey={config.stripe.publishKey}>
+          <StripeFormWrapper
+            user={this.props.user}
+            updateFormField={this.props.updateFormField}
+          />
+        </StripeProvider>
+      </ErrorBoundary>
+    );
+  }
 }
-

@@ -3,10 +3,10 @@
 ///////////////////////////////////////////////////////////////////////
 // DGO
 
-'use strict';
+"use strict";
 
-import React from 'react';
-import '../../styles/forms.css';
+import React from "react";
+import "../../styles/forms.css";
 
 /// Builds out a Bootstrap 4 (RELEASE) input group.
 /* 
@@ -22,23 +22,30 @@ PROPS:
     errorText - the errorText, if it exists
 */
 
-export const TextArea = (props) => (
-    <div className="form-group">
-        <label htmlFor={ props.name } className="control-label">{ props.displayName }</label>
-            <textarea name={props.name} id={props.name} 
-                onChange={ props.onChange } rows={ props.rows } cols={ props.cols }
-                className="form-control" value={ props.value }></textarea>
-        
-        { props.byline !== "" ? (
-            <small className="form-text text-muted">{ props.byline }</small>
-        ) : ( 
-            "" 
-        )}
-        { props.errorText !== "" ? (
-            <label className="label label-danger">{ props.errorText }</label>
-        ) : (
-            ""
-        )}
-    </div>
-);
+export const TextArea = props => (
+  <div className="form-group">
+    <label htmlFor={props.name} className="control-label">
+      {props.displayName}
+    </label>
+    <textarea
+      name={props.name}
+      id={props.name}
+      onChange={props.onChange}
+      rows={props.rows}
+      cols={props.cols}
+      className="form-control"
+      value={props.value}
+    />
 
+    {props.byline !== "" ? (
+      <small className="form-text text-muted">{props.byline}</small>
+    ) : (
+      ""
+    )}
+    {props.errorText !== "" ? (
+      <label className="label label-danger">{props.errorText}</label>
+    ) : (
+      ""
+    )}
+  </div>
+);

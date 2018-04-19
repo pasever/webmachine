@@ -1,14 +1,13 @@
+'use strict';
 
+//////////////////////////////////////////////////////
+////////            github interactions       ///////
+////////////////////////////////////////////////////
 
-
-
-const GitHubAPI =             require('github');
+const github =                require('@octokit/rest')();
 const getNextPage =           require('./getNextPage');
 const traverse =              require('./traverse');
 const set_price_and_others =  require('./setPriceAndOthers');
-// require('dotenv').load();
-
-const github = new GitHubAPI();
 
 var { githubrepo } = require('../../../config').init();
 
@@ -25,7 +24,7 @@ module.exports = async function (username, repo, per_page = 100) {
     let result = await github.issues.getForRepo({
         owner: username,
         repo: repo,
-        state: 'open',
+        state: 'all',
         direction: 'asc',
         per_page: per_page
     }).catch(err => { throw err });

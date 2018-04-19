@@ -4,3 +4,5 @@ config
 public/dist
 .env
 config.zip
+package-lock.json
+npm-debug.log
