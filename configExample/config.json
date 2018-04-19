@@ -11,12 +11,21 @@
 		"phone": "+18882223434"
 	},
 	"db": {
-		"username": "xio",
-		"password": "",
-		"host": "",
-		"port": "",
-		"name": "",
-		"uri": ""
+		"localhost": {
+			"username": "xio",
+			"password": "",
+			"host": "",
+			"port": "",
+			"name": "",
+			"uri": ""
+		},
+		"workitemsBackup": {
+			"user": "xio",
+			"password": "",
+			"name": "",
+			"uri": "",
+			"description": "keys in this object are used in ./utils/backup-workitems-test-data.js to construct mLab uri. to back up, run npm run backup-wis"
+		}
 	},
 	"githubrepo": {
 		"reponame": "test",

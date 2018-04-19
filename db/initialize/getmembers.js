@@ -1,42 +1,42 @@
 'use strict';
 
 ///////////////////////////////////////////////////////////////////////
-///////           placeholder for loading agents              ////////
+///////           placeholder for laoding members             ////////
 /////////////////////////////////////////////////////////////////////
 
-const agentObj  =           require('../schemas/Agent')
+const memberObj  =          require('../schemas/Member')
 const mongoose =            require('mongoose')
-const testAgents  =         require('../data/agents')
+const testMembers  =        require('../data/members')
 const { g, b, gr, r, y } =  require('../../console')
 
 const limit = 1;
 
-function getAgents (conn) {
-      let Agent = conn.model('Agent', agentObj.agentSchema);
+function getMembers (conn) {
+      let Member = conn.model('Member', memberObj.memberSchema);
       // always drop the collection and refresh with test data
-      Agent.collection.drop()
-
-      Agent.find({}).limit(limit).exec(function (err, collection){
+      Member.collection.drop()
+      
+      Member.find({}).limit(limit).exec(function (err, collection){
           if (collection.length === 0) {
             // iterate over the set of agents for initialization and create entries
-            testAgents.map(function(agent) {
-                let newAgent = new Agent(agent)
-                newAgent.save(function (err, data) {
+            testMembers.map(function(member) {
+                let newMember = new Member(member)
+                newMember.save(function (err, data) {
                   if(err) {
                     console.log(err);
                     return //res.status(500).json({msg: 'internal server error'});
                   }
                 })
               })
-            console.log(g('Agents Initialized: ' + conn.name + ' at ' + conn.host))
+            console.log(g('Members Initialized: ' + conn.name + ' at ' + conn.host))
             return
           }
           else {
-            console.log(g('Agents Exist in db ' + conn.name + ' at ' + conn.host))
+            console.log(g('Members Exist in db ' + conn.name + ' at ' + conn.host))
           }
         })
       }
 
 module.exports = {
-  getAgents: getAgents
+  getMembers: getMembers
 }
