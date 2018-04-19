@@ -13,8 +13,9 @@ const MongoClient     = require('mongodb').MongoClient,
       fs              = require('fs'),
       path            = require('path');
 
-// DB Keys 
-const db          = require('../config').init().db.remote;
+// DB Keys & console utils
+const db              = require('../config').init().db.remote,
+      { g, r, y }     = require('../console');
 
 // Construct DB uri
 const uri = db.uri
@@ -33,7 +34,7 @@ MongoClient.connect(uri, function(err, client) {
   let db = client.db('machine');
 
   // Notify user of successful connection
-  console.log('Successful connection to mLab');
+  console.log(g('Successful connection to mLab'));
 
   // Find all workitems in the Workitem collection
   db.collection('Workitem').find({}).toArray(function(err, workitems) {
@@ -50,11 +51,11 @@ MongoClient.connect(uri, function(err, client) {
     // Save workitems data into a file
     fs.writeFile(fileName, fileContent, 'utf8', function(err) {
       if (err) {
-        throw new Error('Error writing test-data into file.');
+        console.log(r('Error writing test-data into file.'), err);
       }
 
       // Notify user we have finished the process
-      console.log('Updated test data saved in ' + fileName);
+      console.log(y('Updated test data saved in ') + fileName);
       // Close connection to DB
       client.close();
     });
