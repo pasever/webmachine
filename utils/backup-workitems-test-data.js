@@ -13,15 +13,20 @@ const MongoClient     = require('mongodb').MongoClient,
       fs              = require('fs'),
       path            = require('path');
 
-// TODO: Pull dbUri from config file
-// mongodb://localhost:27017/
-const dbUri = 'mongodb://xio:Charl0tte@ds229609.mlab.com:29609/machine';
+// DB Keys 
+const db          = require('../config').init().db.remote;
+
+// Construct DB uri
+const uri = db.uri
+            .replace('<dbuser>', db.user)
+            .replace('<dbpassword>', db.password)
+            .replace('<dbname>', db.name);
 
 // Set path and name of file into which test-data will be saved
 const fileName = path.resolve(__dirname, '../db/data/workitems.js');
 
 // Open connection to the database
-MongoClient.connect(dbUri, function(err, client) {
+MongoClient.connect(uri, function(err, client) {
   // Assert that err == null
   assert.equal(null, err);
   // Set reference to machine database
@@ -40,10 +45,10 @@ MongoClient.connect(dbUri, function(err, client) {
     // Stringify and prettify the returned workitems array  of objects
     let data = JSON.stringify(workitems, null, 2, 100);
     // Put it all together
-    let content = `'use strict'; \n\n ${fileHeader} \n\n const objStore = ${data}; \n\n module.exports = objStore;`
+    let fileContent = `'use strict'; \n\n ${fileHeader} \n\n const objStore = ${data}; \n\n module.exports = objStore;`
     
     // Save workitems data into a file
-    fs.writeFile(fileName, content, 'utf8', function(err) {
+    fs.writeFile(fileName, fileContent, 'utf8', function(err) {
       if (err) {
         throw new Error('Error writing test-data into file.');
       }
