@@ -11,12 +11,20 @@
 		"phone": "+18882223434"
 	},
 	"db": {
-		"username": "xio",
-		"password": "",
-		"host": "",
-		"port": "",
-		"name": "",
-		"uri": ""
+		"localhost": {
+			"username": "xio",
+			"password": "",
+			"host": "",
+			"port": "",
+			"name": "",
+			"uri": ""
+		},
+		"workitemsBackup": {
+			"user": "xio",
+			"password": "",
+			"name": "",
+			"uri": ""
+		}
 	},
 	"githubrepo": {
 		"reponame": "test",
