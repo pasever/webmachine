@@ -14,7 +14,7 @@ const MongoClient     = require('mongodb').MongoClient,
       path            = require('path');
 
 // DB Keys & console utils
-const db              = require('../config').init().db.remote,
+const db              = require('../config').init().db.workitemsBackup,
       { g, r, y }     = require('../console');
 
 // Construct DB uri
@@ -38,8 +38,11 @@ MongoClient.connect(uri, function(err, client) {
 
   // Find all workitems in the Workitem collection
   db.collection('Workitem').find({}).toArray(function(err, workitems) {
-    // Throw and error if there's one
-    if (err) throw err;
+    // Notify of error if there's one
+    if (err) {
+      console.log(r('There was an error retrieving workitems from database'));
+      throw err;
+    };
 
     // Set header comment for file
     let fileHeader =`///////     Workitem Test Data     ///////`;
@@ -51,7 +54,8 @@ MongoClient.connect(uri, function(err, client) {
     // Save workitems data into a file
     fs.writeFile(fileName, fileContent, 'utf8', function(err) {
       if (err) {
-        console.log(r('Error writing test-data into file.'), err);
+        console.log(r('Error writing test-data into file.'));
+        throw err;
       }
 
       // Notify user we have finished the process
