@@ -3,21 +3,20 @@
 ///////////////////////////////////////////////////////////////////////
 // DGO
 
-"use strict";
 
-import React, { Component } from "react";
-import { Container, Col, Row } from "../../components/grid/";
-import ErrorBoundary from "../../components/error/ErrorBoundary";
-import {
-  StripeProvider,
-  Elements,
-  PaymentRequestButtonElement,
-  injectStripe
-} from "react-stripe-elements";
-import { StripeFormWrapper } from "../Partials";
-import "../../styles/maintenancepage.css";
 
-const config = require("../../../../../config/").init();
+'use strict';
+
+import React, { Component } from 'react';
+import { Container, Col, Row } from '../../components/grid/';
+import ErrorBoundary from '../../components/error/ErrorBoundary';
+import {StripeProvider, Elements, PaymentRequestButtonElement, injectStripe } from 'react-stripe-elements';
+import { StripeFormWrapper } from '../Partials';
+import '../../styles/maintenancepage.css';
+
+///                     ../../../../../ << WHAT?!?!
+const config = require('../../../../../config/').init();
+
 
 /// FUTURE - Send User object, and check if the user is in Stripe.
 export class BillingMaintenance extends Component {
