@@ -23,7 +23,8 @@
 			"user": "xio",
 			"password": "",
 			"name": "",
-			"uri": ""
+			"uri": "",
+			"description": "keys in this object are used in ./utils/backup-workitems-test-data.js to construct mLab uri. to back up, run npm run backup-wis"
 		}
 	},
 	"githubrepo": {
