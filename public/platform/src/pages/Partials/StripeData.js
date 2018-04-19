@@ -27,7 +27,7 @@ export const StripeData = ({ stripeCust, changeSource, removeSource }) => (
             ) : (
             <div className="stripe-source">
                 <h2>Card info</h2>
-                {stripeCust.sources.data.map((current, idx) => (
+                { stripeCust.sources.data.map((current, idx) => (
                     <table key={idx} className="">
                         <tbody>
                             <tr rowSpan='2'>

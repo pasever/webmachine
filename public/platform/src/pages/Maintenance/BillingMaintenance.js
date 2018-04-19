@@ -13,7 +13,7 @@ import {StripeProvider, Elements, PaymentRequestButtonElement, injectStripe } fr
 import { StripeFormWrapper } from '../Partials';
 import '../../styles/maintenancepage.css';
 
-
+///                     ../../../../../ << WHAT?!?!
 const config = require('../../../../../config/').init();
 
 
