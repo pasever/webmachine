@@ -58,7 +58,10 @@ const step1 = (config) => {
       const dbURI = config[0].uri + config[0].db
       mongoose.connect(dbURI)
       let dbc = mongoose.connection
-      Client.collection.drop()
+      Client.remove({}, function(e, removed){
+        if (e) console.log("Error removing test client documents")
+        console.log("Test Client Docs Removed " + removed.n)
+      })
       Client.create(testClients, (err, response) => {
           console.log(g('Clients Initialized: ' + dbc.name + ' at ' + dbc.host))
         // return array of new customer objects that were returned from db - used in step2

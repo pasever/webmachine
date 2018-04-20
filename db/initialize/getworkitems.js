@@ -14,8 +14,11 @@ const limit = 1;
 function getWorkitems (conn) {
       let Workitem = conn.model('Workitem', workitemObj.workitemSchema);
       // always drop the collection and refresh with test data
-      Workitem.collection.drop()
-      
+      Workitem.remove({}, function(e, removed){
+        if (e) console.log("Error removing test workitem documents")
+        console.log("Test Workitem Docs Removed " + removed.n)
+      })
+
       Workitem.find({}).limit(limit).exec(function (err, collection){
           if (collection.length === 0) {
             // iterate over the set of agents for initialization and create entries
