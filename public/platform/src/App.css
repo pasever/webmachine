@@ -27,6 +27,9 @@ body {
 .toggle, .set-default-src, .remove-src {
   cursor: pointer;
 }
+.fa {
+  text-shadow: 0 0 1px #eee;
+}
 .fa-toggle-on {
   color: green;
 }

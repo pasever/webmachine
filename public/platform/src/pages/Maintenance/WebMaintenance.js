@@ -48,7 +48,38 @@ export const WebMaintenance = ({ errors, text, user, onSubmit, updateFormField,i
             <div className="web-form-section light-shadow">
                 { text.getNetlify && user.web ? ( <p><i className="fa fa-info-circle"></i> { text.getNetlify }</p> ) : ("") }
                 { user.web === "" ? (
-                    <div>{ text.launchMessage ? ( <h2>{text.launchMessage }</h2>) : "" }</div>
+                    <div>{ text.launchMessage ? ( <h2>{text.launchMessage }</h2> ) : "" }
+                        <form >
+                            <Input
+                                value={user.siteData.callToAction}
+                                name="web"
+                                placeholder="Encourage your potential members"
+                                displayName="Call to action"
+                                type="text"
+                                onChange={updateFormField}
+                                classPrepend="fa fa-bullhorn"
+                            />
+                            <Input
+                                value={user.siteData.shortDescription}
+                                name="web"
+                                placeholder="Short description"
+                                displayName="Short description"
+                                type="text"
+                                onChange={updateFormField}
+                                classPrepend="fa fa-info"
+                            />
+                            <TextArea
+                                value={user.siteData.longDescription}
+                                name="description"
+                                onChange={updateFormField}
+                                displayName="Detailed description"
+                                cols={10}
+                                rows={3}
+                                byline="Write a detailed description of your partnership with Strategic Machines"
+                            />
+                                              
+                        </form>
+                    </div>
                 ) : "" }
             
             </div>
