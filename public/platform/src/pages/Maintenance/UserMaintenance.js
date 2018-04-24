@@ -94,7 +94,7 @@ export const UserMaintenance = ({ errors, text, user, onSubmit, updateFormField,
         {isSaving ? (
           <i className="fa fa-gear fa-spin fa-2x margin-top-10" />
         ) : (
-          <Button type="submit" text="Save" style="default" name="signup" />
+          <Button type="submit" text="Save" style="default" name="save" />
         )}
       </form>
     </div>

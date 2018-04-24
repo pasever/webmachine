@@ -79,7 +79,7 @@ export const DbMaintenance = ({ errors, text, user, onSubmit, updateFormField,is
         {isSaving ? (
           <i className="fa fa-spin fa-gear fa-2x margin-top-10" />
         ) : (
-          <Button type="submit" text="Save" style="default" name="signup" />
+          <Button type="submit" text="Save" style="default" name="save" />
         )}
       </form>
     </div>

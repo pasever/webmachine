@@ -18,7 +18,7 @@ const platformObject = {
         type: String,
         unique: true,
         required: true,
-        default: uuidv1(),
+        default: "",
     },
     firstName: {
         type: String,
@@ -131,6 +131,24 @@ const platformObject = {
         type: String,
         default: "",
     },
+    netlifySiteId: {
+        type: String,
+        default: "",
+    },
+    siteData: {
+        callToAction: {
+            type: String,
+            default: "",
+        },
+        shortDescription: {
+            type: String,
+            default: "",
+        },
+        longDescription: {
+            type: String,
+            default: "",
+        },
+    }
 
 }
 

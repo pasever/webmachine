@@ -12,7 +12,7 @@ import { MaintenanceHeader } from './pages/Partials/';
 import config from '../../../config';
 import {Container, Row, Col } from './components/grid';
 import ErrorBoundary from './components/error/ErrorBoundary';
-import MainWrapper  from './components/form/MainWrapper';
+import MaintenanceWrapper  from './pages/Maintenance/MaintenanceWrapper';
 import 'react-tabs/style/react-tabs.css';
 import './App.css';
 
@@ -110,7 +110,7 @@ export default class App extends Component {
                                     toggleSystem={this.toggleSystem} user={this.state.user} hasErrors={this.state.hasErrors } 
                                     headerText={this.state.pageData.header} deletePlatform={ this.deletePlatform } />
                                 { this.state.isSaved ? ( <span className="badge badge-success">Changes have been saved.</span>) : null }
-                                <MainWrapper user={this.state.user} pageData={this.state.pageData} />
+                                <MaintenanceWrapper user={this.state.user} pageData={this.state.pageData} />
                             </Row>
                         </Container>
                         </ErrorBoundary>
