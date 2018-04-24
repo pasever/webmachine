@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { UserMaintenance, DbMaintenance, BillingMaintenance } from '../../pages/Maintenance';
+import { UserMaintenance, DbMaintenance, 
+        BillingMaintenance, WebMaintenance } from './';
 import { Tab, TabPanel, Tabs, TabList } from 'react-tabs';
-import {Container, Row, Col } from '../grid';
+import {Container, Row, Col } from '../../components/grid';
 import API from '../../../utils/API';
 
 import 'react-tabs/style/react-tabs.css';
@@ -9,7 +10,7 @@ import '../../App.css';
 
 
 
-class MainWrapper extends Component {
+class MaintenanceWrapper extends Component {
 
     constructor(props) {
         super(props);
@@ -70,7 +71,8 @@ class MainWrapper extends Component {
                 <TabList>
                     <Tab>Organization</Tab>
                     <Tab>Database</Tab>
-                    <Tab>Billing</Tab>
+                    <Tab>Web</Tab>
+                    <Tab>Billing Info</Tab>
                 </TabList>
             
                 <TabPanel>
@@ -91,6 +93,14 @@ class MainWrapper extends Component {
                 </TabPanel>
                 <TabPanel>
                     <Col size="12">
+                        <WebMaintenance
+                            user={ this.state.user } updateFormField={ this.updateFormField } 
+                            onSubmit={ this.submitForm } errors={ this.state.errors }
+                            text={ this.state.pageData.web } isSaving={this.state.isSaving } />      
+                    </Col>
+                </TabPanel>
+                <TabPanel>
+                    <Col size="12">
                         <BillingMaintenance 
                             text={ this.state.pageData.billingMaintenance } 
                             user={ this.state.user } 
@@ -102,4 +112,4 @@ class MainWrapper extends Component {
     }    
 }
 
-export default MainWrapper;
+export default MaintenanceWrapper;

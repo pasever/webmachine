@@ -16,5 +16,11 @@
     },
     "header": {
         "deleteButton": "Remove my platform"
+    },
+    "web": {
+        "title": "Manage your web presence",
+        "welcomeBody": "If a website already exists which details your partnership with Strategic Machines, please enter it below.  Or, Strategic Machines can deploy a new website for you!",
+        "getNetlify": "If you have a site, but prefer to let Strategic Machines take over, remove the URL.  Be advised, once your site is deployed the URL will be overwritten.",
+        "launchMessage": "Let's Launch A Site!"
     }
 }
