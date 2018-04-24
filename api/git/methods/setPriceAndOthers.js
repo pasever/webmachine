@@ -4,11 +4,22 @@
 ////////        db interactions      ///////
 ///////////////////////////////////////////
 
-const moment =            require('moment');
-const { Workitem } =      require('../../../db/schemas/Workitem');
-const { r } =             require('../../../console');
+const moment              = require('moment');
+const mongoose            = require('mongoose');
+const { workitemSchema }  = require('../../../db/schemas/Workitem');
+const { r }               = require('../../../console');
 
 module.exports = async function(issues, repo) {
+  /*
+    * Refactoring needed here. URI ought the be received
+    * dynammically; CANNOT be hard coded, otherwise not really
+    * multi-tenant. URI needs to be of Client making the request.
+    * To determine which Client is making the request, we (probably)
+    * need to look at the session and/or request object.
+  * */
+  let connection = mongoose.createConnection("mongodb://auto:B0ston@ds157057.mlab.com:57057/client1");
+  let Workitem = connection.model('Workitem', workitemSchema);
+  
   // Get all workitems for repo from db
   let data = await Workitem.find({repo: repo}).lean();
   /*
