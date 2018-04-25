@@ -1,0 +1,4 @@
+node_modules/*
+workbacklog/
+configExample/
+npm-debug.log
