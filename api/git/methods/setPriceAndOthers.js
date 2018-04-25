@@ -16,6 +16,9 @@ module.exports = async function(issues, repo) {
     * multi-tenant. URI needs to be of Client making the request.
     * To determine which Client is making the request, we (probably)
     * need to look at the session and/or request object.
+    * 
+    * filter the client whose unique id matches;
+    * grab uri and connect on the fly
   * */
   let connection = mongoose.createConnection("mongodb://auto:B0ston@ds157057.mlab.com:57057/client1");
   let Workitem = connection.model('Workitem', workitemSchema);
