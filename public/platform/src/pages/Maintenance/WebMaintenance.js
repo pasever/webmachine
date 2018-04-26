@@ -8,6 +8,7 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "../../components/grid/";
 import { Input, TextArea, Button } from "../../components/form/";
+import { NetlifyDeploy } from '../Partials';
 import ErrorBoundary from "../../components/error/ErrorBoundary";
 import "../../styles/maintenancepage.css";
 
@@ -49,36 +50,7 @@ export const WebMaintenance = ({ errors, text, user, onSubmit, updateFormField,i
                 { text.getNetlify && user.web ? ( <p><i className="fa fa-info-circle"></i> { text.getNetlify }</p> ) : ("") }
                 { user.web === "" ? (
                     <div>{ text.launchMessage ? ( <h2>{text.launchMessage }</h2> ) : "" }
-                        <form >
-                            <Input
-                                value={user.siteData.callToAction}
-                                name="web"
-                                placeholder="Encourage your potential members"
-                                displayName="Call to action"
-                                type="text"
-                                onChange={updateFormField}
-                                classPrepend="fa fa-bullhorn"
-                            />
-                            <Input
-                                value={user.siteData.shortDescription}
-                                name="web"
-                                placeholder="Short description"
-                                displayName="Short description"
-                                type="text"
-                                onChange={updateFormField}
-                                classPrepend="fa fa-info"
-                            />
-                            <TextArea
-                                value={user.siteData.longDescription}
-                                name="description"
-                                onChange={updateFormField}
-                                displayName="Detailed description"
-                                cols={10}
-                                rows={3}
-                                byline="Write a detailed description of your partnership with Strategic Machines"
-                            />
-                                              
-                        </form>
+                        <NetlifyDeploy user={ user } />
                     </div>
                 ) : "" }
             
