@@ -70,6 +70,10 @@ class ChatWidget extends Component {
              .then(json => {
                this.db = json
                this.setState({  portfolioData: json  });
+<<<<<<< HEAD
+=======
+               console.log(this.state.portfolioData)
+>>>>>>> 62763d5c921e2e2059e6c35bfb384fd13f39f07f
             })
           }
           handleNewUserMessage = (newMessage) => {
@@ -134,6 +138,10 @@ class ChatWidget extends Component {
          componentDidMount(){
            this.getPortfolioData();
            addResponseMessage("Let's get started! Please enter your password");
+<<<<<<< HEAD
+=======
+           console.log('web app')
+>>>>>>> 62763d5c921e2e2059e6c35bfb384fd13f39f07f
          }
 
 

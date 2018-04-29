@@ -9,7 +9,11 @@ module.exports = {
     web: './public/web/src/index.js',
     home: './public/home/src/index.js',
     market: './public/market/src/index.js',
+<<<<<<< HEAD
     landing: './public/landing/src/index.js',
+=======
+    landing: './public/landing/src/index.js'
+>>>>>>> 62763d5c921e2e2059e6c35bfb384fd13f39f07f
     },
   module: {
     rules: [
