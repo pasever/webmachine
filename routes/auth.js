@@ -32,15 +32,19 @@ const auth = (router) => {
     if (test) {
       apiPath = '/github'
     }
+    test = apiPath.match(/platform/g);
+    if(test) apiPath = '/platform';
     console.log(req.url)
     console.log(apiPath)
     console.log(test)
 
 		switch(apiPath) {
 			case '/db/agent':
-			case '/db/client':
-      case '/github':
-				const token = req.get('Authorization')
+            case '/db/client':
+            case '/github':
+            case '/platform':
+                const token = req.get('Authorization')
+
 				if (token) {
 					req.token = token }
 			 	else {
@@ -125,6 +129,8 @@ const auth = (router) => {
   let platform = platformarray.filter((p) => p.isLive == productionState)
 
 	// find unique configuration from the array of authorized platform subscribers
+  // AUTH DISABLED FOR WEBMACHINES PENDING INTEGRATION OF AUTH0 process
+  /*
   let authToken = []
 
 	if (req.body.ChaoticSource == "sms") {
@@ -152,7 +158,7 @@ const auth = (router) => {
 	}
 	// db conection already made for strategic machines web site
 	// no dynamic assignment for web site unlike the messaging site
-
+  */
   next()
  })
 }

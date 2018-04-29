@@ -7,19 +7,19 @@ const FilterBy = ({ handleCriteriaChange, criteria }) => (
   >
     <button type="button" 
       onClick={() => handleCriteriaChange('open')}
-      className={`btn btn-secondary ${criteria === 'open' ? 'active' : ''}`}
+      className={`btn btn-light ${criteria === 'open' ? 'active' : ''}`}
     >
       Open
     </button>
     <button type="button"
       onClick={() => handleCriteriaChange('active')}
-      className={`btn btn-secondary ${criteria === 'active' ? 'active' : ''}`}
+      className={`btn btn-light ${criteria === 'active' ? 'active' : ''}`}
     >
       Assigned
     </button>
     <button type="button"
       onClick={() => handleCriteriaChange('closed')}
-      className={`btn btn-secondary ${criteria === 'closed' ? 'active' : ''}`}
+      className={`btn btn-light ${criteria === 'closed' ? 'active' : ''}`}
     >
       Closed
     </button>
