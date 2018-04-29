@@ -50,7 +50,7 @@ export const WebMaintenance = ({ errors, text, user, onSubmit, updateFormField,i
                 { text.getNetlify && user.web ? ( <p><i className="fa fa-info-circle"></i> { text.getNetlify }</p> ) : ("") }
                 { user.web === "" ? (
                     <div>{ text.launchMessage ? ( <h2>{text.launchMessage }</h2> ) : "" }
-                        <NetlifyDeploy user={ user } />
+                        <NetlifyDeploy user={ user } text={ text.netlifyDeploy }/>
                     </div>
                 ) : "" }
             

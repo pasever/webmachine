@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Story",
+        "folderLoc": "./templates/story",
+        "folderReplace": "templates/story/",
+        "imageLoc": "static/images/story.png",
+        "demoLoc": "https://html5up.net/story"
+    },
+    {
+        "name": "Forty",
+        "folderLoc": "./templates/forty",
+        "folderReplace": "templates/forty/",
+        "imageLoc": "static/images/forty.png",
+        "demoLoc": "https://html5up.net/forty"
+    }
+]

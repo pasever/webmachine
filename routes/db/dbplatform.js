@@ -6,6 +6,7 @@
 
 const bodyParser =  			require('body-parser')
 const pApi =         			require('../../api/platform')
+const nApi =                    require('../../api/platform/netlify');
 const { r, g, b } =             require('../../console');
 const dbplatform = (router) => {
 
@@ -79,7 +80,7 @@ const dbplatform = (router) => {
             next(err);
         }
 
-    })
+    });
     router.post('/setDefaultSource', (req, res, next) => {
         
         if(req.body.cId && req.body.sId) {
@@ -92,7 +93,7 @@ const dbplatform = (router) => {
             res.status(403).send(err.message);
             next(err);            
         }
-    }) 
+    }); 
     router.post('/removeSource', (req, res, next) => {
         if(req.body.cId && req.body.sId) {
             pApi.removeSource(req.token, req.body.cId, req.body.sId, req.conn, (response) => {
@@ -100,12 +101,23 @@ const dbplatform = (router) => {
                 res.status(200).send(response);
             })
         } else {
-            let err = new Error('Error Remove Stripe Source - Please Provide All Required Data');
+            let err = new Error('Error in Remove Stripe Source - Please Provide All Required Data');
             res.status(403).send(err.message);
             next(err);            
         }
     })
-
+    router.post('/netlify', (req, res, next) => {
+        if(req.body.client && req.body.templateData) {
+            nApi.deployNetlifySite(req.body.client, req.body.templateData).then(resp => {
+                console.log(g("Response --- ", resp));
+                res.status(200).send(resp);
+            }).catch(err => res.status(400).send(err));
+        } else {
+            let err = new Error('Error in deploying Netlify website -- Not enough information provided.');
+            res.status(403).send(err.message);
+            next(err);
+        }
+    })
 }
 
 module.exports = dbplatform;
