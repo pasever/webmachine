@@ -9,7 +9,7 @@ module.exports = {
     web: './public/web/src/index.js',
     home: './public/home/src/index.js',
     market: './public/market/src/index.js',
-    landing: './public/landing/src/index.js'
+    landing: './public/landing/src/index.js',
     },
   module: {
     rules: [

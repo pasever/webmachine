@@ -16,17 +16,31 @@ class Home extends Component {
     constructor(props){
       super(props);
       this.state = {
-        portfolioData: {}
+        portfolioData: {},
+        profile: {}
       }
     }
 
-   
+    
+   componentWillMount() {
+
+    
+    //this function returns the user information if they are logged in
+    this.setState({ profile: {} });
+    const { userProfile, getProfile } = this.props.auth;
+    if (!userProfile) {
+      getProfile((err, profile) => {
+        this.setState({ profile });
+      });
+    } else {
+      this.setState({ profile: userProfile });
+    }
+   }
     
 
+   //render each component of the home page
 render() {
 
-    
-    console.log("Props: " + this.props);
     return (
       <div>
       <div className="App">      

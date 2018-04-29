@@ -14,12 +14,6 @@ import Auth from './Pages/Auth/Auth';
 
 const auth = new Auth();
 
-const handleAuthentication = ({location}) => {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication();
-  }
-}
-//
 
 class App extends Component {
   constructor(props){
@@ -28,6 +22,8 @@ class App extends Component {
       portfolioData: {}
     }
   }
+
+//retrieve portfolio data object to fill page information
    getPortfolioData(){
      //Ajax request
      fetch(origin + '/home/static/portfolioData.json')
@@ -53,7 +49,7 @@ class App extends Component {
       <div>
       <div className="App">
         <Header data={this.state.portfolioData.main} auth={auth}/>
-        <Main data={this.state.portfolioData} auth={auth}/>
+        <Main data={this.state.portfolioData}/>
         
       </div>
     </div>

@@ -4,12 +4,8 @@ import history from '../Pages/Auth/History'
 
 
 class Header extends Component {
-
-  componentWillMount() {
-    console.log("Props Auth: " + this.props.auth)
-  }
   
-
+//including functions from auth0 for login/logout button rendering
 goTo(route) {
   this.props.history.replace(`/${route}`)
 }
@@ -35,6 +31,7 @@ logout() {
         });
     }
     return (
+      <div id="headerBackground">
       <header id="home">
       <nav id="nav-wrap">
          <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
@@ -75,7 +72,7 @@ logout() {
          </ul>
       </nav>
       </header>      
-
+    </div>
    
     );
   }

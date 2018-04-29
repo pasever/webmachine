@@ -3,7 +3,9 @@ import Market from '../../../market/src/App';
 import ChatWidget                 from '../Component/Widget';
 import Footer                 from '../Component/Footer';
 import Header                 from '../Component/Header';
-import "../App.css"
+import "../../../market/src/App.css"
+
+//this component renders the market page acquired from public/market/src/app
 
 class MarketPage extends Component {
     constructor(props){

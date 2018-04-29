@@ -82,6 +82,10 @@ header .banner-text hr {
    border-color: rgba(150, 150, 150, .1);
 }
 
+#headerBackground {
+  background-color: #fff;
+}
+
 /* navbar */ 
 #home {
   max-width: 900px;
