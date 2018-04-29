@@ -4,7 +4,8 @@ const config = require('../../../config').init();
 
 export default {
     getAuthorizedPlatform: () => {
-        return axios.get('/api/db/platform?cid=' + localStorage.clientId );
+        return axios.get('/api/db/platform?cid=' + localStorage.clientId
+    );
         
     },
     addPlatform: (platform) => {
@@ -20,16 +21,13 @@ export default {
     addSourceToCustomer: (customerId, sourceId) => {
         return axios.post('/api/db/platform/addStripeSource', { cId: customerId, sId: sourceId });
     },
-    generateNetlify: (platform) => {
-        const options = {
-            method: 'POST',
-            url: 'https://app.netlify.com/authorize/sites'
-        }
-    },
     setDefaultSource: (customerId, sourceId) => {
         return axios.post('/api/db/platform/setDefaultSource', { cId: customerId, sId: sourceId });
     },
     removeSource: (customerId, sourceId) => {
         return axios.post('/api/db/platform/removeSource', { cId: customerId, sId: sourceId });
-    }
+    },
+    deployNetlify: (client, templateData) => {
+        return axios.post('/api/db/platform/netlify', { client: client, templateData: templateData });
+    },
 }

@@ -11,6 +11,7 @@ import LoadingPage from './pages/LoadingPage';
 import { MaintenanceHeader } from './pages/Partials/';
 import config from '../../../config';
 import {Container, Row, Col } from './components/grid';
+import { Link } from 'react-router-dom';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import MaintenanceWrapper  from './pages/Maintenance/MaintenanceWrapper';
 import 'react-tabs/style/react-tabs.css';
@@ -97,7 +98,7 @@ export default class App extends Component {
                 ) : (
                 
                 <div>
-                    
+                    <a href="/market">MARKET!!!</a>
                     <header className="app-header">
                         <h1 className="header-title">{ this.state.pageData.main.title }</h1>
                     </header>
