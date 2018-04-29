@@ -23,20 +23,21 @@ const auth = (router) => {
 	router.use('/api', function(req, res, next) {
 
 		console.log("-------------AUTHORIZATION-------------")
-    // REFACTOR
+        // REFACTOR
 		// inspect http api calls being made
 		// platform will assign temporary auth token
-    let test = undefined
-    let apiPath = req.url
-    test = apiPath.match(/github/g)
-    if (test) {
-      apiPath = '/github'
-    }
-    test = apiPath.match(/platform/g);
-    if(test) apiPath = '/platform';
-    console.log(req.url)
-    console.log(apiPath)
-    console.log(test)
+        let test = undefined
+        let apiPath = req.url
+
+        test = apiPath.match(/github/g)
+        if (test) {
+        apiPath = '/github'
+        }
+        test = apiPath.match(/platform/g);
+        if(test) apiPath = '/platform';
+        console.log(req.url)
+        console.log(apiPath)
+        console.log(test)
 
 		switch(apiPath) {
 			case '/db/agent':

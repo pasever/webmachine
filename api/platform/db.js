@@ -116,8 +116,8 @@ exports.putPlatform = (platform) => {
 
 // Updates a platform
 exports.updatePlatform = (platform) => {
-    // Checks if we can connect to the database provided
     return new Promise((resolve, reject) => {
+        // Checks if we can connect to the database provided
         testDb(platform).then(resp => { 
             // Assigns the returned boolean to dbConnected
             platform.dbConnected = resp;
