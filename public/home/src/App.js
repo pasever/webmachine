@@ -48,7 +48,7 @@ class App extends Component {
       <div className="App">
         <Header data={this.state.portfolioData.main} auth={auth}/>
         <Main data={this.state.portfolioData}/>
-        
+        <Footer/>
       </div>
     </div>
     );

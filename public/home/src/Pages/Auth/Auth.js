@@ -3,12 +3,13 @@ import history from './History';
 import auth0 from 'auth0-js';
 import {Redirect} from 'react-router-dom';
 
+const config = require("../../../../../config").init();
 
 //set up auth0 configuration
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'machines.auth0.com',
-    clientID: '2TaeX3bxJKAXWZi5ZSxX5BQi1ugnbRHw',
+    clientID: config.auth0.clientID,
     redirectUri: 'http://localhost:3000/',
     audience: 'https://machines.auth0.com/userinfo',
     responseType: 'token id_token',

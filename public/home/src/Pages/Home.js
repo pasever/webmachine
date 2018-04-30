@@ -51,7 +51,6 @@ render() {
         <Portfolio data={this.props.data.portfolio} />
         <Testimonials  data={this.props.data.testimonials} />
         <Contact data={this.props.data.main} />
-        <Footer />
       </div>
         <ChatWidget />
     </div>
