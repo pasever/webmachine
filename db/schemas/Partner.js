@@ -8,20 +8,12 @@ const mongoose = require("mongoose");
 const uuidv1 =  require('uuid/v1')
 const Schema = mongoose.Schema;
 
-// notes:
-// refactor - areas to explore include capturing github auth data, auth via cell,
-// management of workitems, payments data info
-// need to identify some unique identifier for each partner
+
+// REFACTOR - EXPLORE MONGOOSE POPULATE TO SYNC WITH MEMBER COLLECTION
 
 const partnerObject = {
   firstname: String,
   lastname: String,
-  image: String,
-  addr1: String,
-  addr2: String,
-  city: String,
-  state: String,
-  zip: String,
   github: Object,
   competencies: Array,
   payments: Object,
@@ -33,12 +25,8 @@ const partnerObject = {
     archived: Array,
     abandoned: Array,
     escalations: Array
-  },
-  cell: String,
-  email: String,
+  },  
   ssn: String,
-  isAuthenticated: { type: Boolean, default: false },
-  isActive: { type: Boolean, default: true },
   joindate: { type: Date, default: Date.now },
   inactivedate: Date,
   postdate: { type: Date, default: Date.now },

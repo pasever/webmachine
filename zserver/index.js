@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 const express =            require('express');
+const expressValidator =   require('express-validator');
 const path =               require('path');
 const bodyParser =         require('body-parser');
 const cors =               require('cors')
@@ -13,7 +14,6 @@ const favicon =            require('serve-favicon');
 const logger =             require("morgan");
 const api =                require("../api")
 const keys =               require('../config').init();
-const platform =           require('../config').platform()
 const transport =          require('../config/gmail')
 
 const { g, b, gr, r, y } = require('../console');
@@ -21,10 +21,14 @@ const { g, b, gr, r, y } = require('../console');
 const app =   express();;
 
 //////////////////////////////////////////////////////////////////////////
-////////////////// db config to capture messages   //////////////////////
+/////////////    Seed test data if test env detected          ///////////
 ////////////////////////////////////////////////////////////////////////
 
-require('../db/mongoose')(platform)
+let envState = true
+if ( process.env.isLive == 'false' ) {
+    envState = false
+    require('../db/seedTestDb')(envState)
+  }
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////////  Register Middleware       /////////////////////////
@@ -32,6 +36,7 @@ require('../db/mongoose')(platform)
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(expressValidator());
 app.use(express.static('public'));
 app.use('/dist', express.static('public'));
 app.use('/form', express.static('public'));
@@ -41,6 +46,7 @@ app.use('/member', express.static('public'));
 //app.use('/web', express.static('public'));
 app.use('/', express.static('public/home'));
 app.use('/landing', express.static('public'));
+app.use('/platform', express.static('public'));
 app.use(favicon(path.join(__dirname, '..', '/public/assets/favicon.ico')));
 app.use(cors())
 
@@ -50,7 +56,7 @@ app.use(cors())
 
 const mailObject = {
   from: '"ChaoticBots 👥" <chaoticbotshelp@gmail.com>',
-  to: 'patrick.howard@hotmail.com',
+  to: 'dangorlov@yahoo.com',
   subject: 'Platform Error',
   text: ''
 }

@@ -11,6 +11,7 @@ import { Switch, Route }      from 'react-router-dom'
 import ChatWidget                 from '../Component/Widget';
 import Auth from './Auth/Auth';
 
+const auth = new Auth();
 
 class Home extends Component {
     constructor(props){
@@ -44,7 +45,7 @@ render() {
     return (
       <div>
       <div className="App">      
-        <Jumbotron data={this.props.data.main} />
+        <Jumbotron data={this.props.data.main} auth={auth}/>
         <About data={this.props.data.main} />
         <Market data={this.props.data.market} />
         <Portfolio data={this.props.data.portfolio} />

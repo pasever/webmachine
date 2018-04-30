@@ -1,12 +1,14 @@
+'use strict';
 
+//////////////////////////////////////////////////////
+////////            github interactions       ///////
+////////////////////////////////////////////////////
 
-
-const GitHubAPI =           require('github');
+const github =              require('@octokit/rest')();
 const getIssues =           require('./getIssuesForRepo');
 const cleanUp =             require('./cleanUpObj');
 const traverse =            require('./traverse');
-// require('dotenv').load();
-const github = new GitHubAPI();
+
 const { githubrepo } =      require('../../../config').init();
 
 github.authenticate({
@@ -46,8 +48,8 @@ async function getReposForUser(username, per_page = 100) {
     }
 
      // Only keep repositories that have issues
-     repos = repos.filter(repo => repo.open_issues_count !== 0);
-     console.log(`${repos.length} repos left after filtering out ones without issues`);
+    //  repos = repos.filter(repo => repo.open_issues_count !== 0);
+    //  console.log(`${repos.length} repos left after filtering out ones without issues`);
      // Remove excess data from repo objects
      repos = repos.map(repo => cleanUp(repo));
      return repos;
