@@ -4,7 +4,7 @@ import Home from './Home'
 import About from './About'
 import Agents from './Agents'
 import Blog from './Blog'
-import MarketPage from './Market'
+import MarketPage from '../../../market/src/App';
 import Pricing from './Pricing'
 import Products from './Products'
 import Register from './Registration'
