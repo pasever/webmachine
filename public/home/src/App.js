@@ -31,7 +31,6 @@ class App extends Component {
       .then(json => {
         this.db = json
         this.setState({  portfolioData: json  });
-        console.log(this.state.portfolioData)
      })
    }
 
@@ -44,7 +43,6 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state.portfolioData);
     return (
       <div>
       <div className="App">

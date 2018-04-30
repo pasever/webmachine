@@ -59,15 +59,14 @@ logout() {
             |
             {
                 !isAuthenticated() && (
-                  <li><a className="smoothscroll" href="#" onClick={this.login.bind(this)}>Log In</a></li>
+                  <li><a className="smoothscroll" id="signup" href="#" onClick={this.login.bind(this)}>Log In</a></li>
                   )
               }
               {
                 isAuthenticated() && (
-                  <li><a className="smoothscroll" href="#" onClick={this.logout.bind(this)}>Log Out</a></li>
+                  <li><a className="smoothscroll" id="signup" href="#" onClick={this.logout.bind(this)}>Log Out</a></li>
                   )
               }
-            <Link to='/registration'><li><a className="smoothscroll" id="signup" href="#">Sign Up</a></li></Link>
             </div>
          </ul>
       </nav>

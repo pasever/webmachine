@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import auth0 from 'auth0-js';
 
 class Jumbotron extends Component {
+
+  auth0 = new auth0.WebAuth({
+    domain: 'machines.auth0.com',
+    clientID: '2TaeX3bxJKAXWZi5ZSxX5BQi1ugnbRHw',
+    redirectUri: 'http://localhost:3000/',
+    audience: 'https://machines.auth0.com/userinfo',
+    responseType: 'token id_token',
+    scope: 'openid profile user_metadata',
+  });
+  
+  login() {
+    this.auth0.authorize();
+  }
+
   render() {
     if(this.props.data){
         var name = this.props.data.name;
@@ -22,7 +36,7 @@ class Jumbotron extends Component {
             <hr />
             <aside>
             <p className="scrolldown">
-            <Link to='/login'><span className="smoothscroll button" id="getStarted" href="#about"><b>Get Started</b></span></Link>
+            <span className="smoothscroll button" id="getStarted" href="#about" onClick={this.login.bind(this)}><b>Get Started</b></span>
             </p>
             </aside>
          </div>
