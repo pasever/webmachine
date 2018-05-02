@@ -19,6 +19,7 @@ function getAgents (conn) {
           console.log("Test Agent Docs Removed " + removed.n)
         })
 
+
       Agent.find({}).limit(limit).exec(function (err, collection){
           if (collection.length === 0) {
             // iterate over the set of agents for initialization and create entries
