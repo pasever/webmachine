@@ -10,7 +10,8 @@ module.exports = {
     home: './public/home/src/index.js',
     market: './public/market/src/index.js',
     landing: './public/landing/src/index.js',
-    platform: './public/platform/src/index.js'
+    platform: './public/platform/src/index.js',
+    agents: './public/agents/src/index.js'
     },
     devtool: 'source-map',
   module: {
