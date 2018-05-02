@@ -28,7 +28,7 @@
 		}
 	},
 	"githubrepo": {
-		"reponame": "test",
+	"reponame": "test",
     "token": "",
     "repos_url": "/api/github/repos/strategicmarket",
     "issues_url": "/api/github/issues/strategicmarket",
