@@ -8,7 +8,7 @@
 const api = require('../../api/git/index');
 
 const repos = (router) => {
-  // Fetches all repositories, WITH ISSUES, of a specified user.
+  // Fetches all repositories of the specified github user.
   router.get('/:username', (req, res, next) => {    
     let username = req.params.username;
     api.getReposForUser(username).then(function(repos) {
