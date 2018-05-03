@@ -1,102 +1,120 @@
 ////////////////////////////////////////////////////
-//////    Platform wrapper for DB functions    /////
+//////    Client wrapper for DB functions    /////
 ////////////////////////////////////////////////////
+/// DGO - 04/30/18 - REFACTOR 0.7
+/// Accompanying INDEX file for the DB.JS
 
 const clone =           require('clone-deep')
 const uuidv1 =          require('uuid/v1')
 const db =              require('./db')
-const { r, g } =           require('../../console');
+const { r, g } =        require('../../console');
 
-// Gets all platforms
-exports.getPlatforms = (token, conn, cb) => {
+// Gets all clients
+exports.getClients = (token, conn, cb) => {
     thread(conn).then((result) => {
         cb(result);
     }).catch((err) => {
-        console.log("ERROR IN GET Platforms PROCESSING");
+        console.log("ERROR IN GET Clientss PROCESSING");
         console.log(err);
         cb(err);
     });
     async function thread(conn) {
-        let result = await db.getPlatforms(conn);
+        let result = await db.getClients(conn);
         return result;
     }
 }
 
 
-// Gets a single platform by id
-exports.getPlatform = (token, id, conn, cb) => {
+// Gets a single client by id
+exports.getClient = (token, id, conn, cb) => {
     thread(conn).then((result) => {
         cb(result);
     }).catch((err) => {
-        console.log("ERROR IN GET Platform PROCESSING");
+        console.log("ERROR IN GET Client PROCESSING");
         console.log(err);
         cb(err);
     });
     async function thread(conn) {
-        let result = await db.getPlatform(id, conn);
+        let result = await db.getClient(id, conn);
         return result;
     }
 }
 
-// Gets a single platform by profile id
-exports.getPlatformByCId = (token, cid, conn, cb) => {
+// Gets a/many client(s) by AuthO accessId
+exports.getClientByAccessId = (token, accessId, conn, cb) => {
     thread(conn).then((result) => {
         cb(result);
     }).catch((err) => {
-        console.log("ERROR IN GET Platform PROCESSING");
+        console.log("ERROR IN GET Client PROCESSING");
         console.log(err);
         cb(err);
     });
     async function thread(conn) {
-        let result = await db.getPlatformByCId(cid, conn);
+        let result = await db.getClientByAccessId(accessId, conn);
         return result;
     }
 }
   
-// Adds a platform to the db
-exports.addPlatform = (token, platform, conn, cb) => {
-    platform.id = uuidv1();
-    thread(platform, conn).then((result) => {
+// Adds a client to the db
+exports.addClient = (token, client, conn, cb) => {
+    client.id = uuidv1();
+    thread(client, conn).then((result) => {
         cb(result)
     }).catch((err) => {
-        console.log(r("ERROR IN Add Platform PROCESSING"))
+        console.log(r("ERROR IN Add Client PROCESSING"))
         console.log(err)
         cb(err);
     });
     // async await function to drive synchronous processing of db update
-    async function thread(platform, conn) {
-        let result = await db.putPlatform(platform, conn)
+    async function thread(client, conn) {
+        let result = await db.putClient(client, conn)
         return result
     }
 }
 
-// Updates a platform
-exports.updatePlatform = (token, platform, conn, cb) => {
-    thread(platform, conn).then((result) => {
+
+// Gets clients who are operating a public network.
+exports.getPublicClients = (token, conn, cb) => {
+    thread(conn).then(result => {
+        cb(result);
+    }).catch(err => {
+        console.log("ERROR IN getPublicClients PROCESSING");
+        console.log(err);
+        cb(err);
+    });
+    async function thread(conn) {
+        let result = await db.getPublicClients(conn);
+        return result;
+    }
+}
+
+// Updates a client
+exports.updateClient = (token, client, conn, cb) => {
+    thread(client, conn).then((result) => {
         cb(result);
     }).catch((err) => {
-        console.log("ERROR IN updatePlatform PROCESSING")
+        console.log("ERROR IN updateClient PROCESSING")
         console.log(err);
         cb(err);
     })
-    async function thread(platform, conn) {
-        let result = await db.updatePlatform(platform, conn);
+    async function thread(client, conn) {
+        let result = await db.updateClient(client, conn);
         return result;
     }
 }
 
 
-// Deletes a platform
-exports.deletePlatform = (token, id, conn, cb) => {
+// Soft-Deletes a client
+exports.deleteClient = (token, id, conn, cb) => {
     thread(id, conn).then((result) => {
         cb(result);
     }).catch((err) => {
-        console.log("ERROR IN DELETE Platform PROCESSING");
+        console.log("ERROR IN DELETE Client PROCESSING");
         console.log(err);
         cb(err);
     })
     async function thread(id, conn) {
-        let result = await db.deletePlatform(id, conn)
+        let result = await db.deleteClient(id, conn)
         return result
     }
 }
@@ -106,7 +124,7 @@ exports.addStripeSource = (token, cId, sId, conn, cb) => {
     thread(cId, sId, conn).then((result) => {
         cb(result);
     }).catch((err) => {
-        console.log("ERROR IN StripeSource Platform PROCESSING");
+        console.log("ERROR IN StripeSource Client PROCESSING");
         console.log(err);
         cb(err);
     })
@@ -120,7 +138,7 @@ exports.setDefaultSource = (token, cId, sId, conn, cb) => {
     thread(cId, sId, conn).then((result) => {
         cb(result);
     }).catch((err) => {
-        console.log("ERROR IN Stripe Set Source Platform PROCESSING");
+        console.log("ERROR IN Stripe Set Source Client PROCESSING");
         console.log(err);
         cb(err);
     })
@@ -134,7 +152,7 @@ exports.removeSource = (token, cId, sId, conn, cb) => {
     thread(cId, sId, conn).then((result) => {
         cb(result);
     }).catch((err) => {
-        console.log("ERROR IN Stripe Remove Source Platform PROCESSING");
+        console.log("ERROR IN Stripe Remove Source Client PROCESSING");
         console.log(err);
         cb(err);        
     })

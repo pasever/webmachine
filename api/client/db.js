@@ -1,21 +1,21 @@
 //////////////////////////////////////////////////////
-//////           platform CRUD DB Ops          ///////
+//////           Client CRUD DB Ops            ///////
 //////////////////////////////////////////////////////
 // DGO - 03/19/18
-
+// DGO - 04/30/18  - REFACTOR for 0.7  RENAMING INSTANCES OF PLATFORM TO CLIENT.  ADDED ACCESS_ID RETRIEVAL.
 'use strict';
 
 const MongoClient = require('mongodb').MongoClient;
-const { Platform } = require('../../db/schemas/Platform');
+const { Client } = require('../../db/schemas/Client');
 const {r,g,y,b} = require('../../console');
 
 const config = require('../../config').init();
 const stripe = require('stripe')(config.stripe.secretKey);
 
 /// TESTS IF WE CAN CONNECT TO THE MONGODB SERVER
-const testDb = (platform) => {
+const testDb = (client) => {
     //  Assign a new mongo client
-    let client = new MongoClient(platform.uri);
+    let client = new MongoClient(client.uri);
     return new Promise((resolve, reject) => { 
         /// Attempts to connect
         client.connect((error, client) => {
@@ -30,104 +30,116 @@ const testDb = (platform) => {
     });
 }
 
-/// Gets all platforms in the DB Collection
-exports.getPlatforms = () => {
+/// Gets all Clients in the DB Collection
+/// IMPORTANT TO NOTE THIS WILL ONLY GET ACTIVE CLIENTS.  THERE IS ANOTHER CALL TO GET ALL CLIENTS
+exports.getClients = () => {
     return new Promise((resolve, reject) => {
-        Platform.find({}, (err, response) => {
+        Client.find({ isActivated: true }, (err, response) => {
             if (err) {
-                if (err.error !== 'not_found') {
+                if (err.error !== 'not_found') 
                     resolve(err)
-                } else {
+                else 
                     reject(err)
-                }
             };
             resolve(response);
         });
     })  
 }
 
-// Gets platform by id
-exports.getPlatform = (id) => {
+exports.getPublicClients = () => {
     return new Promise((resolve, reject) => {
-        Platform.find({ where: { id: id }}, (err, response) => {
+        Client.find({ isPrivate: false, isActivated: true }, (err, response) => {
             if(err) {
-                if(err.error !== 'not_found') {
-                    resolve(err);
-                } else {
+                if(err.error !== 'not_found') 
+                    resolve(err)
+                else
                     reject(err);
-                }
             }
             resolve(response);
         })
     })
 }
 
-// Gets platform by Client Id
-exports.getPlatformByCId = (cId) => {
+// Gets Client by id
+exports.getClient = (id) => {
     return new Promise((resolve, reject) => {
-        Platform.find({ clientId: cId }).lean().then(response => {
+        Client.find({ where: { id: id }}, (err, response) => {
+            if(err) {
+                if(err.error !== 'not_found') 
+                    resolve(err);
+                else 
+                    reject(err);
+            }
+            resolve(response);
+        })
+    })
+}
+
+// Gets Client(s) by Auth Access Id
+exports.getClientByAccessId = (aId) => {
+    return new Promise((resolve, reject) => {
+        Client.find({ accessId: aId }).lean().then(response => {
             let user = response[0];
             stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {                
-                if(err) {
+                if(err) 
                     user["stripeCustomer"] = null;
-                } else {
+                else 
                     user["stripeCustomer"] = stripeCust;
-                }
                 resolve(user);
             })
         }).catch(err => {
             if(err) {
-                if(err.error !== 'not_found') {
+                if(err.error !== 'not_found') 
                     resolve(err);
-                } else {
+                else
                     reject(err);
-                }
             }
         })
     })
 }
 
-// Adds a platform to the DB
-exports.putPlatform = (platform) => {
-    // Creates a new platform from the Mongo Schema
-    let p = new Platform(platform);
+// Adds a client to the DB
+exports.putClient = (client) => {
+    // Creates a new client from the Mongo Schema
+    let c = new Platform(client);
     // Checks if we can connect to the DB provided
     return new Promise((resolve, reject) => {
-        testDb(platform).then(resp => { 
+        testDb(client).then(resp => { 
             // Assign the boolean response to dbConnected
-            p.dbConnected = resp;
+            c.dbConnected = resp;
             stripe.customers.create({
-                email: p.email,
+                email: c.email,
                 account_balance: 0,
-                description: p.description,
+                description: c.description,
             }, (err, customer) => {
                 if(err) {
                     console.log(r("Error when creating Stripe customer.  Bailing."));
                     console.log(err);
                 }
-                p.stripeCustomerId = customer.id;
-                p.save().then(response => {
-                    resolve(p)
+                c.stripeCustomerId = customer.id;
+                c.save().then(response => {
+                    resolve(c)
                 }).catch(err => reject(err));
             })
         })
     })
 }
 
-// Updates a platform
-exports.updatePlatform = (platform) => {
+// Updates a client
+exports.updateClient = (client) => {
     return new Promise((resolve, reject) => {
         // Checks if we can connect to the database provided
-        testDb(platform).then(resp => { 
+        testDb(client).then(resp => { 
             // Assigns the returned boolean to dbConnected
-            platform.dbConnected = resp;
-            Platform.findOneAndUpdate({ id: platform.id }, platform, {upsert: true, new: true}).lean().then(user => {
-                stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {       
-                    if(err) {
-                        user["stripeCustomer"] = null;
-                    } else {
-                        user["stripeCustomer"] = stripeCust;
-                    }
+            client.dbConnected = resp;
+            // Finds the Client by ID, and performs an UPSERT.  LEAN() is used to attach new objects to the Schema.
+            Client.findOneAndUpdate({ id: client.id }, client, {upsert: true, new: true}).lean().then(respClient => {
+                // Try and retrieve Stripe's data.
+                stripe.customers.retrieve(respClient.stripeCustomerId, (err, stripeCust) => {       
+                    if(err) 
+                        respClient["stripeCustomer"] = null;
+                    else 
+                        respClient["stripeCustomer"] = stripeCust;
                     resolve(user);
                 }).catch(err => resolve(user));
             }).catch(err => reject(err));
@@ -136,9 +148,9 @@ exports.updatePlatform = (platform) => {
 }
 
 // Deletes a platform.  SOFTDELETE only - flags isDeleted to TRUE
-exports.deletePlatform = (id) => {
+exports.deleteClient = (id) => {
     return new Promise((resolve, reject) => {
-        Platform.findOneAndUpdate({id: id}, { $set:{ isDeleted: true }}, { new: true }, (err, response) => {
+        Client.findOneAndUpdate({id: id}, { $set:{ isDeleted: true }}, { new: true }, (err, response) => {
             if (err) {
                 if (err.error !== 'not_found') {
                     resolve(err)
@@ -180,7 +192,6 @@ exports.removeSource = (cId, sId) => {
     return new Promise((resolve, reject) => {
         stripe.customers.deleteSource(cId, sId).then(response => { 
             stripe.customers.retrieve(cId, (err, stripeCust) => {
-                
                 resolve(stripeCust);
             })
         }).catch(err => reject(err));
