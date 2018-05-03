@@ -43,7 +43,6 @@ app.use('/form', express.static('public'));
 app.use('/machine', express.static('public'));
 app.use('/market', express.static('public'));
 app.use('/member', express.static('public'));
-//app.use('/web', express.static('public'));
 app.use('/', express.static('public/home'));
 app.use('/landing', express.static('public'));
 app.use('/platform', express.static('public'));

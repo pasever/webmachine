@@ -88,16 +88,9 @@
 		"clientId": "",
 		"secret": ""
 	},
-<<<<<<< HEAD
   "auth0": {
     "clientID": ""
   },
-=======
-	"auth0": { 
-		"clientID": ""
-	  },
-
->>>>>>> latest
 	"port": 3000,
 	"token": ""
 }
