@@ -5,7 +5,7 @@
 const clone =           require('clone-deep')
 const uuidv1 =          require('uuid/v1')
 const db =              require('./db')
-const { r, g } =           require('../../console');
+const { r, g } =        require('../../console');
 
 // Gets all platforms
 exports.getPlatforms = (token, conn, cb) => {
