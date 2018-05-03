@@ -12,8 +12,8 @@ import IssuesPage                   from './components/IssuesPage';
 const routes = () => (
   <Router>
     <Switch>
-      <Route exact path='/market' component={ReposPage}/>
-      <Route path='/:user/:repo/issues' component={IssuesPage}/>
+      <Route exact path='/market'         component={ReposPage} />
+      <Route path='/:user/:repo/issues'   component={IssuesPage} />
     </Switch>
   </Router>
 );
