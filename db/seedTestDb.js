@@ -20,6 +20,18 @@ let options = {
 };
 
 
+// creating a collection of Agents from agents.js  so Agents Cards can be displayed 
+// this is a temporary workaround to an issue with agent test-data insertion
+// comment left by Evgheni on May 1 (lines 23 - 31)
+const Agent = require('./schemas/Agent').Agent;
+const testAgents = require('./data/agents');
+
+Agent.create(testAgents, (err, response) => {
+console.log(response);
+});
+
+
+
 // initializes db and collections for test environment
 // platform contains the uri for physical database with test client collection
 module.exports = function (envState) {
@@ -58,7 +70,10 @@ const step1 = (config) => {
       const dbURI = config[0].uri + config[0].db
       mongoose.connect(dbURI)
       let dbc = mongoose.connection
-      Client.collection.drop()
+      Client.remove({}, function(e, removed){
+        if (e) console.log("Error removing test client documents")
+        console.log("Test Client Docs Removed " + removed.n)
+      })
       Client.create(testClients, (err, response) => {
           console.log(g('Clients Initialized: ' + dbc.name + ' at ' + dbc.host))
         // return array of new customer objects that were returned from db - used in step2

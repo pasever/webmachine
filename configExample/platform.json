@@ -5,8 +5,9 @@
 		"location": "urbancoder account",
 		"db": "machines",
 		"uri": "",
-		"username": "",
+		"username": "mongodb://localhost:27017/",
 		"password": "",
+		"webpassword": "demo",
 		"isLive": false
 	},
 	{
@@ -15,8 +16,9 @@
 		"location": "urbancoder account",
 		"db": "machines",
 		"uri": "",
-		"username": "",
+		"username": "mongodb://localhost:27017/",
 		"password": "",
+		"webpassword": "demo",
 		"isLive": true
 	}
 
