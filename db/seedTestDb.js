@@ -20,6 +20,18 @@ let options = {
 };
 
 
+// creating a collection of Agents from agents.js  so Agents Cards can be displayed 
+// this is a temporary workaround to an issue with agent test-data insertion
+// comment left by Evgheni on May 1 (lines 23 - 31)
+const Agent = require('./schemas/Agent').Agent;
+const testAgents = require('./data/agents');
+
+Agent.create(testAgents, (err, response) => {
+console.log(response);
+});
+
+
+
 // initializes db and collections for test environment
 // platform contains the uri for physical database with test client collection
 module.exports = function (envState) {

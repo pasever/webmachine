@@ -28,7 +28,7 @@
 		}
 	},
 	"githubrepo": {
-		"reponame": "test",
+	"reponame": "test",
     "token": "",
     "repos_url": "/api/github/repos/strategicmarket",
     "issues_url": "/api/github/issues/strategicmarket",
@@ -88,9 +88,16 @@
 		"clientId": "",
 		"secret": ""
 	},
+<<<<<<< HEAD
   "auth0": {
     "clientID": ""
   },
+=======
+	"auth0": { 
+		"clientID": ""
+	  },
+
+>>>>>>> latest
 	"port": 3000,
 	"token": ""
 }
