@@ -12,14 +12,6 @@ const Schema = mongoose.Schema;
 
 const platformObject = {
     
-    //// SHOULD NAME BE FORCED TO BE UNIQUE?
-    // Org name
-    name: {
-        type: String,
-        unique: true,
-        required: true,
-        default: "",
-    },
     firstName: {
         type: String,
         default: "",
@@ -33,18 +25,6 @@ const platformObject = {
         default: "",
     },
     addressLine2: {
-        type: String,
-        default: "",
-    },
-    city: {
-        type: String,
-        default: "",
-    },
-    state: {
-        type: String,
-        default: "",
-    },
-    zip: {
         type: String,
         default: "",
     },

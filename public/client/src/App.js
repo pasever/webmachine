@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-////////////////////      Platform APP.JS      ////////////////////////
+////////////////////      Client APP.JS        ////////////////////////
 ///////////////////////////////////////////////////////////////////////
 // DGO
 
@@ -9,7 +9,6 @@ import React, { Component } from 'react';
 import API from '../utils/API';
 import LoadingPage from './pages/LoadingPage';
 import { MaintenanceHeader } from './pages/Partials/';
-import config from '../../../config';
 import {Container, Row, Col } from './components/grid';
 import { Link } from 'react-router-dom';
 import ErrorBoundary from './components/error/ErrorBoundary';
@@ -18,7 +17,8 @@ import 'react-tabs/style/react-tabs.css';
 import './App.css';
 
 //////// DEFAULT PLATFORM
-const Platform = require('../../../config/').platform();
+// Deprecated 04/30/18 for REFACTOR 0.7
+//const Platform = require('../../../config/').platform();
 
 
 // The APP class is currently the main hub for the platform.
@@ -98,7 +98,6 @@ export default class App extends Component {
                 ) : (
                 
                 <div>
-                    <a href="/market">MARKET!!!</a>
                     <header className="app-header">
                         <h1 className="header-title">{ this.state.pageData.main.title }</h1>
                     </header>
