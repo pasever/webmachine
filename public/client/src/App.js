@@ -33,6 +33,7 @@ export default class App extends Component {
             user:  null,            //  should be passed in the response from Authorization
             pageData: null,         //  page data object
             hasErrors: false,       //  flags if we should display a message about errors
+            noBusiness: false,
         };
     }
     
@@ -56,12 +57,10 @@ export default class App extends Component {
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, user]).then(values => {
             let user = values[1];
-            console.log(values[0]);
+            
             /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
             if(Object.keys(user.data).length === 0) {
-                API.addPlatform(Platform[0]).then(resp => {
-                    this.setState({pageData: values[0], user: resp.data})
-                })
+                this.setState({ noBusiness: true });
             } else {
                 this.setState({ pageData: values[0], user: user.data});
             }
@@ -93,6 +92,7 @@ export default class App extends Component {
     render() {
         return (
             <div className="app-container">
+                { this.state.noBusiness ? ( <h2>You cannot view this page.</h2>) : ("" )}
                 { /* SHOWS A LOADING SCREEN UNTIL THE PAGE TEXT IS RETURNED */}
                 { this.state.pageData === null ? ( 
                     <LoadingPage />

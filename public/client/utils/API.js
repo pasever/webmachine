@@ -4,7 +4,7 @@ const config = require('../../../config').init();
 
 export default {
     getAuthorizedClient: () => {
-        return axios.get('/api/db/client?accessId=' + localStorage.access_token);
+        return axios.get('/api/db/client?accessToken=' + localStorage.token);
     },
     /// WE WILL NOT BE ADDING CLIENTS FROM THIS SECTION ANYMORE
     //addClient: (client) => {

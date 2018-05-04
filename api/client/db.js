@@ -78,7 +78,7 @@ exports.getClient = (id) => {
 // Gets Client(s) by Auth Access Id
 exports.getClientByAccessId = (aId) => {
     return new Promise((resolve, reject) => {
-        Client.find({ accessId: aId }).lean().then(response => {
+        Client.find({ accessToken: aId }).lean().then(response => {
             let user = response[0];
             stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {                
                 if(err) 

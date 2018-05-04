@@ -31,8 +31,9 @@ const dbclient = (router) => {
         console.log("-----------DB Clients GET ROUTE -----------");
         
         // Checks if there is an access Id passed, gets the matching Client
-        if(req.query.accessId) {            
-            clientApi.getClientByAccessId(req.token, req.query.cid, req.conn, (response) => {
+        if(req.query.accessToken) {   
+            console.log("Access ID EXISTS!!");         
+            clientApi.getClientByAccessId(req.token, req.query.accessToken, req.conn, (response) => {
                 res.status(200).send(response);
             });
         // Checks if there's a Client Id passed, gets the matching client
