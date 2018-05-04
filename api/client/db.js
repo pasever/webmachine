@@ -15,16 +15,16 @@ const stripe = require('stripe')(config.stripe.secretKey);
 /// TESTS IF WE CAN CONNECT TO THE MONGODB SERVER
 const testDb = (client) => {
     //  Assign a new mongo client
-    let client = new MongoClient(client.uri);
+    let testClient = new MongoClient(client.uri);
     return new Promise((resolve, reject) => { 
         /// Attempts to connect
-        client.connect((error, client) => {
+        testClient.connect((error, client) => {
             if(error) {
                 /// In case of an error, we resolve false
                 return resolve(false);
             }
             // Close the client and resolve we did connect.
-            client.close();
+            testClient.close();
             return resolve(true);
         });
     });

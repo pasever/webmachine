@@ -80,16 +80,6 @@ export const UserMaintenance = ({ errors, text, user, onSubmit, updateFormField,
           maskPhone={true}
         />
 
-        <Input
-          value={user.web}
-          name="web"
-          errorText={errors.web}
-          placeholder="Web"
-          displayName="Web URL"
-          type="text"
-          onChange={updateFormField}
-          classPrepend="fa fa-link"
-        />
 
         {isSaving ? (
           <i className="fa fa-gear fa-spin fa-2x margin-top-10" />

@@ -5,7 +5,7 @@
 
 const Agent  =       require('../db/schemas/Agent').Agent
 const Client =       require('../db/schemas/Client').Client
-const Platform =     require('../db/schemas/Platform').Platform 
+//const Platform =     require('../db/schemas/Platform').Platform 
 
 
       //////////////////////////////////////////////////////

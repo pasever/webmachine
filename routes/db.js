@@ -11,7 +11,6 @@ const dbagent =        require('express').Router();
 // register routes
 require('./db/dbagent')(dbagent);
 require('./db/dbclient')(dbclient);
-require('./db/dbplatform')(dbplatform)
 
 const db = (router) => {
 	router.use(bodyParser.json());

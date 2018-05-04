@@ -24,20 +24,22 @@ class App extends Component {
   }
 
 //retrieve portfolio data object to fill page information
-   getPortfolioData(){
-     //Ajax request
-     fetch(origin + '/home/static/portfolioData.json')
+  getPortfolioData(){
+    //Ajax request
+    fetch(origin + '/home/static/portfolioData.json')
       .then(r => r.json())
       .then(json => {
         this.db = json
         this.setState({  portfolioData: json  });
-     })
-   }
+      }
+    )
+  }
 
 
   componentDidMount(){
     this.getPortfolioData();
-    console.log('home app')
+    console.log('home app');
+    console.log(localStorage.getItem(""))
   }
 
 

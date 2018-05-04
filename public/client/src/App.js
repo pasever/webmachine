@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////////////////////////////
 ////////////////////      Client APP.JS        ////////////////////////
 ///////////////////////////////////////////////////////////////////////
+// 05/02/18 - REFACTOR 0.8
 // DGO
 
 'use strict';
@@ -39,7 +40,7 @@ export default class App extends Component {
     getPlatformPageData() {
         
         return new Promise((resolve, reject) => { 
-            fetch('/platform/static/platformPageData.json')
+            fetch('/client/static/platformPageData.json')
                 .then(resp => { let json = resp; return { json, resolve }})
                 .then(({ json, resolve }) => resolve(json) )
         })
@@ -51,7 +52,7 @@ export default class App extends Component {
         const data = this.getPlatformPageData().then(resp => { return resp.json(); });
         
         // Gets our localized user.  Preferably from a localStorage.profileId
-        const user = API.getAuthorizedPlatform(); // get user from localStorage.token through api
+        const user = API.getAuthorizedClient(); // get user from localStorage.token through api
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, user]).then(values => {
             let user = values[1];
