@@ -151,6 +151,7 @@ class App extends Component {
   componentDidMount(){
     this.getPortfolioData();
     addResponseMessage("Let's get started! Please enter your password");
+    console.log('web app')
   }
   render() {
     console.log(this.state.portfolioData);

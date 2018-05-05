@@ -32,7 +32,7 @@ const objStore = [
 	dbname: "smtest",
 	urilocal: "mongodb://localhost:27017/",
 	uri: "mongodb://machina:Charl0tte@ds161630.mlab.com:61630/",
-	username: "machina",
+  username: "machina",
 	password: "Charl0tte",
   isActivated: true
 	},
@@ -61,7 +61,8 @@ const objStore = [
 	addr2: 'Suite 1235',
   city: 'Richmond',
 	state:'Virginia',
-	zip: '12345',
+  zip: '12345',
+  accessToken: "7y54ueo4",
 	contact: 'Bill Jones',
 	phone: '704-555-1212',
   isPrivate: false,

@@ -14,8 +14,11 @@ const limit = 1;
 function getMembers (conn) {
       let Member = conn.model('Member', memberObj.memberSchema);
       // always drop the collection and refresh with test data
-      Member.collection.drop()
-      
+      Member.remove({}, function(e, removed){
+        if (e) console.log("Error removing test member documents")
+        console.log("Test Member Docs Removed " + removed.n)
+      })
+
       Member.find({}).limit(limit).exec(function (err, collection){
           if (collection.length === 0) {
             // iterate over the set of agents for initialization and create entries
