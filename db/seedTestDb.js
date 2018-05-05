@@ -55,7 +55,7 @@ module.exports = function (envState) {
 const step1 = (config) => {
   // drop old test collection for clients and create new test collection
   return new Promise((resolve, reject) => {
-      const dbURI = config[0].uri + config[0].db
+      const dbURI = process.env.DBURI || config[0].uri + config[0].db
       mongoose.connect(dbURI)
       let dbc = mongoose.connection
       Client.collection.drop()
