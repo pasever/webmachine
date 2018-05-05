@@ -53,10 +53,10 @@ export default class ReposPage extends Component {
         let filteredRepos = this.state.repos.filter(repo => (
           repo.name.toLowerCase().includes(this.state.search)
         ));
-        let repos = filteredRepos.map(repo => <Repo key={repo.id} repo={repo}/>);
+        let repos = filteredRepos.map(repo => <Repo key={repo.id} repo={repo} />);
         return repos;
       } else {
-        // If there aren't repo to display, don't even bother
+        // If there aren't repos to display, don't bother
         // with more operations and just display a message
         return (
           <p>
@@ -78,12 +78,12 @@ export default class ReposPage extends Component {
       <div>
         {/* Repos count message will display after data has been fetched
         and ONLY if there's data to render */}
-        <span id="repos-count" className="d-flex justify-content-center">
-          {
-            this.state.loaded && this.state.repos.length > 0 ?
-              this.showReposCount() : null
-          }
-        </span>
+        {this.state.loaded && this.state.repos.length > 0 ? (
+            <span id="repos-count" className="d-flex justify-content-center">
+              {this.showReposCount()}
+            </span>
+          ) : null
+        }
 
         <SearchBar value={this.state.search}
           updateSearch={this.updateSearch}

@@ -11,18 +11,29 @@
 		"phone": "+18882223434"
 	},
 	"db": {
-		"username": "xio",
-		"password": "",
-		"host": "",
-		"port": "",
-		"name": "",
-		"uri": ""
+		"localhost": {
+			"username": "xio",
+			"password": "",
+			"host": "",
+			"port": "",
+			"name": "",
+			"uri": ""
+		},
+		"workitemsBackup": {
+			"user": "xio",
+			"password": "",
+			"name": "",
+			"uri": "",
+			"description": "keys in this object are used in ./utils/backup-workitems-test-data.js to construct mLab uri. to back up, run npm run backup-wis"
+		}
 	},
 	"githubrepo": {
-		"reponame": "test",
+	"reponame": "test",
     "token": "",
     "repos_url": "/api/github/repos/strategicmarket",
-    "issues_url": "/api/github/issues/strategicmarket"
+    "issues_url": "/api/github/issues/strategicmarket",
+    "create_issue_url": "/api/github/create-issue",
+    "edit_issue_url": "/api/github/edit-issue"
 	},
 	"sessionSecret": "",
 	"facebook": {
@@ -77,6 +88,9 @@
 		"clientId": "",
 		"secret": ""
 	},
+	"auth0": { 
+		"clientID": ""
+	  },
 
 	"port": 3000,
 	"token": ""

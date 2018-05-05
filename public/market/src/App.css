@@ -56,8 +56,8 @@
   text-decoration: none;
 }
 
-#repo-card-wi-count {
-  font-size: 14px;
+.repo-card-wi-count {
+  font-size: 18px;
 }
 
 #repos-list .repo-card-footer {
@@ -82,14 +82,29 @@
   padding: 25px 40px;
   display: grid;
   grid-gap: 40px;
-  grid-template-columns: repeat(auto-fit, 18rem);
+  grid-template-columns: repeat(auto-fit, 20rem);
   justify-content: center;
+}
+
+#no-wi-found-alert {
+  text-align: center;
 }
 
 #issue-list li {
   display: inline-block;
   margin: 30px;
 
+}
+
+#issue-list .card-body {
+  padding: 10px 20px !important;
+}
+
+.fa-github {
+  color: #333;
+  font-size: 20px;
+  /* display: block; */
+  margin: 0 auto;
 }
 
 #issue-list .issue-card {
@@ -102,6 +117,7 @@
 
 #issue-list .issue-title {
   font-size: 17px;
+  margin: 0 15px;
 }
 
 #issue-list .issue-price {
@@ -117,9 +133,33 @@
 
 #issue-list .issue-due-date,
 .issue-card-footer {
-  font-size: 12px
+  font-size: 12px;
 }
 
-#issue-list .issue-card-footer {
+/* Highlight due date in red */
+.issue-due-date > span {
+  color: red;
+  font-weight: bold;
+}
+
+/* Workitem card edit button */
+.edit-workitem {
+  position: absolute;
+  top: 0; right: 0;
+  /* margin: 0; */
   background: none;
+  border: none;
+  margin: 5px 5px 2px 0;
+  outline: none;
+}
+
+.fa-edit {
+  color: #333;
+}
+
+/* Notice about the workitem's assignee based on its stage */
+#editNotice {
+  font-size: 12px;
+  color: tomato;
+  padding: 3px;
 }
