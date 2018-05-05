@@ -15,16 +15,16 @@ const stripe = require('stripe')(config.stripe.secretKey);
 /// TESTS IF WE CAN CONNECT TO THE MONGODB SERVER
 const testDb = (client) => {
     //  Assign a new mongo client
-    let client = new MongoClient(client.uri);
+    let testClient = new MongoClient(client.uri);
     return new Promise((resolve, reject) => { 
         /// Attempts to connect
-        client.connect((error, client) => {
+        testClient.connect((error, client) => {
             if(error) {
                 /// In case of an error, we resolve false
                 return resolve(false);
             }
             // Close the client and resolve we did connect.
-            client.close();
+            testClient.close();
             return resolve(true);
         });
     });
@@ -78,7 +78,7 @@ exports.getClient = (id) => {
 // Gets Client(s) by Auth Access Id
 exports.getClientByAccessId = (aId) => {
     return new Promise((resolve, reject) => {
-        Client.find({ accessId: aId }).lean().then(response => {
+        Client.find({ accessToken: aId }).lean().then(response => {
             let user = response[0];
             stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {                
                 if(err) 

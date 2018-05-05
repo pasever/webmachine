@@ -4,12 +4,13 @@ const config = require('../../../config').init();
 
 export default {
     getAuthorizedClient: () => {
-        return axios.get('/api/db/client?accessId=' + localStorage.access_id);
+        return axios.get('/api/db/client?accessToken=' + localStorage.token);
     },
-    addClient: (client) => {
-        localStorage.clientId = client.clientId;
-        return axios.put('/api/db/client', client);
-    },
+    /// WE WILL NOT BE ADDING CLIENTS FROM THIS SECTION ANYMORE
+    //addClient: (client) => {
+        //localStorage.clientId = client.clientId;
+    //    return axios.put('/api/db/client', client);
+    //},
     updateClient: (client) => {
         return axios.post('/api/db/client', client);
     },

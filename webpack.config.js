@@ -7,9 +7,11 @@ let commonsPlugin = new webpack.optimize.CommonsChunkPlugin({
 module.exports = {
   entry: {  
     web: './public/web/src/index.js',
+    home: './public/home/src/index.js',
     market: './public/market/src/index.js',
     landing: './public/landing/src/index.js',
-    platform: './public/platform/src/index.js'
+    platform: './public/client/src/index.js',
+    agents: './public/agents/src/index.js'
     },
     devtool: 'source-map',
   module: {

@@ -20,7 +20,7 @@ export class NetlifyDeploy extends Component {
     getTemplateData(){
         //Ajax request
         //fetch(origin + '/web/static/portfolioData.json')
-        fetch('/platform/static/templateList.json')
+        fetch('/client/static/templateList.json')
             .then(r => r.json())
             .then(json => {
                 this.setState({  templateData: json  });

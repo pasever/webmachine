@@ -14,7 +14,10 @@ const limit = 1;
 function getConfigs (conn) {
       let Config = conn.model('Config', configObj.configSchema);
       // always drop the collection and refresh with test data
-      Config.collection.drop()
+    Config.remove({}, function(e, removed){
+        if (e) console.log("Error removing test config documents")
+        console.log("Test Config Docs Removed " + removed.n)
+      })
 
       Config.find({}).limit(limit).exec(function (err, collection){
           if (collection.length === 0) {

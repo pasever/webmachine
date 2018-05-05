@@ -91,7 +91,7 @@ const clientObject = {
     default: "",
   },
   // For AuthO
-  accessId: { 
+  accessToken: { 
     type: String, 
     default: "",
   },

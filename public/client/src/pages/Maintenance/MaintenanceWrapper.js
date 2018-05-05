@@ -72,6 +72,7 @@ class MaintenanceWrapper extends Component {
                     <Tab>Organization</Tab>
                     <Tab>Database</Tab>
                     <Tab>Web</Tab>
+                    <Tab>Agents</Tab>
                     <Tab>Billing Info</Tab>
                 </TabList>
             
@@ -98,6 +99,9 @@ class MaintenanceWrapper extends Component {
                             onSubmit={ this.submitForm } errors={ this.state.errors }
                             text={ this.state.pageData.web } isSaving={this.state.isSaving } />      
                     </Col>
+                </TabPanel>
+                <TabPanel>
+                    <h2>Agent maintenance</h2>
                 </TabPanel>
                 <TabPanel>
                     <Col size="12">
