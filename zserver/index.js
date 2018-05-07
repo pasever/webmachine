@@ -43,7 +43,7 @@ app.use('/form', express.static('public'));
 app.use('/machine', express.static('public'));
 app.use('/market', express.static('public'));
 app.use('/member', express.static('public'));
-app.use('/dashboard', express.static('public/dashboard'));
+app.use('/dashboard', express.static('public'));
 app.use('/', express.static('public/home'));
 app.use('/landing', express.static('public'));
 app.use('/client', express.static('public'));
@@ -73,15 +73,15 @@ process.on('uncaughtException', function (er) {
 ////////// Register and Config Routes ///////////////
 ////////////////////////////////////////////////////
 
-const sms =      express.Router();
-const db =       express.Router();
-const git =      express.Router();
+const sms =       express.Router();
+const db =        express.Router();
+const git =       express.Router();
 //const web =      express.Router();
-const auth =     express.Router();
-const errs =     express.Router();
-const unk =      express.Router();
-const help =     express.Router();
-
+const auth =      express.Router();
+const errs =      express.Router();
+const unk =       express.Router();
+const help =      express.Router();
+const home =      express.Router();
 require('../routes/auth')(auth);
 require('../routes/db')(db);
 require('../routes/git')(git);
@@ -90,7 +90,7 @@ require('../routes/sms')(sms);
 require('../routes/unk')(unk);
 require('../routes/error')(errs);
 require('../routes/help')(help);
-
+require('../routes/home')(home);
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////// API CATALOGUE /////////////////////////////
 ////////////////////////////////////////////////////////////////////////

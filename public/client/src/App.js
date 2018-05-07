@@ -33,7 +33,7 @@ export default class App extends Component {
             user:  null,            //  should be passed in the response from Authorization
             pageData: null,         //  page data object
             hasErrors: false,       //  flags if we should display a message about errors
-            noBusiness: false,
+            redirectToLogin: false,
         };
     }
     
@@ -57,14 +57,16 @@ export default class App extends Component {
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, user]).then(values => {
             let user = values[1];
+            console.log(values);
             /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
             if(Object.keys(user.data).length === 0 || user === "TOKEN REJECTED") {
                 this.setState({ noBusiness: true });
             } else {
                 this.setState({ pageData: values[0], user: user.data});
             }
-        }).catch(err => { 
-            console.log("ERROR ON MOUNT: ", err)
+        }).catch((err) => { 
+             console.log("ERROR ON MOUNT: ", err)
+             this.setState({ redirectToLogin: true });
         })
     }
 
@@ -93,35 +95,39 @@ export default class App extends Component {
     render() {
         return (
             <div className="app-container">
-                { this.state.noBusiness ? ( <h2>You cannot view this page.</h2>) : ("" )}
-                { /* SHOWS A LOADING SCREEN UNTIL THE PAGE TEXT IS RETURNED */}
-                { this.state.pageData === null ? ( 
-                    <LoadingPage />
-                ) : (
+                { this.state.redirectToLogin ? ( <h2>You must be logged in to view this.</h2>) 
+                    : ( 
                 
                 <div>
-                    <header className="app-header">
-                        <h1 className="header-title">{ this.state.pageData.main.title }</h1>
-                    </header>
-                    { this.state.user.isDeleted ? ( <h2>This platform has been deleted</h2>) : (
-                    <main className="app-content">
-                        <ErrorBoundary>
-                        <Container>
-                            <Row>
-                                <MaintenanceHeader 
-                                    toggleSystem={this.toggleSystem} user={this.state.user} hasErrors={this.state.hasErrors } 
-                                    headerText={this.state.pageData.header} deletePlatform={ this.deletePlatform } />
-                                { this.state.isSaved ? ( <span className="badge badge-success">Changes have been saved.</span>) : null }
-                                <MaintenanceWrapper user={this.state.user} pageData={this.state.pageData} />
-                            </Row>
-                        </Container>
-                        </ErrorBoundary>
-                    </main>
-                    /* END isDeleted CHECK */
-                    )}
-                </div>
+                    { this.state.pageData === null && !this.state.redirectToLogin ? ( 
+                        <LoadingPage />
+                    ) : (
+                    
+                    <div>
+                        <header className="app-header">
+                            <h1 className="header-title">{ this.state.pageData.main.title }</h1>
+                        </header>
+                        { this.state.user.isDeleted ? ( <h2>This platform has been deleted</h2>) : (
+                        <main className="app-content">
+                            <ErrorBoundary>
+                            <Container>
+                                <Row>
+                                    <MaintenanceHeader 
+                                        toggleSystem={this.toggleSystem} user={this.state.user} hasErrors={this.state.hasErrors } 
+                                        headerText={this.state.pageData.header} deletePlatform={ this.deletePlatform } />
+                                    { this.state.isSaved ? ( <span className="badge badge-success">Changes have been saved.</span>) : null }
+                                    <MaintenanceWrapper user={this.state.user} pageData={this.state.pageData} />
+                                </Row>
+                            </Container>
+                            </ErrorBoundary>
+                        </main>
+                        /* END isDeleted CHECK */
+                        )}
+                    </div>
                 /* END pageData CHECK */
                 )}
+                </div>
+            )}
             </div>
             
         );
