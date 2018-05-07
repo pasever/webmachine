@@ -52,8 +52,8 @@ class MaintenanceWrapper extends Component {
     submitForm = event => {
         this.setState({ isSaving: true });
         event.preventDefault();
-        API.updatePlatform(this.state.user).then(resp => {
-        
+        API.updateClient(this.state.user).then(resp => {
+            console.log("RESPONSE", resp);
             if(resp.data.errors) {
                 this.setState({ errors: resp.data.errors, hasErrors: true, isSaved: false, isSaving: false });
             } else {

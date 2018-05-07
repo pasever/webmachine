@@ -6,6 +6,7 @@
 
 const mongoose =            require('mongoose')
 const Client =              require('./schemas/Client').Client
+const dbClient =            require('../api/client/db');
 const platform =            require('../config').platform()
 const utils =               require('../utils')
 const testClients =         require('./data/clients')
@@ -74,11 +75,16 @@ const step1 = (config) => {
         if (e) console.log("Error removing test client documents")
         console.log("Test Client Docs Removed " + removed.n)
       })
-      Client.create(testClients, (err, response) => {
+      /*Client.create(testClients, (err, response) => {
           console.log(g('Clients Initialized: ' + dbc.name + ' at ' + dbc.host))
         // return array of new customer objects that were returned from db - used in step2
         resolve(response)
+      })*/
+      let promises = [];
+      testClients.map(current => {
+        promises.push(dbClient.putClient(current));
       })
+      Promise.all(promises).then(response => console.log(response));
   })
 }
 

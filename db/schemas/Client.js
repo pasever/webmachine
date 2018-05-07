@@ -94,6 +94,8 @@ const clientObject = {
   accessToken: { 
     type: String, 
     default: "",
+    select: false,
+    required: true,
   },
   // Stripe customer ID
   stripeCustomerId: {

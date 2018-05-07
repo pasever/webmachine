@@ -13,3 +13,8 @@ API Changes :
 ROUTES Changes :
   * Renamed dbclient.js to dbclient.js.bak
   * Renamed dbplatform to dbclient.js
+
+PUBLIC Changes :
+  * Added /common folder to hold all common React components
+  * API calls should now all be placed in the /common/utils/API.js file
+  * Axios calls to the server will now include authorization header

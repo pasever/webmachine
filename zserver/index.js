@@ -27,8 +27,7 @@ let envState = true
 if ( process.env.isLive == 'false' ) {
     envState = false
     require('../db/seedTestDb')(envState)
-  }
-
+}
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -44,7 +43,7 @@ app.use('/form', express.static('public'));
 app.use('/machine', express.static('public'));
 app.use('/market', express.static('public'));
 app.use('/member', express.static('public'));
-//app.use('/web', express.static('public'));
+app.use('/dashboard', express.static('public/dashboard'));
 app.use('/', express.static('public/home'));
 app.use('/landing', express.static('public'));
 app.use('/client', express.static('public'));

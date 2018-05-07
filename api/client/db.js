@@ -8,7 +8,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const { Client } = require('../../db/schemas/Client');
 const {r,g,y,b} = require('../../console');
-
+const jwt = require('jsonwebtoken');
+const verifyToken = require('../../utils/auth/verifyJwtToken');
 const config = require('../../config').init();
 const stripe = require('stripe')(config.stripe.secretKey);
 
@@ -34,14 +35,15 @@ const testDb = (client) => {
 /// IMPORTANT TO NOTE THIS WILL ONLY GET ACTIVE CLIENTS.  THERE IS ANOTHER CALL TO GET ALL CLIENTS
 exports.getClients = () => {
     return new Promise((resolve, reject) => {
-        Client.find({ isActivated: true }, (err, response) => {
+        Client.find({ isActivated: true }).then(response => {
+            resolve(response);
+        }).catch(err => {
             if (err) {
                 if (err.error !== 'not_found') 
                     resolve(err)
                 else 
                     reject(err)
             };
-            resolve(response);
         });
     })  
 }
@@ -101,7 +103,7 @@ exports.getClientByAccessId = (aId) => {
 // Adds a client to the DB
 exports.putClient = (client) => {
     // Creates a new client from the Mongo Schema
-    let c = new Platform(client);
+    let c = new Client(client);
     // Checks if we can connect to the DB provided
     return new Promise((resolve, reject) => {
         testDb(client).then(resp => { 
@@ -131,9 +133,8 @@ exports.updateClient = (client) => {
         // Checks if we can connect to the database provided
         testDb(client).then(resp => { 
             // Assigns the returned boolean to dbConnected
-            client.dbConnected = resp;
             // Finds the Client by ID, and performs an UPSERT.  LEAN() is used to attach new objects to the Schema.
-            Client.findOneAndUpdate({ id: client.id }, client, {upsert: true, new: true}).lean().then(respClient => {
+            Client.findOneAndUpdate({ _id: client._id }, client, {upsert: true, new: true}).lean().then(respClient => {
                 // Try and retrieve Stripe's data.
                 stripe.customers.retrieve(respClient.stripeCustomerId, (err, stripeCust) => {       
                     if(err) 
