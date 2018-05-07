@@ -2,9 +2,12 @@ import axios from 'axios';
 
 const config = require('../../../config').init();
 
+
+axios.defaults.headers.common['Authorization'] = localStorage.id_token;
+
 export default {
     getAuthorizedClient: () => {
-        return axios.get('/api/db/client?accessToken=' + localStorage.token);
+        return axios.get('/api/db/client?accessToken=' + localStorage.id_token);
     },
     /// WE WILL NOT BE ADDING CLIENTS FROM THIS SECTION ANYMORE
     //addClient: (client) => {
@@ -12,7 +15,7 @@ export default {
     //    return axios.put('/api/db/client', client);
     //},
     updateClient: (client) => {
-        return axios.post('/api/db/client', client);
+        return axios.post('/api/db/client', { client: client, token: localStorage.id_token});
     },
     deleteClient: (client) => {
         return axios.delete('/api/db/client', { data: { id: client.id }});

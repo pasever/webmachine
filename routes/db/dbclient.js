@@ -10,12 +10,16 @@ const bodyParser =  			require('body-parser')
 const clientApi =               require('../../api/client')
 const netlifyApi =              require('../../api/client/netlify');
 const { r, g, b } =             require('../../console');
+const request =                 require('request');
+const jwt =                     require('jsonwebtoken');
+const config =                  require('../../config').init();
+const verifyJwt =              require('../../utils/auth/verifyJwtToken');
+
 
 
 const dbclient = (router) => {
-
-	router.use(bodyParser.json());
-    
+    router.use(bodyParser.json());
+    router.use(verifyJwt.verifyJWTToken);
     // DELETE ROUTE
     router.delete("/", (req, res, next) => {
         console.log("-----------DB Clients DELETE ROUTE -----------");
@@ -27,13 +31,13 @@ const dbclient = (router) => {
 
     // Checks to see if there is an accessId passed in the Request Body, or a Client Id.
     // Might need refactoring?
-    router.get('/', (req, res, next) => {
+    router.get('/',  (req, res, next) => {
         console.log("-----------DB Clients GET ROUTE -----------");
-        
+        //console.log("AFTER MIDDLEWARE REQUEST: ", req);
         // Checks if there is an access Id passed, gets the matching Client
         if(req.query.accessToken) {   
-            console.log("Access ID EXISTS!!");         
-            clientApi.getClientByAccessId(req.token, req.query.accessToken, req.conn, (response) => {
+            let token = verifyJwt.getIdFromToken(req.query.accessToken);
+            clientApi.getClientByAccessId(req.token, token, req.conn, (response) => {
                 res.status(200).send(response);
             });
         // Checks if there's a Client Id passed, gets the matching client

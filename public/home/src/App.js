@@ -26,7 +26,7 @@ class App extends Component {
 //retrieve portfolio data object to fill page information
   getPortfolioData(){
     //Ajax request
-    fetch(origin + '/home/static/portfolioData.json')
+    fetch('/home/static/portfolioData.json')
       .then(r => r.json())
       .then(json => {
         this.db = json
@@ -38,8 +38,6 @@ class App extends Component {
 
   componentDidMount(){
     this.getPortfolioData();
-    console.log('home app');
-    console.log(localStorage.getItem(""))
   }
 
 

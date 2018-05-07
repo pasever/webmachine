@@ -1,0 +1,22 @@
+
+.loading-page-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.6);
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-page-wrapper > p {
+    
+    font-size: 60px;
+    color: #eee;
+    text-shadow: 0 0 10px black;
+    margin: auto;
+    z-index: 2;    
+}
