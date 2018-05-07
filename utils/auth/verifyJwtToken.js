@@ -67,6 +67,7 @@ function getJWKS() {
 }
 
 function getJWKSSigningKeys() {
+  console.log("JWKS:::::", jwks);
   return jwks
     .filter(
       ( key ) =>
@@ -85,7 +86,7 @@ function getJWKSSigningKey( kid ) {
 function extractAuthenicationToken( req ) {
   
   const authHeader = req.req.headers;
-  
+
   if (!authHeader.authorization || authHeader === undefined || authHeader === 'undefined') {
     return { header: null }; //new Error( 'credentials_required', { message: 'No authorization token was found' } );
   }
@@ -93,19 +94,20 @@ function extractAuthenicationToken( req ) {
   return authHeader.authorization;
 }
 
-async function verifyJWTToken( tenant, req, next ) {
-  await fetchJWKS( tenant );
-  const token = extractAuthenicationToken( req );
+async function verifyJWTToken( req, res, next ) {
+  
+  await fetchJWKS( req );
+  const token = extractAuthenicationToken( res );
   if(token === undefined || !token || token == 'undefined') {
     console.log("TOKEN REJECTED");
-    return next("NO TOKEN");
+    return res.status(401).end()
   }
   const decodedToken = jwt.decode( token, { complete: true } );
   
   const { header } = decodedToken;
 
   if ( !header || header.alg !== 'RS256' ) {
-    return next("TOKEN IS MISSING HEADER")
+    return res.status(401).end();
   }
 
   const key = getJWKSSigningKey( header.kid );
@@ -114,7 +116,8 @@ async function verifyJWTToken( tenant, req, next ) {
 
   jwt.verify( token, actualKey, { algorithms: [ 'RS256' ] }, ( err, decoded ) => {
     if ( err ) {
-      next(err, null);
+      //next(err, null);
+      res.status(401).end();
     } else {
       next(null, decoded);
     }

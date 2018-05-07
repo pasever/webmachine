@@ -11,7 +11,7 @@ export default class Auth {
     domain: 'teststrategicmachines.auth0.com',
     clientID: config.auth0.clientID,
     redirectUri: 'http://localhost:3000',
-    audience: 'https://teststrategicmachines.auth0.com/userinfo',
+    audience: config.auth0.audience,
     responseType: 'token id_token',
     scope: 'openid profile user_metadata',
   });

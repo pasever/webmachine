@@ -84,7 +84,7 @@ const step1 = (config) => {
       testClients.map(current => {
         promises.push(dbClient.putClient(current));
       })
-      Promise.all(promises).then(response => console.log(response));
+      Promise.all(promises).then(response => console.log("CLIENT'S TEST DATA PROMISE RESOLVED"));
   })
 }
 
