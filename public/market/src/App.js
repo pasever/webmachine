@@ -6,6 +6,17 @@ import Routes               from './routes';
 import './App.css';
 
 export default class App extends Component {
+
+  componentDidMount() {
+    let ls = window.localStorage;
+    let id_token = ls.getItem('id_token');
+    if (id_token == null) {
+      console.log('no user authenticated');
+    } else {
+      console.log(id_token);
+    }
+  }
+
   render() {
     return (
       <div className="app-container">
