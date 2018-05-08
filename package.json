@@ -9,7 +9,7 @@
   },
   "scripts": {
     "webpack-watch": "webpack -w",
-    "express-server": "node ./server.js",
+    "express-server": "nodemon ./server.js",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\" ",
     "build": "node node_modules/webpack/bin/webpack.js --colors --progress -p",
     "machine": "node ./server.js",
