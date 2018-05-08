@@ -10,7 +10,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: config.auth0.domain,
     clientID: config.auth0.clientID,
-    redirectUri: 'http://localhost:3000',
+    redirectUri: 'http://localhost:3000/',
     audience: config.auth0.audience,
     responseType: 'token id_token',
     scope: 'openid profile user_metadata',
