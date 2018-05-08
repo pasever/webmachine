@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 
+/**
+ * ---- Fields ----
+ * First Name
+ * Last Name
+ * Image (?)
+ * Address 1 & 2
+ * City, State, Zip
+ * Cell
+ * Email
+ * Network(s) ?
+ * 
+ */
+
 class MemberForm extends Component {
   render() {
     return (
@@ -31,6 +44,8 @@ class MemberForm extends Component {
             <label for="inputState">State</label>
             <select id="inputState" className="form-control">
               <option selected>Choose...</option>
+              <option>...</option>
+              <option>...</option>
               <option>...</option>
             </select>
           </div>
