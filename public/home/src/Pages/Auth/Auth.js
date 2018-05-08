@@ -8,10 +8,10 @@ const config = require("../../../../../config").init();
 //set up auth0 configuration
 export default class Auth {
   auth0 = new auth0.WebAuth({
-    domain: 'machines.auth0.com',
+    domain: config.auth0.domain,
     clientID: config.auth0.clientID,
     redirectUri: 'http://localhost:3000/',
-    audience: 'https://machines.auth0.com/userinfo',
+    audience: config.auth0.audience,
     responseType: 'token id_token',
     scope: 'openid profile user_metadata',
   });
