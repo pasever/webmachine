@@ -34,7 +34,12 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        API.getClientsByAccessId().then(resp => { console.log(resp)})
+        let ownedClients = API.getClientsByAccessId();
+
+        Promise.all([ownedClients]).then(values => {
+            this.setState({ isAuthorized: true });
+            console.log(values);
+        })
     }
 
     render() {
