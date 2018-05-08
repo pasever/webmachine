@@ -10,8 +10,7 @@ export default {
     /// THIS WILL BE USED TO GRAB THE MOST UNIQUE CLIENT TO A USER FOR MAINTENANCE
     getClientForMaintenance: () => {
         /// HACK - REMOVE HARDCODED ID
-        console.log("We're in the API -- NOW DAMMIT WEBPACK");
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token + '&clientId=5af0bffed0e83c1b545b0309');
+        return axios.get('/api/db/client?accessToken=' + localStorage.id_token + '&clientId=5af09dbfbd214805448aa984');
     },
     
     /// USED TO GET ALL CLIENTS ONE INDIVIDUAL LOGIN MANAGES

@@ -80,14 +80,14 @@ exports.getClient = (id) => {
 // Gets Client(s) by Auth Access Id
 exports.getOneOwnedClient = (aId, cId) => {
     return new Promise((resolve, reject) => {
-        Client.find({ accessToken: aId, _id: cId }).lean().then(response => {
-            let user = response[0];
-            stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {                
+        Client.findOne({ accessToken: aId, _id: cId }).lean().then(response => {
+            let client = response;
+            stripe.customers.retrieve(client.stripeCustomerId, (err, stripeCust) => {                
                 if(err) 
-                    user["stripeCustomer"] = null;
+                    client["stripeCustomer"] = null;
                 else 
-                    user["stripeCustomer"] = stripeCust;
-                resolve(user);
+                    client["stripeCustomer"] = stripeCust;
+                resolve(client);
             })
         }).catch(err => {
             if(err) {

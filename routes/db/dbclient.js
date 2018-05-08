@@ -33,18 +33,20 @@ const dbclient = (router) => {
     // Might need refactoring?
     router.get('/',  (req, res, next) => {
         console.log("-----------DB Clients GET ROUTE -----------");
-        //console.log("AFTER MIDDLEWARE REQUEST: ", req);
+        let accessToken = req.query.accessToken || null;
+        let clientId = req.query.clientId || null;
         // Checks if there is an access Id passed, gets the matching Client
-        if(req.query.accessToken && !req.query.clientId) {   
+
+        if(accessToken && !clientId) {   
             // Gets the ID out of the JWT
-            let accessId = verifyJwt.getIdFromToken(req.query.accessToken);
+            let accessId = verifyJwt.getIdFromToken(accessToken);
             clientApi.getClients(req.token, accessId, req.conn, (response) => {
                 res.status(200).send(response);
             });
         // Checks if there's a Client Id passed, gets the matching client
-        } else if(req.query.accessToken && req.query.clientId) {
-            let accessId = verifyJwt.getIdFromToken(req.query.accessToken);
-            clientApi.getOneOwnedClient(req.token, accessId, req.query.clientId, req.conn, (response) => {
+        } else if(accessToken && clientId) {
+            let accessId = verifyJwt.getIdFromToken(accessToken);
+            clientApi.getOneOwnedClient(req.token, accessId, clientId, req.conn, (response) => {
                 res.status(200).send(response);
             });
         // Returns all Clients

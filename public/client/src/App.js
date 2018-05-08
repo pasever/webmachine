@@ -57,7 +57,7 @@ export default class App extends Component {
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, user]).then(values => {
             let user = values[1];
-            console.log(values);
+            console.log(user);
             /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
             if(Object.keys(user.data).length === 0 || user === "TOKEN REJECTED") {
                 this.setState({ redirectToLogin: true });
