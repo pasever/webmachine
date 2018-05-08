@@ -88,10 +88,9 @@
 		"clientId": "",
 		"secret": ""
 	},
-	"auth0": { 
-		"clientID": ""
-	  },
-
+  "auth0": {
+    "clientID": ""
+  },
 	"port": 3000,
 	"token": ""
 }

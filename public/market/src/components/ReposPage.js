@@ -8,18 +8,30 @@ import axios                   from 'axios';
 import Repo                    from './Repo';
 import SearchBar               from './SearchBar'; 
 import config                  from '../../../../config/';
+/**
+ * @namespace Developer_Marketplace
+ * 
+ * TODO: [] Be able to check who authenticated user viewing this page is.
+ * * IMPORTANT: Only authenticated users with developer access should
+ * * be able to make it to this point (maybe not?).
+ * 
+ * TODO: [] Ensure that URL is not pulled from Client's Config file.
+ * * The URL must be for Strategic Machines' GitHub market repo regardless 
+ * * of who's the authenticated user
+ */
 const { repos_url }            = config.init().githubrepo;
 
 export default class ReposPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // repos represent skill-categories
       repos: [],
+      // checks if data has been loaded
       loaded: false,
       search: ''
     }
-    // bind constructor's 'this' object to handleChange method
-    // so that it can access and alter state.
+   
     this.updateSearch = this.updateSearch.bind(this);
   };
 
@@ -76,7 +88,7 @@ export default class ReposPage extends Component {
   render() {
     return (
       <div>
-        {/* Repos count message will display after data has been fetched
+        {/* Repos count message will display after data has been loaded in state
         and ONLY if there's data to render */}
         {this.state.loaded && this.state.repos.length > 0 ? (
             <span id="repos-count" className="d-flex justify-content-center">
@@ -85,10 +97,12 @@ export default class ReposPage extends Component {
           ) : null
         }
 
-        <SearchBar value={this.state.search}
+        <SearchBar
+          value={this.state.search}
           updateSearch={this.updateSearch}
         />
 
+        {/* List of Cards */}
         <ul id="repos-list">
           {this.renderPage()}
         </ul>
