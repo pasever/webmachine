@@ -6,9 +6,9 @@
 "use strict";
 
 import React, { Component } from "react";
-import { Container, Col, Row } from "../../components/grid/";
-import { Input, TextArea, Button } from "../../components/form/";
-import ErrorBoundary from "../../components/error/ErrorBoundary";
+import { Container, Col, Row } from "../../../../common/grid/";
+import { Input, TextArea, Button } from "../../../../common/form/";
+import ErrorBoundary from "../../../../common/error/ErrorBoundary";
 import "../../styles/maintenancepage.css";
 
 /* 

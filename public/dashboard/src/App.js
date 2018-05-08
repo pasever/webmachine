@@ -7,7 +7,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import auth0 from 'auth0-js';
+import API from '../../common/utils/API';
 import './App.css';
 
 
@@ -16,7 +16,9 @@ import './App.css';
 // It requires the user object, so it will handle all form changes and submits.
 export default class App extends Component {
     state = {
-        isAuthorized: false
+        isAuthorized: false,
+        ownedNetworks: [],
+        memberNetworks: [],
     }
 
 
@@ -31,6 +33,9 @@ export default class App extends Component {
         })
     }
 
+    componentDidMount() {
+        API.getClientsByAccessId().then(resp => { console.log(resp)})
+    }
 
     render() {
         return (

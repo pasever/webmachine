@@ -10,7 +10,7 @@ const db =              require('./db')
 const { r, g } =        require('../../console');
 
 // Gets all clients
-exports.getClients = (token, conn, cb) => {
+exports.getClients = (token, accessId, conn, cb) => {
     thread(conn).then((result) => {
         cb(result);
     }).catch((err) => {
@@ -19,7 +19,7 @@ exports.getClients = (token, conn, cb) => {
         cb(err);
     });
     async function thread(conn) {
-        let result = await db.getClients(conn);
+        let result = await db.getClients(accessId, conn);
         return result;
     }
 }
@@ -41,7 +41,7 @@ exports.getClient = (token, id, conn, cb) => {
 }
 
 // Gets a/many client(s) by AuthO accessId
-exports.getClientByAccessId = (token, accessId, conn, cb) => {
+exports.getOneOwnedClient = (token, accessId, clientId, conn, cb) => {
     thread(conn).then((result) => {
         cb(result);
     }).catch((err) => {
@@ -50,7 +50,7 @@ exports.getClientByAccessId = (token, accessId, conn, cb) => {
         cb(err);
     });
     async function thread(conn) {
-        let result = await db.getClientByAccessId(accessId, conn);
+        let result = await db.getOneOwnedClient(accessId, clientId, conn);
         return result;
     }
 }

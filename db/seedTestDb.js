@@ -43,26 +43,28 @@ module.exports = function (envState) {
     if (utils.isValidUrl(config[0].uri)) {
     console.log("----- ENTERED SEEDTESTDATA----")
     // execute async function
-      steps(config).then((result) => {
-        console.log("----- Test Databases Created and Seeded----")
-        return
-        }).catch((err) => {
-          console.log("ERROR - Creating Test Databases")
-          console.log(err)
-          return
-        })
-      }
-      else {
-        console.log("ERROR - Platform JSON Configuration Error Test DB Not Initialized")
-        return
-      }
-
+      // steps(config).then((result) => {
+      //   console.log("----- Test Databases Created and Seeded----")
+      //   return
+      //   }).catch((err) => {
+      //     console.log("ERROR - Creating Test Databases")
+      //     console.log(err)
+      //     return
+      //   })
+      // }
+      // else {
+      //   console.log("ERROR - Platform JSON Configuration Error Test DB Not Initialized")
+      //   return
+      // }
+      const dbURI = process.env.DBURI || config[0].uri + config[0].db
+      mongoose.connect(dbURI)
+    }
     // drop and create test client collection. For every valid client, create test collections on their db
-    async function steps(config) {
+    /*async function steps(config) {
       let clientArray =    await step1(config)
       let result =         await step2(clientArray)
       return result
-    }
+    }*/
 }
 
 const step1 = (config) => {

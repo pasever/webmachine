@@ -8,9 +8,13 @@ const config = require("../../../../../config").init();
 //set up auth0 configuration
 export default class Auth {
   auth0 = new auth0.WebAuth({
+<<<<<<< HEAD
     domain: 'machines.auth0.com',
+=======
+    domain: config.auth0.domain,
+>>>>>>> c69b7c86d0475e291f998a46c4417c23156b733b
     clientID: config.auth0.clientID,
-    redirectUri: 'http://localhost:3000',
+    redirectUri: 'http://localhost:3000/dashboard',
     audience: config.auth0.audience,
     responseType: 'token id_token',
     scope: 'openid profile user_metadata',
@@ -48,7 +52,12 @@ export default class Auth {
   // Sets the session in local storage
   setSession(authResult) {
     // Set the time that the Access Token will expire at
+<<<<<<< HEAD
     // Gets about a month
+=======
+    // Gets tomorrow
+
+>>>>>>> c69b7c86d0475e291f998a46c4417c23156b733b
     let expiresAt = JSON.stringify((authResult.expiresIn * 304400) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);

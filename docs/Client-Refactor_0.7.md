@@ -6,9 +6,18 @@ Changes to Schema :
   * IsDeleted added
   * Stripe customer information added.  << Doesn't get saved, but tacked on when using Lean() in mongoose.
 
-API Changes : 
+API/Core Changes : 
   * Client data-access library now exists in /client folder, inside API
   * Added getPublicClients, as well as getClientsByAccessId
+  * utils/auth added jwtVerifyToken function for use as middleware for protected routes.  
+  > ABOUT PROTECTING YOUR ROUTES --   
+  > 
+  > > All api calls should be made using axios, and be contained in the /public/common/API.js file.  
+  > > Axios will make the call to these routes placing the id_token (which can be deconstructed) in the header.  
+  > > Protect your routes on the server side by using the verifyJWTToken middleware.  
+  > > Beware - protecting a navicable route poses a larger challenge than protecting routes with actual data access.
+  > >   
+  
 
 ROUTES Changes :
   * Renamed dbclient.js to dbclient.js.bak

@@ -4,10 +4,10 @@
 
 import React, { Component } from "react";
 import { injectStripe } from "react-stripe-elements";
-import { Button } from "../../components/form";
+import { Button } from "../../../../common/form";
 import { CardSection, NameAndAddressSection, StripeData } from "./";
 import LoadingPage from "../LoadingPage";
-import API from "../../../utils/API";
+import API from "../../../../common/utils/API";
 
 const stripeCust = {};
 

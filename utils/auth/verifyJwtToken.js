@@ -67,7 +67,6 @@ function getJWKS() {
 }
 
 function getJWKSSigningKeys() {
-  console.log("JWKS:::::", jwks);
   return jwks
     .filter(
       ( key ) =>
@@ -103,7 +102,6 @@ async function verifyJWTToken( req, res, next ) {
     return res.status(401).end()
   }
   const decodedToken = jwt.decode( token, { complete: true } );
-  
   const { header } = decodedToken;
 
   if ( !header || header.alg !== 'RS256' ) {
