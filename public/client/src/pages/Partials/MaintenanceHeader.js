@@ -4,7 +4,7 @@
 // DGO
 
 import React from "react";
-import { Col } from "../../components/grid/";
+import { Col } from "../../../../common/grid/";
 
 /* 
 REQUIRED PROPS: 

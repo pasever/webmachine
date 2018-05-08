@@ -8,10 +8,11 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Container, Col, Row } from '../../components/grid/';
-import ErrorBoundary from '../../components/error/ErrorBoundary';
+import { Container, Col, Row } from '../../../../common/grid';
+import ErrorBoundary from '../../../../common/error/ErrorBoundary';
 import {StripeProvider, Elements, PaymentRequestButtonElement, injectStripe } from 'react-stripe-elements';
 import { StripeFormWrapper } from '../Partials';
+
 import '../../styles/maintenancepage.css';
 
 ///                     ../../../../../ << WHAT?!?!
@@ -35,3 +36,4 @@ export class BillingMaintenance extends Component {
     );
   }
 }
+

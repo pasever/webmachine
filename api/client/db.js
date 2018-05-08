@@ -33,9 +33,9 @@ const testDb = (client) => {
 
 /// Gets all Clients in the DB Collection
 /// IMPORTANT TO NOTE THIS WILL ONLY GET ACTIVE CLIENTS.  THERE IS ANOTHER CALL TO GET ALL CLIENTS
-exports.getClients = () => {
+exports.getClients = (accessId) => {
     return new Promise((resolve, reject) => {
-        Client.find({ isActivated: true }).then(response => {
+        Client.find({ accessToken: accessId }).then(response => {
             resolve(response);
         }).catch(err => {
             if (err) {
@@ -78,9 +78,9 @@ exports.getClient = (id) => {
 }
 
 // Gets Client(s) by Auth Access Id
-exports.getClientByAccessId = (aId) => {
+exports.getOneOwnedClient = (aId, cId) => {
     return new Promise((resolve, reject) => {
-        Client.find({ accessToken: aId }).lean().then(response => {
+        Client.find({ accessToken: aId, _id: cId }).lean().then(response => {
             let user = response[0];
             stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {                
                 if(err) 

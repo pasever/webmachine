@@ -37,36 +37,33 @@ logout() {
          <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
 	       <a className="mobile-btn" href="" title="Hide navigation">Hide navigation</a>
          <ul id="nav" className="nav">
-           <div className="nav left">
-            <Link to='/'><li className="current"><a className="smoothscroll" href="#home">Home</a></li></Link>
-            <Link to='/products' ><li><a className="smoothscroll" href="#about">Products</a></li></Link>
-	          <Link to='/solution'><li><a className="smoothscroll" href="#resume">Solution</a></li></Link>
-            <Link to='/market'><li><a className="smoothscroll" href="#portfolio">Market</a></li></Link>
-            {/*
-            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-            <div id="myDropdown" class="dropdown-content">
-              <Link to='/marketitems'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
-              <Link to='/marketmywork'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
-              <Link to='/marketdocs'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
+            <div className="nav left">
+              <li className="current"><Link to='/'>Home</Link></li>
+              <li><Link to='/products' >Products</Link></li>
+              <li><Link to='/solution'>Solution</Link></li>
+              <li><Link to='/market'>Market</Link></li>
+              {/*
+              <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+              <div id="myDropdown" class="dropdown-content">
+                <Link to='/marketitems'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
+                <Link to='/marketmywork'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
+                <Link to='/marketdocs'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
+              </div>
+              */}
+              <li><Link to='/agents'>Agents</Link></li>
+              <li><Link to='/pricing'>Pricing</Link></li>
+              <li><Link to='/about'>About</Link></li>
+              <li><Link to='/blog'>Blog</Link></li>
             </div>
-            */}
-            <Link to='/agents'><li><a className="smoothscroll" href="#testimonials">Agents</a></li></Link>
-            <Link to='/pricing'><li><a className="smoothscroll" href="#contact">Pricing</a></li></Link>
-            <Link to='/about'><li><a className="smoothscroll" href="#contact">About</a></li></Link>
-            <Link to='/blog'><li><a className="smoothscroll" href="#contact">Blog</a></li></Link>
-            </div>
-            <div className="nav right">
-            |
-            {
-                !isAuthenticated() && (
-                  <li><a className="smoothscroll" id="signup" href="#" onClick={this.login.bind(this)}>Log In</a></li>
-                  )
-              }
-              {
-                isAuthenticated() && (
+            <div className="nav right">      
+            { !isAuthenticated() ? (
+                <li><a className="smoothscroll" id="signup" href="#" onClick={this.login.bind(this)}>Log In</a></li> ) :(                
+                <div>
+                  <span><strong>User: </strong></span>
+                  <li><a href="/dashboarD">Dashboard</a></li>
                   <li><a className="smoothscroll" id="signup" href="#" onClick={this.logout.bind(this)}>Log Out</a></li>
-                  )
-              }
+                </div>
+            )}
             </div>
          </ul>
       </nav>

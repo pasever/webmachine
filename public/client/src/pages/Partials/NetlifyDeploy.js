@@ -1,8 +1,8 @@
 
 
 import React, {Component} from 'react';
-import { Input, TextArea, Button } from '../../components/form';
-import API from '../../../utils/API';
+import { Input, TextArea, Button } from '../../../../common/form';
+import API from '../../../../common/utils/API';
 
 import '../../styles/netlifyDeploy.css';
 

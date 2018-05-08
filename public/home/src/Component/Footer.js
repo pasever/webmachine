@@ -10,18 +10,18 @@ class Footer extends Component {
          <div className="leftFooter">
             <ul className="social-links leftUl">
             <div>
-            <Link to='/'><li><a href="">Home</a></li></Link>
-            <Link to='/products'><li><a href="">Products</a></li></Link>
-            <Link to='/solutions'><li><a href="">Solutions</a></li></Link>
-            <Link to='/market'><li><a href="">Market</a></li></Link>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/products'>Products</Link></li>
+            <li><Link to='/solutions'>Solutions</Link></li>
+            <li><Link to='/market'>Market</Link></li>
           </div>
           </ul>
           <ul className="social-links rightUl">
           <div>
-            <Link to='/agents'><li><a href="">Agents</a></li></Link>
-            <Link to='/pricing'><li><a href="">Pricing</a></li></Link>
-            <Link to='/about'><li><a href="">About</a></li></Link>
-            <Link to='/blog'><li><a href="">Blog</a></li></Link>
+            <li><Link to='/agents'>Agents</Link></li>
+            <li><Link to='/pricing'>Pricing</Link></li>
+            <li><Link to='/about'>About</Link></li>
+            <li><Link to='/blog'>Blog</Link></li>
           </div>
             </ul>
          </div>
