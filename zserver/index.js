@@ -15,7 +15,6 @@ const logger =             require("morgan");
 const api =                require("../api")
 const keys =               require('../config').init();
 const transport =          require('../config/gmail')
-
 const { g, b, gr, r, y } = require('../console');
 
 const app =   express();;
@@ -27,8 +26,9 @@ const app =   express();;
 let envState = true
 if ( process.env.isLive == 'false' ) {
     envState = false
-    require('../db/seedTestDb')(envState)
-  }
+    //require('../db/seedTestDb')(envState)
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////////  Register Middleware       /////////////////////////
@@ -43,9 +43,13 @@ app.use('/form', express.static('public'));
 app.use('/machine', express.static('public'));
 app.use('/market', express.static('public'));
 app.use('/member', express.static('public'));
+<<<<<<< HEAD
+=======
+app.use('/dashboard', express.static('public'));
+>>>>>>> common
 app.use('/', express.static('public/home'));
 app.use('/landing', express.static('public'));
-app.use('/platform', express.static('public'));
+app.use('/client', express.static('public'));
 app.use(favicon(path.join(__dirname, '..', '/public/assets/favicon.ico')));
 app.use(cors())
 
@@ -72,15 +76,14 @@ process.on('uncaughtException', function (er) {
 ////////// Register and Config Routes ///////////////
 ////////////////////////////////////////////////////
 
-const sms =      express.Router();
-const db =       express.Router();
-const git =      express.Router();
-//const web =      express.Router();
-const auth =     express.Router();
-const errs =     express.Router();
-const unk =      express.Router();
-const help =     express.Router();
-
+const sms =       express.Router();
+const db =        express.Router();
+const git =       express.Router();
+const auth =      express.Router();
+const errs =      express.Router();
+const unk =       express.Router();
+const help =      express.Router();
+const home =      express.Router();
 require('../routes/auth')(auth);
 require('../routes/db')(db);
 require('../routes/git')(git);
@@ -89,13 +92,15 @@ require('../routes/sms')(sms);
 require('../routes/unk')(unk);
 require('../routes/error')(errs);
 require('../routes/help')(help);
-
+require('../routes/home')(home);
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////// API CATALOGUE /////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 // auth test
 app.use(auth)
+// home route
+//app.use('/', home);
 // text > twilio > server process
 app.use('/api/sms', sms)
 // web > twilio > text

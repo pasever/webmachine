@@ -11,7 +11,8 @@ const objStore = [
   addr1: '1234 Main Street',
 	addr2: 'Suite 1235',
   city: 'Richmond',
-	state:'Virginia',
+  state:'Virginia',
+  accessToken: "useless1",
 	zip: '12345',
 	contact: 'Bill Smith',
 	phone: '704-555-1212',
@@ -29,12 +30,22 @@ const objStore = [
 	phone: '704-555-1212',
 	sms: "+17042289191",
 	web: "demo",
+<<<<<<< HEAD
 	dbname: "client1",
 	urilocal: "mongodb://localhost:27017/",
 	uri: "mongodb://auto:B0ston@ds157057.mlab.com:57057/",
 	username: "auto",
 	password: "Bost0n",
   isActivated: true
+=======
+	dbname: "smtest",
+	urilocal: "",
+	uri: "mongodb://machina:Charl0tte@ds161630.mlab.com:61630/",
+  username: "machina",
+	password: "Charl0tte",
+  isActivated: true,
+  accessToken: "useless2",
+>>>>>>> common
 	},
 	{
 	name: "Strategic Machines (test cloud)",
@@ -48,11 +59,21 @@ const objStore = [
 	phone: '704-555-1212',
 	sms: "+19148195104",
 	web: "demo",
+<<<<<<< HEAD
 	dbname: "client2",
 	uri: "mongodb://auto:B0ston@ds251889.mlab.com:51889/",
 	username: "auto",
 	password: "B0ston",
   isActivated: true
+=======
+	dbname: "smcloud",
+	uri: "mongodb://machina:Charl0tte@ds147589.mlab.com:47589/",
+	username: "machina",
+	password: "Charl0tte",
+  isActivated: true,
+  accessToken: "useless3",
+
+>>>>>>> common
 },
   {
 	name: "Beta Industries",
@@ -61,11 +82,13 @@ const objStore = [
 	addr2: 'Suite 1235',
   city: 'Richmond',
 	state:'Virginia',
-	zip: '12345',
+  zip: '12345',
+  accessToken: "7y54ueo4",
 	contact: 'Bill Jones',
 	phone: '704-555-1212',
   isPrivate: false,
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless4",
   },
   {
 	name: "Alpha Industries",
@@ -74,11 +97,12 @@ const objStore = [
 	addr2: 'Suite 1235',
   city: 'Richmond',
 	state:'Virginia',
-	zip: '12345',
+  zip: '12345',
+  accessToken: "5aef0a1fe1f6ba712cfa47aa",
 	contact: 'Bill Alpha',
 	phone: '704-555-1212',
   isPrivate: false,
-  isActivated: false
+  isActivated: false,
   },
   {
 	name: "Mercy (test db)",
@@ -97,7 +121,8 @@ const objStore = [
 	contact: 'Charlie King',
 	phone: '704-555-1212',
   isPrivate: false,
-  isActivated: true
+  isActivated: true,
+  accessToken: "useless6",
 	},
   {
   name: "Pivot and Scale",
@@ -109,7 +134,8 @@ const objStore = [
   zip: '12345',
   contact: 'Dave',
   phone: '+17042282288',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless7",
   },
   {
   name: "Medical Center",
@@ -121,7 +147,9 @@ const objStore = [
   zip: '12345',
   contact: 'Nurse',
   phone: '+17045551212',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless8",
+
   },
   {
   name: "Software company",
@@ -133,7 +161,8 @@ const objStore = [
   zip: '12345',
   contact: 'Mike',
   phone: '+17045551111',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless9",
   },
   {
   name: "Utility",
@@ -145,7 +174,8 @@ const objStore = [
   zip: '12345',
   contact: 'Uko',
   phone: '+19192223333',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless10",
   },
   {
   name: "IBM",
@@ -157,7 +187,8 @@ const objStore = [
   zip: '12345',
   contact: 'Janna',
   phone: '+12124454444',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless11",
   },
   {
   name: "xio partners",
@@ -169,7 +200,8 @@ const objStore = [
   zip: '12345',
   contact: 'Pat',
   phone: '+17044445555',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless12",
   }
 
 ]

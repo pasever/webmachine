@@ -58,3 +58,8 @@ a.link {
   line-height: 1.5;
   color: white;
 }
+
+
+.floating-form {
+  display: inline;
+}

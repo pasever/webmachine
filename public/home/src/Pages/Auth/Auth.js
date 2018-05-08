@@ -31,8 +31,9 @@ export default class Auth {
     this.auth0.authorize();
   }
 
-//this function checks for successful authentication, and if successful sets session and moves you to the new page
+  //this function checks for successful authentication, and if successful sets session and moves you to the new page
   handleAuthentication() {
+    console.log("Handling authentication!!");
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
@@ -41,44 +42,41 @@ export default class Auth {
         history.replace('/');
         console.log(err);
       }
-    });
-    
+    });    
   }
 
+  // Sets the session in local storage
   setSession(authResult) {
     // Set the time that the Access Token will expire at
-    let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    // Gets about a month
+    let expiresAt = JSON.stringify((authResult.expiresIn * 304400) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     history.replace('/');    
   }
 
-//this function acquires user access token to be used for returning profile information
+  //this function acquires user access token to be used for returning profile information
   getAccessToken() {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
-      return
-      throw new Error('No access token found');
+      return null;
     }
     return accessToken;
   }
 
   
-//set variable to hold user profile
-  userProfile;
-//this function returns profile object which is populated with the authenticated user's information
+  //this function returns profile object which is populated with the authenticated user's information
   getProfile(cb) {
     let accessToken = this.getAccessToken();
     if(accessToken){
-    this.auth0.client.userInfo(accessToken, (err, profile) => {
-      if (profile) {
-        this.userProfile = profile;
-      }
-      cb(err, profile);
-      console.log(profile)
-    });
-  }
+      this.auth0.client.userInfo(accessToken, (err, profile) => {
+        if (profile) {
+          return cb(err, profile);
+        }
+        return cb(err, {});      
+      });
+    }
   }
 
 

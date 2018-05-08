@@ -6,12 +6,12 @@
 /////     DB connection is secured for org        ////
 /////////////////////////////////////////////////////
 
-const bodyParser =  				require('body-parser')
-const mongoose =          	require('mongoose')
-const clone =     					require('clone-deep')
-const platformarray =       require('../config').platform()
+const bodyParser =  			require('body-parser')
+const mongoose =          	    require('mongoose')
+const clone =     				require('clone-deep')
+const platformarray =           require('../config').platform()
 const keys =          			require('../config').init();
-const { g, b, gr, r, y } =  require('../console')
+const { g, b, gr, r, y } =      require('../console')
 
 const options = {
   	poolSize: 10, // Maintain up to 10 socket connections
@@ -23,26 +23,26 @@ const auth = (router) => {
 	router.use('/api', function(req, res, next) {
 
 		console.log("-------------AUTHORIZATION-------------")
-    // REFACTOR
+        // REFACTOR
 		// inspect http api calls being made
 		// platform will assign temporary auth token
-    let test = undefined
-    let apiPath = req.url
-    test = apiPath.match(/github/g)
-    if (test) {
-      apiPath = '/github'
-    }
-    test = apiPath.match(/platform/g);
-    if(test) apiPath = '/platform';
-    console.log(req.url)
-    console.log(apiPath)
-    console.log(test)
+        let test = undefined
+        let apiPath = req.url
+
+        test = apiPath.match(/github/g)
+        if (test) {
+        apiPath = '/github'
+        }
+        test = apiPath.match(/client/g);
+        if(test) apiPath = '/db/client';
+        console.log(req.url)
+        console.log(apiPath)
+        console.log(test)
 
 		switch(apiPath) {
 			case '/db/agent':
             case '/db/client':
             case '/github':
-            case '/platform':
                 const token = req.get('Authorization')
 
 				if (token) {
