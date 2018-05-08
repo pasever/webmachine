@@ -30,22 +30,12 @@ const objStore = [
 	phone: '704-555-1212',
 	sms: "+17042289191",
 	web: "demo",
-<<<<<<< HEAD
 	dbname: "client1",
 	urilocal: "mongodb://localhost:27017/",
 	uri: "mongodb://auto:B0ston@ds157057.mlab.com:57057/",
 	username: "auto",
 	password: "Bost0n",
   isActivated: true
-=======
-	dbname: "smtest",
-	urilocal: "",
-	uri: "mongodb://machina:Charl0tte@ds161630.mlab.com:61630/",
-  username: "machina",
-	password: "Charl0tte",
-  isActivated: true,
-  accessToken: "useless2",
->>>>>>> common
 	},
 	{
 	name: "Strategic Machines (test cloud)",
@@ -59,21 +49,11 @@ const objStore = [
 	phone: '704-555-1212',
 	sms: "+19148195104",
 	web: "demo",
-<<<<<<< HEAD
 	dbname: "client2",
 	uri: "mongodb://auto:B0ston@ds251889.mlab.com:51889/",
 	username: "auto",
 	password: "B0ston",
   isActivated: true
-=======
-	dbname: "smcloud",
-	uri: "mongodb://machina:Charl0tte@ds147589.mlab.com:47589/",
-	username: "machina",
-	password: "Charl0tte",
-  isActivated: true,
-  accessToken: "useless3",
-
->>>>>>> common
 },
   {
 	name: "Beta Industries",

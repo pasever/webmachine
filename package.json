@@ -52,10 +52,7 @@
     "express-validator": "^5.1.2",
     "form-serialize": "^0.7.2",
     "jsonwebtoken": "^8.2.1",
-<<<<<<< HEAD
     "jwks-rsa": "^1.2.1",
-=======
->>>>>>> 6b509bfe3c10ec3785ff1926d954596fe65a3bd0
     "moment": "^2.21.0",
     "mongodb": "^3.0.7",
     "mongoose": "^5.0.14",
