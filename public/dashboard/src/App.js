@@ -7,7 +7,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import API from '../../common/utils';
+import API from '../../common/utils/API';
 import './App.css';
 
 
@@ -34,7 +34,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        API.get
+        API.getClientsByAccessId().then(resp => { console.log(resp)})
     }
 
     render() {
