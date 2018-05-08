@@ -4,8 +4,8 @@
 // DGO
 
 import React, { Component } from "react";
-import { Input, TextArea } from "../../components/form";
-import { Col } from "../../components/grid";
+import { Input, TextArea } from "../../../../common/form";
+import { Col } from "../../../../common/grid";
 /// Displays the name and addressfields from stripe
 
 /* REQUIRED PROPS

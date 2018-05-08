@@ -7,12 +7,12 @@
 'use strict';
 
 import React, { Component } from 'react';
-import API from '../utils/API';
+import API from '../../common/utils/API';
 import LoadingPage from './pages/LoadingPage';
 import { MaintenanceHeader } from './pages/Partials/';
-import {Container, Row, Col } from './components/grid';
+import {Container, Row, Col } from '../../common/grid';
 import { Link } from 'react-router-dom';
-import ErrorBoundary from './components/error/ErrorBoundary';
+import ErrorBoundary from '../../common/error/ErrorBoundary';
 import MaintenanceWrapper  from './pages/Maintenance/MaintenanceWrapper';
 import 'react-tabs/style/react-tabs.css';
 import './App.css';
@@ -53,14 +53,14 @@ export default class App extends Component {
         const data = this.getPlatformPageData().then(resp => { return resp.json(); });
         
         // Gets our localized user.  Preferably from a localStorage.profileId
-        const user = API.getAuthorizedClient(); // get user from localStorage.token through api
+        const user = API.getClientForMaintenance(); // get user from localStorage.token through api
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, user]).then(values => {
             let user = values[1];
             console.log(values);
             /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
             if(Object.keys(user.data).length === 0 || user === "TOKEN REJECTED") {
-                this.setState({ noBusiness: true });
+                this.setState({ redirectToLogin: true });
             } else {
                 this.setState({ pageData: values[0], user: user.data});
             }

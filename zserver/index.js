@@ -76,7 +76,6 @@ process.on('uncaughtException', function (er) {
 const sms =       express.Router();
 const db =        express.Router();
 const git =       express.Router();
-//const web =      express.Router();
 const auth =      express.Router();
 const errs =      express.Router();
 const unk =       express.Router();
@@ -97,6 +96,8 @@ require('../routes/home')(home);
 
 // auth test
 app.use(auth)
+// home route
+//app.use('/', home);
 // text > twilio > server process
 app.use('/api/sms', sms)
 // web > twilio > text

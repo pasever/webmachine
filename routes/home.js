@@ -13,7 +13,7 @@ const home = (router) => {
 	router.use(function(req, res, next) {
 
 	console.log("-------------INCOMING home MESSAGE -----------")
-
+    console.log(req);
     res.status(200)
     res.json({message: "home message received"})
     next()

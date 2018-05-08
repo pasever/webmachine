@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { UserMaintenance, DbMaintenance, 
         BillingMaintenance, WebMaintenance } from './';
 import { Tab, TabPanel, Tabs, TabList } from 'react-tabs';
-import {Container, Row, Col } from '../../components/grid';
-import API from '../../../utils/API';
+import {Container, Row, Col } from '../../../../common/grid';
+import API from '../../../../common/utils/API';
 
 import 'react-tabs/style/react-tabs.css';
 import '../../App.css';

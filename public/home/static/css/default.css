@@ -456,6 +456,7 @@ img.pull-left { margin: 12px 18px 0px 0px; }
 
 /*  6. Buttons  --------------------------------------------------------- */
 
+
 .button,
 .button:visited,
 button,
@@ -516,6 +517,7 @@ input[type="button"].full-width {
 }
 
 /* Fix for odd Mozilla border & padding issues */
+
 button::-moz-focus-inner,
 input::-moz-focus-inner {
     border: 0;

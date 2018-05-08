@@ -9,7 +9,7 @@
   },
   "scripts": {
     "webpack-watch": "webpack -w",
-    "express-server": "node ./server.js",
+    "express-server": "nodemon ./server.js",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\" ",
     "build": "node node_modules/webpack/bin/webpack.js --colors --progress -p",
     "machine": "node ./server.js",
@@ -67,6 +67,7 @@
     "react-dom": "^16.3.0",
     "react-input-mask": "^1.2.2",
     "react-markdown-renderer": "^1.4.0",
+    "react-responsive-modal": "^3.0.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-stripe-elements": "^1.6.0",
