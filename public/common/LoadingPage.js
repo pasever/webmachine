@@ -6,7 +6,7 @@
 "use strict";
 
 import React from "react";
-import "../styles/loadingpage.css";
+import "./styles/loadingpage.css";
 
 const LoadingPage = () => (
   <div className="loading-page-wrapper">

@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import API from '../../common/utils/API';
-import LoadingPage from './pages/LoadingPage';
+import LoadingPage from '../../common/LoadingPage';
 import { MaintenanceHeader } from './pages/Partials/';
 import {Container, Row, Col } from '../../common/grid';
 import { Link } from 'react-router-dom';
