@@ -56,7 +56,11 @@ const dbclient = (router) => {
             });
         }
     });
-    
+    router.get('/public', (req, res, next) => {
+        clientApi.getPublicClients(req.token, req.conn, (response) => {
+            res.status(200).send(response);
+        })
+    })
     // Updates a client
     router.post('/', (req, res, next) => {
         console.log("-----------DB Clients POST ROUTE -----------");

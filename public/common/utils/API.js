@@ -17,6 +17,9 @@ export default {
     getClientsByAccessId: () => {
         return axios.get('/api/db/client?accessToken=' + localStorage.id_token);
     },
+    getPublicClients: () => {
+        return axios.get('/api/db/client/public');
+    },
     /// WE WILL NOT BE ADDING CLIENTS FROM THIS SECTION ANYMORE
     //addClient: (client) => {
         //localStorage.clientId = client.clientId;
