@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Label from './FormElements/Label';
+import Input from './FormElements/Input';
 
 /**
  * ---- Fields ----
@@ -16,11 +18,13 @@ import React, { Component } from 'react';
 class MemberForm extends Component {
   render() {
     return (
-      <form>
+      <form style={{ width: '70%', margin: '0 auto' }}>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label for="inputEmail4">Email</label>
-            <input type="email" className="form-control" id="inputEmail4" placeholder="Email" />
+            <Label forHtml='name' innerText='Name' />
+            {/* <label for="inputEmail4">Email</label> */}
+            <Input type='text' placeholder='Name' id='name' />
+            {/* <input type="email" className="form-control" id="inputEmail4" placeholder="Email" /> */}
           </div>
           <div className="form-group col-md-6">
             <label for="inputPassword4">Password</label>
