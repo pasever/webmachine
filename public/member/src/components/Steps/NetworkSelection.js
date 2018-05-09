@@ -13,12 +13,36 @@ class NetworkSelection extends Component {
   }
 
   renderNetworks() {
-    return <ul>
+    // Will eventually be array of networks pulled from DB
+    let networks = [1,2,3,4,5,6,7];
 
-    </ul>
+    {/*
+    * @TODO: onClick, add active class and add network identifier to an array of networksToJoin[]
+    */}
+    return (
+      <ul
+        className="list-group list-group-flush networks-results"
+        style={{overflowY: 'scroll', maxHeight: '250px'}}
+      >
+        {networks.map((n, i) =>
+          <li
+            id={`networdId${i+1}`} key={i+1}
+            className="list-group-item network"
+            onClick={() => console.log('click')}
+          >
+            {`Network ${n}`}
+          </li>)}
+      </ul>
+    )
   }
 
-  addToList() {}
+  // Triggered on <li> click.
+  // If active class NOT present, adds network id to state
+  addNetworkToState() {}
+
+  // Triggered on <li> click.
+  // If active class present, adds network id to state
+  removeNetworkFromState() {}
 
   render() {
     return (
@@ -50,21 +74,7 @@ class NetworkSelection extends Component {
           
             <div className="row m-4">
               <div className="col-md-8 offset-md-2 col-sm-12">
-                <ul className="list-group list-group-flush networks-results" style={{overflowY: 'scroll', maxHeight: '250px'}}>
-                  {/*
-                  * @TODO: onClick, add active class and add network identifier to an array of networksToJoin[]
-                  */}
-                  <li className="list-group-item network active">Cras justo odio</li>
-                  <li className="list-group-item network">Dapibus ac facilisis in</li>
-                  <li className="list-group-item network">Morbi leo risus</li>
-                  <li className="list-group-item network active">Porta ac consectetur ac</li>
-                  <li className="list-group-item network">Vestibulum at eros</li>
-                  <li className="list-group-item network">Cras justo odio</li>
-                  <li className="list-group-item network">Dapibus ac facilisis in</li>
-                  <li className="list-group-item network">Morbi leo risus</li>
-                  <li className="list-group-item network">Porta ac consectetur ac</li>
-                  <li className="list-group-item network">Vestibulum at eros</li>
-                </ul>
+                {this.renderNetworks()}
               </div>
             </div>
 
