@@ -8,7 +8,7 @@
  */
 
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import NetworkSelection from './components/Steps/NetworkSelection';
 import MemberForm from './components/Steps/MemberForm';
 
