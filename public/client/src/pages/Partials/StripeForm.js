@@ -6,7 +6,7 @@ import React, { Component } from "react";
 import { injectStripe } from "react-stripe-elements";
 import { Button } from "../../../../common/form";
 import { CardSection, NameAndAddressSection, StripeData } from "./";
-import LoadingPage from "../LoadingPage";
+import LoadingPage from "../../../../common/LoadingPage";
 import API from "../../../../common/utils/API";
 
 const stripeCust = {};

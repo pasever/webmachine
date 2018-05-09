@@ -36,7 +36,7 @@ const dbclient = (router) => {
         let accessToken = req.query.accessToken || null;
         let clientId = req.query.clientId || null;
         // Checks if there is an access Id passed, gets the matching Client
-
+        console.log(verifyJwt.getIdFromToken(accessToken));
         if(accessToken && !clientId) {   
             // Gets the ID out of the JWT
             let accessId = verifyJwt.getIdFromToken(accessToken);
