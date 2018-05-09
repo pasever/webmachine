@@ -6,7 +6,7 @@ import React from 'react';
  */
 
 const Label = ({ forHtml, innerText }) =>
-  <label for={forHtml}>
+  <label htmlFor={forHtml}>
     { innerText }
   </label>
 
