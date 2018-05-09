@@ -1,10 +1,17 @@
 /**
  * @description
  * Member Registration page/process.
- * Contains member registration form.
- * Successful submission of this form will
- * create and insert a Member document within
- * the Members collections of the respective Client(s).
+ * 
+ * Process consists of two (or more?) steps:
+ * 1. Network selection - User selects from array 
+ *    of available networks to join.
+ * 2. Member form - Member specific information
+ *    is gathered through a form.
+ * 
+ * Successful submission of the data gathered in this
+ * process creates and inserts a Member document within
+ * the Members collections of the respective Client(s)
+ * who manage the selected Network(s).
  */
 
 import React, { Component } from 'react';
@@ -14,6 +21,12 @@ import MemberForm from './components/Steps/MemberForm';
 
 class MemberRegistration extends Component {
   render() {
+    /**
+     * @TODO
+     * Add state and write methods to lift state.
+     * State at this level is used to keep track of
+     * data as we progress through member registration steps.
+     */
     return (
         <Router>
           <div className='container'>
