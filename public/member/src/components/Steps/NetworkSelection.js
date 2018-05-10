@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Input from '../FormElements/Input';
+import React, { Component }       from 'react';
+import { Link }                   from 'react-router-dom';
+import Input                      from '../FormElements/Input';
 
 class NetworkSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
       networksToJoin: []
-    }
+    };
 
-    this.addToList = this.addToList.bind(this);
+    // bindings
+    this.toggleActiveClass = this.toggleActiveClass.bind(this);
+    this.addNetworkToState = this.addNetworkToState.bind(this);
   }
 
+  // Renders discoverable networks as a list-group
+  /** @todo pass array of networks from state */
   renderNetworks() {
     // Will eventually be array of networks pulled from DB
     let networks = [1,2,3,4,5,6,7];
 
-    {/*
-    * @TODO: onClick, add active class and add network identifier to an array of networksToJoin[]
-    */}
+    // Return array of <li>s; one <li> for each discoverable network
     return (
       <ul
         className="list-group list-group-flush networks-results"
@@ -26,9 +28,9 @@ class NetworkSelection extends Component {
       >
         {networks.map((n, i) =>
           <li
-            id={`networdId${i+1}`} key={i+1}
+            id={`networkId${i+1}`} key={i+1}
             className="list-group-item network"
-            onClick={() => console.log('click')}
+            onClick={this.toggleActiveClass}
           >
             {`Network ${n}`}
           </li>)}
@@ -36,13 +38,43 @@ class NetworkSelection extends Component {
     )
   }
 
-  // Triggered on <li> click.
-  // If active class NOT present, adds network id to state
-  addNetworkToState() {}
+  // Adds or removes .active class to <li>.network.
+  // If it adds .active, it also adds it to state.
+  // If it removes .active, it also removes it from state.
+  /** @param click_event */
+  toggleActiveClass(e) {
+    let elem = e.target;
 
-  // Triggered on <li> click.
-  // If active class present, adds network id to state
-  removeNetworkFromState() {}
+    if (!elem.classList.contains('active')) {
+      elem.classList.add('active');
+      this.addNetworkToState(elem.id);
+    } else {
+      elem.classList.remove('active');
+      this.removeNetworkFromState(elem.id);
+    }
+  }
+
+  // Gets called if active class is NOT present.
+  // Adds network id to state.
+  /** @param netword_id */
+  addNetworkToState(net_id) {
+    let { networksToJoin } = this.state;
+    networksToJoin = networksToJoin.concat(net_id);
+    this.setState({ networksToJoin  });
+  }
+
+  // Gets called if active class is present.
+  // Removes network id to state.
+  /** @param netword_id */
+  removeNetworkFromState(net_id) {
+    let { networksToJoin } = this.state;
+    let index = networksToJoin.indexOf(net_id);
+    if (index > -1) {
+      networksToJoin.splice(index, 1);
+      this.setState({ networksToJoin })
+    }
+  }
+
 
   render() {
     return (
@@ -70,7 +102,7 @@ class NetworkSelection extends Component {
 
         <main>
 
-          <section id='searchable-networks'>
+          <section id='discoverable-networks'>
           
             <div className="row m-4">
               <div className="col-md-8 offset-md-2 col-sm-12">
