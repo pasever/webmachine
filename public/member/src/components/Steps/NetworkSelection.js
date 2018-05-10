@@ -75,8 +75,17 @@ class NetworkSelection extends Component {
     }
   }
 
+  /** @description
+   * Lifts state up to Highest Order Component.
+   * Does NOT lift state if networksToJoin is empty
+   */
+  liftState() {
+
+  }
+
 
   render() {
+    {this.props.passMeTheProps('HERE YOU GO HOMIE')}
     return (
       <div className="step1-network-selection" style={{textAlign: 'center', padding: '10px', position:'relative'}} >
         
