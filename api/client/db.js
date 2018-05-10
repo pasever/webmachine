@@ -65,15 +65,32 @@ exports.getPublicClients = () => {
 // Gets Client by id
 exports.getClient = (id) => {
     return new Promise((resolve, reject) => {
-        Client.find({ where: { id: id }}, (err, response) => {
+        Client.find({ where: { id: id }}).then(response => {
+            resolve(response);
+        }).catch(err => {
             if(err) {
                 if(err.error !== 'not_found') 
                     resolve(err);
                 else 
                     reject(err);
             }
+        });
+    })
+}
+
+exports.getJoinedClients = (aId) => {
+    return new Promise((resolve, reject) => {
+        Client.find({ members: aId }).then(response => {
             resolve(response);
+        }).catch(err => {
+            if(err) {
+                if(err.error !== 'not_found') 
+                    resolve(err);
+                else 
+                    reject(err);
+            }            
         })
+
     })
 }
 

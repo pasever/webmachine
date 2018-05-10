@@ -23,7 +23,9 @@ API/Core Changes :
 ROUTES Changes :
   * Renamed dbclient.js to dbclient.js.bak
   * Renamed dbplatform to dbclient.js
+  * Route: /api/db/client can either be sent only an accessId or both an accessId and a clientId.  If it is just provided with an access Id it will return an array of all clients that accessId manages.  Otherwise, it will return a single client (for maintenance).  This route will return a 401 Unauthorized error code.
   * Added /api/db/client/public route, which gets all Clients who are marked isPrivate: false and isActivated: true.  This is for public network selection.
+  * Added /api/db/client/joined route, which gets all Clients a member has joined.  
 
 PUBLIC Changes :
   * Added /common folder to hold all common React components

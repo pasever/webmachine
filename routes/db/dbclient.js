@@ -51,11 +51,24 @@ const dbclient = (router) => {
             });
         // Returns all Clients
         } else {
-            clientApi.getClients(req.token, req.conn, (response) => {
-                res.status(200).send(response);
+            res.status(401).send({ 
+                error: "Nothing to do",
             });
         }
     });
+    router.get('/joined', (req, res, next) => {
+        let accessToken = req.query.accessToken || null;
+        if(accessToken) {
+            let accessId = verifyJwt.getIdFromToken(accessToken);
+            clientApi.getJoinedClients(req.token, accessId, req.conn, (response) => {
+                res.status(200).send(response);
+            });
+        } else {
+            res.status(401).send({
+                error: "Nothing to do",
+            });
+        }
+    })
     router.get('/public', (req, res, next) => {
         clientApi.getPublicClients(req.token, req.conn, (response) => {
             res.status(200).send(response);

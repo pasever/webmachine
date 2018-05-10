@@ -40,6 +40,19 @@ exports.getClient = (token, id, conn, cb) => {
     }
 }
 
+exports.getJoinedClients = (token, accessId, conn, cb) => {
+    thread(conn).then((result) => {
+        cb(result);
+    }).catch((err) => {
+        console.log("ERROR IN GET JoinedClients PROCESSING");
+        console.log(err);
+    });
+    async function thread(conn) {
+        let result = await db.getJoinedClients(accessId);
+        return result;
+    }
+}
+
 // Gets a/many client(s) by AuthO accessId
 exports.getOneOwnedClient = (token, accessId, clientId, conn, cb) => {
     thread(conn).then((result) => {
