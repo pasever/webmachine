@@ -9,24 +9,26 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "../../../../common/grid/";
 import { Input, TextArea, Button } from "../../../../common/form/";
 import ErrorBoundary from "../../../../common/error/ErrorBoundary";
+import Dropzone from 'dropzone';
 import "../../styles/maintenancepage.css";
+
 
 /* 
 REQUIRED PROPS: 
     onSubmit (method) - method that fires when the form is submitted
     errors - errors object
-    user - the user object
+    client - the client object
     text - text to display
     updateFormField (method) - method that fires when a form value is updated
 */
-export const UserMaintenance = ({ errors, text, user, onSubmit, updateFormField, isSaving }) => (
+export const GeneralMaintenance = ({ errors, text, client, onSubmit, updateFormField, isSaving }) => (
   <ErrorBoundary>
     <div className="form-styles light-shadow">
       {text.title ? <h2>{text.title}</h2> : ""}
       {text.body ? <p>{text.body}</p> : ""}
       <form onSubmit={onSubmit}>
         <Input
-          value={user.name}
+          value={client.name}
           name="name"
           onChange={updateFormField}
           displayName="Name"
@@ -36,7 +38,7 @@ export const UserMaintenance = ({ errors, text, user, onSubmit, updateFormField,
         />
 
         <TextArea
-          value={user.description}
+          value={client.description}
           name="description"
           onChange={updateFormField}
           displayName="Description"
@@ -47,7 +49,7 @@ export const UserMaintenance = ({ errors, text, user, onSubmit, updateFormField,
         />
 
         <Input
-          value={user.contact}
+          value={client.contact}
           name="contact"
           onChange={updateFormField}
           displayName="Contact"
@@ -58,7 +60,7 @@ export const UserMaintenance = ({ errors, text, user, onSubmit, updateFormField,
         />
 
         <Input
-          value={user.email}
+          value={client.email}
           name="contact"
           onChange={updateFormField}
           classPrepend="fa fa-envelope"
@@ -69,7 +71,7 @@ export const UserMaintenance = ({ errors, text, user, onSubmit, updateFormField,
         />
 
         <Input
-          value={user.sms}
+          value={client.sms}
           name="sms"
           onChange={updateFormField}
           displayName="SMS Phone #"

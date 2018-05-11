@@ -15,16 +15,16 @@ import "../../styles/maintenancepage.css";
 REQUIRED PROPS: 
     onSubmit (method) - method that fires when the form is submitted
     errors - errors object
-    user - the user object
+    client - the client object
     text - text to display
     updateFormField (method) - method that fires when a form value is updated
 */
-export const DbMaintenance = ({ errors, text, user, onSubmit, updateFormField,isSaving }) => (
+export const DbMaintenance = ({ errors, text, client, onSubmit, updateFormField,isSaving }) => (
   <ErrorBoundary>
     <div className="form-styles light-shadow">
       {text.title ? <h2>{text.title}</h2> : ""}
       {text.body ? <p>{text.body}</p> : ""}
-      {user.dbConnected ? (
+      {client.dbConnected ? (
         <h6>
           <i className="fa fa-toggle-on" /> db can connect.
         </h6>
@@ -36,7 +36,7 @@ export const DbMaintenance = ({ errors, text, user, onSubmit, updateFormField,is
       )}
       <form onSubmit={onSubmit}>
         <Input
-          value={user.dbname}
+          value={client.dbname}
           name="dbname"
           errorText={errors.dbname}
           placeholder="Database Name"
@@ -46,19 +46,19 @@ export const DbMaintenance = ({ errors, text, user, onSubmit, updateFormField,is
         />
 
         <Input
-          value={user.uri}
+          value={client.uri}
           name="uri"
           errorText={errors.uri}
           placeholder="db.example.net"
           displayName="Database URI"
           type="text"
-          byline="Do not include your username and password"
+          byline="Do not include your clientname and password"
           onChange={updateFormField}
           classPrepend="fa fa-database"
         />
 
         <Input
-          value={user.username}
+          value={client.username}
           name="username"
           errorText={errors.username}
           placeholder="username"
@@ -68,7 +68,7 @@ export const DbMaintenance = ({ errors, text, user, onSubmit, updateFormField,is
         />
 
         <Input
-          value={user.password}
+          value={client.password}
           name="password"
           errorText={errors.password}
           placeholder=""

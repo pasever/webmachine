@@ -9,8 +9,10 @@
 import React, { Component } from 'react';
 import API from '../../common/utils/API';
 import LoadingPage from '../../common/LoadingPage';
+
 import './App.css';
 
+const config = require('../../../config').init();
 
 
 // The APP class is currently the main hub for the platform.

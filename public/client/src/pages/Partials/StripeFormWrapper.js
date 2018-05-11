@@ -14,7 +14,7 @@ export class StripeFormWrapper extends Component {
     return (
       <Elements>
         <StripeForm
-          user={this.props.user}
+          client={this.props.client}
           updateFormField={this.props.updateFormField}
         />
       </Elements>
