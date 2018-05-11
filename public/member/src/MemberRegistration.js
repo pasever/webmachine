@@ -52,7 +52,8 @@ class MemberRegistration extends Component {
    */
 
   liftChildState(value) {
-    this.setState({ test: value })
+    // this.setState({ test: value })
+    console.log(value);
   }
 
   render() {

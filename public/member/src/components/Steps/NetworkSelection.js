@@ -90,7 +90,7 @@ class NetworkSelection extends Component {
   // Lifts state up to Highest Order Component.
   // Does NOT lift state if networksToJoin is empty
   handlePageAdvance() {
-    {this.props.liftState('lifting state from child NetworkSelection')}
+    // this.props.liftState('lifting state from child NetworkSelection')
   }
 
 
