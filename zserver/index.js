@@ -7,6 +7,7 @@
 
 const express =            require('express');
 const expressValidator =   require('express-validator');
+const history =              require('connect-history-api-fallback');
 const path =               require('path');
 const bodyParser =         require('body-parser');
 const cors =               require('cors')
@@ -34,6 +35,7 @@ if ( process.env.isLive == 'false' ) {
 ////////////////////  Register Middleware       /////////////////////////
 ////////////////////////////////////////////////////////////////////////
 app.use(logger("dev"));
+app.use(history({ verbose: true }));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(expressValidator());
