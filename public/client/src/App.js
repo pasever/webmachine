@@ -10,11 +10,11 @@ import React, { Component } from 'react';
 import API from '../../common/utils/API';
 import URI from '../../common/utils/URI';
 import LoadingPage from '../../common/LoadingPage';
-import { MaintenanceHeader } from './pages/Partials/';
+import { MaintenanceHeader } from './components/Partials/';
 import {Container, Row, Col } from '../../common/grid';
 import { Link } from 'react-router-dom';
 import ErrorBoundary from '../../common/error/ErrorBoundary';
-import MaintenanceWrapper  from './pages/Maintenance/MaintenanceWrapper';
+import MaintenanceWrapper  from './components/Maintenance/MaintenanceWrapper';
 import 'react-tabs/style/react-tabs.css';
 import './App.css';
 

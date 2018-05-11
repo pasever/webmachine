@@ -38,7 +38,7 @@ export default class App extends Component {
     componentDidMount() {
         let ownedNetworks = API.getClientsByAccessId();
         let joinedNetworks = API.getJoinedNetworks();
-        Promise.all([ownedNetworks]).then(values => {
+        Promise.all([ownedNetworks, joinedNetworks]).then(values => {
             console.log(values);
             this.setState({ isLoading: false, ownedNetworks: values[0].data});
         })
