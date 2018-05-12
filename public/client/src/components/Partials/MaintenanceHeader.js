@@ -8,15 +8,15 @@ import { Col } from "../../../../common/grid/";
 
 /* 
 REQUIRED PROPS: 
-    user - the user object
+    client - the client object
     ////  FUTURE -- turn into an object
     hasErrors - boolean to tell us if we have errors and display a message 
     toggleSystem (method) - toggles when to go live, if we can go life
 */
-export const MaintenanceHeader = ({ headerText, user, hasErrors, toggleSystem, deletePlatform }) => (
+export const MaintenanceHeader = ({ headerText, client, hasErrors, toggleSystem, deletePlatform }) => (
   <div className="maintenance-header">
     <div className="toggle-section">
-      {user.isLive ? (
+      {client.isLive ? (
         <h6>
           <i onClick={toggleSystem} className="fa fa-toggle-on toggle" /> system
           is live.

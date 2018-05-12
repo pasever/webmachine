@@ -104,7 +104,7 @@ class MaintenanceWrapper extends Component {
                         <GeneralMaintenance
                             client={ this.state.client } updateFormField={ this.updateFormField } 
                             onSubmit={ this.submitForm } errors={ this.state.errors }
-                            text={ this.state.pageData.clientMaintenance } isSaving={this.state.isSaving } />      
+                            text={ this.state.pageData.generalMaintenance } isSaving={this.state.isSaving } />      
                     </Col>
                 </TabPanel>
                 <TabPanel>

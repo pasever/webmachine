@@ -24,14 +24,14 @@ import './App.css';
 
 
 // The APP class is currently the main hub for the platform.
-// It requires the user object, so it will handle all form changes and submits.
+// It requires the client object, so it will handle all form changes and submits.
 export default class App extends Component {
     // ctor
     constructor(props) {
         super(props);
         
         this.state = {
-            user:  null,            //  should be passed in the response from Authorization
+            client:  null,            //  should be passed in the response from Authorization
             pageData: null,         //  page data object
             hasErrors: false,       //  flags if we should display a message about errors
             redirectToLogin: false,
@@ -48,24 +48,24 @@ export default class App extends Component {
         })
     }
 
-    /// When the component mounts, we will try and get all of the platform text and the user object from token.
+    /// When the component mounts, we will try and get all of the platform text and the client object from token.
     componentDidMount() {
         // Gets our platform page data
         const data = this.getPlatformPageData().then(resp => { return resp.json(); });
         
         // Grabs the Id in the query string, and tests if the User has permission to edit this client
         // via their Id.
-        const user = API.getClientForMaintenance(URI.getQuerystringValue("clientId")); 
+        const client = API.getClientForMaintenance(URI.getQuerystringValue("clientId")); 
         
         // Waits till all promises are fulfilled to proceed.
-        Promise.all([data, user]).then(values => {
-            let user = values[1];
-            console.log(user);
+        Promise.all([data, client]).then(values => {
+            let client = values[1];
+            console.log(values);
             /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
-            if(Object.keys(user.data).length === 0 || user === "TOKEN REJECTED") {
+            if(Object.keys(client.data).length === 0 || client === "TOKEN REJECTED") {
                 this.setState({ redirectToLogin: true });
             } else {
-                this.setState({ pageData: values[0], user: user.data});
+                this.setState({ pageData: values[0], client: client.data});
             }
         }).catch((err) => { 
              console.log("ERROR ON MOUNT: ", err)
@@ -78,8 +78,8 @@ export default class App extends Component {
     ///  FUTURE - SOME MORE WARNING SHOULD BE GIVEN BEFORE THE USER ACTUALLY HAS THEIR PLATFORM FLAGGED FOR DELETION.
     deletePlatform = event => {
         event.preventDefault();
-        API.deletePlatform(this.state.user).then(resp => {
-            this.setState({ user: resp.data });
+        API.deletePlatform(this.state.client).then(resp => {
+            this.setState({ client: resp.data });
         })
     }
 
@@ -88,11 +88,11 @@ export default class App extends Component {
     toggleSystem = () => {
         //// RUN A TEST IF THE SYSTEM CAN GO LIVE!!
         //// 
-        let user = this.state.user;
-        user.isLive = !user.isLive;
+        let client = this.state.client;
+        client.isLive = !client.isLive;
         
         //// DON'T JUST UPDATE THE STATE - SAVE THE USER!
-        this.setState({ user: user });
+        this.setState({ client: client });
     }
 
     render() {
@@ -110,16 +110,16 @@ export default class App extends Component {
                         <header className="app-header">
                             <h1 className="header-title">{ this.state.pageData.main.title }</h1>
                         </header>
-                        { this.state.user.isDeleted ? ( <h2>This platform has been deleted</h2>) : (
+                        { this.state.client.isDeleted ? ( <h2>This platform has been deleted</h2>) : (
                         <main className="app-content">
                             <ErrorBoundary>
                             <Container>
                                 <Row>
                                     <MaintenanceHeader 
-                                        toggleSystem={this.toggleSystem} user={this.state.user} hasErrors={this.state.hasErrors } 
+                                        toggleSystem={this.toggleSystem} client={this.state.client} hasErrors={this.state.hasErrors } 
                                         headerText={this.state.pageData.header} deletePlatform={ this.deletePlatform } />
                                     { this.state.isSaved ? ( <span className="badge badge-success">Changes have been saved.</span>) : null }
-                                    <MaintenanceWrapper user={this.state.user} pageData={this.state.pageData} />
+                                    <MaintenanceWrapper client={this.state.client} pageData={this.state.pageData} />
                                 </Row>
                             </Container>
                             </ErrorBoundary>

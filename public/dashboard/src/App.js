@@ -52,11 +52,12 @@ export default class App extends Component {
                 { this.state.isLoading ? ( <LoadingPage /> ) : (
                     <div>
                         { this.state.ownedNetworks.length > -1 ? (
-                            <div>
+                            <ul>
+
                                 {this.state.ownedNetworks.map((current, idx) =>  
-                                    <h2 key={idx}>{current.name}</h2>
+                                    <li key={idx}><a href={ `/client?clientId=${ current._id }`}>{current.name}</a></li>
                                 )}
-                            </div>
+                            </ul>
                         ) : (<h2>Nothing to show here</h2>)}
                     </div>
                 )}

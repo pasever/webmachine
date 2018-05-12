@@ -9,9 +9,7 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "../../../../common/grid/";
 import { Input, TextArea, Button } from "../../../../common/form/";
 import ErrorBoundary from "../../../../common/error/ErrorBoundary";
-import Dropzone from 'dropzone';
 import "../../styles/maintenancepage.css";
-
 
 /* 
 REQUIRED PROPS: 
@@ -61,7 +59,7 @@ export const GeneralMaintenance = ({ errors, text, client, onSubmit, updateFormF
 
         <Input
           value={client.email}
-          name="contact"
+          name="email"
           onChange={updateFormField}
           classPrepend="fa fa-envelope"
           displayName="Email"

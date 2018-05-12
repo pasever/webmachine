@@ -28,7 +28,7 @@ export default {
     //    return axios.put('/api/db/client', client);
     //},
     updateClient: (client) => {
-        return axios.post('/api/db/client', { client: client, token: localStorage.id_token});
+        return axios.post('/api/db/client', client);
     },
     deleteClient: (client) => {
         return axios.delete('/api/db/client', { data: { id: client.id }});
