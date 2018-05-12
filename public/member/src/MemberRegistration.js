@@ -15,25 +15,8 @@
  */
 
 import React, { Component }       from 'react';
-import {
-  BrowserRouter as Router,
-  Route
-}                                 from "react-router-dom";
 import NetworkSelection           from './components/Steps/NetworkSelection';
 import MemberForm                 from './components/Steps/MemberForm';
-
-const routes = [
-  {
-    //member_registration_step#
-    path: '/member',
-    exact: true,
-    component: NetworkSelection
-  },
-  {
-    path: '/member-form',
-    component: MemberForm
-  }
-];
 
 class MemberRegistration extends Component {
 
@@ -46,11 +29,6 @@ class MemberRegistration extends Component {
 
     this.liftChildState = this.liftChildState.bind(this);
   }
-
-  /**@todo
-   * write a function that allows each child
-   * to lift its respective state
-   */
 
   liftChildState(page, load) {
     let arrName = /-/.test(page) ? this.state.location.replace('-','_') : page;
@@ -66,28 +44,11 @@ class MemberRegistration extends Component {
     }
   }
 
-  
-
   render() {
     return (
       <div className="container">
         {this.renderPage()}
       </div>
-        // <Router>
-        //   <div className='container'>
-        //     {/* Render a Route forEach object in routes Array */}
-        //     {routes.map(({ path, component: C }) => (
-        //       <Route
-        //         key={path}
-        //         path={path}
-        //          // ...props = routing props
-        //         render={(props) => 
-        //           <C {...props} liftState={this.liftChildState} />
-        //         }
-        //       />
-        //     ))}
-        //   </div>
-        // </Router> 
     )
   }
 }
