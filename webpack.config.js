@@ -12,7 +12,8 @@ module.exports = {
     landing: './public/landing/src/index.js',
     client: './public/client/src/index.js',
     agents: './public/agents/src/index.js',
-    dashboard: './public/dashboard/src/index.js'
+    dashboard: './public/dashboard/src/index.js',
+    member_registration: './public/member/src/index.js'
     },
     devtool: 'source-map',
   module: {

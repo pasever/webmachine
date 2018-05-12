@@ -8,15 +8,19 @@ axios.defaults.headers.common['Authorization'] = localStorage.id_token;
 export default {
     /// USED TO GET A CLIENT BY ACCESS ID AND CLIENT ID
     /// THIS WILL BE USED TO GRAB THE MOST UNIQUE CLIENT TO A USER FOR MAINTENANCE
-    getClientForMaintenance: () => {
+    getClientForMaintenance: (id) => {
         /// HACK - REMOVE HARDCODED ID
-        console.log("We're in the API -- NOW DAMMIT WEBPACK");
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token + '&clientId=5af0bffed0e83c1b545b0309');
+        return axios.get('/api/db/client?clientId=' + id);
     },
-    
+    getJoinedNetworks: () => {
+        return axios.get('/api/db/client/joined');
+    },
     /// USED TO GET ALL CLIENTS ONE INDIVIDUAL LOGIN MANAGES
     getClientsByAccessId: () => {
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token);
+        return axios.get('/api/db/client');
+    },
+    getPublicClients: () => {
+        return axios.get('/api/db/client/public');
     },
     /// WE WILL NOT BE ADDING CLIENTS FROM THIS SECTION ANYMORE
     //addClient: (client) => {

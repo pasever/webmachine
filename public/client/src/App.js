@@ -8,12 +8,13 @@
 
 import React, { Component } from 'react';
 import API from '../../common/utils/API';
-import LoadingPage from './pages/LoadingPage';
-import { MaintenanceHeader } from './pages/Partials/';
+import URI from '../../common/utils/URI';
+import LoadingPage from '../../common/LoadingPage';
+import { MaintenanceHeader } from './components/Partials/';
 import {Container, Row, Col } from '../../common/grid';
 import { Link } from 'react-router-dom';
 import ErrorBoundary from '../../common/error/ErrorBoundary';
-import MaintenanceWrapper  from './pages/Maintenance/MaintenanceWrapper';
+import MaintenanceWrapper  from './components/Maintenance/MaintenanceWrapper';
 import 'react-tabs/style/react-tabs.css';
 import './App.css';
 
@@ -52,12 +53,14 @@ export default class App extends Component {
         // Gets our platform page data
         const data = this.getPlatformPageData().then(resp => { return resp.json(); });
         
-        // Gets our localized user.  Preferably from a localStorage.profileId
-        const user = API.getClientForMaintenance(); // get user from localStorage.token through api
+        // Grabs the Id in the query string, and tests if the User has permission to edit this client
+        // via their Id.
+        const user = API.getClientForMaintenance(URI.getQuerystringValue("clientId")); 
+        
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, user]).then(values => {
             let user = values[1];
-            console.log(values);
+            console.log(user);
             /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
             if(Object.keys(user.data).length === 0 || user === "TOKEN REJECTED") {
                 this.setState({ redirectToLogin: true });

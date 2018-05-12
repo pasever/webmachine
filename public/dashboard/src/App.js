@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import API from '../../common/utils/API';
+import LoadingPage from '../../common/LoadingPage';
 import './App.css';
 
 
@@ -17,6 +18,7 @@ import './App.css';
 export default class App extends Component {
     state = {
         isAuthorized: false,
+        isLoading: true,
         ownedNetworks: [],
         memberNetworks: [],
     }
@@ -34,15 +36,29 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        API.getClientsByAccessId().then(resp => { console.log(resp)})
+        let ownedNetworks = API.getClientsByAccessId();
+        let joinedNetworks = API.getJoinedNetworks();
+        Promise.all([ownedNetworks, joinedNetworks]).then(values => {
+            console.log(values);
+            this.setState({ isLoading: false, ownedNetworks: values[0].data});
+        })
     }
 
     render() {
         return (
             <div className="app-container">
-                { this.state.isAuthorized ? (
-                <h2>Welcome to the Dashboard!</h2>
-                ) : (<h2>THOUGH SHALL NOT PASS</h2> )}
+                { this.state.isLoading ? ( <LoadingPage /> ) : (
+                    <div>
+                        { this.state.ownedNetworks.length > -1 ? (
+                            <div>
+                                {this.state.ownedNetworks.map((current, idx) =>  
+                                    <h2 key={idx}>{current.name}</h2>
+                                )}
+                            </div>
+                        ) : (<h2>Nothing to show here</h2>)}
+                    </div>
+                )}
+                
             </div>
             
         );

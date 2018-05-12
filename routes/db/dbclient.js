@@ -7,13 +7,13 @@
 
 
 const bodyParser =  			require('body-parser')
-const clientApi =               require('../../api/client')
+const clientApi =               require('../../api/client');
 const netlifyApi =              require('../../api/client/netlify');
 const { r, g, b } =             require('../../console');
 const request =                 require('request');
 const jwt =                     require('jsonwebtoken');
 const config =                  require('../../config').init();
-const verifyJwt =              require('../../utils/auth/verifyJwtToken');
+const verifyJwt =               require('../../utils/auth/verifyJwtToken');
 
 
 
@@ -33,28 +33,49 @@ const dbclient = (router) => {
     // Might need refactoring?
     router.get('/',  (req, res, next) => {
         console.log("-----------DB Clients GET ROUTE -----------");
-        //console.log("AFTER MIDDLEWARE REQUEST: ", req);
+        let accessToken = req.headers.authorization || null;
+        let clientId = req.query.clientId || null;
         // Checks if there is an access Id passed, gets the matching Client
-        if(req.query.accessToken && !req.query.clientId) {   
+        console.log(verifyJwt.getIdFromToken(accessToken));
+        if(accessToken && !clientId) {   
             // Gets the ID out of the JWT
-            let accessId = verifyJwt.getIdFromToken(req.query.accessToken);
+            let accessId = verifyJwt.getIdFromToken(accessToken);
             clientApi.getClients(req.token, accessId, req.conn, (response) => {
                 res.status(200).send(response);
             });
         // Checks if there's a Client Id passed, gets the matching client
-        } else if(req.query.accessToken && req.query.clientId) {
-            let accessId = verifyJwt.getIdFromToken(req.query.accessToken);
-            clientApi.getOneOwnedClient(req.token, accessId, req.query.clientId, req.conn, (response) => {
+        } else if(accessToken && clientId) {
+            let accessId = verifyJwt.getIdFromToken(accessToken);
+            console.log("ACCESSID:::::::", accessId)
+            clientApi.getOneOwnedClient(req.token, accessId, clientId, req.conn, (response) => {
                 res.status(200).send(response);
             });
         // Returns all Clients
         } else {
-            clientApi.getClients(req.token, req.conn, (response) => {
-                res.status(200).send(response);
+            res.status(401).send({ 
+                error: "Nothing to do",
             });
         }
     });
-    
+    router.get('/joined', (req, res, next) => {
+        console.log("----------DB Clients JOINED GET ROUTE ---------------");
+        let accessToken = req.headers.authorization;
+        if(accessToken) {
+            let accessId = verifyJwt.getIdFromToken(accessToken);
+            clientApi.getJoinedClients(req.token, accessId, req.conn, (response) => {
+                res.status(200).send(response);
+            });
+        } else {
+            res.status(401).send({
+                error: "Nothing to do",
+            });
+        }
+    })
+    router.get('/public', (req, res, next) => {
+        clientApi.getPublicClients(req.token, req.conn, (response) => {
+            res.status(200).send(response);
+        })
+    })
     // Updates a client
     router.post('/', (req, res, next) => {
         console.log("-----------DB Clients POST ROUTE -----------");

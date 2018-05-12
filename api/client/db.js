@@ -50,14 +50,15 @@ exports.getClients = (accessId) => {
 
 exports.getPublicClients = () => {
     return new Promise((resolve, reject) => {
-        Client.find({ isPrivate: false, isActivated: true }, (err, response) => {
+        Client.find({ isPrivate: false, isActivated: true }, "name description addr1 addr2 city state zip sms").then(response => {
+            resolve(response);
+        }).catch(err => {
             if(err) {
                 if(err.error !== 'not_found') 
                     resolve(err)
                 else
                     reject(err);
             }
-            resolve(response);
         })
     })
 }
@@ -65,29 +66,46 @@ exports.getPublicClients = () => {
 // Gets Client by id
 exports.getClient = (id) => {
     return new Promise((resolve, reject) => {
-        Client.find({ where: { id: id }}, (err, response) => {
+        Client.find({ where: { id: id }}).then(response => {
+            resolve(response);
+        }).catch(err => {
             if(err) {
                 if(err.error !== 'not_found') 
                     resolve(err);
                 else 
                     reject(err);
             }
+        });
+    })
+}
+
+exports.getJoinedClients = (aId) => {
+    return new Promise((resolve, reject) => {
+        Client.find({ members: aId }, "name description addr1 addr2 city state zip sms").then(response => {
             resolve(response);
+        }).catch(err => {
+            if(err) {
+                if(err.error !== 'not_found') 
+                    resolve(err);
+                else 
+                    reject(err);
+            }            
         })
+
     })
 }
 
 // Gets Client(s) by Auth Access Id
 exports.getOneOwnedClient = (aId, cId) => {
     return new Promise((resolve, reject) => {
-        Client.find({ accessToken: aId, _id: cId }).lean().then(response => {
-            let user = response[0];
-            stripe.customers.retrieve(user.stripeCustomerId, (err, stripeCust) => {                
+        Client.findOne({ accessToken: aId, _id: cId }).lean().then(response => {
+            let client = response;
+            stripe.customers.retrieve(client.stripeCustomerId, (err, stripeCust) => {                
                 if(err) 
-                    user["stripeCustomer"] = null;
+                    client["stripeCustomer"] = null;
                 else 
-                    user["stripeCustomer"] = stripeCust;
-                resolve(user);
+                    client["stripeCustomer"] = stripeCust;
+                resolve(client);
             })
         }).catch(err => {
             if(err) {
