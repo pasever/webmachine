@@ -75,7 +75,7 @@ class NetworkSelection extends Component {
 
   /** @method */
   // Gets called if active class is present.
-  // Removes network id to state.
+  // Removes network id from state.
   /** @param netword_id */
   removeNetworkFromState(net_id) {
     let { networksToJoin } = this.state;
