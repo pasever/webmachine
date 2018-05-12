@@ -34,10 +34,16 @@ class MemberForm extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   handleInputChange(e) {
     this.setState({[e.target.id]: e.target.value});
+  }
+
+  handlePageChange() {
+    // Passes name of next page/step
+    this.props.liftState('networks-to-join', this.state)
   }
 
   /**
@@ -55,7 +61,7 @@ class MemberForm extends Component {
     return (
       <form style={{ width: '70%', margin: '0 auto' }}>
         <h4 className="form-title">Last Step</h4>
-        <Link to='/member'> Go (back) to the Network Selection Stage </Link>
+        <a href='#' onClick={this.handlePageChange}> Go (back) to the Network Selection Stage </a>
         <div className="form-row">
 
           <div className="form-group col-md-6">

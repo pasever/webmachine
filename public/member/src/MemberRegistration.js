@@ -40,7 +40,8 @@ class MemberRegistration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: 'hello'
+      test: 'hello',
+      location: 'networks-to-join'
     };
 
     this.liftChildState = this.liftChildState.bind(this);
@@ -51,34 +52,42 @@ class MemberRegistration extends Component {
    * to lift its respective state
    */
 
-  liftChildState(value) {
-    // this.setState({ test: value })
-    console.log(value);
+  liftChildState(page, load) {
+    let arrName = /-/.test(page) ? this.state.location.replace('-','_') : page;
+    this.setState({ location: page, [arrName]: load })
   }
 
+  renderPage() {
+    let { location } = this.state;
+    if (location === 'networks-to-join') {
+      return <NetworkSelection liftState={this.liftChildState}  />
+    } else if (location === 'member-form') {
+      return <MemberForm liftState={this.liftChildState}  />
+    }
+  }
+
+  
+
   render() {
-    /**
-     * @TODO
-     * Add state and write methods to lift state.
-     * State at this level is used to keep track of
-     * data as we progress through member registration steps.
-     */
     return (
-        <Router>
-          <div className='container'>
-            {/* Render a Route forEach object in routes Array */}
-            {routes.map(({ path, component: C }) => (
-              <Route
-                key={path}
-                path={path}
-                 // ...props = routing props
-                render={(props) => 
-                  <C {...props} liftState={this.liftChildState} />
-                }
-              />
-            ))}
-          </div>
-        </Router> 
+      <div className="container">
+        {this.renderPage()}
+      </div>
+        // <Router>
+        //   <div className='container'>
+        //     {/* Render a Route forEach object in routes Array */}
+        //     {routes.map(({ path, component: C }) => (
+        //       <Route
+        //         key={path}
+        //         path={path}
+        //          // ...props = routing props
+        //         render={(props) => 
+        //           <C {...props} liftState={this.liftChildState} />
+        //         }
+        //       />
+        //     ))}
+        //   </div>
+        // </Router> 
     )
   }
 }

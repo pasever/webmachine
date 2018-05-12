@@ -7,7 +7,7 @@
 
 const express =            require('express');
 const expressValidator =   require('express-validator');
-const history =            require('connect-history-api-fallback');
+// const history =            require('connect-history-api-fallback');
 const path =               require('path');
 const bodyParser =         require('body-parser');
 const cors =               require('cors')
@@ -35,15 +35,15 @@ if ( process.env.isLive == 'false' ) {
 ////////////////////  Register Middleware       /////////////////////////
 ////////////////////////////////////////////////////////////////////////
 app.use(logger("dev"));
-app.use(history({
-  index: path.join(__dirname, '../public/home/index.html'),
-  verbose: true,
-  disableDotRule: true,
-  rewrites: [
-    { from: /\/member\/?/,
-      to: (context) => path.join(__dirname, '../public', context.parsedUrl.pathname, 'index.html') }
-  ]
-}));
+// app.use(history({
+//   index: path.join(__dirname, '../public/home/index.html'),
+//   verbose: true,
+//   disableDotRule: true,
+//   rewrites: [
+//     { from: /\/member\/?/,
+//       to: (context) => path.join(__dirname, '../public', context.parsedUrl.pathname, 'index.html') }
+//   ]
+// }));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(expressValidator());
