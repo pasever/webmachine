@@ -3,9 +3,16 @@ import { Link }                   from 'react-router-dom';
 import Input                      from '../FormElements/Input';
 
 class NetworkSelection extends Component {
+  /**
+   * @property {Array} discoverableNetworks - networks fetched from DB
+   * @todo fetch discoverable networks from DB
+   * @property {Array} networksToJoin - list of unique identifiers
+   * 
+   */
   constructor(props) {
     super(props);
     this.state = {
+      discoverableNetworks: [1,2,3,4,5,6,7],
       networksToJoin: []
     };
 
@@ -14,19 +21,20 @@ class NetworkSelection extends Component {
     this.addNetworkToState = this.addNetworkToState.bind(this);
   }
 
-  // Renders discoverable networks as a list-group
-  /** @todo pass array of networks from state */
+  /** @method */
+  // Renders discoverable networks as a list-group.
   renderNetworks() {
     // Will eventually be array of networks pulled from DB
-    let networks = [1,2,3,4,5,6,7];
+    let { discoverableNetworks } = this.state;
 
-    // Return array of <li>s; one <li> for each discoverable network
+    // Return <ul> of discoverable networks.
+    // Render one <li> for each discoverable network.
     return (
       <ul
         className="list-group list-group-flush networks-results"
         style={{overflowY: 'scroll', maxHeight: '250px'}}
       >
-        {networks.map((n, i) =>
+        {discoverableNetworks.map((n, i) =>
           <li
             id={`networkId${i+1}`} key={i+1}
             className="list-group-item network"
@@ -38,6 +46,7 @@ class NetworkSelection extends Component {
     )
   }
 
+  /** @method */
   // Adds or removes .active class to <li>.network.
   // If it adds .active, it also adds it to state.
   // If it removes .active, it also removes it from state.
@@ -54,6 +63,7 @@ class NetworkSelection extends Component {
     }
   }
 
+  /** @method */
   // Gets called if active class is NOT present.
   // Adds network id to state.
   /** @param netword_id */
@@ -63,6 +73,7 @@ class NetworkSelection extends Component {
     this.setState({ networksToJoin  });
   }
 
+  /** @method */
   // Gets called if active class is present.
   // Removes network id to state.
   /** @param netword_id */
@@ -73,6 +84,13 @@ class NetworkSelection extends Component {
       networksToJoin.splice(index, 1);
       this.setState({ networksToJoin })
     }
+  }
+
+   /** @method */
+  // Lifts state up to Highest Order Component.
+  // Does NOT lift state if networksToJoin is empty
+  handlePageAdvance() {
+    // this.props.liftState('lifting state from child NetworkSelection')
   }
 
 
@@ -117,7 +135,7 @@ class NetworkSelection extends Component {
         <footer>
 
           {/* Should only display after one or more networks selected */}
-          <Link to='/member-form'> Go to the Member Registration Form (Next) </Link>
+          <Link to='/member-form' onClick={this.handlePageAdvance}> Go to the Member Registration Form (Next) </Link>
 
         </footer>
       </div>

@@ -10,12 +10,14 @@ export default {
     /// THIS WILL BE USED TO GRAB THE MOST UNIQUE CLIENT TO A USER FOR MAINTENANCE
     getClientForMaintenance: (id) => {
         /// HACK - REMOVE HARDCODED ID
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token + '&clientId=' + id);
+        return axios.get('/api/db/client?clientId=' + id);
     },
-    
+    getJoinedNetworks: () => {
+        return axios.get('/api/db/client/joined');
+    },
     /// USED TO GET ALL CLIENTS ONE INDIVIDUAL LOGIN MANAGES
     getClientsByAccessId: () => {
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token);
+        return axios.get('/api/db/client');
     },
     getPublicClients: () => {
         return axios.get('/api/db/client/public');

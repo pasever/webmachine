@@ -14,12 +14,48 @@
  * who manage the selected Network(s).
  */
 
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import NetworkSelection from './components/Steps/NetworkSelection';
-import MemberForm from './components/Steps/MemberForm';
+import React, { Component }       from 'react';
+import {
+  BrowserRouter as Router,
+  Route
+}                                 from "react-router-dom";
+import NetworkSelection           from './components/Steps/NetworkSelection';
+import MemberForm                 from './components/Steps/MemberForm';
+
+const routes = [
+  {
+    //member_registration_step#
+    path: '/member',
+    exact: true,
+    component: NetworkSelection
+  },
+  {
+    path: '/member-form',
+    component: MemberForm
+  }
+];
 
 class MemberRegistration extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      test: 'hello'
+    };
+
+    this.liftChildState = this.liftChildState.bind(this);
+  }
+
+  /**@todo
+   * write a function that allows each child
+   * to lift its respective state
+   */
+
+  liftChildState(value) {
+    // this.setState({ test: value })
+    console.log(value);
+  }
+
   render() {
     /**
      * @TODO
@@ -30,8 +66,17 @@ class MemberRegistration extends Component {
     return (
         <Router>
           <div className='container'>
-            <Route exact path='/member' component={NetworkSelection} />
-            <Route path='/member-form' component={MemberForm} />
+            {/* Render a Route forEach object in routes Array */}
+            {routes.map(({ path, component: C }) => (
+              <Route
+                key={path}
+                path={path}
+                 // ...props = routing props
+                render={(props) => 
+                  <C {...props} liftState={this.liftChildState} />
+                }
+              />
+            ))}
           </div>
         </Router> 
     )
