@@ -12,7 +12,7 @@ const Select = ({ id, options, handleInput }) =>
     onChange={handleInput}
   >
     {options.map((opt, i) =>
-      <option key={i}>{ opt }</option>
+      <option key={opt.name}>{ opt.abbreviation }</option>
     )}
   </select>
 

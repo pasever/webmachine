@@ -41,8 +41,56 @@ class MemberRegistration extends Component {
     this.registerMember = this.registerMember.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps, nextState)
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   let { networks_to_join, member_form } = this.state;
+
+  //   if(!this.loadIsOkToSubmit(networks_to_join)) {
+  //     alert('HOC: select at least one network');
+  //     return;
+  //   } else {
+  //     if(!this.loadIsOkToSubmit(member_form)) {
+  //       alert('HOC: fill out all required fields');
+  //       return;
+  //     } else {
+  //       alert('all set!');
+  //     }
+  //   }
+
+  // }
+
+  loadIsOkToSubmit(load) {
+    // if it's not an array, then it's a plain object
+    console.log(load)
+    if (Array.isArray(load)) {
+      if(load.length === 0) {
+        // alert('Please select at least one network to join');
+        return false;
+      }
+    } else {
+      let loadValues;
+      // Address 2 is optional; if it's empty, delete it
+      if (load.address2 === '') delete load.address2;
+      // Capture value of each key in an array
+      let x = Object.values(load);
+      
+      // Safety net in case somehow all keys get deleted.
+      // Shouldn't happen (look at initial state of MemberForm)
+      // but just in case
+      if (x.length > 0)
+        loadValues = x
+      else {
+        // alert('Please fill out all fields in the form')
+        return false
+      }
+
+      for (let i = 0; i < loadValues.length; i++) {
+        if (loadValues[i] === '') {
+          // alert('Please fill out all fields in the form');
+          return false;
+        }
+      }
+    }
+
     return true;
   }
 
@@ -67,13 +115,13 @@ class MemberRegistration extends Component {
     let { location } = this.state;
 
     if (location === 'networks-to-join') {
-      return <NetworkSelection liftState={this.liftChildState}  />
+      return <NetworkSelection liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} />
     } else if (location === 'member-form') {
-      return <MemberForm liftState={this.liftChildState} registerMember={this.registerMember} />
+      return <MemberForm liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} />
     } else {
       // If, for whatever reason, the value of location is wiped out
       // from state, render the first step of the registration process.
-      return <NetworkSelection liftState={this.liftChildState}  />
+      return <NetworkSelection liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} />
     }
   }
 
@@ -88,54 +136,8 @@ class MemberRegistration extends Component {
   //    a new member.
   // 3. Waits for response and notifies user of outcome.
   registerMember() {
-    // e.preventDefault();
-
-    /** @todo */
-    // have a method to check if load is empty and another to check if
-    // load has any empty fields
-    function loadIsEmpty(load) {
-      // if it's not an array, then it's a plain object
-      console.log(load)
-      if (Array.isArray(load)) {
-        if(load.length === 0) {
-          alert('Please select at least one network to join');
-          return true;
-        }
-      } else {
-        let loadValues;
-        // checks if it has empty fields! not if it's empty...
-        let x = Object.values(load);
-        
-        if (x.length > 0)
-          loadValues = x
-        else {
-          alert('Please fill out all fields in the form')
-          return true
-        }
-
-        for (let i = 0; i < loadValues.length; i++) {
-          if (loadValues[i] === '') {
-            alert('Please fill out all fields in the form');
-            return true;
-          }
-        }
-      }
-
-      return false;
-    }
-    
-    let { networks_to_join, member_form } = this.state;
-
-    // if loads are not empty
-    if(!loadIsEmpty(networks_to_join) && !loadIsEmpty(member_form)) {
-      console.log('good to go');
-    } else {
-      console.log('can\'t submit');
-    }
-
-    // need to make sure that by the time 'complete registration' gets clicked,
-    // that state of member-form gets lifted before before and actual submit is
-    // attempted
+    console.log(this.state)
+    // gets called when both loads are valid and ready to go.
   }
 
   render() {

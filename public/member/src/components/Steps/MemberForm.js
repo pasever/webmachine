@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Label from '../FormElements/Label';
 import Input from '../FormElements/Input';
 import Select from '../FormElements/Select';
+import state_abbreviations from '../../data/state_abbreviations';
 
 /**
  * ---- Fields ----
@@ -12,10 +13,12 @@ import Select from '../FormElements/Select';
  * [x] City, State, Zip
  * [x] Cell
  * [x] Email
- * 
  */
 
- const states = ['NC', 'MA', 'FL'];
+ // Global reference to document object
+ const d = window.document;
+// Global reference to localStorage
+const ls = window.localStorage;
 
 class MemberForm extends Component {
   constructor(props) {
@@ -37,20 +40,56 @@ class MemberForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // If there's record of state in localStorage, retrieve it
+  // and refill the form with it.
+  componentDidMount() {
+    if('memberForm' in ls) {
+      let memberFormRemnants = JSON.parse(ls.getItem('memberForm'));
+      let keys = Object.keys(memberFormRemnants);
+      let values = Object.values(memberFormRemnants);
+      let updatedState = {};
+      // Safety net
+      if (keys.length !== values.length) return;
+
+      let form = Array.from(d.getElementById('member-form'));
+      // Get rid of submit button - not needed for these purposes
+      form.pop();
+
+      // Iterate through every form field and create an object using
+      // key/value pairs from localStorage
+      for (let i = 0; i < form.length; i++) {
+        updatedState[keys[i]] = values[i];
+      }
+
+      this.setState(updatedState);
+
+    } else {
+      // First time component mounts and there's no data in localStorage
+      // this.setState({ state: d.getElementById('state')[0].value });
+    }
+
+  }
+
   handleInputChange(e) {
     this.setState({[e.target.id]: e.target.value});
   }
 
   handlePageChange() {
-    // Passes name of next page/step
-    this.props.liftState('networks-to-join', this.state)
+    // if(this.props.loadIsOkToLift(this.state)) {
+      // Passes name of next page/step
+      this.props.liftState('networks-to-join', this.state)
+    // } else {
+      // alert('Please fill out all of the required fields');
+    // }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.liftState('member-form', this.state);
-    // console.log('lifted state');
-    this.props.registerMember();
+    if(this.props.loadIsOkToLift(this.state)) {
+      this.props.liftState('member-form', this.state);
+    } else {
+      alert('Please fill out all of the required fields');
+    }
   }
 
   /**
@@ -60,13 +99,21 @@ class MemberForm extends Component {
    * 3. Save IMG URL into state
    */
 
+   /** @method */
+   // If component will unmount, save state into localStorage
+   componentWillUnmount() {
+     let memberForm = this.state;
+     memberForm = JSON.stringify(memberForm);
+     ls.setItem('memberForm', memberForm);
+   }
+
   render() {
     let {
       firstName, lastName, phone, email,
       address1, address2, city, state, zip
     } = this.state;
     return (
-      <form style={{ width: '70%', margin: '0 auto' }} onSubmit={this.handleSubmit}>
+      <form id='member-form' style={{ width: '70%', margin: '0 auto' }}>
         <h4 className="form-title">Last Step</h4>
         <a href='#' onClick={this.handlePageChange}> Go (back) to the Network Selection Stage </a>
         <div className="form-row">
@@ -145,7 +192,7 @@ class MemberForm extends Component {
           <div className="form-group col-md-4">
             <Label forHtml='state' innerText='State' />
             <Select
-              id='state' options={states} 
+              id='state' options={state_abbreviations} 
               handleInput={this.handleInputChange}
             />
           </div>
@@ -160,7 +207,7 @@ class MemberForm extends Component {
 
         </div>
         
-        <button type="submit" className="btn btn-primary">Complete Registration</button>
+        <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Complete Registration</button>
       </form>
     );
   }

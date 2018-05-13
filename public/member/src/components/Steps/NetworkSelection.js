@@ -1,7 +1,7 @@
 import React, { Component }       from 'react';
 import Input                      from '../FormElements/Input';
 
-// global reference to localStorage
+// Global reference to localStorage
 let ls = window.localStorage;
 
 class NetworkSelection extends Component {
@@ -24,7 +24,7 @@ class NetworkSelection extends Component {
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  // When component mounts, check if records of previously selected networksToJoin exists in localStorage.
+  // Check if records of previously selected networksToJoin exists in localStorage.
   // If so, pull records and iterate over list of available networks.
   // For every item in the list that matches a previously selected network,
   // add .active class to it AND push it to array named networksToJoin[]. 
@@ -122,11 +122,16 @@ class NetworkSelection extends Component {
   // Lifts state up to Highest Order Component.
   // Does NOT lift state if networksToChange empty
   handlePageChange() {
-    // Passes name of next page/step
-    this.props.liftState('member-form', this.state.networksToJoin);
+    if(this.props.loadIsOkToLift(this.state.networksToJoin)) {
+      // Passes name of next page/step
+      this.props.liftState('member-form', this.state.networksToJoin);
+    } else {
+      alert('Please select at least one network');
+    }
   }
 
-  /** @todo comment better */
+  /** @method */
+   // If component will unmount, save state into localStorage
   componentWillUnmount() {
     ls.setItem('networksToJoin', this.state.networksToJoin);
   }
