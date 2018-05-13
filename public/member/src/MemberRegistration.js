@@ -32,10 +32,18 @@ class MemberRegistration extends Component {
     super(props);
     this.state = {
       // Defaults to step1 of the registration process.
-      location: 'networks-to-join'
+      location: 'networks-to-join',
+      networks_to_join: [],
+      member_form: {}
     };
 
     this.liftChildState = this.liftChildState.bind(this);
+    this.registerMember = this.registerMember.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps, nextState)
+    return true;
   }
 
   /** @method 
@@ -50,7 +58,7 @@ class MemberRegistration extends Component {
     // uses this.state.location to test & replace because the
     // incoming load is from the current location, not the next one.
     let loc = this.state.location === '' ? 'networks-to-join' : this.state.location;
-    let stateProp = /-/.test(loc) ? loc.replace('-','_') : page;
+    let stateProp = /-/.test(loc) ? loc.replace(/-/g,'_') : page;
     this.setState({ location: page, [stateProp]: load })
   }
 
@@ -61,7 +69,7 @@ class MemberRegistration extends Component {
     if (location === 'networks-to-join') {
       return <NetworkSelection liftState={this.liftChildState}  />
     } else if (location === 'member-form') {
-      return <MemberForm liftState={this.liftChildState}  />
+      return <MemberForm liftState={this.liftChildState} registerMember={this.registerMember} />
     } else {
       // If, for whatever reason, the value of location is wiped out
       // from state, render the first step of the registration process.
@@ -80,20 +88,31 @@ class MemberRegistration extends Component {
   //    a new member.
   // 3. Waits for response and notifies user of outcome.
   registerMember() {
+    // e.preventDefault();
 
-    function loadHasEmptyFields() {};
     /** @todo */
     // have a method to check if load is empty and another to check if
     // load has any empty fields
     function loadIsEmpty(load) {
       // if it's not an array, then it's a plain object
+      console.log(load)
       if (Array.isArray(load)) {
-        if(load.length === 0)
+        if(load.length === 0) {
           alert('Please select at least one network to join');
           return true;
+        }
       } else {
+        let loadValues;
         // checks if it has empty fields! not if it's empty...
-        let loadValues = Object.values(load);
+        let x = Object.values(load);
+        
+        if (x.length > 0)
+          loadValues = x
+        else {
+          alert('Please fill out all fields in the form')
+          return true
+        }
+
         for (let i = 0; i < loadValues.length; i++) {
           if (loadValues[i] === '') {
             alert('Please fill out all fields in the form');
@@ -104,7 +123,19 @@ class MemberRegistration extends Component {
 
       return false;
     }
+    
+    let { networks_to_join, member_form } = this.state;
 
+    // if loads are not empty
+    if(!loadIsEmpty(networks_to_join) && !loadIsEmpty(member_form)) {
+      console.log('good to go');
+    } else {
+      console.log('can\'t submit');
+    }
+
+    // need to make sure that by the time 'complete registration' gets clicked,
+    // that state of member-form gets lifted before before and actual submit is
+    // attempted
   }
 
   render() {

@@ -9,9 +9,10 @@ const Select = ({ id, options, handleInput }) =>
   <select
     className='form-control'
     id={id}
+    onChange={handleInput}
   >
     {options.map((opt, i) =>
-      <option key={i} onChange={handleInput}>{ opt }</option>
+      <option key={i}>{ opt }</option>
     )}
   </select>
 
