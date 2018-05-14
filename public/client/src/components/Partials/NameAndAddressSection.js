@@ -10,13 +10,12 @@ import { Col } from "../../../../common/grid";
 
 /* REQUIRED PROPS
 
-    user - the user object
+    client - the client object
     updateFormField (method) - method that is fired when an input is 
 */
-export const NameAndAddressSection = ({ user, updateFormField }) => (
+export const NameAndAddressSection = ({ client, updateFormField }) => (
   <div>
-    <Input
-      value={user.addressLine1}
+    <Input value={client.addr1}
       name="addressLine1"
       onChange={updateFormField}
       displayName="Address"
@@ -24,22 +23,22 @@ export const NameAndAddressSection = ({ user, updateFormField }) => (
       placeholder="123 Main St"
     />
     <Input
-      value={user.addressLine2}
+      value={client.addr2}
       name="addressLine2"
       onChange={updateFormField}
       type="text"
       placeholder="Suite. G"
     />
     <Input
-      value={user.city}
+      value={client.city}
       name="city"
       onChange={updateFormField}
       displayName="City"
       type="text"
-      placeholder="New York"
+      placeholder="New York "
     />
     <Input
-      value={user.state}
+      value={client.state}
       name="state"
       onChange={updateFormField}
       displayName="State"
@@ -48,7 +47,7 @@ export const NameAndAddressSection = ({ user, updateFormField }) => (
       width="2"
     />
     <Input
-      value={user.zip}
+      value={client.zip}
       name="zip"
       onChange={updateFormField}
       displayName="Zip"

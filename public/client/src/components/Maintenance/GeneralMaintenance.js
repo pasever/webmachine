@@ -9,6 +9,7 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "../../../../common/grid/";
 import { Input, TextArea, Button } from "../../../../common/form/";
 import ErrorBoundary from "../../../../common/error/ErrorBoundary";
+import { ImageUpload } from '../Partials';
 import "../../styles/maintenancepage.css";
 
 /* 
@@ -34,7 +35,7 @@ export const GeneralMaintenance = ({ errors, text, client, onSubmit, updateFormF
           errorText={errors.name}
           classPrepend="fa fa-users"
         />
-
+        <ImageUpload client={client} />
         <TextArea
           value={client.description}
           name="description"

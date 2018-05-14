@@ -127,7 +127,10 @@ const clientObject = {
     type: Array,
     default: [],
   },
-
+  agents: {
+    type: Array,
+    default: [],
+  },
   // Array that consists of whitelisted emails.  We need to always remove Emails/Numbers who join.
   whiteList: {
     type: Array,

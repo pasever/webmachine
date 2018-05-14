@@ -24,29 +24,6 @@ class MaintenanceWrapper extends Component {
         };
 
     }
-    onImageDrop = files => {
-        const client = this.props.client;
-        let formData  = new FormData();
-        formData.append("image", files[0]);
-        axios.post(config.cloudinary.url, formData, { headers: { "Content-Type": "Multipart/form-data" }})
-        .then(response => {
-            client.image = resp.body.secure_url;
-            //this.setState({ client: this.})
-        })
-            /*UPLOAD_URL)
-            .field("upload_preset", UPLOAD_PRESET)
-            .field("file", files[0]);*/
-        /*})
-        upload.end((err, resp) => {
-            if(err) return console.log(err);
-
-            if(resp.body.secure_url !== '') {
-                client.foodTrucks[0].imageUrl = resp.body.secure_url;
-                this.setState({ client: client, message: "Image uploaded!" });
-                this.onUserFormSubmit();
-            }
-        })*/
-    }
 
 
     // HANDLES UPDATING
