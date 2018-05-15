@@ -86,6 +86,7 @@ class MemberForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(this.props.loadIsOkToLift(this.state)) {
+      // state not lifting before register gets called...
       this.props.liftState('member-form', this.state);
       this.props.register();
     } else {

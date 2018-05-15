@@ -45,7 +45,8 @@ class MemberRegistration extends Component {
     let { networks_to_join, member_form } = this.state;
     // if loads are NOT ready to be submitted, re-render.
     // otherwise, don't re-render
-    if (!this.loadIsOkToSubmit(networks_to_join) && !this.loadIsOkToSubmit(member_form)) {
+    console.log(this.state)
+    if (!this.loadIsOkToSubmit(networks_to_join) || !this.loadIsOkToSubmit(member_form)) {
       console.log('not ready to submit');
       return true;
     } else {
