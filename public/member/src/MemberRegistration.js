@@ -37,88 +37,32 @@ class MemberRegistration extends Component {
       member_form: {}
     };
 
-    this.liftChildState = this.liftChildState.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleNetworkSelectionChange = this.handleNetworkSelectionChange.bind(this);
+    this.handleFormInputChange = this.handleFormInputChange.bind(this);
     this.registerMember = this.registerMember.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    let { networks_to_join, member_form } = nextState;
-    // if loads are NOT ready to be submitted, re-render.
-    // otherwise, don't re-render
-    if (!this.loadIsOkToSubmit(networks_to_join) || !this.loadIsOkToSubmit(member_form)) {
-      console.log('not ready to submit');
-      return true;
-    } else {
-      console.log('ready to submit');
-      
-      return false;
-    }
+  handlePageChange(location) {
+    this.setState({ location });
   }
 
-  loadIsOkToSubmit(load) {
-    // if it's not an array, then it's a plain object
-    console.log(load)
-    if (Array.isArray(load)) {
-      if(load.length === 0) {
-        // alert('Please select at least one network to join');
-        return false;
-      }
-    } else {
-      let loadValues;
-      // Address 2 is optional; if it's empty, delete it
-      if (load.address2 === '') delete load.address2;
-      // Capture value of each key in an array
-      let x = Object.values(load);
-      
-      // Safety net in case somehow all keys get deleted.
-      // Shouldn't happen (look at initial state of MemberForm)
-      // but just in case
-      if (x.length > 0)
-        loadValues = x
-      else {
-        // alert('Please fill out all fields in the form')
-        return false
-      }
+  handleNetworkSelectionChange() {}
 
-      for (let i = 0; i < loadValues.length; i++) {
-        if (loadValues[i] === '') {
-          // alert('Please fill out all fields in the form');
-          return false;
-        }
-      }
-    }
-
-    return true;
-  }
-
-  /** @method 
-   * @description - Is passed through props to children as handler to lift state.
-   * @param {String} page - identifier of page user is navigating to.
-   * @param {Array|Object} load - data passed from the child's state.
-   */
-  liftChildState(page, load) {
-    // replace any dashes (-) with underscores (_).
-    // use the output as name of new property in state.
-    // i.e. uses networks-to-join to save array (in state) called networks_to_join
-    // uses this.state.location to test & replace because the
-    // incoming load is from the current location, not the next one.
-    let loc = this.state.location === '' ? 'networks-to-join' : this.state.location;
-    let stateProp = /-/.test(loc) ? loc.replace(/-/g,'_') : page;
-    this.setState({ location: page, [stateProp]: load });
-  }
+  handleFormInputChange() {}
 
   // Renders component based on page location
   renderPage() {
     let { location } = this.state;
 
     if (location === 'networks-to-join') {
-      return <NetworkSelection liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} />
+      return <NetworkSelection handleChange={} />
     } else if (location === 'member-form') {
-      return <MemberForm liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} register={this.registerMember} />
+      return <MemberForm handleChange={} />
     } else {
       // If, for whatever reason, the value of location is wiped out
       // from state, render the first step of the registration process.
-      return <NetworkSelection liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} />
+      return <NetworkSelection handleChange={} />
     }
   }
 
@@ -147,3 +91,39 @@ class MemberRegistration extends Component {
 }
 
 export default MemberRegistration;
+
+// loadIsOkToSubmit(load) {
+//   // if it's not an array, then it's a plain object
+//   console.log(load)
+//   if (Array.isArray(load)) {
+//     if(load.length === 0) {
+//       // alert('Please select at least one network to join');
+//       return false;
+//     }
+//   } else {
+//     let loadValues;
+//     // Address 2 is optional; if it's empty, delete it
+//     if (load.address2 === '') delete load.address2;
+//     // Capture value of each key in an array
+//     let x = Object.values(load);
+    
+//     // Safety net in case somehow all keys get deleted.
+//     // Shouldn't happen (look at initial state of MemberForm)
+//     // but just in case
+//     if (x.length > 0)
+//       loadValues = x
+//     else {
+//       // alert('Please fill out all fields in the form')
+//       return false
+//     }
+
+//     for (let i = 0; i < loadValues.length; i++) {
+//       if (loadValues[i] === '') {
+//         // alert('Please fill out all fields in the form');
+//         return false;
+//       }
+//     }
+//   }
+
+//   return true;
+// }
