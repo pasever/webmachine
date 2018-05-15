@@ -50,6 +50,7 @@ class MemberRegistration extends Component {
       return true;
     } else {
       console.log('ready to submit');
+      
       return false;
     }
   }
