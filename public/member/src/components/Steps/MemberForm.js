@@ -43,7 +43,7 @@ class MemberForm extends Component {
   // If there's record of state in localStorage, retrieve it
   // and refill the form with it.
   componentDidMount() {
-    if('memberForm' in ls) {
+    if ('memberForm' in ls) {
       let memberFormRemnants = JSON.parse(ls.getItem('memberForm'));
       let keys = Object.keys(memberFormRemnants);
       let values = Object.values(memberFormRemnants);
@@ -87,6 +87,7 @@ class MemberForm extends Component {
     e.preventDefault();
     if(this.props.loadIsOkToLift(this.state)) {
       this.props.liftState('member-form', this.state);
+      this.props.register();
     } else {
       alert('Please fill out all of the required fields');
     }
@@ -192,7 +193,8 @@ class MemberForm extends Component {
           <div className="form-group col-md-4">
             <Label forHtml='state' innerText='State' />
             <Select
-              id='state' options={state_abbreviations} 
+              id='state' options={state_abbreviations}
+              value={state}
               handleInput={this.handleInputChange}
             />
           </div>

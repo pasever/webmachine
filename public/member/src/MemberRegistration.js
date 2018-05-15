@@ -41,22 +41,18 @@ class MemberRegistration extends Component {
     this.registerMember = this.registerMember.bind(this);
   }
 
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   let { networks_to_join, member_form } = this.state;
-
-  //   if(!this.loadIsOkToSubmit(networks_to_join)) {
-  //     alert('HOC: select at least one network');
-  //     return;
-  //   } else {
-  //     if(!this.loadIsOkToSubmit(member_form)) {
-  //       alert('HOC: fill out all required fields');
-  //       return;
-  //     } else {
-  //       alert('all set!');
-  //     }
-  //   }
-
-  // }
+  shouldComponentUpdate(nextProps, nextState) {
+    let { networks_to_join, member_form } = this.state;
+    // if loads are NOT ready to be submitted, re-render.
+    // otherwise, don't re-render
+    if (!this.loadIsOkToSubmit(networks_to_join) && !this.loadIsOkToSubmit(member_form)) {
+      console.log('not ready to submit');
+      return true;
+    } else {
+      console.log('ready to submit');
+      return false;
+    }
+  }
 
   loadIsOkToSubmit(load) {
     // if it's not an array, then it's a plain object
@@ -117,7 +113,7 @@ class MemberRegistration extends Component {
     if (location === 'networks-to-join') {
       return <NetworkSelection liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} />
     } else if (location === 'member-form') {
-      return <MemberForm liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} />
+      return <MemberForm liftState={this.liftChildState} loadIsOkToLift={this.loadIsOkToSubmit} register={this.registerMember} />
     } else {
       // If, for whatever reason, the value of location is wiped out
       // from state, render the first step of the registration process.
@@ -136,8 +132,8 @@ class MemberRegistration extends Component {
   //    a new member.
   // 3. Waits for response and notifies user of outcome.
   registerMember() {
-    console.log(this.state)
     // gets called when both loads are valid and ready to go.
+    console.log('submitting now!');
   }
 
   render() {
