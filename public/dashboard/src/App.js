@@ -9,7 +9,10 @@
 import React, { Component } from 'react';
 import API from '../../common/utils/API';
 import LoadingPage from '../../common/LoadingPage';
-
+import { Col, Row, Container } from '../../common/grid';
+import { Button } from '../../common/form';
+import { DashHome } from './components';
+import ErrorBoundary from '../../common/error/ErrorBoundary'
 import './App.css';
 
 const config = require('../../../config').init();
@@ -19,51 +22,61 @@ const config = require('../../../config').init();
 // It requires the user object, so it will handle all form changes and submits.
 export default class App extends Component {
     state = {
-        isAuthorized: false,
         isLoading: true,
-        ownedNetworks: [],
-        memberNetworks: [],
+        launchingNetwork: false,
+        pageData: {},
     }
 
 
-
     /// GRABS OUR PAGE DATA.  THIS IS WHERE ALL THE TEXT EXISTS FOR THE PLATFORM PAGES.  TO MAKE CHANGES SEE ../static/platformPageData.json
-    getPlatformPageData() {
-        
+    getDashboardPageData() {
         return new Promise((resolve, reject) => { 
-            fetch('/client/static/dashboardPageData.json')
+            fetch('/dashboard/static/dashboardPageData.json')
                 .then(resp => { let json = resp; return { json, resolve }})
                 .then(({ json, resolve }) => resolve(json) )
         })
     }
 
     componentDidMount() {
-        let ownedNetworks = API.getClientsByAccessId();
-        let joinedNetworks = API.getJoinedNetworks();
-        Promise.all([ownedNetworks, joinedNetworks]).then(values => {
-            console.log(values);
-            this.setState({ isLoading: false, ownedNetworks: values[0].data});
-        })
+        let pageData = this.getDashboardPageData().then(resp => { return resp.json() });
+        Promise.all([pageData]).then(values => {
+            this.setState({ pageData: values[0], isLoading: false}) 
+        });
     }
-
+    renderLeftColumn() {
+        if(!this.state.launchingNetwork) {
+            return(
+                <DashHome pageText={this.state.pageData.main }  />            
+            );
+        }
+    }
     render() {
         return (
-            <div className="app-container">
-                { this.state.isLoading ? ( <LoadingPage /> ) : (
-                    <div>
-                        { this.state.ownedNetworks.length > -1 ? (
-                            <ul>
-
-                                {this.state.ownedNetworks.map((current, idx) =>  
-                                    <li key={idx}><a href={ `/client?clientId=${ current._id }`}>{current.name}</a></li>
-                                )}
-                            </ul>
-                        ) : (<h2>Nothing to show here</h2>)}
+            <ErrorBoundary>
+            { this.state.isLoading ? ( <LoadingPage /> ) : (
+                <div>
+                    <div className="app-container">
+                        <Container>
+                            <Row>
+                                <Col size='12'>    
+                                    { this.renderLeftColumn() }    
+                                
+                                </Col>
+                                { /* 
+                                <Col size='4'>
+                                    <h2 className="title">{ this.state.pageData.main.asideTitle }</h2>
+                                    <p>
+                                        { this.state.pageData.main.asideParagraph }
+                                    </p>
+                                    <img src="static/images/mercyblueicon.jpg" className="img-fluid" alt="Machines Logo" />
+                                </Col>
+                                */}
+                            </Row>
+                        </Container>
                     </div>
-                )}
-                
-            </div>
-            
+                </div>
+            )}
+            </ErrorBoundary>
         );
     };
 };

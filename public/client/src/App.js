@@ -39,10 +39,10 @@ export default class App extends Component {
     }
     
     /// GRABS OUR PAGE DATA.  THIS IS WHERE ALL THE TEXT EXISTS FOR THE PLATFORM PAGES.  TO MAKE CHANGES SEE ../static/platformPageData.json
-    getPlatformPageData() {
+    getClientPageData() {
         
         return new Promise((resolve, reject) => { 
-            fetch('/client/static/platformPageData.json')
+            fetch('/client/static/clientPageData.json')
                 .then(resp => { let json = resp; return { json, resolve }})
                 .then(({ json, resolve }) => resolve(json) )
         })
@@ -51,7 +51,7 @@ export default class App extends Component {
     /// When the component mounts, we will try and get all of the platform text and the client object from token.
     componentDidMount() {
         // Gets our platform page data
-        const data = this.getPlatformPageData().then(resp => { return resp.json(); });
+        const data = this.getClientPageData().then(resp => { return resp.json(); });
         
         // Grabs the Id in the query string, and tests if the User has permission to edit this client
         // via their Id.
