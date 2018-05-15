@@ -42,10 +42,9 @@ class MemberRegistration extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let { networks_to_join, member_form } = this.state;
+    let { networks_to_join, member_form } = nextState;
     // if loads are NOT ready to be submitted, re-render.
     // otherwise, don't re-render
-    console.log(this.state)
     if (!this.loadIsOkToSubmit(networks_to_join) || !this.loadIsOkToSubmit(member_form)) {
       console.log('not ready to submit');
       return true;
@@ -104,7 +103,7 @@ class MemberRegistration extends Component {
     // incoming load is from the current location, not the next one.
     let loc = this.state.location === '' ? 'networks-to-join' : this.state.location;
     let stateProp = /-/.test(loc) ? loc.replace(/-/g,'_') : page;
-    this.setState({ location: page, [stateProp]: load })
+    this.setState({ location: page, [stateProp]: load });
   }
 
   // Renders component based on page location
@@ -134,7 +133,7 @@ class MemberRegistration extends Component {
   // 3. Waits for response and notifies user of outcome.
   registerMember() {
     // gets called when both loads are valid and ready to go.
-    console.log('submitting now!');
+    console.log(this.state, 'submitting now!');
   }
 
   render() {
