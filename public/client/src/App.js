@@ -23,7 +23,7 @@ import './App.css';
 //const Platform = require('../../../config/').platform();
 
 
-// The APP class is currently the main hub for the platform.
+// The APP class is currently the main hub for the Client.
 // It requires the client object, so it will handle all form changes and submits.
 export default class App extends Component {
     // ctor
@@ -94,13 +94,14 @@ export default class App extends Component {
         //// DON'T JUST UPDATE THE STATE - SAVE THE USER!
         this.setState({ client: client });
     }
-
+    /// Calls the URI utility function to redirect to the login page
+    sendToLogin() {
+        URI.sendToLogin();
+    }
     render() {
         return (
             <div className="app-container">
-                { this.state.redirectToLogin ? ( <h2>You must be logged in to view this.</h2>) 
-                    : ( 
-                
+                { this.state.redirectToLogin && this.sendToLogin() } 
                 <div>
                     { this.state.pageData === null && !this.state.redirectToLogin ? ( 
                         <LoadingPage />

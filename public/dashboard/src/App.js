@@ -55,25 +55,7 @@ export default class App extends Component {
             <ErrorBoundary>
             { this.state.isLoading ? ( <LoadingPage /> ) : (
                 <div>
-                    <div className="app-container">
-                        <Container>
-                            <Row>
-                                <Col size='12'>    
-                                    { this.renderLeftColumn() }    
-                                
-                                </Col>
-                                { /* 
-                                <Col size='4'>
-                                    <h2 className="title">{ this.state.pageData.main.asideTitle }</h2>
-                                    <p>
-                                        { this.state.pageData.main.asideParagraph }
-                                    </p>
-                                    <img src="static/images/mercyblueicon.jpg" className="img-fluid" alt="Machines Logo" />
-                                </Col>
-                                */}
-                            </Row>
-                        </Container>
-                    </div>
+                    { this.renderLeftColumn() }                
                 </div>
             )}
             </ErrorBoundary>

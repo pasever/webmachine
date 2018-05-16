@@ -1,9 +1,16 @@
+
+
 import React, {Component} from 'react';
 import { ClientsSection } from './';
-import { Col } from '../../../common/grid';
+import { Container, Row, Col } from '../../../common/grid';
 import ErrorBoundary from '../../../common/error/ErrorBoundary';
 import API from '../../../common/utils/API';
 import LoadingPage from '../../../common/LoadingPage';
+import { Redirect } from 'react-router-dom';
+import URI from '../../../common/utils/URI';
+import Config from '../../../../config';
+
+const config = Config.init();
 
 export class DashHome extends Component {
     state = {
@@ -11,6 +18,7 @@ export class DashHome extends Component {
         ownedNetworks: [],
         joinedNetworks: [],
         isLoading: true,
+        errorHappened: false,
     }
 
     componentDidMount() {
@@ -19,26 +27,35 @@ export class DashHome extends Component {
         Promise.all([ ownedNetworks, joinedNetworks ]).then(values => {
             this.setState({ isLoading: false, ownedNetworks: values[0].data, 
                         joinedNetworks: values[1].data });            
-        })
+        }).catch(err => { this.setState({ errorHappened: true }); return console.log(err); })
 
     }
 
+    sendToLogin() {
+        URI.sendToLogin();
+    }
     render() {
         return (
             <ErrorBoundary>
-            <div className="center-content">
-                <h1 className="title">
-                    { this.state.pageText.title}
-                </h1>
-                <p className="paragraph">{this.state.pageText.subTitle }</p>
-                <a href="/member" className="btn btn-default">{ this.state.pageText.searchNetworksButton }</a>
-            </div>
+            { this.state.errorHappened && this.sendToLogin() }
             { this.state.isLoading ? ( <LoadingPage /> ) : (
-                <div className="right-border">
+            <div>
+                <header>
+                    <div className="header-wrapper">
+                        <h1 className="title">
+                            { this.state.pageText.title}
+                        </h1>
+                        <p className="paragraph">{this.state.pageText.subTitle }</p>
+                        <a href="/member" className="btn btn-default">{ this.state.pageText.searchNetworksButton }</a>
+                    </div>
+                </header>
+            
+                <div>
                     { this.state.ownedNetworks.length > -1 ? (
                         <ClientsSection clients={this.state.ownedNetworks } pageText={this.state.pageText } />
                     ) : "" }
                 </div>                
+            </div>
             )}
             
             </ErrorBoundary>
