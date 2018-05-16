@@ -44,25 +44,52 @@ class MemberRegistration extends Component {
   }
 
   handlePageChange(location) {
+    // let loc = this.state.location === '' ? 'networks-to-join' : this.state.location;
+    // let stateProp = /-/.test(loc) ? loc.replace(/-/g,'_') : page;
     this.setState({ location });
   }
 
-  handleNetworkSelectionChange() {}
+  handleNetworkSelectionChange(networks_to_join) {
+    this.setState({ networks_to_join });
+  }
 
-  handleFormInputChange() {}
+  handleFormInputChange(e) {
+    let member_form;
+    if ('member_form' in this.state)
+      member_form = this.state.member_form;
+
+    member_form[e.target.id] = e.target.value;
+    this.setState({ member_form });
+  }
 
   // Renders component based on page location
   renderPage() {
     let { location } = this.state;
 
     if (location === 'networks-to-join') {
-      return <NetworkSelection handleChange={} />
+      return (
+        <NetworkSelection
+          networks={this.state.networks_to_join}
+          changePage={this.handlePageChange}
+          handleChange={this.handleNetworkSelectionChange}
+        /> )
     } else if (location === 'member-form') {
-      return <MemberForm handleChange={} />
+      return (
+        <MemberForm
+          formValues={this.state.member_form}
+          changePage={this.handlePageChange}
+          handleChange={this.handleFormInputChange}
+          handleSubmit={this.registerMember}
+        /> )
     } else {
       // If, for whatever reason, the value of location is wiped out
       // from state, render the first step of the registration process.
-      return <NetworkSelection handleChange={} />
+      return (
+        <NetworkSelection
+          networks={this.state.networks_to_join}
+          changePage={this.handlePageChange}
+          handleChange={this.handleNetworkSelectionChange}
+        /> )
     }
   }
 
@@ -76,9 +103,11 @@ class MemberRegistration extends Component {
   //    effectively passing ALL information necessary to register
   //    a new member.
   // 3. Waits for response and notifies user of outcome.
-  registerMember() {
+  registerMember(e) {
+    e.preventDefault();
     // gets called when both loads are valid and ready to go.
-    console.log(this.state, 'submitting now!');
+    let member_load = this.state;
+    console.log(member_load, 'submitting now!');
   }
 
   render() {
