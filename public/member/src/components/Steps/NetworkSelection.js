@@ -17,6 +17,10 @@ class NetworkSelection extends Component {
       // retrieved from backend
       discoverableNetworks: [1,2,3,4,5,6,7]
     };
+
+    this.toggleActiveClass = this.toggleActiveClass.bind(this);
+    this.addNetworkToState = this.addNetworkToState.bind(this);
+    this.removeNetworkFromState = this.removeNetworkFromState.bind(this);
   }
 
   // Check if records of previously selected networksToJoin exists in localStorage.

@@ -174,7 +174,10 @@ class MemberForm extends Component {
 
         </div>
         
-        <button onClick={this.props.handleSubmit} type="submit" className="btn btn-primary">
+        <button
+          onClick={this.props.handleSubmit}
+          type="submit" className="btn btn-primary"
+        >
           Complete Registration
         </button>
       </form>
