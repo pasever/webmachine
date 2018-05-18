@@ -1,6 +1,6 @@
 import React, { Component }       from 'react';
 import Input                      from '../FormElements/Input';
-import getPublicClient, { getPublicClients }            from '../../../../../api/client/db';
+import API                        from '../../../../common/utils/API';
 
 // Global reference to localStorage
 let ls = window.localStorage;
@@ -16,7 +16,7 @@ class NetworkSelection extends Component {
     super(props);
     this.state = {
       // retrieved from backend
-      discoverableNetworks: [1,2,3,4,5,6,7]
+      discoverableNetworks: []
     };
 
     this.toggleActiveClass = this.toggleActiveClass.bind(this);
@@ -32,31 +32,35 @@ class NetworkSelection extends Component {
   // once user navigates to the next page and this component unmounts)
   /** @todo implement same functionality in member-form */
   componentDidMount() {
-    // getPublicClients()
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
-    if('networksToJoin' in ls) {
-      let previouslySelectedNetworks = ls.getItem('networksToJoin').split(',');
-      let unselectedNetworks = window.document.getElementById('networks-results').getElementsByTagName('li');
-      let networksToJoin = [];
-      // Convert nodeList to Array
-      unselectedNetworks = Array.from(unselectedNetworks);
 
-      for (let i = 0; i < previouslySelectedNetworks.length; i++) {
-        for (let j = 0; j < unselectedNetworks.length; j++) {
-          if (previouslySelectedNetworks[i] === unselectedNetworks[j].id) {
-            unselectedNetworks[j].classList.add('active');
-            networksToJoin.push(unselectedNetworks[j].id)
-          }
-        }
-      }
+    API.getPublicClients()
+      .then(res => {
+        let discoverableNetworks = res.data;
+        this.setState({ discoverableNetworks });
+      })
+      .catch(err => {
+        console.log(err);
+      })
 
-      this.props.handleChange(networksToJoin);
-    }
+    // if('networksToJoin' in ls) {
+    //   let previouslySelectedNetworks = ls.getItem('networksToJoin').split(',');
+    //   let unselectedNetworks = window.document.getElementById('networks-results').getElementsByTagName('li');
+    //   let networksToJoin = [];
+    //   // Convert nodeList to Array
+    //   unselectedNetworks = Array.from(unselectedNetworks);
+
+    //   for (let i = 0; i < previouslySelectedNetworks.length; i++) {
+    //     for (let j = 0; j < unselectedNetworks.length; j++) {
+    //       if (previouslySelectedNetworks[i] === unselectedNetworks[j].id) {
+    //         unselectedNetworks[j].classList.add('active');
+    //         networksToJoin.push(unselectedNetworks[j].id)
+    //       }
+    //     }
+    //   }
+
+    //   this.props.handleChange(networksToJoin);
+    // }
+
   }
 
   /** @method */
@@ -75,11 +79,11 @@ class NetworkSelection extends Component {
       >
         {discoverableNetworks.map((n, i) =>
           <li
-            id={`networkId${i+1}`} key={i+1}
+            id={n._id} key={i+1}
             className="list-group-item network"
             onClick={this.toggleActiveClass}
           >
-            {`Network ${n}`}
+            {n.name}
           </li>)}
       </ul>
     )
