@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////////////////
+////////////////////      Utils API.js         ///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+///  Handles making calls to the API.                                           //
+///  Authorized API calls require being called through Axios, from this file.   //
+///  Otherwise, the Authorization header needs to be manually attached.         //
+///  DGO                                                                        //
+//////////////////////////////////////////////////////////////////////////////////
+
 import axios from 'axios';
 
 const config = require('../../../config').init();
@@ -10,12 +19,14 @@ export default {
     /// THIS WILL BE USED TO GRAB THE MOST UNIQUE CLIENT TO A USER FOR MAINTENANCE
     getClientForMaintenance: (id) => {
         /// HACK - REMOVE HARDCODED ID
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token + '&clientId=' + id);
+        return axios.get('/api/db/client?clientId=' + id);
     },
-    
+    getJoinedNetworks: () => {
+        return axios.get('/api/db/client/joined');
+    },
     /// USED TO GET ALL CLIENTS ONE INDIVIDUAL LOGIN MANAGES
     getClientsByAccessId: () => {
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token);
+        return axios.get('/api/db/client');
     },
     getPublicClients: () => {
         return axios.get('/api/db/client/public');
@@ -26,7 +37,7 @@ export default {
     //    return axios.put('/api/db/client', client);
     //},
     updateClient: (client) => {
-        return axios.post('/api/db/client', { client: client, token: localStorage.id_token});
+        return axios.post('/api/db/client', client);
     },
     deleteClient: (client) => {
         return axios.delete('/api/db/client', { data: { id: client.id }});

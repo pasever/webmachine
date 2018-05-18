@@ -50,14 +50,15 @@ exports.getClients = (accessId) => {
 
 exports.getPublicClients = () => {
     return new Promise((resolve, reject) => {
-        Client.find({ isPrivate: false, isActivated: true }, (err, response) => {
+        Client.find({ isPrivate: false, isActivated: true }, "name description addr1 addr2 city state zip sms").then(response => {
+            resolve(response);
+        }).catch(err => {
             if(err) {
                 if(err.error !== 'not_found') 
                     resolve(err)
                 else
                     reject(err);
             }
-            resolve(response);
         })
     })
 }
@@ -80,7 +81,7 @@ exports.getClient = (id) => {
 
 exports.getJoinedClients = (aId) => {
     return new Promise((resolve, reject) => {
-        Client.find({ members: aId }).then(response => {
+        Client.find({ members: aId }, "name description addr1 addr2 city state zip sms").then(response => {
             resolve(response);
         }).catch(err => {
             if(err) {
@@ -158,8 +159,8 @@ exports.updateClient = (client) => {
                         respClient["stripeCustomer"] = null;
                     else 
                         respClient["stripeCustomer"] = stripeCust;
-                    resolve(user);
-                }).catch(err => resolve(user));
+                    return resolve(respClient);
+                })
             }).catch(err => reject(err));
         })
     })
