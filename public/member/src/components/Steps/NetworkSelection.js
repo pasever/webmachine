@@ -1,5 +1,6 @@
 import React, { Component }       from 'react';
 import Input                      from '../FormElements/Input';
+import getPublicClient, { getPublicClients }            from '../../../../../api/client/db';
 
 // Global reference to localStorage
 let ls = window.localStorage;
@@ -31,6 +32,13 @@ class NetworkSelection extends Component {
   // once user navigates to the next page and this component unmounts)
   /** @todo implement same functionality in member-form */
   componentDidMount() {
+    // getPublicClients()
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
     if('networksToJoin' in ls) {
       let previouslySelectedNetworks = ls.getItem('networksToJoin').split(',');
       let unselectedNetworks = window.document.getElementById('networks-results').getElementsByTagName('li');
