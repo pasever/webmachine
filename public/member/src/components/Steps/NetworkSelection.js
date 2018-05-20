@@ -131,9 +131,9 @@ class NetworkSelection extends Component {
 
   /** @method */
    // If component will unmount, save state into localStorage
-  componentWillUnmount() {
-    ls.setItem('networksToJoin', this.props.networks);
-  }
+  // componentWillUnmount() {
+  //   ls.setItem('networksToJoin', this.props.networks);
+  // }
 
 
   render() {

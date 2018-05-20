@@ -65,11 +65,11 @@ class MemberForm extends Component {
 
    /** @method */
    // If component will unmount, save state into localStorage
-   componentWillUnmount() {
-     let memberForm = this.props.formValues;
-     memberForm = JSON.stringify(memberForm);
-     ls.setItem('memberForm', memberForm);
-   }
+  //  componentWillUnmount() {
+  //    let memberForm = this.props.formValues;
+  //    memberForm = JSON.stringify(memberForm);
+  //    ls.setItem('memberForm', memberForm);
+  //  }
 
   render() {
     let {
