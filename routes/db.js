@@ -7,10 +7,13 @@
 
 const bodyParser =  	 require('body-parser')
 const dbclient =       require('express').Router();
+const dbMember = 			 require('express').Router();
 const dbagent =        require('express').Router();
+
 // register routes
 require('./db/dbagent')(dbagent);
 require('./db/dbclient')(dbclient);
+require('./db/dbMember')(dbMember);
 
 const db = (router) => {
 	router.use(bodyParser.json());
@@ -20,6 +23,9 @@ const db = (router) => {
 
 	// api/db/client
 	router.use('/client', dbclient)
+
+	// api/db/member
+	router.use('/member', dbMember)
 
 }
 
