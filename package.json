@@ -66,6 +66,8 @@
     "react-chat-widget": "2.1.2",
     "react-dom": "^16.3.0",
     "react-dropzone": "^4.2.9",
+    "react-file-reader": "^1.1.4",
+    "react-filtered-multiselect": "^0.5.1",
     "react-input-mask": "^1.2.2",
     "react-markdown-renderer": "^1.4.0",
     "react-responsive-modal": "^3.0.1",

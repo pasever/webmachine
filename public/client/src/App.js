@@ -13,7 +13,7 @@ import LoadingPage from '../../common/LoadingPage';
 import { MaintenanceHeader } from './components/Partials/';
 import {Container, Row, Col } from '../../common/grid';
 import { Link } from 'react-router-dom';
-import ErrorBoundary from '../../common/error/ErrorBoundary';
+import { ErrorBoundary } from '../../common/error/ErrorBoundary';
 import MaintenanceWrapper  from './components/Maintenance/MaintenanceWrapper';
 import 'react-tabs/style/react-tabs.css';
 import './App.css';
@@ -49,7 +49,7 @@ export default class App extends Component {
     }
 
     /// When the component mounts, we will try and get all of the platform text and the client object from token.
-    componentDidMount() {
+    componentDidMount() {   
         // Gets our platform page data
         const data = this.getClientPageData().then(resp => { return resp.json(); });
         
@@ -131,7 +131,6 @@ export default class App extends Component {
                 /* END pageData CHECK */
                 )}
                 </div>
-            )}
             </div>
             
         );

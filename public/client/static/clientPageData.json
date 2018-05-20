@@ -4,7 +4,8 @@
     },
     "generalMaintenance": {
         "title": "General Information",
-        "body": "General platform information"
+        "body": "General platform information",
+        "isPrivate": "Make network private?"
     },
     "dbMaintenance": {
         "title": "Data Store Information",
@@ -16,6 +17,14 @@
     },
     "header": {
         "deleteButton": "Remove my platform"
+    },
+    "members": {
+        "title": "Manage your members",
+        "subTitle": "Add members to your white list and manage active members",
+        "addMembers": "Add members by email or phone #",
+        "manageMembers": "Manage your whitelist and approved members",
+        "upload": "Or upload a CSV of approved members",
+        "manageWhiteList": "Members to add"
     },
     "web": {
         "title": "Manage your web presence",

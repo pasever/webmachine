@@ -95,25 +95,25 @@ exports.getJoinedClients = (aId) => {
     })
 }
 
-// Gets Client(s) by Auth Access Id
+// Gets Client(s) by Auth Access Id & Client Id
 exports.getOneOwnedClient = (aId, cId) => {
     return new Promise((resolve, reject) => {
         Client.findOne({ accessToken: aId, _id: cId }).lean().then(response => {
             let client = response;
-            stripe.customers.retrieve(client.stripeCustomerId, (err, stripeCust) => {                
-                if(err) 
-                    client["stripeCustomer"] = null;
-                else 
-                    client["stripeCustomer"] = stripeCust;
-                resolve(client);
-            })
-        }).catch(err => {
-            if(err) {
-                if(err.error !== 'not_found') 
-                    resolve(err);
-                else
-                    reject(err);
+            
+            if(client.stripeCustomerId) {
+                stripe.customers.retrieve(client.stripeCustomerId, (err, stripeCust) => {                
+                    if(err) 
+                        client["stripeCustomer"] = null;
+                    else 
+                        client["stripeCustomer"] = stripeCust;
+                    return resolve(client);
+                })
+            } else {
+               return resolve(client);
             }
+        }).catch(err => {
+            reject(err);
         })
     })
 }

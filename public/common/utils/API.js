@@ -18,7 +18,6 @@ export default {
     /// USED TO GET A CLIENT BY ACCESS ID AND CLIENT ID
     /// THIS WILL BE USED TO GRAB THE MOST UNIQUE CLIENT TO A USER FOR MAINTENANCE
     getClientForMaintenance: (id) => {
-        /// HACK - REMOVE HARDCODED ID
         return axios.get('/api/db/client?clientId=' + id);
     },
     getJoinedNetworks: () => {
