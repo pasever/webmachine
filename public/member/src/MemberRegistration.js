@@ -22,6 +22,9 @@ import React, { Component }       from 'react';
 import axios                      from 'axios';
 import NetworkSelection           from './components/Steps/NetworkSelection';
 import MemberForm                 from './components/Steps/MemberForm';
+import API                        from '../../common/utils/API';
+
+const ls = window.localStorage;
 
 class MemberRegistration extends Component {
 
@@ -121,20 +124,19 @@ class MemberRegistration extends Component {
     e.preventDefault();
     // gets called when both loads are valid and ready to go.
     let member_load = this.state;
-    console.log(member_load, 'submitting now!');
-    // axios.post('/endpoint', member_load)
-    //   .then(res => {
-    //     if ('networksToJoin' in ls)
-    //       ls.removeItem('networksToJoin');
+    API.registerMember(member_load)
+      .then(res => {
+        if ('networksToJoin' in ls)
+          ls.removeItem('networksToJoin');
         
-    //     if ('memberForm' in ls)
-    //       ls.removeItem('memberForm')
+        if ('memberForm' in ls)
+          ls.removeItem('memberForm')
 
-    //     console.log(res)
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   render() {
