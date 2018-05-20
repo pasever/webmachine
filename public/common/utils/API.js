@@ -54,4 +54,7 @@ export default {
     deployNetlify: (client, templateData) => {
         return axios.post('/api/db/client/netlify', { client: client, templateData: templateData });
     },
+    registerMember: (memberPayload) => {
+      return axios.post('/api/db/member/register', memberPayload);
+    }
 }
