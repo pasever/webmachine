@@ -5,13 +5,15 @@ import React from 'react';
  * @prop {Array} options - one <option> tag rendered for each element
  */
 
-const Select = ({ id, options, handleInput }) => 
+const Select = ({ id, options, value, handleInput }) => 
   <select
     className='form-control'
-    id={id}
+    id={ id }
+    value={ value }
+    onChange={ handleInput }
   >
     {options.map((opt, i) =>
-      <option key={i} onChange={handleInput}>{ opt }</option>
+      <option key={opt.name}>{ opt.abbreviation }</option>
     )}
   </select>
 
