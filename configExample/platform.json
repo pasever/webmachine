@@ -1,5 +1,6 @@
 [
 	{
+<<<<<<< Updated upstream
 		"name": "xio",
 		"description": "Platform owner - test database holding client collections ",
 		"location": "urbancoder account",
@@ -20,6 +21,32 @@
 		"password": "",
 		"webpassword": "demo",
 		"isLive": true
+=======
+		"name": "Test Strategic Machines",
+		"email": "",
+		"firstName": "",
+    	"surname": "",
+	    "addressLine1": "",
+    	"addressLine2": "",
+		"city": "",
+		"state": "",
+		"zip": "",
+		"description": "Test db with primary auth records for orgs and marketplace collections",
+		"collections": ["platform", "partners", "workitems"],
+		"contact": "ChaoticRoute",
+		"sms": "",
+		"web": "demo",
+		"db": "machines",
+		"dbname": "",
+		"dbConnected": false,
+		"uri": "mongodb://localhost:27017/",
+		"username": "",
+		"password": "",
+		"stripeCustomerId": "",
+		"isPlatform": true,
+		"isLive": false,
+		"clientId": ""
+>>>>>>> Stashed changes
 	}
 
 ]

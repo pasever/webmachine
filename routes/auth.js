@@ -39,10 +39,12 @@ const auth = (router) => {
         console.log(apiPath)
         console.log(test)
 
+
 		switch(apiPath) {
 			case '/db/agent':
             case '/db/client':
             case '/github':
+            case '/platform':
                 const token = req.get('Authorization')
 
 				if (token) {
@@ -62,7 +64,7 @@ const auth = (router) => {
 			default:
 		}
 
-
+        
 	// configured for future capabilities, processing messages from various channels
 	// as of 2/2018 - only configured for web http and sms channels
 

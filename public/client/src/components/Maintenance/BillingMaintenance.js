@@ -19,7 +19,7 @@ import '../../styles/maintenancepage.css';
 const config = require('../../../../../config/').init();
 
 
-/// FUTURE - Send User object, and check if the user is in Stripe.
+/// FUTURE - Send User object, and check if the client is in Stripe.
 export class BillingMaintenance extends Component {
   render() {
     return (
@@ -28,7 +28,7 @@ export class BillingMaintenance extends Component {
         {this.props.text.body ? <p>{this.props.text.body}</p> : ""}
         <StripeProvider apiKey={config.stripe.publishKey}>
           <StripeFormWrapper
-            user={this.props.user}
+            client={this.props.client}
             updateFormField={this.props.updateFormField}
           />
         </StripeProvider>

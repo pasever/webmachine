@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { UserMaintenance, DbMaintenance, 
+import { GeneralMaintenance, DbMaintenance, 
         BillingMaintenance, WebMaintenance } from './';
 import { Tab, TabPanel, Tabs, TabList } from 'react-tabs';
 import {Container, Row, Col } from '../../../../common/grid';
@@ -15,11 +15,11 @@ class MaintenanceWrapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user:  this.props.user,                 //  should be passed in the response from Authorization
+            client:  this.props.client,             //  should be passed in the response from Authorization
             errors: {},                             //  errors object
             pageData: this.props.pageData,          //  page data object
             hasErrors: false,                       //  flags if we should display a message about errors
-            isSaved: false,                         //  flags if we should inform the user data has been saved
+            isSaved: false,                         //  flags if we should inform the client data has been saved
             isSaving: false,                        //  shows the "saving" cog
         };
 
@@ -31,33 +31,33 @@ class MaintenanceWrapper extends Component {
         event.preventDefault();
         // Grabs the attributes from the target
         const { name, value } = event.target;
-        // Get the current user object from the state
-        const user = this.state.user;
+        // Get the current client object from the state
+        const client = this.state.client;
         // If this is a phone number, we need to remove the mask
         if(name === "sms") {
             // Handles removing mask from Phone Number input
             const number = value.replace(/\D/g, "");
-            user[name] = number;
+            client[name] = number;
         } else
-            user[name] = value;
+            client[name] = value;
 
-        // Sets the updated user object back in the state
+        // Sets the updated client object back in the state
         this.setState({
-            user: user
+            client: client
         });
         
     }
     
-    // Method that handles saving the user
+    // Method that handles saving the client
     submitForm = event => {
         this.setState({ isSaving: true });
         event.preventDefault();
-        API.updateClient(this.state.user).then(resp => {
+        API.updateClient(this.state.client).then(resp => {
             console.log("RESPONSE", resp);
             if(resp.data.errors) {
                 this.setState({ errors: resp.data.errors, hasErrors: true, isSaved: false, isSaving: false });
             } else {
-                this.setState({ errors: {}, hasErrors: false, user: resp.data, isSaved: true, isSaving: false });
+                this.setState({ errors: {}, hasErrors: false, client: resp.data, isSaved: true, isSaving: false });
             }
         }).catch(err => { 
             console.log(err) 
@@ -78,16 +78,16 @@ class MaintenanceWrapper extends Component {
             
                 <TabPanel>
                     <Col size="12 md-8">
-                        <UserMaintenance
-                            user={ this.state.user } updateFormField={ this.updateFormField } 
+                        <GeneralMaintenance
+                            client={ this.state.client } updateFormField={ this.updateFormField } 
                             onSubmit={ this.submitForm } errors={ this.state.errors }
-                            text={ this.state.pageData.userMaintenance } isSaving={this.state.isSaving } />      
+                            text={ this.state.pageData.generalMaintenance } isSaving={this.state.isSaving } />      
                     </Col>
                 </TabPanel>
                 <TabPanel>
                     <Col size="12 md-8">
                         <DbMaintenance
-                            user={ this.state.user } updateFormField={ this.updateFormField } 
+                            client={ this.state.client } updateFormField={ this.updateFormField } 
                             onSubmit={ this.submitForm } errors={ this.state.errors }
                             text={ this.state.pageData.dbMaintenance } isSaving={this.state.isSaving } />      
                     </Col>
@@ -95,7 +95,7 @@ class MaintenanceWrapper extends Component {
                 <TabPanel>
                     <Col size="12">
                         <WebMaintenance
-                            user={ this.state.user } updateFormField={ this.updateFormField } 
+                            client={ this.state.client } updateFormField={ this.updateFormField } 
                             onSubmit={ this.submitForm } errors={ this.state.errors }
                             text={ this.state.pageData.web } isSaving={this.state.isSaving } />      
                     </Col>
@@ -107,7 +107,7 @@ class MaintenanceWrapper extends Component {
                     <Col size="12">
                         <BillingMaintenance 
                             text={ this.state.pageData.billingMaintenance } 
-                            user={ this.state.user } 
+                            client={ this.state.client } 
                             updateFormField={ this.updateFormField } />
                     </Col>
                 </TabPanel>

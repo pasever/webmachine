@@ -159,8 +159,8 @@ exports.updateClient = (client) => {
                         respClient["stripeCustomer"] = null;
                     else 
                         respClient["stripeCustomer"] = stripeCust;
-                    resolve(user);
-                }).catch(err => resolve(user));
+                    return resolve(respClient);
+                })
             }).catch(err => reject(err));
         })
     })
