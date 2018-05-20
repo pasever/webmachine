@@ -4,9 +4,13 @@
  * 
  * Process consists of two (or more?) steps:
  * 1. Network selection - User selects from array 
- *    of available networks to join.
+ *    of available discoverable networks to join.
  * 2. Member form - Member specific information
  *    is gathered through a form.
+ * 3. When moving, either to or from, one step to
+ *    another, the data gathered in the state of each
+ *    child component is lifted to the state of the 
+ *    highest order component; this one.
  * 
  * Successful submission of the data gathered in this
  * process creates and inserts a Member document within
@@ -15,72 +19,167 @@
  */
 
 import React, { Component }       from 'react';
-import {
-  BrowserRouter as Router,
-  Route
-}                                 from "react-router-dom";
+import axios                      from 'axios';
 import NetworkSelection           from './components/Steps/NetworkSelection';
 import MemberForm                 from './components/Steps/MemberForm';
 
-const routes = [
-  {
-    //member_registration_step#
-    path: '/member',
-    exact: true,
-    component: NetworkSelection
-  },
-  {
-    path: '/member-form',
-    component: MemberForm
-  }
-];
-
 class MemberRegistration extends Component {
 
+  /**
+   * @property {String} location - identifier of current page OR step
+   *  in the member registration process
+   */
   constructor(props) {
     super(props);
     this.state = {
-      test: 'hello'
+      // Defaults to step1 of the registration process.
+      location: 'networks-to-join',
+      networks_to_join: [],
+      member_form: {}
     };
 
-    this.liftChildState = this.liftChildState.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleNetworkSelectionChange = this.handleNetworkSelectionChange.bind(this);
+    this.handleFormInputChange = this.handleFormInputChange.bind(this);
+    this.registerMember = this.registerMember.bind(this);
   }
 
-  /**@todo
-   * write a function that allows each child
-   * to lift its respective state
+  /**
+   * @param {String} location
+   * Passed to children to handle page changes
    */
+  handlePageChange(location) {
+    // let loc = this.state.location === '' ? 'networks-to-join' : this.state.location;
+    // let stateProp = /-/.test(loc) ? loc.replace(/-/g,'_') : page;
+    this.setState({ location });
+  }
 
-  liftChildState(value) {
-    // this.setState({ test: value })
-    console.log(value);
+  /**
+   * @param {Array} networks_to_join
+   * Passed to NetworkSelection stage to allow
+   * for the lifting up of network selections array
+   */
+  handleNetworkSelectionChange(networks_to_join) {
+    this.setState({ networks_to_join });
+  }
+
+  /**
+   * @param {Object} event
+   * Allows MemberForm to become a controlled component
+   */
+  handleFormInputChange(e) {
+    let member_form;
+    if ('member_form' in this.state)
+      member_form = this.state.member_form;
+
+    member_form[e.target.id] = e.target.value;
+    this.setState({ member_form });
+  }
+
+  // Renders component based on page location
+  renderPage() {
+    let { location } = this.state;
+
+    if (location === 'networks-to-join') {
+      return (
+        <NetworkSelection
+          networks={this.state.networks_to_join}
+          changePage={this.handlePageChange}
+          handleChange={this.handleNetworkSelectionChange}
+        /> )
+    } else if (location === 'member-form') {
+      return (
+        <MemberForm
+          formValues={this.state.member_form}
+          changePage={this.handlePageChange}
+          handleChange={this.handleFormInputChange}
+          handleSubmit={this.registerMember}
+        /> )
+    } else {
+      // If, for whatever reason, the value of location is wiped out
+      // from state, render the first step of the registration process.
+      return (
+        <NetworkSelection
+          networks={this.state.networks_to_join}
+          changePage={this.handlePageChange}
+          handleChange={this.handleNetworkSelectionChange}
+        /> )
+    }
+  }
+
+  // Passed to the component handling last step of the process.
+  // Triggered when 'Complete Registration' button is clicked.
+  // Performs a few things:
+  // 1. Checks that load from each step IS NOT empty (@method)
+  //  1.1 If one or more is empty, it DOESN'T submit
+  //  1.2 If none are empty, it moves on.
+  // 2. Makes request to member registration route in backend,
+  //    effectively passing ALL information necessary to register
+  //    a new member.
+  // 3. Waits for response and notifies user of outcome.
+  registerMember(e) {
+    e.preventDefault();
+    // gets called when both loads are valid and ready to go.
+    let member_load = this.state;
+    console.log(member_load, 'submitting now!');
+    // axios.post('/endpoint', member_load)
+    //   .then(res => {
+    //     if ('networksToJoin' in ls)
+    //       ls.removeItem('networksToJoin');
+        
+    //     if ('memberForm' in ls)
+    //       ls.removeItem('memberForm')
+
+    //     console.log(res)
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
   }
 
   render() {
-    /**
-     * @TODO
-     * Add state and write methods to lift state.
-     * State at this level is used to keep track of
-     * data as we progress through member registration steps.
-     */
     return (
-        <Router>
-          <div className='container'>
-            {/* Render a Route forEach object in routes Array */}
-            {routes.map(({ path, component: C }) => (
-              <Route
-                key={path}
-                path={path}
-                 // ...props = routing props
-                render={(props) => 
-                  <C {...props} liftState={this.liftChildState} />
-                }
-              />
-            ))}
-          </div>
-        </Router> 
+      <div className="container">
+        {this.renderPage()}
+      </div>
     )
   }
 }
 
 export default MemberRegistration;
+
+// loadIsOkToSubmit(load) {
+//   // if it's not an array, then it's a plain object
+//   console.log(load)
+//   if (Array.isArray(load)) {
+//     if(load.length === 0) {
+//       // alert('Please select at least one network to join');
+//       return false;
+//     }
+//   } else {
+//     let loadValues;
+//     // Address 2 is optional; if it's empty, delete it
+//     if (load.address2 === '') delete load.address2;
+//     // Capture value of each key in an array
+//     let x = Object.values(load);
+    
+//     // Safety net in case somehow all keys get deleted.
+//     // Shouldn't happen (look at initial state of MemberForm)
+//     // but just in case
+//     if (x.length > 0)
+//       loadValues = x
+//     else {
+//       // alert('Please fill out all fields in the form')
+//       return false
+//     }
+
+//     for (let i = 0; i < loadValues.length; i++) {
+//       if (loadValues[i] === '') {
+//         // alert('Please fill out all fields in the form');
+//         return false;
+//       }
+//     }
+//   }
+
+//   return true;
+// }

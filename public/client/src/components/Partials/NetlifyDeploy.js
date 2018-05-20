@@ -10,8 +10,8 @@ import '../../styles/netlifyDeploy.css';
 export class NetlifyDeploy extends Component {
 
     state = {
-        user: this.props.user,
-        siteData: this.props.user.siteData,
+        client: this.props.client,
+        siteData: this.props.client.siteData,
         isSaving: false,
         templateData: [],
         selectedTemplate: 0,  
@@ -39,15 +39,15 @@ export class NetlifyDeploy extends Component {
     launchNetlify = event => {
         event.preventDefault();
         // Extract the Client
-        const user = this.state.user;
+        const client = this.state.client;
         
         // 
-        user.siteData = this.state.siteData;
+        client.siteData = this.state.siteData;
         this.setState( { isSaving: true });
         
-        API.deployNetlify(user, this.state.templateData[this.state.selectedTemplate]).then(resp => {
+        API.deployNetlify(client, this.state.templateData[this.state.selectedTemplate]).then(resp => {
             console.log("Response! : ", resp)
-            this.setState({ user: resp.data, siteData: resp.data.siteData, isSaving: false })
+            this.setState({ client: resp.data, siteData: resp.data.siteData, isSaving: false })
         }).catch(err => { console.log("ERROR!!", err); this.setState({ error: "There was an error processing your request", isSaving: false })});
     }
     componentDidMount() {

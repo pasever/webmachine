@@ -16,12 +16,12 @@ import "../../styles/maintenancepage.css";
 REQUIRED PROPS: 
     onSubmit (method) - method that fires when the form is submitted
     errors - errors object
-    user - the user object
+    client - the client object
     text - text to display
     updateFormField (method) - method that fires when a form value is updated
 */
 
-export const WebMaintenance = ({ errors, text, user, onSubmit, updateFormField,isSaving }) => (
+export const WebMaintenance = ({ errors, text, client, onSubmit, updateFormField,isSaving }) => (
     <ErrorBoundary>
         <div className="web-form-wrapper">
             <div className="web-form-section light-shadow">
@@ -29,7 +29,7 @@ export const WebMaintenance = ({ errors, text, user, onSubmit, updateFormField,i
                 {text.welcomeBody ? <p>{text.welcomeBody}</p> : ""}
                 <form onSubmit={onSubmit}>
                     <Input
-                        value={user.web}
+                        value={client.web}
                         name="web"
                         errorText={errors.web}
                         placeholder="Web"
@@ -47,10 +47,10 @@ export const WebMaintenance = ({ errors, text, user, onSubmit, updateFormField,i
                 </form>
             </div>
             <div className="web-form-section light-shadow">
-                { text.getNetlify && user.web ? ( <p><i className="fa fa-info-circle"></i> { text.getNetlify }</p> ) : ("") }
-                { user.web === "" ? (
+                { text.getNetlify && client.web ? ( <p><i className="fa fa-info-circle"></i> { text.getNetlify }</p> ) : ("") }
+                { client.web === "" ? (
                     <div>{ text.launchMessage ? ( <h2>{text.launchMessage }</h2> ) : "" }
-                        <NetlifyDeploy user={ user } text={ text.netlifyDeploy }/>
+                        <NetlifyDeploy client={ client } text={ text.netlifyDeploy }/>
                     </div>
                 ) : "" }
             

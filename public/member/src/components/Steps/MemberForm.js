@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Label from '../FormElements/Label';
 import Input from '../FormElements/Input';
 import Select from '../FormElements/Select';
+import state_abbreviations from '../../data/state_abbreviations';
 
 /**
  * ---- Fields ----
@@ -13,32 +13,48 @@ import Select from '../FormElements/Select';
  * [x] City, State, Zip
  * [x] Cell
  * [x] Email
- * 
  */
 
- const states = ['NC', 'MA', 'FL'];
+ // Global reference to document object
+ const d = window.document;
+// Global reference to localStorage
+const ls = window.localStorage;
 
 class MemberForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      phone: '',
-      email: '',
-      address1: '',
-      address2: '',
-      city: '',
-      state: '',
-      zip: ''
-    };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.state = {};
   }
 
-  handleInputChange(e) {
-    this.setState({[e.target.id]: e.target.value});
-  }
+  // If there's record of state in localStorage, retrieve it
+  // and refill the form with it.
+  // componentDidMount() {
+  //   if ('memberForm' in ls) {
+  //     let memberFormRemnants = JSON.parse(ls.getItem('memberForm'));
+  //     let keys = Object.keys(memberFormRemnants);
+  //     let values = Object.values(memberFormRemnants);
+  //     let updatedState = {};
+  //     // Safety net
+  //     if (keys.length !== values.length) return;
+
+  //     let form = Array.from(d.getElementById('member-form'));
+  //     // Get rid of submit button - not needed for these purposes
+  //     form.pop();
+
+  //     // Iterate through every form field and create an object using
+  //     // key/value pairs from localStorage
+  //     for (let i = 0; i < form.length; i++) {
+  //       updatedState[keys[i]] = values[i];
+  //     }
+
+  //     // this.props.handleChange(updatedState);
+
+  //   } else {
+  //     // First time component mounts and there's no data in localStorage
+  //     // this.setState({ state: d.getElementById('state')[0].value });
+  //   }
+
+  // }
 
   /**
    * @TODO Create method to upload a picture ?
@@ -47,15 +63,25 @@ class MemberForm extends Component {
    * 3. Save IMG URL into state
    */
 
+   /** @method */
+   // If component will unmount, save state into localStorage
+   componentWillUnmount() {
+     let memberForm = this.props.formValues;
+     memberForm = JSON.stringify(memberForm);
+     ls.setItem('memberForm', memberForm);
+   }
+
   render() {
     let {
       firstName, lastName, phone, email,
       address1, address2, city, state, zip
-    } = this.state;
+    } = this.props.formValues;
     return (
-      <form style={{ width: '70%', margin: '0 auto' }}>
+      <form id='member-form' style={{ width: '70%', margin: '0 auto' }}>
         <h4 className="form-title">Last Step</h4>
-        <Link to='/member'> Go (back) to the Network Selection Stage </Link>
+        <a href='#' onClick={() => this.props.changePage('networks-to-join')}>
+          Go (back) to the Network Selection Stage
+        </a>
         <div className="form-row">
 
           <div className="form-group col-md-6">
@@ -63,7 +89,7 @@ class MemberForm extends Component {
             <Input
               type='text' placeholder='John'
               id='firstName' value={firstName}
-              handleInput={this.handleInputChange}
+              handleInput={this.props.handleChange}
             />
           </div>
           <div className="form-group col-md-6">
@@ -71,7 +97,7 @@ class MemberForm extends Component {
             <Input
               type='text' placeholder='Smith'
               id='lastName' value={lastName}
-              handleInput={this.handleInputChange}
+              handleInput={this.props.handleChange}
             />
           </div>
 
@@ -84,7 +110,7 @@ class MemberForm extends Component {
             <Input
               type='text' placeholder='111-222-3333'
               id='phone' value={phone}
-              handleInput={this.handleInputChange}
+              handleInput={this.props.handleChange}
             />
           </div>
           <div className="form-group col-md-6">
@@ -92,7 +118,7 @@ class MemberForm extends Component {
             <Input
               type='email' placeholder='email@domain.com'
               id='email' value={email}
-              handleInput={this.handleInputChange}
+              handleInput={this.props.handleChange}
             />
           </div>
 
@@ -105,7 +131,7 @@ class MemberForm extends Component {
             <Input
               type='text' placeholder='100 Main St.'
               id='address1' value={address1}
-              handleInput={this.handleInputChange}
+              handleInput={this.props.handleChange}
             />
           </div>
           <div className="form-group">
@@ -113,7 +139,7 @@ class MemberForm extends Component {
             <Input
               type='text' placeholder='Apartment, Studio or Floor'
               id='address2' value={address2}
-              handleInput={this.handleInputChange}
+              handleInput={this.props.handleChange}
             />
           </div>
 
@@ -126,14 +152,15 @@ class MemberForm extends Component {
             <Input
               type='text' id='city'
               value={city}
-              handleInput={this.handleInputChange}
+              handleInput={this.props.handleChange}
             />
           </div>
           <div className="form-group col-md-4">
             <Label forHtml='state' innerText='State' />
             <Select
-              id='state' options={states} 
-              handleInput={this.handleInputChange}
+              id='state' options={state_abbreviations}
+              value={state}
+              handleInput={this.props.handleChange}
             />
           </div>
           <div className="form-group col-md-2">
@@ -141,13 +168,18 @@ class MemberForm extends Component {
             <Input
               type='text' id='zip'
               value={zip}
-              handleInput={this.handleInputChange}
+              handleInput={this.props.handleChange}
             />
           </div>
 
         </div>
         
-        <button type="submit" className="btn btn-primary">Complete Registration</button>
+        <button
+          onClick={this.props.handleSubmit}
+          type="submit" className="btn btn-primary"
+        >
+          Complete Registration
+        </button>
       </form>
     );
   }

@@ -96,6 +96,7 @@ function extractAuthenicationToken( req ) {
 async function verifyJWTToken( req, res, next ) {
   
   await fetchJWKS( req );
+  console.log("FETCHED TOKEN");
   const token = extractAuthenicationToken( res );
   if(token === undefined || !token || token == 'undefined') {
     console.log("TOKEN REJECTED");
@@ -110,9 +111,11 @@ async function verifyJWTToken( req, res, next ) {
 
   const key = getJWKSSigningKey( header.kid );
   const actualKey = key.publicKey || key.rsaPublicKey;
-
+  console.log("KEY:::::::", key);
+  console.log("ACTUALKEY::::::::", actualKey);
 
   jwt.verify( token, actualKey, { algorithms: [ 'RS256' ] }, ( err, decoded ) => {
+    console.log(":::::DECODED!!!", decoded);
     if ( err ) {
       //next(err, null);
       res.status(401).end();

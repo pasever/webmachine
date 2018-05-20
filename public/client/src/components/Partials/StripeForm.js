@@ -19,12 +19,12 @@ class StripeForm extends Component {
     warnings: [], // Warnings handled as an array are listed at the top of the form
     isUpdated: false,
     isSaving: false,
-    user: this.props.user
+    client: this.props.client
   };
 
   /// Makes sure the necessary data exists on the form.
   validateInfo() {
-    const u = this.props.user,
+    const u = this.props.client,
       errors = [],
       warnings = [];
 
@@ -44,12 +44,12 @@ class StripeForm extends Component {
   }
 
   finishSave = stripeCustomer => {
-    // Extract the user from the state
-    const user = this.state.user;
-    // Assign the returned stripeCustomer to our extracted user
-    user.stripeCustomer = stripeCustomer;
+    // Extract the client from the state
+    const client = this.state.client;
+    // Assign the returned stripeCustomer to our extracted client
+    client.stripeCustomer = stripeCustomer;
     // Sets the state.
-    this.setState({ isSaved: true, user: user, isSaving: false });
+    this.setState({ isSaved: true, client: client, isSaving: false });
   };
 
   ///  Calls the API to change the default source
@@ -59,7 +59,7 @@ class StripeForm extends Component {
     this.setState({ isSaving: true });
     // Make our call to the server, passing our customer Id and Source Id
     API.setDefaultSource(
-      this.state.user.stripeCustomer.id,
+      this.state.client.stripeCustomer.id,
       event.target.dataset.sourceId
     ).then(response => {
       this.finishSave(response.data);
@@ -73,7 +73,7 @@ class StripeForm extends Component {
     this.setState({ isSaving: true });
     // Make our call to the server, passing the source we want to remove
     API.removeSource(
-      this.state.user.stripeCustomer.id,
+      this.state.client.stripeCustomer.id,
       event.target.dataset.sourceId
     ).then(response => {
       this.finishSave(response.data);
@@ -85,9 +85,9 @@ class StripeForm extends Component {
     event.preventDefault();
     if (!this.validateInfo()) return false;
     this.setState({ isSaving: true });
-    const u = this.props.user;
+    const u = this.props.client;
 
-    /// Creates a stripe source with the user information.  stripe-react-elements handles getting the card data to the source.
+    /// Creates a stripe source with the client information.  stripe-react-elements handles getting the card data to the source.
     this.props.stripe
       .createSource({
         owner: {
@@ -104,17 +104,17 @@ class StripeForm extends Component {
       .then(resp => {
         let promises = [
           API.addSourceToCustomer(
-            this.state.user.stripeCustomerId,
+            this.state.client.stripeCustomerId,
             resp.source.id
           ),
-          API.updatePlatform(this.state.user)
+          API.updatePlatform(this.state.client)
         ];
 
         Promise.all(promises).then(values => {
           this.setState({
             isSaving: false,
             isUpdated: true,
-            user: values[1].data
+            client: values[1].data
           });
         });
       });
@@ -142,7 +142,7 @@ class StripeForm extends Component {
               ""
             )}
             <NameAndAddressSection
-              user={this.state.user}
+              client={this.state.client}
               updateFormField={this.props.updateFormField}
             />
             <CardSection />
@@ -159,11 +159,11 @@ class StripeForm extends Component {
           </form>
         </div>
         <div className="billing-form-section light-shadow">
-          {this.state.user.stripeCustomer === null ? (
+          {this.state.client.stripeCustomer === null ? (
             <h2>No stripe customer loaded.</h2>
           ) : (
             <StripeData
-              stripeCust={this.state.user.stripeCustomer}
+              stripeCust={this.state.client.stripeCustomer}
               changeSource={this.changeDefaultSource}
               removeSource={this.removeSource}
             />

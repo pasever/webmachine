@@ -1,6 +1,9 @@
 import React, { Component }       from 'react';
-import { Link }                   from 'react-router-dom';
 import Input                      from '../FormElements/Input';
+import API                        from '../../../../common/utils/API';
+
+// Global reference to localStorage
+let ls = window.localStorage;
 
 class NetworkSelection extends Component {
   /**
@@ -12,13 +15,52 @@ class NetworkSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      discoverableNetworks: [1,2,3,4,5,6,7],
-      networksToJoin: []
+      // retrieved from backend
+      discoverableNetworks: []
     };
 
-    // bindings
     this.toggleActiveClass = this.toggleActiveClass.bind(this);
     this.addNetworkToState = this.addNetworkToState.bind(this);
+    this.removeNetworkFromState = this.removeNetworkFromState.bind(this);
+  }
+
+  // Check if records of previously selected networksToJoin exists in localStorage.
+  // If so, pull records and iterate over list of available networks.
+  // For every item in the list that matches a previously selected network,
+  // add .active class to it AND push it to array named networksToJoin[]. 
+  // Once iteration is over, set networksToJoin into state again (state is lost
+  // once user navigates to the next page and this component unmounts)
+  /** @todo implement same functionality in member-form */
+  componentDidMount() {
+
+    API.getPublicClients()
+      .then(res => {
+        let discoverableNetworks = res.data;
+        this.setState({ discoverableNetworks });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+    // if('networksToJoin' in ls) {
+    //   let previouslySelectedNetworks = ls.getItem('networksToJoin').split(',');
+    //   let unselectedNetworks = window.document.getElementById('networks-results').getElementsByTagName('li');
+    //   let networksToJoin = [];
+    //   // Convert nodeList to Array
+    //   unselectedNetworks = Array.from(unselectedNetworks);
+
+    //   for (let i = 0; i < previouslySelectedNetworks.length; i++) {
+    //     for (let j = 0; j < unselectedNetworks.length; j++) {
+    //       if (previouslySelectedNetworks[i] === unselectedNetworks[j].id) {
+    //         unselectedNetworks[j].classList.add('active');
+    //         networksToJoin.push(unselectedNetworks[j].id)
+    //       }
+    //     }
+    //   }
+
+    //   this.props.handleChange(networksToJoin);
+    // }
+
   }
 
   /** @method */
@@ -31,16 +73,17 @@ class NetworkSelection extends Component {
     // Render one <li> for each discoverable network.
     return (
       <ul
-        className="list-group list-group-flush networks-results"
+        id='networks-results'
+        className="list-group list-group-flush"
         style={{overflowY: 'scroll', maxHeight: '250px'}}
       >
         {discoverableNetworks.map((n, i) =>
           <li
-            id={`networkId${i+1}`} key={i+1}
+            id={n._id} key={i+1}
             className="list-group-item network"
             onClick={this.toggleActiveClass}
           >
-            {`Network ${n}`}
+            {n.name}
           </li>)}
       </ul>
     )
@@ -68,9 +111,9 @@ class NetworkSelection extends Component {
   // Adds network id to state.
   /** @param netword_id */
   addNetworkToState(net_id) {
-    let { networksToJoin } = this.state;
-    networksToJoin = networksToJoin.concat(net_id);
-    this.setState({ networksToJoin  });
+    let { networks } = this.props;
+    networks = networks.concat(net_id);
+    this.props.handleChange(networks);
   }
 
   /** @method */
@@ -78,19 +121,18 @@ class NetworkSelection extends Component {
   // Removes network id from state.
   /** @param netword_id */
   removeNetworkFromState(net_id) {
-    let { networksToJoin } = this.state;
-    let index = networksToJoin.indexOf(net_id);
+    let { networks } = this.props;
+    let index = networks.indexOf(net_id);
     if (index > -1) {
-      networksToJoin.splice(index, 1);
-      this.setState({ networksToJoin })
+      networks.splice(index, 1);
+      this.props.handleChange(networks);
     }
   }
 
-   /** @method */
-  // Lifts state up to Highest Order Component.
-  // Does NOT lift state if networksToJoin is empty
-  handlePageAdvance() {
-    // this.props.liftState('lifting state from child NetworkSelection')
+  /** @method */
+   // If component will unmount, save state into localStorage
+  componentWillUnmount() {
+    ls.setItem('networksToJoin', this.props.networks);
   }
 
 
@@ -135,7 +177,9 @@ class NetworkSelection extends Component {
         <footer>
 
           {/* Should only display after one or more networks selected */}
-          <Link to='/member-form' onClick={this.handlePageAdvance}> Go to the Member Registration Form (Next) </Link>
+          <a href='#' onClick={() => this.props.changePage('member-form')}>
+            Go to the Member Registration Form (Next)
+          </a>
 
         </footer>
       </div>
@@ -146,7 +190,3 @@ class NetworkSelection extends Component {
 
 
 export default NetworkSelection;
-
-{/* <Link to='/member-form' className='align-item-center' style={{position: 'absolute', right: -20}}>
-<button type='button' className='btn btn-dark' style={{borderRadius: '50%'}}> -> </button>
-</Link> */}
