@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 const express =            require('express');
+const helmet =             require('helmet');
 const expressValidator =   require('express-validator');
 const path =               require('path');
 const bodyParser =         require('body-parser');
@@ -34,6 +35,7 @@ if ( process.env.isLive == 'false' ) {
 ////////////////////  Register Middleware       /////////////////////////
 ////////////////////////////////////////////////////////////////////////
 app.use(logger("dev"));
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(expressValidator());
