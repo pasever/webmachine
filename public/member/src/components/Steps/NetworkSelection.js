@@ -6,7 +6,10 @@ import API                        from '../../../../common/utils/API';
 let ls = window.localStorage;
 
 /**
- * @prop {Function} this.props.handleChanle
+ * @prop {Function} this.props.changePage
+ * Used to update page location in parent's state
+ * 
+ * @prop {Function} this.props.handleChange
  * Directly updates parent's state.
  * 
  * @prop {Array} this.props.networks
