@@ -1,16 +1,19 @@
-///////////////////////////////////////////////////////////////////////
-////////////////     Billing Maintenance Page       ///////////////////
-///////////////////////////////////////////////////////////////////////
-// DGO
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////      BillingMaintenance.js         /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+///  Billing Maintenance Wrapper                                                //
+///  REFACTOR 0.7 REMOVED UNNECESSARY IMPORTS                                   //
+///                                                                             //
+///  DGO                                                                        //
+//////////////////////////////////////////////////////////////////////////////////
 
 
 
 'use strict';
 
 import React, { Component } from 'react';
-import { Container, Col, Row } from '../../../../common/grid';
-import ErrorBoundary from '../../../../common/error/ErrorBoundary';
-import {StripeProvider, Elements, PaymentRequestButtonElement, injectStripe } from 'react-stripe-elements';
+import { ErrorBoundary } from '../../../../common/error';
+import {StripeProvider } from 'react-stripe-elements';
 import { StripeFormWrapper } from '../Partials';
 
 import '../../styles/maintenancepage.css';

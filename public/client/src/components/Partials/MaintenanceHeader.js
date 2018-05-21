@@ -27,12 +27,11 @@ export const MaintenanceHeader = ({ headerText, client, hasErrors, toggleSystem,
           system is off.
         </h6>
       )}
-      {hasErrors ? (
+            
+      {hasErrors && (
         <h6 className="badge badge-warning">
           Please check the forms for errors
         </h6>
-      ) : (
-        ""
       )}
     </div>
     <div className="delete-section">

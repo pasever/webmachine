@@ -83,14 +83,14 @@ button {
   margin-top: 0;
 }
 
-.billing-form-section, .web-form-section {
+.billing-form-section, .web-form-section, .flex-section {
   flex-grow: 1;
   min-width: 50%;
   margin: 10px;
   padding: 10px;
 }
 
-.billing-form-wrapper, .web-form-wrapper {
+.billing-form-wrapper, .web-form-wrapper, .flex-wrapper {
   display: flex;
   flex-direction: row;
 }

@@ -1,14 +1,19 @@
-///////////////////////////////////////////////////////////////////////
-//////////////////     User Maintenance Page      /////////////////////
-///////////////////////////////////////////////////////////////////////
-// DGO
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////      GeneralMaintenance.js         /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+///                                                                             //
+///  General Client Maintenance Page for filling out general client             //
+///  information.                                                               //
+///                                                                             //
+///  DGO                                                                        //
+//////////////////////////////////////////////////////////////////////////////////
 
 "use strict";
 
 import React, { Component } from "react";
 import { Container, Col, Row } from "../../../../common/grid/";
-import { Input, TextArea, Button } from "../../../../common/form/";
-import ErrorBoundary from "../../../../common/error/ErrorBoundary";
+import { Input, TextArea, Button, Checkbox } from "../../../../common/form/";
+import { ErrorBoundary } from "../../../../common/error";
 import { ImageUpload } from '../Partials';
 import "../../styles/maintenancepage.css";
 
@@ -20,12 +25,19 @@ REQUIRED PROPS:
     text - text to display
     updateFormField (method) - method that fires when a form value is updated
 */
-export const GeneralMaintenance = ({ errors, text, client, onSubmit, updateFormField, isSaving }) => (
+export const GeneralMaintenance = ({ errors, text, client, onSubmit, updateFormField, isSaving, toggleCheckbox }) => (
   <ErrorBoundary>
     <div className="form-styles light-shadow">
       {text.title ? <h2>{text.title}</h2> : ""}
       {text.body ? <p>{text.body}</p> : ""}
       <form onSubmit={onSubmit}>
+        <div className="input-group">
+          <label>
+            <input type="checkbox"  
+              checked={client.isPrivate} onChange={ toggleCheckbox } />
+            { text.isPrivate }   
+          </label>
+        </div>
         <Input
           value={client.name}
           name="name"

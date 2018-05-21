@@ -1,6 +1,20 @@
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////      MaintenanceWrapper.js         /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+///                                                                             //
+///  Wrapper for the maintenance section of Client's for the webmachine         //
+///  platform.                                                                  //
+///                                                                             //
+///  REFACTOR 0.7 - Members Whitelisting Added                                  //
+///  DGO                                                                        //
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
 import React, { Component } from 'react';
 import { GeneralMaintenance, DbMaintenance, 
-        BillingMaintenance, WebMaintenance } from './';
+        BillingMaintenance, WebMaintenance,
+        MembersMaintenance } from './';
 import { Tab, TabPanel, Tabs, TabList } from 'react-tabs';
 import {Container, Row, Col } from '../../../../common/grid';
 import API from '../../../../common/utils/API';
@@ -22,7 +36,7 @@ class MaintenanceWrapper extends Component {
             isSaved: false,                         //  flags if we should inform the client data has been saved
             isSaving: false,                        //  shows the "saving" cog
         };
-
+        this.toggleCheckbox = this.toggleCheckbox.bind(this);
     }
 
 
@@ -47,13 +61,18 @@ class MaintenanceWrapper extends Component {
         });
         
     }
-    
+
+    toggleCheckbox() {
+        const {client} = this.state;
+        client.isPrivate = !client.isPrivate;
+        this.setState({ client: client });
+    }
+
     // Method that handles saving the client
     submitForm = event => {
         this.setState({ isSaving: true });
         event.preventDefault();
         API.updateClient(this.state.client).then(resp => {
-            console.log("RESPONSE", resp);
             if(resp.data.errors) {
                 this.setState({ errors: resp.data.errors, hasErrors: true, isSaved: false, isSaving: false });
             } else {
@@ -72,6 +91,7 @@ class MaintenanceWrapper extends Component {
                     <Tab>Organization</Tab>
                     <Tab>Database</Tab>
                     <Tab>Web</Tab>
+                    {this.state.client.isPrivate && ( <Tab>Members</Tab> )}
                     <Tab>Agents</Tab>
                     <Tab>Billing Info</Tab>
                 </TabList>
@@ -81,7 +101,8 @@ class MaintenanceWrapper extends Component {
                         <GeneralMaintenance
                             client={ this.state.client } updateFormField={ this.updateFormField } 
                             onSubmit={ this.submitForm } errors={ this.state.errors }
-                            text={ this.state.pageData.generalMaintenance } isSaving={this.state.isSaving } />      
+                            text={ this.state.pageData.generalMaintenance } isSaving={this.state.isSaving }
+                            toggleCheckbox={ this.toggleCheckbox } />      
                     </Col>
                 </TabPanel>
                 <TabPanel>
@@ -100,6 +121,14 @@ class MaintenanceWrapper extends Component {
                             text={ this.state.pageData.web } isSaving={this.state.isSaving } />      
                     </Col>
                 </TabPanel>
+                { this.state.client.isPrivate && (
+                    <TabPanel>
+                        <Col size='12'>
+                            <MembersMaintenance client={this.state.client} 
+                                text={ this.state.pageData.members } />
+                        </Col>
+                    </TabPanel>
+                )}
                 <TabPanel>
                     <h2>Agent maintenance</h2>
                 </TabPanel>

@@ -47,10 +47,14 @@ const dbclient = (router) => {
         } else if(accessToken && clientId) {
             let accessId = verifyJwt.getIdFromToken(accessToken);
             console.log("ACCESSID:::::::", accessId)
+            /// Get's a client based on their Auth0 Id and the Id of the Client
             clientApi.getOneOwnedClient(req.token, accessId, clientId, req.conn, (response) => {
-                res.status(200).send(response);
+                if(response.name === "CastError") 
+                    return res.status(404).send(response);
+                else 
+                    return res.status(200).send(response);
             });
-        // Returns all Clients
+        // Fail
         } else {
             res.status(401).send({ 
                 error: "Nothing to do",

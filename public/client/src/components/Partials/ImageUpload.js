@@ -1,3 +1,16 @@
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////          ImageUpload.js            /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+///                                                                             //
+///  Component that handles the upload of a Client's logo using a drag and      //
+///  drop interface.  Uploads to Cloudinary.  See config for more info.         //
+///                                                                             //
+///  REFACTOR 0.7 - Members Whitelisting Added                                  //
+///  DGO                                                                        //
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import API from '../../../../common/utils/API';
@@ -5,6 +18,8 @@ import request from 'superagent';
 const config = require('../../../../../config').init();
 
 
+
+/// Styles for the dropzone
 const dropZoneStyle ={
     backgroundColor: "#eee",
     border: "1px solid black",
@@ -14,7 +29,10 @@ const dropZoneStyle ={
     padding: "20px"
 }
 
-
+/*
+    REQUIRED PROPS:
+        client - the client object we have stored in the wrapper's state
+*/
 export class ImageUpload extends Component {
     state = { 
         client: this.props.client,
@@ -50,7 +68,7 @@ export class ImageUpload extends Component {
         return (
             <div>
                 <h5>Logo</h5>
-                { this.state.client.image ? <img src={ this.state.client.image } className="img-thumbnail"  alt="Logo" /> : "" }    
+                { this.state.client.image ? <img src={ this.state.client.image } className="img-thumbnail img-fluid"  alt="Logo" /> : "" }    
                 <Dropzone
                     style={dropZoneStyle}
                     multiple={false} accept="image/*"

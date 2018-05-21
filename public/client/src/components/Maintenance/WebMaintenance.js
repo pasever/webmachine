@@ -9,7 +9,7 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "../../../../common/grid/";
 import { Input, TextArea, Button } from "../../../../common/form/";
 import { NetlifyDeploy } from '../Partials';
-import ErrorBoundary from "../../../../common/error/ErrorBoundary";
+import { ErrorBoundary } from "../../../../common/error";
 import "../../styles/maintenancepage.css";
 
 /* 
