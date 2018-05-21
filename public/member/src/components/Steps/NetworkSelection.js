@@ -5,13 +5,18 @@ import API                        from '../../../../common/utils/API';
 // Global reference to localStorage
 let ls = window.localStorage;
 
+/**
+ * @prop {Function} this.props.handleChanle
+ * Directly updates parent's state.
+ * 
+ * @prop {Array} this.props.networks
+ * networks_to_join Array in parent's state.
+ */
+
 class NetworkSelection extends Component {
   /**
    * @property {Array} discoverableNetworks - networks fetched from DB
-   * @todo fetch discoverable networks from DB
-   * @property {Array} networksToJoin - list of unique identifiers
-   * 
-   */
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -24,13 +29,11 @@ class NetworkSelection extends Component {
     this.removeNetworkFromState = this.removeNetworkFromState.bind(this);
   }
 
-  // Check if records of previously selected networksToJoin exists in localStorage.
-  // If so, pull records and iterate over list of available networks.
-  // For every item in the list that matches a previously selected network,
-  // add .active class to it AND push it to array named networksToJoin[]. 
-  // Once iteration is over, set networksToJoin into state again (state is lost
-  // once user navigates to the next page and this component unmounts)
-  /** @todo implement same functionality in member-form */
+  /**
+   * @description
+   * Fetches Public Clients and 
+   * saves them into state.
+  */
   componentDidMount() {
 
     API.getPublicClients()
@@ -42,29 +45,14 @@ class NetworkSelection extends Component {
         console.log(err);
       })
 
-    // if('networksToJoin' in ls) {
-    //   let previouslySelectedNetworks = ls.getItem('networksToJoin').split(',');
-    //   let unselectedNetworks = window.document.getElementById('networks-results').getElementsByTagName('li');
-    //   let networksToJoin = [];
-    //   // Convert nodeList to Array
-    //   unselectedNetworks = Array.from(unselectedNetworks);
-
-    //   for (let i = 0; i < previouslySelectedNetworks.length; i++) {
-    //     for (let j = 0; j < unselectedNetworks.length; j++) {
-    //       if (previouslySelectedNetworks[i] === unselectedNetworks[j].id) {
-    //         unselectedNetworks[j].classList.add('active');
-    //         networksToJoin.push(unselectedNetworks[j].id)
-    //       }
-    //     }
-    //   }
-
-    //   this.props.handleChange(networksToJoin);
-    // }
-
   }
 
-  /** @method */
-  // Renders discoverable networks as a list-group.
+  /** 
+   * @method renderNetworks
+   * @description
+   * Renders discoverable networks as a list-group.
+   * @returns {NodeList}
+  */
   renderNetworks() {
     // Will eventually be array of networks pulled from DB
     let { discoverableNetworks } = this.state;
@@ -89,11 +77,14 @@ class NetworkSelection extends Component {
     )
   }
 
-  /** @method */
-  // Adds or removes .active class to <li>.network.
-  // If it adds .active, it also adds it to state.
-  // If it removes .active, it also removes it from state.
-  /** @param click_event */
+  /**
+   * @method toggleActiveClass
+   * @param {Object} e (click event)
+   * @description
+   * Adds or removes .active class to/from <li>.
+   * If .active is added, network id is lifted to parent's state.
+   * If .active is removed, network id is removed from parent's state.
+  */
   toggleActiveClass(e) {
     let elem = e.target;
 
@@ -106,20 +97,26 @@ class NetworkSelection extends Component {
     }
   }
 
-  /** @method */
-  // Gets called if active class is NOT present.
-  // Adds network id to state.
-  /** @param netword_id */
+  /**
+   * @method addNetworkToState
+   * @param {String} net_id
+   * @description
+   * Gets called when .active class is added to <li>.
+   * Adds network id to networks_to_join Array in parent's state
+  */
   addNetworkToState(net_id) {
     let { networks } = this.props;
     networks = networks.concat(net_id);
     this.props.handleChange(networks);
   }
 
-  /** @method */
-  // Gets called if active class is present.
-  // Removes network id from state.
-  /** @param netword_id */
+  /**
+   * @method removeNetworkFromState
+   * @param {String} net_id
+   * @description
+   * Gets called when .active class is removed from <li>.
+   * Removes network id from networks_to_join Array in parent's state.
+  */
   removeNetworkFromState(net_id) {
     let { networks } = this.props;
     let index = networks.indexOf(net_id);
@@ -128,13 +125,6 @@ class NetworkSelection extends Component {
       this.props.handleChange(networks);
     }
   }
-
-  /** @method */
-   // If component will unmount, save state into localStorage
-  // componentWillUnmount() {
-  //   ls.setItem('networksToJoin', this.props.networks);
-  // }
-
 
   render() {
     return (
@@ -190,3 +180,23 @@ class NetworkSelection extends Component {
 
 
 export default NetworkSelection;
+
+
+// if('networksToJoin' in ls) {
+//   let previouslySelectedNetworks = ls.getItem('networksToJoin').split(',');
+//   let unselectedNetworks = window.document.getElementById('networks-results').getElementsByTagName('li');
+//   let networksToJoin = [];
+//   // Convert nodeList to Array
+//   unselectedNetworks = Array.from(unselectedNetworks);
+
+//   for (let i = 0; i < previouslySelectedNetworks.length; i++) {
+//     for (let j = 0; j < unselectedNetworks.length; j++) {
+//       if (previouslySelectedNetworks[i] === unselectedNetworks[j].id) {
+//         unselectedNetworks[j].classList.add('active');
+//         networksToJoin.push(unselectedNetworks[j].id)
+//       }
+//     }
+//   }
+
+//   this.props.handleChange(networksToJoin);
+// }
