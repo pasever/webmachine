@@ -2,24 +2,14 @@ body {
   color: #334433;
 }
 
-header {
-  width: 100vw;
-  background-image: url('../static/images/dashboard-header-back.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-y: -200px;
-}
-.header-wrapper {
-  padding: 20px 25%;
-  text-align: center;
-  background-color: rgba(0, 0, 0, .6);
-  color: #eee;
-}
 .app-content {
   font-size: large;
   padding: 2em;
 }
 
+header {
+  background-image: url('../static/images/dashboard-header-backbw.jpg');
+}
 
 .btn-default {
   background-color: #000;
@@ -97,4 +87,20 @@ color-red {
 
 .paragraph {
   margin: 0 auto;
+}
+
+.flex-section {
+  flex-grow: 1;
+  min-width: 50%;
+  margin: 10px;
+  padding: 10px;
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.light-shadow {
+  box-shadow: 0 0 15px #ccc;
 }

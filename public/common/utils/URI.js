@@ -26,8 +26,8 @@ export default {
 
     // Sends the user to the login page.  
     // Gets the login page from the Config file
-    sendToLogin: () => {
-        window.location.href = config.auth0.sloppyLoginUrl;
+    redirect: url => {
+        window.location.href = url;
     }
 
 }

@@ -1,0 +1,13 @@
+.flex-section {
+    flex-grow: 1;
+    min-width: 50%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+  
