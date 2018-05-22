@@ -53,11 +53,13 @@ export default class App extends Component {
     render() {
         return (
             <ErrorBoundary>
-            { this.state.isLoading ? ( <LoadingPage /> ) : (
+              { this.state.isLoading ? (
+                  <LoadingPage /> 
+                ) : (
                 <div>
-                    { this.renderLeftColumn() }                
+                  { this.renderLeftColumn() }                
                 </div>
-            )}
+              )}
             </ErrorBoundary>
         );
     };
