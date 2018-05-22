@@ -10,3 +10,4 @@ export const ClientsSection = ({ clients, pageText }) =>
             )}
         </div>
     </div>
+

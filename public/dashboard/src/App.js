@@ -12,7 +12,7 @@ import LoadingPage from '../../common/LoadingPage';
 import { Col, Row, Container } from '../../common/grid';
 import { Button } from '../../common/form';
 import { DashHome } from './components';
-import ErrorBoundary from '../../common/error/ErrorBoundary'
+import { ErrorBoundary } from '../../common/error'
 import './App.css';
 
 const config = require('../../../config').init();

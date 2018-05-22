@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import { ClientsSection } from './';
 import { Container, Row, Col } from '../../../common/grid';
-import ErrorBoundary from '../../../common/error/ErrorBoundary';
+import { ErrorBoundary } from '../../../common/error';
 import API from '../../../common/utils/API';
 import LoadingPage from '../../../common/LoadingPage';
 import { Redirect } from 'react-router-dom';
@@ -12,7 +12,7 @@ import Config from '../../../../config';
 
 const config = Config.init();
 
-export class DashHome extends Component {
+export default class DashHome extends Component {
     state = {
         pageText: this.props.pageText,
         ownedNetworks: [],
