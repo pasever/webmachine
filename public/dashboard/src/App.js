@@ -36,7 +36,10 @@ export default class App extends Component {
                 .then(({ json, resolve }) => resolve(json) )
         })
     }
-
+    // Changes our state to launching a network.
+    launchNetwork() {
+        this.setState({ launchingNetwork: !launchingNetwork });
+    }
     componentDidMount() {
         let pageData = this.getDashboardPageData().then(resp => { return resp.json() });
         Promise.all([pageData]).then(values => {
@@ -46,7 +49,9 @@ export default class App extends Component {
     renderLeftColumn() {
         if(!this.state.launchingNetwork) {
             return(
-                <DashHome pageText={this.state.pageData.main }  />            
+                <DashHome 
+                    pageText={this.state.pageData.main } 
+                    launchNetwork={ this.launchNetwork } />            
             );
         }
     }
