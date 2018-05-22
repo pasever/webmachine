@@ -2,13 +2,15 @@
 
 import React, {Component} from 'react';
 import { ClientsSection } from './';
-import { Container, Row, Col } from '../../../common/grid';
+import { Container, Row, Col,
+        FlexWrapper, FlexItem } from '../../../common/grid';
 import { ErrorBoundary } from '../../../common/error';
 import API from '../../../common/utils/API';
 import LoadingPage from '../../../common/LoadingPage';
 import { Redirect } from 'react-router-dom';
 import URI from '../../../common/utils/URI';
 import Config from '../../../../config';
+import { DashHeader } from '../partials';
 
 const config = Config.init();
 
@@ -32,7 +34,7 @@ export default class DashHome extends Component {
     }
 
     sendToLogin() {
-        URI.sendToLogin();
+        URI.redirect(config.auth0.sloppyLoginUrl);
     }
     render() {
         return (
@@ -40,21 +42,21 @@ export default class DashHome extends Component {
             { this.state.errorHappened && this.sendToLogin() }
             { this.state.isLoading ? ( <LoadingPage /> ) : (
             <div>
-                <header>
-                    <div className="header-wrapper">
-                        <h1 className="title">
-                            { this.state.pageText.title}
-                        </h1>
-                        <p className="paragraph">{this.state.pageText.subTitle }</p>
-                        <a href="/member" className="btn btn-default">{ this.state.pageText.searchNetworksButton }</a>
-                    </div>
-                </header>
-            
-                <div>
-                    { this.state.ownedNetworks.length > -1 ? (
-                        <ClientsSection clients={this.state.ownedNetworks } pageText={this.state.pageText } />
-                    ) : "" }
-                </div>                
+                <DashHeader text={ this.state.pageText } />
+                <FlexWrapper>
+                    <FlexItem>
+                        <div className="light-shadow">
+                        { this.state.pageText.networkTitle && <h3>{ this.state.pageText.networkTitle }</h3>}
+                        
+                        { this.state.ownedNetworks.length > 0 ? (
+                            <ClientsSection clients={this.state.ownedNetworks } pageText={this.state.pageText } />
+                        ) : "" }
+                        </div>
+                    </FlexItem>
+                    <FlexItem>
+                        <p>Here is some more stuff!</p>
+                    </FlexItem>
+                </FlexWrapper>                
             </div>
             )}
             

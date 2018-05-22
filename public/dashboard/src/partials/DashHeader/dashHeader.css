@@ -1,0 +1,28 @@
+header {
+    /* BACKGROUND IMAGE IS IN APP.CSS in /src */
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -200px;
+    border-bottom: 5px solid black;
+}
+
+.header-wrapper {
+    padding: 20px 25%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .55);
+    font-weight: 600;
+}
+
+.header-wrapper > h1, .header-wrapper {
+    color: #eee;
+    text-shadow: 0 0 2px #000;
+}
+
+a.btn-default {
+    color: #eee;
+}
+a.btn-default:hover {
+    box-shadow: 0 0 15px #000;
+}
+  

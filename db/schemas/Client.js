@@ -22,7 +22,7 @@ const clientObject = {
   },
   // Avatar
   image: { 
-    String,
+    type: String,
     default: "",
   },
   // Address: 
