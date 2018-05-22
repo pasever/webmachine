@@ -44,11 +44,11 @@ app.use('/dist', express.static('public'));
 app.use('/form', express.static('public'));
 app.use('/machine', express.static('public'));
 app.use('/market', express.static('public'));
-app.use('/member', express.static('public'));
 app.use('/dashboard', express.static('public'));
 app.use('/', express.static('public/home'));
 app.use('/landing', express.static('public'));
 app.use('/client', express.static('public'));
+app.use('/member', express.static('public'));
 app.use(favicon(path.join(__dirname, '..', '/public/assets/favicon.ico')));
 app.use(cors())
 
