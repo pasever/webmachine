@@ -5,14 +5,14 @@ import Select from '../FormElements/Select';
 import state_abbreviations from '../../data/state_abbreviations';
 
 /**
- * ---- Fields ----
- * [x] First Name 
- * [x] Last Name
- * [ ] Image (?) []
- * [x] Address 1 & 2
- * [x] City, State, Zip
- * [x] Cell
- * [x] Email
+ * ---- Form Fields ----
+ * First Name 
+ * Last Name
+ * Image (?)
+ * Address 1 & 2
+ * City, State, Zip
+ * Cell
+ * Email
  */
 
  // Global reference to document object
