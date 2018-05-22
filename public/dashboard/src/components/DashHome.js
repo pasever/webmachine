@@ -50,7 +50,7 @@ export default class DashHome extends Component {
                         
                         { this.state.ownedNetworks.length > 0 ? (
                             <ClientsSection clients={this.state.ownedNetworks } pageText={this.state.pageText } />
-                        ) : "" }
+                        ) : ( <h4>{this.state.pageText.noNetwork }</h4> ) }
                         </div>
                     </FlexItem>
                     <FlexItem>

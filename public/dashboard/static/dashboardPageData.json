@@ -8,6 +8,7 @@
             "already a member of."
         ],
         "networkTitle": "Networks",
+        "noNetworks": "It appears you are not managing any networks.  Why don't you Launch one for your Business or Organization?",
         "ownedNetworksTitle": "Manage the networks you own",
         "searchNetworksButton": "Find Networks",
         "asideTitle": "Welcome to the Machine",

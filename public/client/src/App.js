@@ -18,6 +18,9 @@ import MaintenanceWrapper  from './components/Maintenance/MaintenanceWrapper';
 import 'react-tabs/style/react-tabs.css';
 import './App.css';
 
+
+const config = require('../../../config').init();
+
 //////// DEFAULT PLATFORM
 // Deprecated 04/30/18 for REFACTOR 0.7
 //const Platform = require('../../../config/').platform();
@@ -96,7 +99,7 @@ export default class App extends Component {
     }
     /// Calls the URI utility function to redirect to the login page
     sendToLogin() {
-        URI.sendToLogin();
+        URI.redirect(config.auth0.sloppyLoginUrl);
     }
     render() {
         return (
