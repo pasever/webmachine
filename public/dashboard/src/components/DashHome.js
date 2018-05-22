@@ -14,7 +14,7 @@ import { DashHeader } from '../partials';
 
 const config = Config.init();
 
-export default class DashHome extends Component {
+export class DashHome extends Component {
     state = {
         pageText: this.props.pageText,
         ownedNetworks: [],

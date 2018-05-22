@@ -131,7 +131,9 @@ class NetworkSelection extends Component {
 
   render() {
     return (
-      <div className="step1-network-selection" style={{textAlign: 'center', padding: '10px', position:'relative'}} >
+      <div className="step1-network-selection"
+        style={{textAlign: 'center', padding: '10px', position:'relative'}}
+      >
         
         <header>
 
