@@ -20,56 +20,32 @@ import state_abbreviations from '../../data/state_abbreviations';
 // Global reference to localStorage
 const ls = window.localStorage;
 
+/**
+ * * @prop {Object} formValues
+ * Object in parent's state that keeps track of form values
+ * 
+ * @prop {Function} this.props.changePage
+ * Used to update page location in parent's state
+ * 
+ * @prop {Function} this.props.handleChange
+ * Directly updates parent's state.
+ * 
+ * @prop {Function} this.props.handleSubmit
+ * Triggers submission in parent's state
+*/
+
 class MemberForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  // If there's record of state in localStorage, retrieve it
-  // and refill the form with it.
-  // componentDidMount() {
-  //   if ('memberForm' in ls) {
-  //     let memberFormRemnants = JSON.parse(ls.getItem('memberForm'));
-  //     let keys = Object.keys(memberFormRemnants);
-  //     let values = Object.values(memberFormRemnants);
-  //     let updatedState = {};
-  //     // Safety net
-  //     if (keys.length !== values.length) return;
-
-  //     let form = Array.from(d.getElementById('member-form'));
-  //     // Get rid of submit button - not needed for these purposes
-  //     form.pop();
-
-  //     // Iterate through every form field and create an object using
-  //     // key/value pairs from localStorage
-  //     for (let i = 0; i < form.length; i++) {
-  //       updatedState[keys[i]] = values[i];
-  //     }
-
-  //     // this.props.handleChange(updatedState);
-
-  //   } else {
-  //     // First time component mounts and there's no data in localStorage
-  //     // this.setState({ state: d.getElementById('state')[0].value });
-  //   }
-
-  // }
-
   /**
-   * @TODO Create method to upload a picture ?
+   * @todo Create method to upload a picture ?
    * 1. Upload it to cloudinary
    * 2. Get URL back
    * 3. Save IMG URL into state
    */
-
-   /** @method */
-   // If component will unmount, save state into localStorage
-  //  componentWillUnmount() {
-  //    let memberForm = this.props.formValues;
-  //    memberForm = JSON.stringify(memberForm);
-  //    ls.setItem('memberForm', memberForm);
-  //  }
 
   render() {
     let {
@@ -124,8 +100,6 @@ class MemberForm extends Component {
 
         </div>
 
-        {/* <div className="form-row"> */}
-
           <div className="form-group">
             <Label forHtml='address1' innerText='Address Line 1' />
             <Input
@@ -142,8 +116,6 @@ class MemberForm extends Component {
               handleInput={this.props.handleChange}
             />
           </div>
-
-        {/* </div> */}
 
         <div className="form-row">
 
@@ -186,3 +158,34 @@ class MemberForm extends Component {
 }
 
 export default MemberForm;
+
+
+// If there's record of state in localStorage, retrieve it
+// and refill the form with it.
+// componentDidMount() {
+//   if ('memberForm' in ls) {
+//     let memberFormRemnants = JSON.parse(ls.getItem('memberForm'));
+//     let keys = Object.keys(memberFormRemnants);
+//     let values = Object.values(memberFormRemnants);
+//     let updatedState = {};
+//     // Safety net
+//     if (keys.length !== values.length) return;
+
+//     let form = Array.from(d.getElementById('member-form'));
+//     // Get rid of submit button - not needed for these purposes
+//     form.pop();
+
+//     // Iterate through every form field and create an object using
+//     // key/value pairs from localStorage
+//     for (let i = 0; i < form.length; i++) {
+//       updatedState[keys[i]] = values[i];
+//     }
+
+//     // this.props.handleChange(updatedState);
+
+//   } else {
+//     // First time component mounts and there's no data in localStorage
+//     // this.setState({ state: d.getElementById('state')[0].value });
+//   }
+
+// }

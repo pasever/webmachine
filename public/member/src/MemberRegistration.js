@@ -1,8 +1,8 @@
 /**
  * @description
- * Member Registration page/process.
+ * Member Registration process.
  * 
- * Process consists of two (or more?) steps:
+ * Process consists of two steps:
  * 1. Network selection - User selects from array 
  *    of available discoverable networks to join.
  * 2. Member form - Member specific information
@@ -10,11 +10,11 @@
  * 3. When moving, either to or from, one step to
  *    another, the data gathered in the state of each
  *    child component is lifted to the state of the 
- *    highest order component; this one.
+ *    highest order component" <MemberRegistration />.
  * 
  * Successful submission of the data gathered in this
  * process creates and inserts a Member document within
- * the Members collections of the respective Client(s)
+ * the Member collections of each respective Client(s)
  * who manage the selected Network(s).
  */
 
@@ -29,7 +29,7 @@ const ls = window.localStorage;
 class MemberRegistration extends Component {
 
   /**
-   * @property {String} location - identifier of current page OR step
+   * @property {String} location - identifier of current page/step
    *  in the member registration process
    */
   constructor(props) {
@@ -52,15 +52,13 @@ class MemberRegistration extends Component {
    * Passed to children to handle page changes
    */
   handlePageChange(location) {
-    // let loc = this.state.location === '' ? 'networks-to-join' : this.state.location;
-    // let stateProp = /-/.test(loc) ? loc.replace(/-/g,'_') : page;
     this.setState({ location });
   }
 
   /**
    * @param {Array} networks_to_join
    * Passed to NetworkSelection stage to allow
-   * for the lifting up of network selections array
+   * for the lifting up of networks_to_join array
    */
   handleNetworkSelectionChange(networks_to_join) {
     this.setState({ networks_to_join });
@@ -110,7 +108,7 @@ class MemberRegistration extends Component {
     }
   }
 
-  // Passed to the component handling last step of the process.
+  // Passed to MemberForm.
   // Triggered when 'Complete Registration' button is clicked.
   // Performs a few things:
   // 1. Checks that load from each step IS NOT empty (@method)
@@ -149,39 +147,3 @@ class MemberRegistration extends Component {
 }
 
 export default MemberRegistration;
-
-// loadIsOkToSubmit(load) {
-//   // if it's not an array, then it's a plain object
-//   console.log(load)
-//   if (Array.isArray(load)) {
-//     if(load.length === 0) {
-//       // alert('Please select at least one network to join');
-//       return false;
-//     }
-//   } else {
-//     let loadValues;
-//     // Address 2 is optional; if it's empty, delete it
-//     if (load.address2 === '') delete load.address2;
-//     // Capture value of each key in an array
-//     let x = Object.values(load);
-    
-//     // Safety net in case somehow all keys get deleted.
-//     // Shouldn't happen (look at initial state of MemberForm)
-//     // but just in case
-//     if (x.length > 0)
-//       loadValues = x
-//     else {
-//       // alert('Please fill out all fields in the form')
-//       return false
-//     }
-
-//     for (let i = 0; i < loadValues.length; i++) {
-//       if (loadValues[i] === '') {
-//         // alert('Please fill out all fields in the form');
-//         return false;
-//       }
-//     }
-//   }
-
-//   return true;
-// }
