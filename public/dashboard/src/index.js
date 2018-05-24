@@ -1,12 +1,14 @@
 //////////////////////////////////////////
-//////     PLATFORM ENTRY POINT     //////
+//////    DASHBOARD ENTRY POINT     //////
 //////////////////////////////////////////
 
-import React            from 'react';
-import ReactDOM         from 'react-dom';
-import './index.css';
-import App              from './App';
+import React                from 'react';
+import ReactDOM             from 'react-dom';
+import DashboardComponent   from './DashboardComponent';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import './index.css';
+
+
+ReactDOM.render(<DashboardComponent />, document.getElementById('root'));
 
 module.hot.accept();
