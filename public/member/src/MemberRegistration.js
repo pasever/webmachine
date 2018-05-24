@@ -38,7 +38,8 @@ class MemberRegistration extends Component {
       // Defaults to step1 of the registration process.
       location: 'networks-to-join',
       networks_to_join: [],
-      member_form: {}
+      member_form: {},
+      authenticationError: false
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
