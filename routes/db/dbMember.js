@@ -30,9 +30,10 @@ const dbMember = (router) => {
    *    Document into each Client's Member Collection.
    */
 
-  router.use(bodyParser.json())
+  router.use(bodyParser.json());
+  router.use(verifyJWTToken);
 
-  router.post('/register', verifyJWTToken, (req, res, next) => {
+  router.post('/register', (req, res, next) => {
     console.log('got a request');
     // Grab payload from body
     let memberPayload = req.body;
