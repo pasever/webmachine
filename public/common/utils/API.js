@@ -12,6 +12,7 @@ import axios from 'axios';
 const config = require('../../../config').init();
 
 
+
 axios.defaults.headers.common['Authorization'] = localStorage.id_token;
 
 export default {
@@ -55,5 +56,9 @@ export default {
     },
     registerMember: (memberPayload) => {
       return axios.post('/api/db/member/register', memberPayload);
+    },
+    market: {
+      getRepos: () => axios.get(config.githubrepo.repos_url),
+      getIssues: (repo) => axios.get(config.githubrepo.issues_url + '/' + repo)
     }
 }
