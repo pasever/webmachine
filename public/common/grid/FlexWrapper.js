@@ -1,5 +1,5 @@
 import React from 'react';
-import './flex.css';
+import '../styles/flex.css';
 
 
 export const FlexWrapper = ({ props, children}) =>

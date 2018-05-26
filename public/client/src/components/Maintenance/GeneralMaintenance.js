@@ -31,13 +31,12 @@ export const GeneralMaintenance = ({ errors, text, client, onSubmit, updateFormF
       {text.title ? <h2>{text.title}</h2> : ""}
       {text.body ? <p>{text.body}</p> : ""}
       <form onSubmit={onSubmit}>
-        <div className="input-group">
-          <label>
-            <input type="checkbox"  
-              checked={client.isPrivate} onChange={ toggleCheckbox } />
-            { text.isPrivate }   
-          </label>
-        </div>
+        <Checkbox 
+          label={ text.isPrivate }
+          onChange={ toggleCheckbox }
+          checked={ client.isPrivate } 
+        />
+
         <Input
           value={client.name}
           name="name"

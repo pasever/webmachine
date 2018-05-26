@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(0,0,0,.5);
     width: 100vw;
     height: 100vh;
     text-align: center;
@@ -16,7 +16,11 @@
     
     font-size: 60px;
     color: #eee;
-    text-shadow: 0 0 10px black;
+    
     margin: auto;
     z-index: 2;    
+}
+
+.loading-page-wrapper > p > i {
+    text-shadow: 0 0 3px black;
 }

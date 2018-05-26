@@ -11,6 +11,7 @@
 import React, {Component} from 'react';
 import { ClientsSection } from './';
 import { Container, Row, Col, FlexItem } from '../../../common/grid';
+import { Button } from '../../../common/form';
 import { ErrorBoundary } from '../../../common/error';
 import API from '../../../common/utils/API';
 import LoadingPage from '../../../common/LoadingPage';
@@ -20,46 +21,25 @@ import Config from '../../../../config';
 const config = Config.init();
 
 
+/**
+ * @class DashNetworks
+ * @author DGO
+ * @description Creates the page that allows the options to launch or maintain a Network (Client)
+ */
+export const DashNetworks = ({ text, clients, launchNetwork }) => 
 
-export class DashNetworks extends Component {
-    state = {
-        pageText: this.props.pageText,
-        ownedNetworks: [],
-        joinedNetworks: [],
-        isLoading: true,
-        errorHappened: false,
-    }
-
-    componentDidMount() {
-        let ownedNetworks = API.getClientsByAccessId();
-        let joinedNetworks = API.getJoinedNetworks();
-        Promise.all([ ownedNetworks, joinedNetworks ]).then(values => {
-            this.setState({ isLoading: false, ownedNetworks: values[0].data, 
-                        joinedNetworks: values[1].data });            
-        }).catch(err => { this.setState({ errorHappened: true }); return console.log(err); })
-
-    }
-
-    sendToLogin() {
-        URI.redirect(config.auth0.sloppyLoginUrl);
-    }
-    render() {
-        return (
-            <ErrorBoundary>
-            { this.state.errorHappened && this.sendToLogin() }
-            { this.state.isLoading ? ( <LoadingPage /> ) : (
-                <FlexItem>
-                    <div className="light-shadow">
-                    { this.state.pageText.networkTitle && <h3>{ this.state.pageText.networkTitle }</h3>}
-                    
-                    { this.state.ownedNetworks.length > 0 ? (
-                        <ClientsSection clients={this.state.ownedNetworks } pageText={this.state.pageText } />
-                    ) : ( <h4>{this.state.pageText.noNetwork }</h4> ) }
-                    </div>
-                </FlexItem>
-            )}
+    <FlexItem classes="animated fadeIn light-shadow text-center">
+        { text.networkTitle && <h1>{ text.networkTitle }</h1>}
+        
+        { clients.length > 0 ? (
+            <ClientsSection clients={ clients } pageText={ text } />
+        ) : ( <h4>{ text.noNetworks }</h4> ) }
+            <div className="launch-network">
+                <Button 
+                    text={ text.launchNetworkButton} 
+                    onClick={ launchNetwork }
+                    style="default"
+                />                            
+            </div>
+    </FlexItem>
             
-            </ErrorBoundary>
-        );
-    }
-}

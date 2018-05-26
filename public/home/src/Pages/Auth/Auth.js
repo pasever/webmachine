@@ -2,11 +2,14 @@
 import history from './History';
 import auth0 from 'auth0-js';
 import {Redirect} from 'react-router-dom';
-
+import URI from '../../../../common/utils/URI';
 const config = require("../../../../../config").init();
+
+let URIredirect = "";
 
 //set up auth0 configuration
 export default class Auth {
+  
   auth0 = new auth0.WebAuth({
     domain: config.auth0.domain,
     clientID: config.auth0.clientID,
@@ -16,7 +19,7 @@ export default class Auth {
     scope: 'openid profile user_metadata',
   });
 
-  constructor() {
+  constructor(redirect) {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
@@ -27,16 +30,19 @@ export default class Auth {
 
   
 //this function pulls up the auth0 authorization
-  login() {
+  login(redirect="") {
+    URIredirect = redirect;
     this.auth0.authorize();
   }
 
   //this function checks for successful authentication, and if successful sets session and moves you to the new page
   handleAuthentication() {
-    console.log("Handling authentication!!");
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
+        if(URIredirect !== "") {
+          return URI.redirect(URIredirect);
+        }
         history.replace('/');
       } else if (err) {
         history.replace('/');
@@ -53,7 +59,6 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    history.replace('/');    
   }
 
   //this function acquires user access token to be used for returning profile information

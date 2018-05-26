@@ -96,11 +96,10 @@ function extractAuthenicationToken( req ) {
 async function verifyJWTToken( req, res, next ) {
   
   await fetchJWKS( req );
-  console.log("FETCHED TOKEN");
   const token = extractAuthenicationToken( res );
   if(token === undefined || !token || token == 'undefined') {
-    console.log("TOKEN REJECTED");
     return res.status(401).end()
+
   }
   const decodedToken = jwt.decode( token, { complete: true } );
   const { header } = decodedToken;

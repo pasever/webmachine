@@ -138,10 +138,14 @@ export class MembersMaintenance extends Component {
     // Event handler for when the file is read
     reader.onload = (e) => {
       const { members } = this.state;
-      // Splits the values by the carriage return
-      reader.result.split('\n').map((current) => { 
+      console.log(reader.result);
+      let splitValue = reader.result.indexOf(',') > 0 ? ',' : '\n';
+      // Splits the values by split value
+      reader.result.split(splitValue).map((current) => { 
+        
         if(current !== "") members.push(current) 
       });
+    
       
       this.setState({members: members, errors: {} });
     }

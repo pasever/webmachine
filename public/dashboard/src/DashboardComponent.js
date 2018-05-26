@@ -8,6 +8,8 @@
 
 import React, { Component } from 'react';
 import API from '../../common/utils/API';
+import URI from '../../common/utils/URI';
+import Auth from '../../home/src/Pages/Auth/Auth';
 import LoadingPage from '../../common/LoadingPage';
 import { Col, Row, Container, FlexWrapper, FlexItem } from '../../common/grid';
 import { Button } from '../../common/form';
@@ -15,9 +17,10 @@ import { DashNetworks } from './components';
 import { DashHeader } from './partials';
 import { ErrorBoundary } from '../../common/error'
 import './App.css';
+import '../../common/styles/animate.css';
 
 const config = require('../../../config').init();
-
+const auth = new Auth();
 
 /**
  * @class DashboardComponent
@@ -34,6 +37,8 @@ export default class DashboardComponent extends Component {
     state = {
         isLoading: true,            // If the page is loading - use this flag to display the LoadingPage component
         launchingNetwork: false,    // Used to flag for rendering purposes
+        ownedNetworks: [],
+        joinedNetworks: [],
         pageData: {},               // Holds the pageData (text to display)
     }
 
@@ -60,13 +65,23 @@ export default class DashboardComponent extends Component {
 
     /**
      * @function: componentDidMount()
-     * @description calls the function that gets the text to display
+     * @description gets the text to display, and makes API calls to get the networks the user owns and is a member of.
      */
     componentDidMount() {
+        if(!auth.isAuthenticated()) auth.login();
+        
         let pageData = this.getDashboardPageData().then(resp => { return resp.json() });
-        Promise.all([pageData]).then(values => {
-            this.setState({ pageData: values[0], isLoading: false}) 
-        });
+        let ownedNetworks = API.getClientsByAccessId();
+        let joinedNetworks = API.getJoinedNetworks();
+        
+        Promise.all([pageData, ownedNetworks, joinedNetworks]).then(values => {
+            this.setState({ 
+                pageData: values[0], 
+                ownedNetworks: values[1].data, 
+                joinedNetworks: values[2].data, 
+                isLoading: false
+            }); 
+        }).catch(err => {console.log(err); auth.login("/dashboard"); });
     }
 
     /**
@@ -77,8 +92,9 @@ export default class DashboardComponent extends Component {
         if(!this.state.launchingNetwork) {
             return(
                 <DashNetworks 
-                    pageText={this.state.pageData.main } 
-                    launchNetwork={ this.launchNetwork } />            
+                    text={this.state.pageData.main } 
+                    launchNetwork={ this.launchNetwork }
+                    clients={ this.state.ownedNetworks } />            
             );
         }
     }
@@ -92,6 +108,11 @@ export default class DashboardComponent extends Component {
             </FlexItem>
         )
     }
+    sendToLogin() {
+
+        URI.redirect(config.auth0.sloppyLoginUrl);
+    }
+
     render() {
         return (
             <ErrorBoundary>

@@ -17,6 +17,7 @@ import { ErrorBoundary } from '../../common/error/ErrorBoundary';
 import MaintenanceWrapper  from './components/Maintenance/MaintenanceWrapper';
 import 'react-tabs/style/react-tabs.css';
 import './App.css';
+import '../../common/styles/animate.css';
 
 
 const config = require('../../../config').init();
@@ -28,7 +29,7 @@ const config = require('../../../config').init();
 
 // The APP class is currently the main hub for the Client.
 // It requires the client object, so it will handle all form changes and submits.
-export default class App extends Component {
+export default class ClientComponent extends Component {
     // ctor
     constructor(props) {
         super(props);
@@ -103,14 +104,14 @@ export default class App extends Component {
     }
     render() {
         return (
-            <div className="app-container">
+            <div className="app-container animated fadeIn">
                 { this.state.redirectToLogin && this.sendToLogin() } 
                 <div>
                     { this.state.pageData === null && !this.state.redirectToLogin ? ( 
                         <LoadingPage />
                     ) : (
                     
-                    <div>
+                    <div className="animated fadeIn">
                         <header className="app-header">
                             <h1 className="header-title">{ this.state.pageData.main.title }</h1>
                         </header>
