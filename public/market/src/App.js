@@ -1,20 +1,16 @@
 
 
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import Routes               from './routes';
+import Auth from '../../home/src/Pages/Auth/Auth'
 import './App.css';
 
 export default class App extends Component {
 
-  componentDidMount() {
-    let ls = window.localStorage;
-    let id_token = ls.getItem('id_token');
-    if (id_token == null) {
-      console.log('no user authenticated');
-    } else {
-      console.log(id_token);
-    }
+  componentWillMount() {
+    let auth = new Auth();
+    if (!auth.isAuthenticated())
+      auth.login()
   }
 
   render() {

@@ -7,7 +7,8 @@ import React, { Component }    from 'react';
 import axios                   from 'axios';
 import Repo                    from './Repo';
 import SearchBar               from './SearchBar'; 
-import config                  from '../../../../config/';
+import API                     from '../../../common/utils/API'
+import Auth                    from '../../../home/src/Pages/Auth/Auth'
 /**
  * @namespace Developer_Marketplace
  * 
@@ -19,7 +20,6 @@ import config                  from '../../../../config/';
  * * The URL must be for Strategic Machines' GitHub market repo regardless 
  * * of who's the authenticated user
  */
-const { repos_url }            = config.init().githubrepo;
 
 export default class ReposPage extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export default class ReposPage extends Component {
       repos: [],
       // checks if data has been loaded
       loaded: false,
-      search: ''
+      search: '',
     }
    
     this.updateSearch = this.updateSearch.bind(this);
@@ -37,13 +37,17 @@ export default class ReposPage extends Component {
 
   componentDidMount() {
     // Fetch repositories for given user  
-    axios.get(repos_url)
+    API.market.getRepos()
       .then(res => {
         // Save data to state
         this.setState({
           repos: res.data,
           loaded: true
         });
+      })
+      .catch(err => {
+        // let auth = new Auth();
+        // auth.login();
       });
   };
 
