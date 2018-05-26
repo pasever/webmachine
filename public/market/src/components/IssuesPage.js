@@ -11,8 +11,7 @@ import Navigation             from './Navigation';
 import FilterBy               from './IssuesFilterBy';
 import SearchBar              from './SearchBar';
 import AdminLayer             from './admin/AdminLayer';
-import config                 from '../../../../config/';
-const { issues_url }          = config.init().githubrepo;
+import API                    from '../../../common/utils/API';
 
 export default class IssuesPage extends Component {
   constructor(props) {
@@ -42,9 +41,8 @@ export default class IssuesPage extends Component {
   componentDidMount() {
     // Construct API endpoint from which to fetch issues.
     let repo = this.state.repo;
-    let endpoint = `${issues_url}/${repo}`;  
     // Fetch issues for repo and save them into state
-    axios.get(endpoint)
+    API.market.getIssues(repo)
     .then(res => {
       this.setState({
         issues: res.data.length > 0 ? res.data : [],

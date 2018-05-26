@@ -55,10 +55,10 @@ class App extends Component {
     return (
       <div>
       <div className="App">
-        <Modal open={this.state.openModal} className="modal" onClose={this.onClose } center>
+        {/* <Modal open={this.state.openModal} className="modal" onClose={this.onClose } center>
           <h2>Welcome back, friend!</h2>
           <p>We see you're already logged in!<br />
-          We can take you directly to your <a href="/dashboarD"><strong>Dashboard</strong></a> if you'd like?</p>
+          We can take you directly to your <a href="/dashboard"><strong>Dashboard</strong></a> if you'd like?</p>
           
           <button className="btn btn-secondary btn-lg" onClick={ this.onClose }>No</button>
           <form action="/dashboard" method="GET" className="floating-form">
@@ -66,7 +66,7 @@ class App extends Component {
           </form>
             
           
-        </Modal>
+        </Modal> */}
         <Header data={this.state.portfolioData.main} auth={auth}/>
         <Main data={this.state.portfolioData}/>
         <Footer/>

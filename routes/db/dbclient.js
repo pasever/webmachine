@@ -13,13 +13,13 @@ const { r, g, b } =             require('../../console');
 const request =                 require('request');
 const jwt =                     require('jsonwebtoken');
 const config =                  require('../../config').init();
-const verifyJwt =               require('../../utils/auth/verifyJwtToken');
+const { verifyJWTToken } =               require('../../utils/auth/verifyJwtToken');
 
 
 
 const dbclient = (router) => {
     router.use(bodyParser.json());
-    router.use(verifyJwt.verifyJWTToken);
+    router.use(verifyJWTToken);
     // DELETE ROUTE
     router.delete("/", (req, res, next) => {
         console.log("-----------DB Clients DELETE ROUTE -----------");

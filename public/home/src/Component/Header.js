@@ -60,7 +60,7 @@ logout() {
                 <li><a className="smoothscroll" id="signup" href="#" onClick={this.login.bind(this)}>Log In</a></li> ) :(                
                 <div>
                   <span><strong>User: </strong></span>
-                  <li><a href="/dashboarD">Dashboard</a></li>
+                  <li><a href="/dashboard">Dashboard</a></li>
                   <li><a className="smoothscroll" id="signup" href="#" onClick={this.logout.bind(this)}>Log Out</a></li>
                 </div>
             )}

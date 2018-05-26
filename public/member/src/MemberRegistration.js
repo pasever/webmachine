@@ -23,6 +23,7 @@ import axios                      from 'axios';
 import NetworkSelection           from './components/Steps/NetworkSelection';
 import MemberForm                 from './components/Steps/MemberForm';
 import API                        from '../../common/utils/API';
+import Auth                       from '../../home/src/Pages/Auth/Auth';
 
 const ls = window.localStorage;
 
@@ -38,13 +39,19 @@ class MemberRegistration extends Component {
       // Defaults to step1 of the registration process.
       location: 'networks-to-join',
       networks_to_join: [],
-      member_form: {}
+      member_form: {},
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleNetworkSelectionChange = this.handleNetworkSelectionChange.bind(this);
     this.handleFormInputChange = this.handleFormInputChange.bind(this);
     this.registerMember = this.registerMember.bind(this);
+  }
+
+  componentWillMount() {
+    let auth = new Auth();
+    if (!auth.isAuthenticated())
+      auth.login()
   }
 
   /**
