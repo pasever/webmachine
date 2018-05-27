@@ -58,7 +58,7 @@ class StripeForm extends Component {
     // Flags to the form that we are saving to show the animation
     this.setState({ isSaving: true });
     // Make our call to the server, passing our customer Id and Source Id
-    API.setDefaultSource(
+    API.stripe.setDefaultSource(
       this.state.client.stripeCustomer.id,
       event.target.dataset.sourceId
     ).then(response => {
@@ -72,7 +72,7 @@ class StripeForm extends Component {
     // Flags to the form that we are saving to show the animation
     this.setState({ isSaving: true });
     // Make our call to the server, passing the source we want to remove
-    API.removeSource(
+    API.stripe.removeSource(
       this.state.client.stripeCustomer.id,
       event.target.dataset.sourceId
     ).then(response => {
@@ -103,11 +103,11 @@ class StripeForm extends Component {
       })
       .then(resp => {
         let promises = [
-          API.addSourceToCustomer(
+          API.stripe.addSourceToCustomer(
             this.state.client.stripeCustomerId,
             resp.source.id
           ),
-          API.updatePlatform(this.state.client)
+          API.client.updatePlatform(this.state.client)
         ];
 
         Promise.all(promises).then(values => {

@@ -81,7 +81,7 @@ export class MembersMaintenance extends Component {
    */
   saveClient(client) {
     this.setState({isSaving: true});
-    API.updateClient(client).then(resp => {
+    API.client.updateClient(client).then(resp => {
       this.setState({ client: resp.data, isSaving: false });
     }).catch(err => this.setState({ isSaving: false, errors: { saveError: "There was an error saving the members"}}))
   }

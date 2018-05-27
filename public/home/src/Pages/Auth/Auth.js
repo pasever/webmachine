@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom';
 import URI from '../../../../common/utils/URI';
 const config = require("../../../../../config").init();
 
-let URIredirect = "";
+
 
 //set up auth0 configuration
 export default class Auth {
@@ -19,7 +19,7 @@ export default class Auth {
     scope: 'openid profile user_metadata',
   });
 
-  constructor(redirect) {
+  constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
@@ -30,8 +30,7 @@ export default class Auth {
 
   
 //this function pulls up the auth0 authorization
-  login(redirect="") {
-    URIredirect = redirect;
+  login() {
     this.auth0.authorize();
   }
 
@@ -39,14 +38,12 @@ export default class Auth {
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log("SETTING SESSION");
         this.setSession(authResult);
-        if(URIredirect !== "") {
-          return URI.redirect(URIredirect);
-        }
         history.replace('/');
       } else if (err) {
         history.replace('/');
-        console.log(err);
+        console.log("ERR::::", err);
       }
     });    
   }
