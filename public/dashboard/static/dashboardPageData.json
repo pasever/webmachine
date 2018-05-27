@@ -8,8 +8,11 @@
             "already a member of."
         ],
         "networkTitle": "Networks",
+        "memberTitle": "Memberships",
         "noNetworks": "It appears you are not managing any networks.  Why don't you Launch one for your Business or Organization?",
+        "noMemberships": "It appears you are not a member of any networks.",
         "ownedNetworksTitle": "Manage the networks you own",
+        "membershipTitle": "Manage your member profiles",
         "searchNetworksButton": "Find Networks",
         "launchNetworkButton": "Launch a new network",
         "asideTitle": "Welcome to the Machine",

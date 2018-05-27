@@ -2,7 +2,7 @@ import React from 'react';
 
 import './network.css';
 
-export const OwnedClient = ({ network }) => 
+export const JoinedClient = ({ network }) => 
     <div className="network">
             <a className="client-name" href={ `/client?clientId=${ network._id }`}>    
             { network.image === "" ? 

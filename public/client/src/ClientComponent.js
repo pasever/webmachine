@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import API from '../../common/utils/API';
 import URI from '../../common/utils/URI';
 import LoadingPage from '../../common/LoadingPage';
+import Auth from '../../home/src/Pages/Auth/Auth';
 import { MaintenanceHeader } from './components/Partials/';
 import {Container, Row, Col } from '../../common/grid';
 import { Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ import '../../common/styles/animate.css';
 
 
 const config = require('../../../config').init();
-
+const auth = new Auth();
 //////// DEFAULT PLATFORM
 // Deprecated 04/30/18 for REFACTOR 0.7
 //const Platform = require('../../../config/').platform();
@@ -38,7 +39,6 @@ export default class ClientComponent extends Component {
             client:  null,            //  should be passed in the response from Authorization
             pageData: null,         //  page data object
             hasErrors: false,       //  flags if we should display a message about errors
-            redirectToLogin: false,
         };
     }
     
@@ -64,16 +64,15 @@ export default class ClientComponent extends Component {
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, client]).then(values => {
             let client = values[1];
-            console.log(values);
-            /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
+            // Checks to see if we got no data or if our token was rejected
             if(Object.keys(client.data).length === 0 || client === "TOKEN REJECTED") {
-                this.setState({ redirectToLogin: true });
+                auth.login();
             } else {
                 this.setState({ pageData: values[0], client: client.data});
             }
         }).catch((err) => { 
-             console.log("ERROR ON MOUNT: ", err)
-             this.setState({ redirectToLogin: true });
+            
+             auth.login();
         })
     }
 
@@ -99,13 +98,9 @@ export default class ClientComponent extends Component {
         this.setState({ client: client });
     }
     /// Calls the URI utility function to redirect to the login page
-    sendToLogin() {
-        URI.redirect(config.auth0.sloppyLoginUrl);
-    }
     render() {
         return (
             <div className="app-container animated fadeIn">
-                { this.state.redirectToLogin && this.sendToLogin() } 
                 <div>
                     { this.state.pageData === null && !this.state.redirectToLogin ? ( 
                         <LoadingPage />

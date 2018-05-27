@@ -29,7 +29,8 @@ export class LaunchClientForm extends Component {
             email: this.state.email,
         };
         API.client.addClient(client).then(resp => {
-            URI.redirect('/client?clientId' + resp.data._id);
+            
+            URI.redirect('/client?clientId=' + resp.data._id);
         })
     }
 
@@ -67,7 +68,7 @@ export class LaunchClientForm extends Component {
                             classPrepend="fa fa-at"
                         />
 
-                    <Button style="default" type="submit" text="Launch" />
+                        <Button style="default" type="submit" text="Launch" />
                     </Col>
                 </form>
             </FlexItem>

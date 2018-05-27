@@ -13,7 +13,7 @@ import Auth from '../../home/src/Pages/Auth/Auth';
 import LoadingPage from '../../common/LoadingPage';
 import { Col, Row, Container, FlexWrapper, FlexItem } from '../../common/grid';
 import { Button } from '../../common/form';
-import { DashNetworks } from './components';
+import { DashNetworks, DashMembers } from './components';
 import { DashHeader, LaunchClientForm } from './partials';
 import { ErrorBoundary } from '../../common/error'
 import './App.css';
@@ -109,16 +109,11 @@ export default class DashboardComponent extends Component {
 
     renderRightColumn() {
         return(
-            <FlexItem>
-                <div className="light-shadow">
-                    <p>SOME TEXT TEXT</p>
-                </div>
-            </FlexItem>
+            <DashMembers 
+                text={this.state.pageData.main } 
+                clients={ this.state.joinedNetworks }
+            />  
         )
-    }
-    sendToLogin() {
-
-        URI.redirect(config.auth0.sloppyLoginUrl);
     }
 
     render() {

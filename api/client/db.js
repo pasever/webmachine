@@ -48,9 +48,10 @@ exports.getClients = (accessId) => {
     })  
 }
 
+// Gets all public clients
 exports.getPublicClients = () => {
     return new Promise((resolve, reject) => {
-        Client.find({ isPrivate: false, isActivated: true }, "name description addr1 addr2 city state zip sms").then(response => {
+        Client.find({ isPrivate: false, isActivated: true }, "name image description addr1 addr2 city state zip sms").then(response => {
             resolve(response);
         }).catch(err => {
             if(err) {
@@ -79,9 +80,10 @@ exports.getClient = (id) => {
     })
 }
 
+// Gets all clients a member has joined.
 exports.getJoinedClients = (aId) => {
     return new Promise((resolve, reject) => {
-        Client.find({ members: aId }, "name description addr1 addr2 city state zip sms").then(response => {
+        Client.find({ members: aId }, "name description image addr1 addr2 city state zip sms").then(response => {
             resolve(response);
         }).catch(err => {
             if(err) {

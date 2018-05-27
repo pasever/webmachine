@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////////////////
-/////////////////////           DashHome.js              /////////////////////////
+/////////////////////           DashNetworks.js          /////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ///                                                                             //
-///  Wrapper for the Dashboard                                                  //
+///  Displays the Networks a user is an owner of.                               //
 ///                                                                             //
 /// DGO                                                                         //
 //////////////////////////////////////////////////////////////////////////////////
@@ -10,15 +10,8 @@
 
 import React, {Component} from 'react';
 import { ClientsSection } from './';
-import { Container, Row, Col, FlexItem } from '../../../common/grid';
+import { FlexItem } from '../../../common/grid';
 import { Button } from '../../../common/form';
-import { ErrorBoundary } from '../../../common/error';
-import API from '../../../common/utils/API';
-import LoadingPage from '../../../common/LoadingPage';
-import URI from '../../../common/utils/URI';
-import Config from '../../../../config';
-
-const config = Config.init();
 
 
 /**
