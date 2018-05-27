@@ -71,8 +71,8 @@ export default class DashboardComponent extends Component {
         if(!auth.isAuthenticated()) auth.login();
         
         let pageData = this.getDashboardPageData().then(resp => { return resp.json() });
-        let ownedNetworks = API.getClientsByAccessId();
-        let joinedNetworks = API.getJoinedNetworks();
+        let ownedNetworks = API.client.getClientsByAccessId();
+        let joinedNetworks = API.client.getJoinedNetworks();
         
         Promise.all([pageData, ownedNetworks, joinedNetworks]).then(values => {
             this.setState({ 
