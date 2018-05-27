@@ -6,6 +6,7 @@ import URI from "../../../common/utils/URI";
 import "../../../common/styles/animate.css";
 
 export class LaunchClientForm extends Component {
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
@@ -32,6 +33,35 @@ export class LaunchClientForm extends Component {
       URI.redirect("/client?clientId" + resp.data._id);
     });
   }
+=======
+    constructor(props) {
+        super(props);
+        this.state = {
+            companyName: "",
+            contactName: "",
+            email: "",
+            errors: {},
+        }
+        this.updateFormField = this.updateFormField.bind(this);
+        this.launchClient = this.launchClient.bind(this);
+    }
+    updateFormField(e) {
+        const {name, value} = e.target;
+        this.setState({ [name]: value });
+    }
+    launchClient(e) {
+        e.preventDefault();
+        let client = {
+            name: this.state.companyName,
+            contact: this.state.contactName,
+            email: this.state.email,
+        };
+        API.client.addClient(client).then(resp => {
+            
+            URI.redirect('/client?clientId=' + resp.data._id);
+        })
+    }
+>>>>>>> common
 
   render() {
     return (
@@ -69,10 +99,19 @@ export class LaunchClientForm extends Component {
               classPrepend="fa fa-at"
             />
 
+<<<<<<< HEAD
             <Button style="default" type="submit" text="Launch" />
           </Col>
         </form>
       </FlexItem>
     );
   }
+=======
+                        <Button style="default" type="submit" text="Launch" />
+                    </Col>
+                </form>
+            </FlexItem>
+        )
+    }
+>>>>>>> common
 }

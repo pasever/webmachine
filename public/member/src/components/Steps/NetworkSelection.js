@@ -39,7 +39,7 @@ class NetworkSelection extends Component {
   */
   componentDidMount() {
 
-    API.getPublicClients()
+    API.client.getPublicClients()
       .then(res => {
         let discoverableNetworks = res.data;
         this.setState({ discoverableNetworks });

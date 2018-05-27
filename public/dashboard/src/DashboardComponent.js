@@ -6,6 +6,7 @@
 
 "use strict";
 
+<<<<<<< HEAD
 import React, { Component } from "react";
 import API from "../../common/utils/API";
 import URI from "../../common/utils/URI";
@@ -19,6 +20,20 @@ import { DashHeader, LaunchClientForm } from "./partials";
 import { ErrorBoundary } from "../../common/error";
 import "./App.css";
 import "../../common/styles/animate.css";
+=======
+import React, { Component } from 'react';
+import API from '../../common/utils/API';
+import URI from '../../common/utils/URI';
+import Auth from '../../home/src/Pages/Auth/Auth';
+import LoadingPage from '../../common/LoadingPage';
+import { Col, Row, Container, FlexWrapper, FlexItem } from '../../common/grid';
+import { Button } from '../../common/form';
+import { DashNetworks, DashMembers } from './components';
+import { DashHeader, LaunchClientForm } from './partials';
+import { ErrorBoundary } from '../../common/error'
+import './App.css';
+import '../../common/styles/animate.css';
+>>>>>>> common
 
 const config = require("../../../config").init();
 const auth = new Auth("/dashboard");
@@ -85,6 +100,7 @@ export default class DashboardComponent extends Component {
     let ownedNetworks = API.client.getClientsByAccessId();
     let joinedNetworks = API.client.getJoinedNetworks();
 
+<<<<<<< HEAD
     Promise.all([pageData, ownedNetworks, joinedNetworks])
       .then(values => {
         this.setState({
@@ -130,6 +146,16 @@ export default class DashboardComponent extends Component {
   sendToLogin() {
     URI.redirect(config.auth0.sloppyLoginUrl);
   }
+=======
+    renderRightColumn() {
+        return(
+            <DashMembers 
+                text={this.state.pageData.main } 
+                clients={ this.state.joinedNetworks }
+            />  
+        )
+    }
+>>>>>>> common
 
   render() {
     return (
