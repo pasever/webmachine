@@ -115,6 +115,7 @@ export default class ClientComponent extends Component {
                             <ErrorBoundary>
                             <Container>
                                 <Row>
+                                    <a href="/dashboard"><i class="fa fa-arrow-left"></i> Return to Dashboard</a>
                                     <MaintenanceHeader 
                                         toggleSystem={this.toggleSystem} client={this.state.client} hasErrors={this.state.hasErrors } 
                                         headerText={this.state.pageData.header} deletePlatform={ this.deletePlatform } />

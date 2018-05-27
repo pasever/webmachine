@@ -40,7 +40,7 @@ export class ImageUpload extends Component {
 
 
     saveClient() {
-        API.updateClient(this.state.client).then(resp => {
+        API.client.updateClient(this.state.client).then(resp => {
             this.setState({ client: resp.data });
         }).catch(err => { 
             console.log(err) 

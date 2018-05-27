@@ -12,6 +12,7 @@ export class LaunchClientForm extends Component {
             companyName: "",
             contactName: "",
             email: "",
+            launching: false,
             errors: {},
         }
         this.updateFormField = this.updateFormField.bind(this);
@@ -23,6 +24,7 @@ export class LaunchClientForm extends Component {
     }
     launchClient(e) {
         e.preventDefault();
+        this.setState({ launching: true });
         let client = {
             name: this.state.companyName,
             contact: this.state.contactName,
@@ -67,8 +69,12 @@ export class LaunchClientForm extends Component {
                             errorText={ this.state.errors.email}
                             classPrepend="fa fa-at"
                         />
-
+                    { this.state.launching ? (
+                        <i className="fa fa-gear fa-spin fa-2x margin-top-10" />
+                    ) : (
                         <Button style="default" type="submit" text="Launch" />
+                    )}
+
                     </Col>
                 </form>
             </FlexItem>
