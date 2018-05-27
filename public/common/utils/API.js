@@ -41,6 +41,11 @@ export default {
             return axios.delete('/api/db/client', { data: { id: client.id }});
         },
     },
+    member: {
+      register: (memberPayload) => {
+        return axios.post('/api/db/member/register', memberPayload);
+      },
+    },
     stripe: {
         addSourceToCustomer: (customerId, sourceId) => {
             return axios.post('/api/db/client/addStripeSource', { cId: customerId, sId: sourceId });
@@ -56,9 +61,6 @@ export default {
         deployNetlify: (client, templateData) => {
             return axios.post('/api/db/client/netlify', { client: client, templateData: templateData });
         },
-    },
-    registerMember: (memberPayload) => {
-      return axios.post('/api/db/member/register', memberPayload);
     },
     market: {
       getRepos: () => axios.get(config.githubrepo.repos_url),

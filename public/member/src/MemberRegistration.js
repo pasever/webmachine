@@ -129,7 +129,7 @@ class MemberRegistration extends Component {
     e.preventDefault();
     // gets called when both loads are valid and ready to go.
     let member_load = this.state;
-    API.registerMember(member_load)
+    API.member.register(member_load)
       .then(res => {
         if ('networksToJoin' in ls)
           ls.removeItem('networksToJoin');
