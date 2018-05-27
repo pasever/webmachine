@@ -31,10 +31,9 @@ export default {
             return axios.get('/api/db/client/public');
         },
         /// WE WILL NOT BE ADDING CLIENTS FROM THIS SECTION ANYMORE
-        //addClient: (client) => {
-            //localStorage.clientId = client.clientId;
-        //    return axios.put('/api/db/client', client);
-        //},
+        addClient: (client) => {
+            return axios.put('/api/db/client', client);
+        },
         updateClient: (client) => {
             return axios.post('/api/db/client', client);
         },

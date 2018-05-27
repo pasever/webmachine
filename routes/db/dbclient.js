@@ -6,14 +6,14 @@
 // DGO 04/30/18  REFACTOR 0.7  Commenting and removing references to Platform
 
 
-const bodyParser =  			require('body-parser')
-const clientApi =               require('../../api/client');
-const netlifyApi =              require('../../api/client/netlify');
-const { r, g, b } =             require('../../console');
-const request =                 require('request');
-const jwt =                     require('jsonwebtoken');
-const config =                  require('../../config').init();
-const { verifyJWTToken } =               require('../../utils/auth/verifyJwtToken');
+const bodyParser =  			                require('body-parser')
+const clientApi =                               require('../../api/client');
+const netlifyApi =                              require('../../api/client/netlify');
+const { r, g, b } =                             require('../../console');
+const request =                                 require('request');
+const jwt =                                     require('jsonwebtoken');
+const config =                                  require('../../config').init();
+const { verifyJWTToken, getIdFromToken } =      require('../../utils/auth/verifyJwtToken');
 
 
 
@@ -36,16 +36,16 @@ const dbclient = (router) => {
         let accessToken = req.headers.authorization || null;
         let clientId = req.query.clientId || null;
         // Checks if there is an access Id passed, gets the matching Client
-        console.log(verifyJwt.getIdFromToken(accessToken));
+        console.log(getIdFromToken(accessToken));
         if(accessToken && !clientId) {   
             // Gets the ID out of the JWT
-            let accessId = verifyJwt.getIdFromToken(accessToken);
+            let accessId = getIdFromToken(accessToken);
             clientApi.getClients(req.token, accessId, req.conn, (response) => {
                 res.status(200).send(response);
             });
         // Checks if there's a Client Id passed, gets the matching client
         } else if(accessToken && clientId) {
-            let accessId = verifyJwt.getIdFromToken(accessToken);
+            let accessId = getIdFromToken(accessToken);
             console.log("ACCESSID:::::::", accessId)
             /// Get's a client based on their Auth0 Id and the Id of the Client
             clientApi.getOneOwnedClient(req.token, accessId, clientId, req.conn, (response) => {
@@ -65,7 +65,7 @@ const dbclient = (router) => {
         console.log("----------DB Clients JOINED GET ROUTE ---------------");
         let accessToken = req.headers.authorization;
         if(accessToken) {
-            let accessId = verifyJwt.getIdFromToken(accessToken);
+            let accessId = getIdFromToken(accessToken);
             clientApi.getJoinedClients(req.token, accessId, req.conn, (response) => {
                 res.status(200).send(response);
             });
@@ -100,6 +100,7 @@ const dbclient = (router) => {
         console.log("-----------DB Clients PUT ROUTE -----------");
         
         if (req.body) {
+            req.body.accessToken = getIdFromToken(req.headers.authorization);
             clientApi.addClient(req.token, req.body, req.conn, (response) => {
                 console.log("RESPONSE --- ", response);
 		        res.status(200).send(response);

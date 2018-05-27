@@ -45,7 +45,7 @@ export class NetlifyDeploy extends Component {
         client.siteData = this.state.siteData;
         this.setState( { isSaving: true });
         
-        API.deployNetlify(client, this.state.templateData[this.state.selectedTemplate]).then(resp => {
+        API.netlify.deployNetlify(client, this.state.templateData[this.state.selectedTemplate]).then(resp => {
             console.log("Response! : ", resp)
             this.setState({ client: resp.data, siteData: resp.data.siteData, isSaving: false })
         }).catch(err => { console.log("ERROR!!", err); this.setState({ error: "There was an error processing your request", isSaving: false })});

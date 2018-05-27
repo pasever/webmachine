@@ -59,7 +59,7 @@ export default class ClientComponent extends Component {
         
         // Grabs the Id in the query string, and tests if the User has permission to edit this client
         // via their Id.
-        const client = API.getClientForMaintenance(URI.getQuerystringValue("clientId")); 
+        const client = API.client.getClientForMaintenance(URI.getQuerystringValue("clientId")); 
         
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, client]).then(values => {
@@ -82,7 +82,7 @@ export default class ClientComponent extends Component {
     ///  FUTURE - SOME MORE WARNING SHOULD BE GIVEN BEFORE THE USER ACTUALLY HAS THEIR PLATFORM FLAGGED FOR DELETION.
     deletePlatform = event => {
         event.preventDefault();
-        API.deletePlatform(this.state.client).then(resp => {
+        API.client.deleteClient(this.state.client).then(resp => {
             this.setState({ client: resp.data });
         })
     }

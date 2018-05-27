@@ -14,13 +14,13 @@ import LoadingPage from '../../common/LoadingPage';
 import { Col, Row, Container, FlexWrapper, FlexItem } from '../../common/grid';
 import { Button } from '../../common/form';
 import { DashNetworks } from './components';
-import { DashHeader } from './partials';
+import { DashHeader, LaunchClientForm } from './partials';
 import { ErrorBoundary } from '../../common/error'
 import './App.css';
 import '../../common/styles/animate.css';
 
 const config = require('../../../config').init();
-const auth = new Auth();
+const auth = new Auth('/dashboard');
 
 /**
  * @class DashboardComponent
@@ -42,6 +42,10 @@ export default class DashboardComponent extends Component {
         pageData: {},               // Holds the pageData (text to display)
     }
 
+    constructor(props) {
+        super(props);
+        this.launchNetwork = this.launchNetwork.bind(this);
+    }
 
     /**
      * @function: getDashboardPageData()
@@ -60,7 +64,7 @@ export default class DashboardComponent extends Component {
      * @description Changes our state to launching a network.
      */
     launchNetwork() {
-        this.setState({ launchingNetwork: !launchingNetwork });
+        this.setState({ launchingNetwork: !this.state.launchingNetwork });
     }
 
     /**
@@ -81,7 +85,7 @@ export default class DashboardComponent extends Component {
                 joinedNetworks: values[2].data, 
                 isLoading: false
             }); 
-        }).catch(err => {console.log(err); auth.login("/dashboard"); });
+        }).catch(err => {console.log(err); auth.login(); });
     }
 
     /**
@@ -90,11 +94,15 @@ export default class DashboardComponent extends Component {
      */
     renderLeftColumn() {
         if(!this.state.launchingNetwork) {
-            return(
+            return (
                 <DashNetworks 
                     text={this.state.pageData.main } 
                     launchNetwork={ this.launchNetwork }
-                    clients={ this.state.ownedNetworks } />            
+                    clients={ this.state.ownedNetworks } /> 
+            );
+        } else {
+            return (
+                <LaunchClientForm goBack={ this.launchNetwork } />
             );
         }
     }
