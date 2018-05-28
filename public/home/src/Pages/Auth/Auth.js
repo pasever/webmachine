@@ -30,7 +30,8 @@ export default class Auth {
 
   
 //this function pulls up the auth0 authorization
-  login() {
+  login(redirect = "") {
+    if(redirect !== "") localStorage.setItem("redirect", redirect);
     this.auth0.authorize();
   }
 
@@ -38,8 +39,12 @@ export default class Auth {
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        console.log("SETTING SESSION");
         this.setSession(authResult);
+        let redirect = localStorage.getItem("redirect");
+        if(redirect) {
+          localStorage.removeItem("redirect");
+          URI.redirect(redirect);
+        }
         history.replace('/');
       } else if (err) {
         history.replace('/');
