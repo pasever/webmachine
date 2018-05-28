@@ -4,7 +4,7 @@ import "./network.css";
 
 export const JoinedClient = ({ network, handleCallToUpdateProfile }) => (
   <div className="network" >
-    <a className="client-name" onClick={() => handleCallToUpdateProfile(true, network._id)}>
+    <a className="client-name" onClick={() => handleCallToUpdateProfile(true, network._id, network.name)}>
       {network.image === "" ? (
         <img
           src="static/images/noimages.jpg"

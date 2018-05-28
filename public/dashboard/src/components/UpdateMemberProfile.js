@@ -21,15 +21,17 @@ class UpdateMemberProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clientId: this.props.clientId
+      clientId: this.props.clientId,
+      clientName: this.props.clientName,
+      memberProfile: {}
     }
   }
 
   componentDidMount() {
     API.member.getProfileData(this.state.clientId)
-      .then(profile => {
+      .then(res => {
         // Extract profile data from response
-        let memberProfile = profile.data;
+        let memberProfile = res.data.profile;
 
         // Save profile data into state
         this.setState({ memberProfile });
@@ -43,11 +45,16 @@ class UpdateMemberProfile extends Component {
   render() { 
     return (
       <section>
-        <h1>This is where you update your info for the Network you clicked</h1>
-        <p>client Id: {this.state.clientId}</p>
+        <h2>Update your profile information</h2>
+        <h3>for {this.state.clientName}</h3>
 
-        {typeof this.state.memberProfile == 'object' ? (
-          this.state.memberProfile
+        {this.state.memberProfile ? (
+          <div>
+            <p>First Name: {this.state.memberProfile.firstName}</p>
+            <p>Last Name: {this.state.memberProfile.lastName}</p>
+            <p>Cell: {this.state.memberProfile.cell}</p>
+            <p>Email: {this.state.memberProfile.email}</p>
+          </div>
         ) : (
           <p>No profile data found</p>
         )}
