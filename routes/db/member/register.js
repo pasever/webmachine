@@ -4,16 +4,10 @@
 //////// route for new member registration ///////
 //////////////////////////////////////////////////
 
-// const mongoose            = require('mongoose');
-// const { Client }          = require('../../db/schemas/Client');
-// const { memberSchema }    = require('../../db/schemas/Member');
-const utils               = require('../../utils');
+const utils               = require('../../../utils');
 const bodyParser          = require('body-parser');
-const {
-  verifyJWTToken,
-  getIdFromToken
-}                         = require('../../utils/auth/verifyJwtToken')
-const { register }        = require('../../api/member');
+const { getIdFromToken }  = require('../../../utils/auth/verifyJwtToken')
+const { register }        = require('../../../api/member');
 
 const dbMember = (router) => {
   /**
@@ -31,7 +25,6 @@ const dbMember = (router) => {
    */
 
   router.use(bodyParser.json());
-  router.use(verifyJWTToken);
 
   router.post('/register', (req, res, next) => {
     console.log('got a request');

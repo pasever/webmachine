@@ -1,10 +1,12 @@
 const {
   verifyJWTToken,
   getIdFromToken
-}                         = require('../../utils/auth/verifyJwtToken');
-const { getProfile }      = require('../../api/member')
+}                         = require('../../../utils/auth/verifyJwtToken');
+const { getProfile }      = require('../../../api/member')
 
 /**
+ * @private {Route}
+ * @method GET
  * @description
  * Opens a connection to the specified Client's DB and
  * returns the document ("profile") of the specified Member

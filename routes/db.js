@@ -9,13 +9,11 @@ const bodyParser =  	 require('body-parser')
 const dbclient =       require('express').Router();
 const dbMember = 			 require('express').Router();
 const dbagent =        require('express').Router();
-const dbGetMemberProfile = require('express').Router();
 
 // register routes
 require('./db/dbagent')(dbagent);
 require('./db/dbclient')(dbclient);
-require('./db/dbMember')(dbMember);
-require('./db/dbGetMemberProfile')(dbGetMemberProfile);
+require('./db/member')(dbMember);
 
 const db = (router) => {
 	router.use(bodyParser.json());
@@ -28,9 +26,6 @@ const db = (router) => {
 
 	// api/db/member
   router.use('/member', dbMember)
-  
-  // api/db/member/profile/network/:clientId
-  router.use('/member/profile/network', dbGetMemberProfile);
 
 }
 
