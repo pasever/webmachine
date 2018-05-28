@@ -6,18 +6,18 @@
 
 "use strict";
 
-import React, { Component } from 'react';
-import API from '../../common/utils/API';
-import URI from '../../common/utils/URI';
-import Auth from '../../home/src/Pages/Auth/Auth';
-import LoadingPage from '../../common/LoadingPage';
-import { Col, Row, Container, FlexWrapper, FlexItem } from '../../common/grid';
-import { Button } from '../../common/form';
-import { DashNetworks, DashMembers } from './components';
-import { DashHeader, LaunchClientForm } from './partials';
-import { ErrorBoundary } from '../../common/error'
-import './App.css';
-import '../../common/styles/animate.css';
+import React, { Component } from "react";
+import API from "../../common/utils/API";
+import URI from "../../common/utils/URI";
+import Auth from "../../home/src/Pages/Auth/Auth";
+import LoadingPage from "../../common/LoadingPage";
+import { Col, Row, Container, FlexWrapper, FlexItem } from "../../common/grid";
+import { Button } from "../../common/form";
+import { DashNetworks, DashMembers } from "./components";
+import { DashHeader, LaunchClientForm } from "./partials";
+import { ErrorBoundary } from "../../common/error";
+import "./App.css";
+import "../../common/styles/animate.css";
 
 const config = require("../../../config").init();
 const auth = new Auth("/dashboard");
@@ -83,16 +83,48 @@ export default class DashboardComponent extends Component {
     });
     let ownedNetworks = API.client.getClientsByAccessId();
     let joinedNetworks = API.client.getJoinedNetworks();
+
+    Promise.all([pageData, ownedNetworks, joinedNetworks])
+      .then(values => {
+        this.setState({
+          pageData: values[0],
+          ownedNetworks: values[1].data,
+          joinedNetworks: values[2].data,
+          isLoading: false
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        auth.login();
+      });
   }
 
-    renderRightColumn() {
-        return(
-            <DashMembers 
-                text={this.state.pageData.main } 
-                clients={ this.state.joinedNetworks }
-            />  
-        )
+  /**
+   * @function: renderLeftColumn()
+   * @description
+   */
+  renderLeftColumn() {
+    if (!this.state.launchingNetwork) {
+      return (
+        <DashNetworks
+          text={this.state.pageData.main}
+          launchNetwork={this.launchNetwork}
+          clients={this.state.ownedNetworks}
+        />
+      );
+    } else {
+      return <LaunchClientForm goBack={this.launchNetwork} />;
     }
+  }
+
+  renderRightColumn() {
+    return (
+      <DashMembers
+        text={this.state.pageData.main}
+        clients={this.state.joinedNetworks}
+      />
+    );
+  }
 
   render() {
     return (
@@ -112,4 +144,3 @@ export default class DashboardComponent extends Component {
     );
   }
 }
-
