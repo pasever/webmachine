@@ -59,7 +59,8 @@ export default class ClientComponent extends Component {
         
         // Grabs the Id in the query string, and tests if the User has permission to edit this client
         // via their Id.
-        const client = API.client.getClientForMaintenance(URI.getQuerystringValue("clientId")); 
+        let clientId = URI.getQuerystringValue("clientId");
+        const client = API.client.getClientForMaintenance(clientId); 
         
         // Waits till all promises are fulfilled to proceed.
         Promise.all([data, client]).then(values => {
@@ -72,7 +73,7 @@ export default class ClientComponent extends Component {
             }
         }).catch((err) => { 
             
-             auth.login();
+             auth.login(clientId !== "" ? '/client?clientId=' + clientId : "");
         })
     }
 

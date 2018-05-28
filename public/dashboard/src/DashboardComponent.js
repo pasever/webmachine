@@ -85,7 +85,7 @@ export default class DashboardComponent extends Component {
                 joinedNetworks: values[2].data, 
                 isLoading: false
             }); 
-        }).catch(err => {console.log(err); auth.login(); });
+        }).catch(err => {console.log(err); auth.login('/dashboard'); });
     }
 
     /**
