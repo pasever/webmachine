@@ -13,7 +13,7 @@ const dbagent =        require('express').Router();
 // register routes
 require('./db/dbagent')(dbagent);
 require('./db/dbclient')(dbclient);
-require('./db/dbMember')(dbMember);
+require('./db/member')(dbMember);
 
 const db = (router) => {
 	router.use(bodyParser.json());
@@ -25,7 +25,7 @@ const db = (router) => {
 	router.use('/client', dbclient)
 
 	// api/db/member
-	router.use('/member', dbMember)
+  router.use('/member', dbMember)
 
 }
 

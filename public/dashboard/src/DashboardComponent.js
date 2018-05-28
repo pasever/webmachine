@@ -44,7 +44,10 @@ export default class DashboardComponent extends Component {
     pageData: {}, // Holds the pageData (text to display),
     profile: {
       update: false,
-      updateForClient: ''
+      updateForClient: {
+        name: '',
+        id: ''
+      }
     }
   };
 
@@ -143,7 +146,8 @@ export default class DashboardComponent extends Component {
           />
         ) : (
           <UpdateMemberProfile
-            clientId={this.state.profile.updateForClient}
+            clientId={this.state.profile.updateForClient.id}
+            clientName={this.state.profile.updateForClient.name}
             handleCallToUpdateProfile={this.handleCallToUpdateProfile}
           />
         )}
@@ -159,10 +163,11 @@ export default class DashboardComponent extends Component {
    * @description
    * 
    */
-  handleCallToUpdateProfile(shouldUpdate, clientId) {
+  handleCallToUpdateProfile(shouldUpdate, clientId, clientName) {
     let { profile } = this.state;
     profile.update = shouldUpdate;
-    profile.updateForClient = clientId;
+    profile.updateForClient.id = clientId;
+    profile.updateForClient.name = clientName;
 
     this.setState({ profile });
   }
