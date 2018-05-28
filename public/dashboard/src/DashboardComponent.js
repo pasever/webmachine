@@ -101,7 +101,7 @@ export default class DashboardComponent extends Component {
       })
       .catch(err => {
         console.log(err);
-        auth.login();
+        auth.login('/dashboard');
       });
   }
 
