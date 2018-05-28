@@ -84,40 +84,6 @@ export default class ClientComponent extends Component {
       });
   }
 
-  /// When the component mounts, we will try and get all of the platform text and the client object from token.
-  componentDidMount() {
-    // Gets our platform page data
-    const data = this.getClientPageData().then(resp => {
-      return resp.json();
-    });
-
-    // Grabs the Id in the query string, and tests if the User has permission to edit this client
-    // via their Id.
-    const client = API.client.getClientForMaintenance(
-      URI.getQuerystringValue("clientId")
-    );
-
-    // Waits till all promises are fulfilled to proceed.
-    Promise.all([data, client])
-      .then(values => {
-        let client = values[1];
-        console.log(values);
-        /// FOR TESTING PURPOSES.  GRABS THE DEFAULT DATA.
-        if (
-          Object.keys(client.data).length === 0 ||
-          client === "TOKEN REJECTED"
-        ) {
-          this.setState({ redirectToLogin: true });
-        } else {
-          this.setState({ pageData: values[0], client: client.data });
-        }
-      })
-      .catch(err => {
-        console.log("ERROR ON MOUNT: ", err);
-        this.setState({ redirectToLogin: true });
-      });
-  }
-
   // Method that handles the clicking of the DELETE PLATFORM button.
   ///  FUTURE - SOME MORE WARNING SHOULD BE GIVEN BEFORE THE USER ACTUALLY HAS THEIR PLATFORM FLAGGED FOR DELETION.
   deletePlatform = event => {
@@ -159,6 +125,9 @@ export default class ClientComponent extends Component {
                   <ErrorBoundary>
                     <Container>
                       <Row>
+                        <a href="/dashboard">
+                          <i class="fa fa-arrow-left" /> Return to Dashboard
+                        </a>
                         <MaintenanceHeader
                           toggleSystem={this.toggleSystem}
                           client={this.state.client}
