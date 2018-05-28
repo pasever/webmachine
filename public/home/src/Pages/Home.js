@@ -9,9 +9,6 @@ import Market                 from '../Component/Market';
 import Testimonials           from '../Component/Testimonials';
 import { Switch, Route }      from 'react-router-dom'
 import ChatWidget                 from '../Component/Widget';
-import Auth from './Auth/Auth';
-
-const auth = new Auth();
 
 class Home extends Component {
     constructor(props){
@@ -28,7 +25,6 @@ class Home extends Component {
     const { userProfile, getProfile } = this.props.auth;
     getProfile((err, profile) => {
       this.setState({ profile });
-      console.log("User's Profile", profile);
     });
   }
     
@@ -38,7 +34,7 @@ class Home extends Component {
     return (
       <div>
         <div className="App">      
-          <Jumbotron data={this.props.data.main} auth={auth}/>
+          <Jumbotron data={this.props.data.main} />
           <About data={this.props.data.main} />
           <Market data={this.props.data.market} />
           <Portfolio data={this.props.data.portfolio} />

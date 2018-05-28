@@ -3,14 +3,29 @@ import { Link, withRouter } from 'react-router-dom';
 import history from '../Pages/Auth/History'
 
 
-const handleAuthentication = ({location, auth}) => {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication();
-  }
-}
+
 
 class Header extends Component {
-  
+
+  constructor(props) {
+    super(props);
+    let tokenExists = localStorage.getItem("access_token");
+    this.state = {
+      authenticated: tokenExists !== null,
+    }
+    this.handleAuthentication = this.handleAuthentication.bind(this);
+  }
+
+
+  handleAuthentication = ({location, auth}) => {
+    if (/access_token|id_token|error/.test(location.hash)) {
+      auth.handleAuthentication();
+      this.setState({ authenticated: true });
+    }
+  }
+  componentDidMount() {
+    this.handleAuthentication(this.props);
+  }
   //including functions from auth0 for login/logout button rendering
   goTo(route) {
     this.props.history.replace(`/${route}`)
@@ -22,17 +37,11 @@ class Header extends Component {
 
   logout() {
     this.props.auth.logout();
+    this.setState({ authenticated: false });
   }
 
-  constructor(props) {
-    super(props);
-    handleAuthentication(props);
-    console.log(localStorage.getItem("expires_at"));
-    console.log(localStorage.getItem("access_token"))
-  }
 
   render() {
-    const { isAuthenticated } = this.props.auth;
     
     if(this.props.data){
         var name = this.props.data.name;
@@ -55,21 +64,13 @@ class Header extends Component {
               <li><Link to='/products' >Products</Link></li>
               <li><Link to='/solution'>Solution</Link></li>
               <li><Link to='/market'>Market</Link></li>
-              {/*
-              <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-              <div id="myDropdown" class="dropdown-content">
-                <Link to='/marketitems'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
-                <Link to='/marketmywork'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
-                <Link to='/marketdocs'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
-              </div>
-              */}
               <li><Link to='/agents'>Agents</Link></li>
               <li><Link to='/pricing'>Pricing</Link></li>
               <li><Link to='/about'>About</Link></li>
               <li><Link to='/blog'>Blog</Link></li>
             </div>
             <div className="nav right">      
-            { !isAuthenticated() ? (
+            { !this.state.authenticated ? (
                 <li><a className="smoothscroll" id="signup" href="#" onClick={this.login.bind(this)}>Log In</a></li> ) :(                
                 <div>
                   <span><strong>User: </strong></span>

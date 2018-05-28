@@ -3,7 +3,6 @@ import './dashHeader.css';
 
 export const DashHeader = ({text}) => 
     <header>
-     {console.log(text) }
         <div className="header-wrapper">
             <h1 className="title animated fadeInDown">
                 { text.title}
