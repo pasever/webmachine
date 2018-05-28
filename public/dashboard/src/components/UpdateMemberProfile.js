@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
 import { FlexItem } from '../../../common/grid/FlexItem';
 
+/**
+ * @name UpdateMemberProfile
+ * @prop {Function} handleCallToUpdateProfile
+ *  @param {Boolean} shouldUpdate
+ *  @param {String}  clientId
+ * 
+ * @description
+ * This component fetches the logged in member's data
+ * from the respective Client's Member Collection.
+ * It then allows the Member to update their info
+ * if they wish to do so.
+ * @author JCG 
+ */
+
 class UpdateMemberProfile extends Component {
 
   constructor(props) {
     super(props);
     this.state = { clientId: this.props.clientId }
+  }
+
+  componentDidMount() {
+    
   }
 
   render() { 
