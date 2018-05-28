@@ -2,9 +2,9 @@ import React from "react";
 
 import "./network.css";
 
-export const JoinedClient = ({ network }) => (
-  <div className="network">
-    <a className="client-name" href={`/client?clientId=${network._id}`}>
+export const JoinedClient = ({ network, handleCallToUpdateProfile }) => (
+  <div className="network" >
+    <a className="client-name" onClick={() => handleCallToUpdateProfile(true, network._id)}>
       {network.image === "" ? (
         <img
           src="static/images/noimages.jpg"

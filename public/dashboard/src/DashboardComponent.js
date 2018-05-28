@@ -14,6 +14,7 @@ import LoadingPage from "../../common/LoadingPage";
 import { Col, Row, Container, FlexWrapper, FlexItem } from "../../common/grid";
 import { Button } from "../../common/form";
 import { DashNetworks, DashMembers } from "./components";
+import UpdateMemberProfile from './components/UpdateMemberProfile';
 import { DashHeader, LaunchClientForm } from "./partials";
 import { ErrorBoundary } from "../../common/error";
 import "./App.css";
@@ -40,12 +41,17 @@ export default class DashboardComponent extends Component {
     launchingNetwork: false, // Used to flag for rendering purposes
     ownedNetworks: [],
     joinedNetworks: [],
-    pageData: {} // Holds the pageData (text to display)
+    pageData: {}, // Holds the pageData (text to display),
+    profile: {
+      update: false,
+      updateForClient: ''
+    }
   };
 
   constructor(props) {
     super(props);
     this.launchNetwork = this.launchNetwork.bind(this);
+    this.handleCallToUpdateProfile = this.handleCallToUpdateProfile.bind(this);
   }
 
   /**
@@ -117,13 +123,48 @@ export default class DashboardComponent extends Component {
     }
   }
 
+  /**
+   * @description
+   * By default, it renders all networks of which current user is a member.
+   * If user whishes to update their info for a particular network by clicking
+   * on that network's icon/button, this section will re-render and return a
+   * component that lets the user do just that.
+   * @author JCG
+   */
   renderRightColumn() {
     return (
-      <DashMembers
-        text={this.state.pageData.main}
-        clients={this.state.joinedNetworks}
-      />
-    );
+      <FlexItem classes="animated fadeIn light-shadow text-center">
+
+        {!this.state.profile.update ? (
+          <DashMembers
+            text={this.state.pageData.main}
+            clients={this.state.joinedNetworks}
+            handleCallToUpdateProfile={this.handleCallToUpdateProfile}
+          />
+        ) : (
+          <UpdateMemberProfile
+            clientId={this.state.profile.updateForClient}
+            handleCallToUpdateProfile={this.handleCallToUpdateProfile}
+          />
+        )}
+
+      </FlexItem>
+    )
+  }
+
+  /**
+   * @method handleMemberProfileUpdate
+   * @param {Boolean} shouldUpdate 
+   * @param {String} clientId
+   * @description
+   * 
+   */
+  handleCallToUpdateProfile(shouldUpdate, clientId) {
+    let { profile } = this.state;
+    profile.update = shouldUpdate;
+    profile.updateForClient = clientId;
+
+    this.setState({ profile });
   }
 
   render() {
