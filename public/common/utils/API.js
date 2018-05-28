@@ -45,6 +45,9 @@ export default {
       register: (memberPayload) => {
         return axios.post('/api/db/member/register', memberPayload);
       },
+      getProfileData: (clientId) => {
+        return axios.get('/api/db/member/network/' + clientId + '/profile');
+      }
     },
     stripe: {
         addSourceToCustomer: (customerId, sourceId) => {
