@@ -8,13 +8,12 @@ import Footer                 from './Component/Footer';
 import Header                 from './Component/Header';
 import Main                   from './Pages/Main';
 import Testimonials           from './Component/Testimonials';
-import { Switch, Route } from 'react-router-dom';
-import Modal from 'react-responsive-modal';
+import { withRouter }         from 'react-router-dom';
+import Modal                  from 'react-responsive-modal';
+import Auth                   from './Pages/Auth/Auth';
 import './App.css';
-import Auth from './Pages/Auth/Auth';
 
 const auth = new Auth();
-
 
 class App extends Component {
   constructor(props){
@@ -22,6 +21,7 @@ class App extends Component {
     this.state = {
       portfolioData: {},
       openModal: false,
+      mountedAuth: false,
     }
     this.onClose = this.onClose.bind(this);
   }
@@ -41,9 +41,9 @@ class App extends Component {
   onClose() {
     this.setState({ openModal: false });
   }
-
   componentDidMount(){
     this.getPortfolioData();
+    
     if(auth.isAuthenticated()) {
       this.setState({ openModal: true });
     }
@@ -67,13 +67,13 @@ class App extends Component {
             
           
         </Modal> */}
-        <Header data={this.state.portfolioData.main} auth={auth}/>
-        <Main data={this.state.portfolioData}/>
-        <Footer/>
+          <Header data={this.state.portfolioData.main} auth={auth} />
+          <Main data={this.state.portfolioData} />        
+          <Footer />
       </div>
     </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

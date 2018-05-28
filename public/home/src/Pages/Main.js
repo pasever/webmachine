@@ -15,6 +15,7 @@ import Callback from './Auth/Callback';
 
 const auth = new Auth();
 
+
 const handleAuthentication = ({location}) => {
   if (/access_token|id_token|error/.test(location.hash)) {
     auth.handleAuthentication();
@@ -25,7 +26,7 @@ const handleAuthentication = ({location}) => {
 const Main = ({data, history, profile}) => (
   <main>
       <Switch>
-        <Route exact path="/" render={ (props) => {handleAuthentication(props); return <Home auth={ auth } data={ data } {...props} profile={ profile }  /> }} />
+        <Route exact path="/" render={ (props) => { handleAuthentication(props); return <Home auth={ auth } data={ data } {...props} profile={ profile }  /> }} />
         <Route path='/about' component={About} auth={ auth }/>
         <Route path='/agents' component={Agents} auth={ auth }/>
         <Route path='/blog' component={Blog} auth={ auth }/>
@@ -35,6 +36,7 @@ const Main = ({data, history, profile}) => (
         <Route path='/registration' render={ (props) => <Login auth={ auth } {...props} /> } />
         <Route path='/solution' component={Solution} auth={ auth }/>
       </Switch>
+      
   </main>
 )
 
