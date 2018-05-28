@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import history from '../Pages/Auth/History'
 
 
+const handleAuthentication = ({location, auth}) => {
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication();
+  }
+}
+
 class Header extends Component {
   
-//including functions from auth0 for login/logout button rendering
-goTo(route) {
-  this.props.history.replace(`/${route}`)
-}
+  //including functions from auth0 for login/logout button rendering
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
 
-login() {
-  this.props.auth.login();
-}
+  login() {
+    this.props.auth.login();
+  }
 
-logout() {
-  this.props.auth.logout();
-}
+  logout() {
+    this.props.auth.logout();
+  }
+
+  constructor(props) {
+    super(props);
+    handleAuthentication(props);
+    console.log(localStorage.getItem("expires_at"));
+    console.log(localStorage.getItem("access_token"))
+  }
 
   render() {
     const { isAuthenticated } = this.props.auth;
-
+    
     if(this.props.data){
         var name = this.props.data.name;
         var occupation = this.props.data.occupation;
@@ -74,4 +87,4 @@ logout() {
   }
 }
 
-export default Header;
+export default withRouter(Header);

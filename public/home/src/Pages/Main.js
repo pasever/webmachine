@@ -16,17 +16,17 @@ import Callback from './Auth/Callback';
 const auth = new Auth();
 
 
-const handleAuthentication = ({location}) => {
+/*const handleAuthentication = ({location}) => {
   if (/access_token|id_token|error/.test(location.hash)) {
     auth.handleAuthentication();
   }
-}
+}*/
 // The Main component renders one of the the provided
 // Routes (provided that one matches).  
 const Main = ({data, history, profile}) => (
   <main>
       <Switch>
-        <Route exact path="/" render={ (props) => { handleAuthentication(props); return <Home auth={ auth } data={ data } {...props} profile={ profile }  /> }} />
+        <Route exact path="/" render={ (props) => { /*handleAuthentication(props);*/ return <Home auth={ auth } data={ data } {...props} profile={ profile }  /> }} />
         <Route path='/about' component={About} auth={ auth }/>
         <Route path='/agents' component={Agents} auth={ auth }/>
         <Route path='/blog' component={Blog} auth={ auth }/>
