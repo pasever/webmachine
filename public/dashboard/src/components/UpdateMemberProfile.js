@@ -77,7 +77,8 @@ class UpdateMemberProfile extends Component {
     }
     
   }
-  updateProfile() {
+  updateProfile = event => {
+    event.preventDefault();
     this.setState({isSaving: true })
     const {clientId, memberProfile} = this.state;
     API.member.updateProfileData(clientId, memberProfile).then(resp => 
@@ -96,7 +97,7 @@ class UpdateMemberProfile extends Component {
         { this.state.updatedFailure && ( <h5 className="badge badge-danger">An error occured</h5> )}
         { !this.state.isLoading ? (
           <form onSubmit={ this.updateProfile }>
-            <div class="col-8 offset-2">
+            <div className="col-8 offset-2">
               <MemberProfileForm 
                 memberProfile={this.state.memberProfile }
                 updateFormField={this.updateFormField }
