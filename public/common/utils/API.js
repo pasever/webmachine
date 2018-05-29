@@ -52,7 +52,7 @@ export default {
         return axios.put('/api/db/member/profile/network' + clientId);
       },
       removeFromNetwork: (clientId) => {
-        return axios.delete('/api/db/member/profile/network/' + clientId)
+        return axios.delete('/api/db/member/profile/network/' + clientId);
       }
     },
     stripe: {
