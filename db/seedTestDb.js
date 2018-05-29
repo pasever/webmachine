@@ -43,16 +43,16 @@ module.exports = function (envState) {
     if (utils.isValidUrl(config[0].uri)) {
     console.log("----- ENTERED SEEDTESTDATA----")
     // execute async function
-      // steps(config)
-      //   .then((result) => {
-      //     console.log("----- Test Databases Created and Seeded----")
-      //     return
-      //   })
-      //   .catch((err) => {
-      //     console.log("ERROR - Creating Test Databases")
-      //     console.log(err)
-      //     return
-      //   })
+      steps(config)
+        .then((result) => {
+          console.log("----- Test Databases Created and Seeded----")
+          return
+        })
+        .catch((err) => {
+          console.log("ERROR - Creating Test Databases")
+          console.log(err)
+          return
+        })
       
       }
       else {
@@ -63,11 +63,11 @@ module.exports = function (envState) {
       mongoose.connect(dbURI)
     
     // drop and create test client collection. For every valid client, create test collections on their db
-    // async function steps(config) {
-    //   let clientArray =    await step1(config)
-    //   let result =         await step2(clientArray)
-    //   return result
-    // }
+    async function steps(config) {
+      let clientArray =    await step1(config)
+      let result =         await step2(clientArray)
+      return result
+    }
 }
 
 const step1 = (config) => {
@@ -80,11 +80,11 @@ const step1 = (config) => {
         if (e) console.log("Error removing test client documents")
         console.log("Test Client Docs Removed " + removed.n)
       })
-      // Client.create(testClients, (err, response) => {
-      //     console.log(g('Clients Initialized: ' + dbc.name + ' at ' + dbc.host))
-      //   // return array of new customer objects that were returned from db - used in step2
-      //   resolve(response)
-      // })
+      Client.create(testClients, (err, response) => {
+          console.log(g('Clients Initialized: ' + dbc.name + ' at ' + dbc.host))
+        // return array of new customer objects that were returned from db - used in step2
+        resolve(response)
+      })
       let promises = [];
       testClients.map(current => {
         promises.push(dbClient.putClient(current));

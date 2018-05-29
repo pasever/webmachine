@@ -1,3 +1,4 @@
+const bodyParser          = require('body-parser')
 const mongoose            = require('mongoose');
 const { Client }          = require('../../../db/schemas/Client');
 const { memberSchema }    = require('../../../db/schemas/Member');
@@ -17,6 +18,8 @@ const { getProfile }      = require('../../../api/member');
 
 const memberProfile = (router) => {
 
+  router.use(bodyParser.json())
+
   /** @method GET */
   router.get('/:clientId', (req, res, next) => {
     let { clientId } = req.params;
@@ -35,6 +38,46 @@ const memberProfile = (router) => {
           err
         })
       })
+  })
+
+  /** @method PUT */
+  router.put('/:clientId', async (req, res, next) => {
+    const { clientId } = req.params;
+    const memberId = getIdFromToken(req.headers.authorization);
+    const memberUpdates = req.body;
+
+    // Fetch Client's URI
+    const query1 = { "_id": clientId };
+    const projection = { "dbname": 1, "uri": 1 };
+    const dbKeys = await Client.findById(query1, projection);
+
+    // Establish connection and reference to Member Collection
+    const dbURI = dbKeys.uri + dbKeys.dbname;
+    const db = mongoose.createConnection(dbURI, { poolSize: 10 });
+    const Members = db.model('Member', memberSchema);
+
+    // Update Member Document
+    const query2 = { "auth0Id": memberId };
+    const update = {
+      "$set": {
+        firstName: memberUpdates.firstName,
+        lastName: memberUpdates.lastName,
+        cell: memberUpdates.cell,
+        email: memberUpdates.email
+      }
+    }
+
+    try {
+      await Members.updateOne(query2, update);
+    } catch (error) {
+      let message = 'ERROR - Trouble updating member';
+      res.status(500).json({ message, error })
+    }
+
+    // End response
+    res.status(200).json({
+      message: 'Successfully updated Member info'
+    })
   })
 
   /** @method DELETE */
@@ -60,7 +103,6 @@ const memberProfile = (router) => {
   
     // Establish connection and reference to Member Collection
     const dbURI = dbKeys.uri + dbKeys.dbname;
-    console.log(dbURI)
     const db = mongoose.createConnection(dbURI, { poolSize: 10 });
     const Members = db.model('Member', memberSchema);
 
