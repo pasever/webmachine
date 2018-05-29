@@ -48,7 +48,7 @@ export default {
       getProfileData: (clientId) => {
         return axios.get('/api/db/member/profile/network/' + clientId);
       },
-      updateProfileData: (updates) => {
+      updateProfileData: (clientId, updates) => {
         return axios.put('/api/db/member/profile/network/' + clientId, updates);
       },
       removeFromNetwork: (clientId) => {
