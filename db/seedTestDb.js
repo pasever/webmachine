@@ -6,6 +6,7 @@
 
 const mongoose =            require('mongoose')
 const Client =              require('./schemas/Client').Client
+const dbClient =            require('../api/client/db');
 const platform =            require('../config').platform()
 const utils =               require('../utils')
 const testClients =         require('./data/clients')
@@ -42,20 +43,25 @@ module.exports = function (envState) {
     if (utils.isValidUrl(config[0].uri)) {
     console.log("----- ENTERED SEEDTESTDATA----")
     // execute async function
-      steps(config).then((result) => {
-        console.log("----- Test Databases Created and Seeded----")
-        return
-        }).catch((err) => {
+      steps(config)
+        .then((result) => {
+          console.log("----- Test Databases Created and Seeded----")
+          return
+        })
+        .catch((err) => {
           console.log("ERROR - Creating Test Databases")
           console.log(err)
           return
         })
+      
       }
       else {
         console.log("ERROR - Platform JSON Configuration Error Test DB Not Initialized")
         return
       }
-
+      const dbURI = process.env.DBURI || config[0].uri + config[0].db
+      mongoose.connect(dbURI)
+    
     // drop and create test client collection. For every valid client, create test collections on their db
     async function steps(config) {
       let clientArray =    await step1(config)
@@ -67,7 +73,7 @@ module.exports = function (envState) {
 const step1 = (config) => {
   // drop old test collection for clients and create new test collection
   return new Promise((resolve, reject) => {
-      const dbURI = config[0].uri + config[0].db
+      const dbURI = process.env.DBURI || config[0].uri + config[0].db
       mongoose.connect(dbURI)
       let dbc = mongoose.connection
       Client.remove({}, function(e, removed){
@@ -79,6 +85,11 @@ const step1 = (config) => {
         // return array of new customer objects that were returned from db - used in step2
         resolve(response)
       })
+      let promises = [];
+      testClients.map(current => {
+        promises.push(dbClient.putClient(current));
+      })
+      Promise.all(promises).then(response => console.log("CLIENT'S TEST DATA PROMISE RESOLVED"));
   })
 }
 

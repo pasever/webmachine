@@ -1,11 +1,18 @@
 
 
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import Routes               from './routes';
+import Auth from '../../home/src/Pages/Auth/Auth'
 import './App.css';
 
 export default class App extends Component {
+
+  componentWillMount() {
+    let auth = new Auth();
+    if (!auth.isAuthenticated())
+      auth.login()
+  }
+
   render() {
     return (
       <div className="app-container">

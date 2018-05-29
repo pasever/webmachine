@@ -57,13 +57,14 @@ const msgObj = {
 class ChatWidget extends Component {
         constructor(props){
           super(props);
-          this.state = {
+          /*this.state = {
             portfolioData: {}
-          }
+          }*/
         }
     
 
-        getPortfolioData(){
+        /* ALREADY GETTING PORTFOLIO DATA ONCE
+          getPortfolioData(){
             //Ajax request
             fetch(origin + '/home/static/portfolioData.json')
              .then(r => r.json())
@@ -71,7 +72,7 @@ class ChatWidget extends Component {
                this.db = json
                this.setState({  portfolioData: json  });
             })
-          }
+          }*/
           handleNewUserMessage = (newMessage) => {
            console.log(`New message incoming! ${newMessage}`);
            // validate the secret key from the array of platform configuration objects
@@ -132,23 +133,21 @@ class ChatWidget extends Component {
        
        
          componentDidMount(){
-           this.getPortfolioData();
+           //this.getPortfolioData();
            addResponseMessage("Let's get started! Please enter your password");
          }
 
 
       render() {
         return (
-        <div className="App">
-        <Widget
-          handleNewUserMessage={this.handleNewUserMessage}
-          profileAvatar={logo}
-          title="Strategic Machines"
-          subtitle="Connecting Business to the Conversational Economy"
-        />
-      </div>
-      );
-          }
-        }
+            <Widget
+              handleNewUserMessage={this.handleNewUserMessage}
+              profileAvatar={logo}
+              title="Strategic Machines"
+              subtitle="Connecting Business to the Conversational Economy"
+            />
+    );
+  }
+}
         
 export default ChatWidget;
