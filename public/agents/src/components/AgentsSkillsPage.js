@@ -7,6 +7,7 @@ import axios                   from 'axios';
 import SkillsList from './SkillsList';
 import SearchBar from './SearchBar'; 
 import SkillsAvailable from './SkillsAvailable';
+import AgentsSkillsCrumbs from './AgentsSkillsCrumbs';
 import { Link } from 'react-router-dom';
 
 
@@ -64,16 +65,16 @@ class App extends Component {
 
 // main render component
   render() {
-  // if data is still bing fetched  
+  // if data is still being fetched  
     if(this.state.isLoading) {
       return <p>Loading ...</p>;
     }
     
     return (
       <div>
-        <Link to={`/agents`} >           
-            Back
-         </Link>
+         
+          <AgentsSkillsCrumbs name={ this.state.agent.name } />
+          
           {/*  search bar component passes the state.search value */}
           <SearchBar
             value={ this.state.search }
@@ -84,8 +85,8 @@ class App extends Component {
               !this.state.search ? 
               (
                 <div>
-                <SkillsAvailable qty={ this.state.skills.length } name={ this.state.agent.name } />
-                <SkillsList skills={ this.state.skills } /> 
+                  <SkillsAvailable qty={ this.state.skills.length } name={ this.state.agent.name } />
+                  <SkillsList skills={ this.state.skills } /> 
               </div>
               ) : (
               // {/* if state.search value is not empty => calls the renderSearchResults method and displays results */}

@@ -88,6 +88,9 @@
 		"clientId": "",
 		"secret": ""
 	},
+	"auth0": { 
+		"clientID": "2TaeX3bxJKAXWZi5ZSxX5BQi1ugnbRHw"
+	  },
 
 	"port": 3000,
 	"token": ""

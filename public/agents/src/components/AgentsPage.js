@@ -44,10 +44,10 @@ class App extends Component {
    // if filtered > 0 => render results
       if( filteredAgents.length > 0 ) {
           return (
-          <div>
-            <AgentsAvailable qty={ filteredAgents.length }  />
-            <AgentList agents={ filteredAgents } onAgentClick={ this.props.onAgentClick } /> 
-          </div>
+            <div>
+              <AgentsAvailable qty={ filteredAgents.length }  />
+              <AgentList agents={ filteredAgents } onAgentClick={ this.props.onAgentClick } /> 
+            </div>
           ) 
    // if = 0 => shows 'not found' message
         } else {
@@ -61,10 +61,15 @@ class App extends Component {
     
   // main render component 
     render() {
+     
+      // if data is still being fetched
+     if(this.state.isLoading) {
+        return <p className="loading">Loading ...</p>;
+      }
+      
       return ( 
         
-        <div>
-         
+        <div>        
           {/*  search bar component passes the state.search value */}
             <SearchBar
               value={ this.state.search }
