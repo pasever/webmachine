@@ -1,3 +1,4 @@
+const bodyParser          = require('body-parser')
 const mongoose            = require('mongoose');
 const { Client }          = require('../../../db/schemas/Client');
 const { memberSchema }    = require('../../../db/schemas/Member');
@@ -16,6 +17,8 @@ const { getProfile }      = require('../../../api/member');
  */
 
 const memberProfile = (router) => {
+
+  router.use(bodyParser.json())
 
   /** @method GET */
   router.get('/:clientId', (req, res, next) => {
