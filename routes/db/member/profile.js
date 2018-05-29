@@ -53,6 +53,7 @@ const memberProfile = (router) => {
     const db = mongoose.createConnection(dbURI, { poolSize: 10 });
     const Members = db.model('Member', memberSchema);
 
+    // Update Member Document
     const query2 = { "auth0Id": memberId };
     const update = {
       "$set": {
@@ -70,6 +71,7 @@ const memberProfile = (router) => {
       res.status(500).json({ message, error })
     }
 
+    // End response
     res.status(200).json({
       message: 'Successfully updated Member info'
     })
