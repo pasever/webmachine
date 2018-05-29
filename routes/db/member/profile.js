@@ -44,7 +44,7 @@ const memberProfile = (router) => {
   router.put('/:clientId', async (req, res, next) => {
     const { clientId } = req.params;
     const memberId = getIdFromToken(req.headers.authorization);
-    const { memberUpdates } = req.body;
+    const memberUpdates = req.body;
 
     // Fetch Client's URI
     const query1 = { "_id": clientId };
