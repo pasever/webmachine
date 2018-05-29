@@ -6,15 +6,19 @@
 ///  DGO                                                                        //
 //////////////////////////////////////////////////////////////////////////////////
 
-const config = require('../../../config').init();
 
 export default {
-    // Gets a queryStringValue.
-    // Usage:
-    //// Url: https://www.url.com?myValue=myValue 
-    //// let myValue = URI.getQueryStringValue("myValue") 
-    //// Works with ? and &
-    getQuerystringValue: (name) => {
+    /**
+      * @function getQuerystringValue
+      * @argument name
+      * @returns the value of the requested querystring or ""
+      * @description Gets a queryStringValue.
+      *  Usage:
+      * Url: https://www.url.com?myValue=myValue 
+      * let myValue = URI.getQueryStringValue("myValue") 
+      * Works with ? and &
+    */
+    getQuerystringValue: name => {
         let url = window.location.href;
         name = name.replace(/[\[\]]/g, "\\$&");
         let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
@@ -24,8 +28,7 @@ export default {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     },
 
-    // Sends the user to the login page.  
-    // Gets the login page from the Config file
+    // Sends the user to another page
     redirect: url => {
         window.location.href = url;
     }
