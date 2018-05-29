@@ -90,16 +90,16 @@
 	},
 	"auth0": {
 		"clientID": "",
+		"clientSecret": "",
+		"jwksUri": "",
 		"domain": "",
-        "clientSecret": "",
-        "jwksUri": "",
-        "issuer": "",
-        "audience": ""
+		"issuer": "",
+		"audience": ""
 	},
 	"cloudinary": {
-		"preset": "",
-		"url": ""
-	},
+        "preset": "",
+        "url": ""
+    },
 	"port": 3000,
 	"token": ""
 }

@@ -23,7 +23,13 @@ const config = require('../../../../../config/').init();
 
 
 /// FUTURE - Send User object, and check if the client is in Stripe.
+/**
+ * @class BillingMaintenance
+ * @description 
+ * Connects the user to the stripe API from the front end
+ */
 export class BillingMaintenance extends Component {
+
   render() {
     return (
       <ErrorBoundary>

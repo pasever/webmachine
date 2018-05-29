@@ -6,6 +6,21 @@ Changes to Client Schema :
   * IsDeleted added
   * Stripe customer information added.  << Doesn't get saved, but tacked on when using Lean() in mongoose.
 
+Changes to CONFIG.json :  
+  	"auth0": {  
+  		"clientID": "",  
+  		"clientSecret": "",  
+  		"jwksUri": "",  
+  		"domain": "",  
+  		"issuer": "",  
+  		"audience": ""  
+  	},  
+  	"cloudinary": {  
+          "preset": "",  
+          "url": ""  
+      },  
+
+
 API/Core Changes : 
   * Client data-access library now exists in /client folder, inside API
   * Added getPublicClients, as well as getClientsByAccessId
@@ -32,3 +47,4 @@ PUBLIC Changes :
   * API calls should now all be placed in the /common/utils/API.js file
   * Axios calls to the server will now include authorization header containing the user's id_token from Auth0.  It can be found in req.headers.authorization
   * /client route now takes a query string expected to the the Client's _id (mongo).  The route that is used to get this Client's Document out of mongo checks to make sure the user's Auth0 id_token also appears in the Document.
+  * Added URI utility functions which provide a redirect and the ability to parse URL parameters.
