@@ -49,7 +49,7 @@ export default {
         return axios.get('/api/db/member/profile/network/' + clientId);
       },
       updateProfileData: (updates) => {
-        return axios.put('/api/db/member/profile/network' + clientId);
+        return axios.put('/api/db/member/profile/network/' + clientId, updates);
       },
       removeFromNetwork: (clientId) => {
         return axios.delete('/api/db/member/profile/network/' + clientId);
