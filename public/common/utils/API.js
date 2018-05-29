@@ -48,11 +48,11 @@ export default {
       getProfileData: (clientId) => {
         return axios.get('/api/db/member/profile/network/' + clientId);
       },
-      updateProfileData: (updates) => {
-        
+      updateProfileData: (clientId, memberUpdates) => {
+        return axios.put('/api/db/member/profile/network/' + clientId, memberUpdates);
       },
       removeFromNetwork: (clientId) => {
-        return axios.delete('/api/db/member/profile/network/' + clientId)
+        return axios.delete('/api/db/member/profile/network/' + clientId);
       }
     },
     stripe: {
