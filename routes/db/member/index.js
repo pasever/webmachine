@@ -5,11 +5,11 @@
 ////////////////////////////////////////////////////////////
 
 const registerMember      = require('express').Router()
-const getMemberProfile    = require('express').Router()
+const memberProfile    = require('express').Router()
 const { verifyJWTToken }  = require('../../../utils/auth/verifyJwtToken')
 
 require('./register')(registerMember)
-require('./getProfile')(getMemberProfile)
+require('./profile')(memberProfile)
 
 const member = (router) => {
   // Enforce authentication on all /member related routes
@@ -19,9 +19,9 @@ const member = (router) => {
   // api/db/member/register
   router.use('/register', registerMember)
 
-  /** @method GET */
+  /** @method GET-PUT-DELETE */
   // api/db/member/profile/network/:clientId
-  router.use('/profile/network', getMemberProfile)
+  router.use('/profile/network', memberProfile)
 }
 
 module.exports = member
