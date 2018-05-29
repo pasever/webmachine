@@ -37,6 +37,44 @@ const memberProfile = (router) => {
       })
   })
 
+  /** @method PUT */
+  router.put('/:clientId', async (req, res, next) => {
+    const { clientId } = req.params;
+    const memberId = getIdFromToken(req.headers.authorization);
+    const { memberUpdates } = req.body;
+
+    // Fetch Client's URI
+    const query1 = { "_id": clientId };
+    const projection = { "dbname": 1, "uri": 1 };
+    const dbKeys = await Client.findById(query1, projection);
+
+    // Establish connection and reference to Member Collection
+    const dbURI = dbKeys.uri + dbKeys.dbname;
+    const db = mongoose.createConnection(dbURI, { poolSize: 10 });
+    const Members = db.model('Member', memberSchema);
+
+    const query2 = { "auth0Id": memberId };
+    const update = {
+      "$set": {
+        firstName: memberUpdates.firstName,
+        lastName: memberUpdates.lastName,
+        cell: memberUpdates.cell,
+        email: memberUpdates.email
+      }
+    }
+
+    try {
+      await Members.updateOne(query2, update);
+    } catch (error) {
+      let message = 'ERROR - Trouble updating member';
+      res.status(500).json({ message, error })
+    }
+
+    res.status(200).json({
+      message: 'Successfully updated Member info'
+    })
+  })
+
   /** @method DELETE */
   router.delete('/:clientId', async (req, res, next) => {
     console.log('ENTERED DELETE ROUTE')
@@ -60,7 +98,6 @@ const memberProfile = (router) => {
   
     // Establish connection and reference to Member Collection
     const dbURI = dbKeys.uri + dbKeys.dbname;
-    console.log(dbURI)
     const db = mongoose.createConnection(dbURI, { poolSize: 10 });
     const Members = db.model('Member', memberSchema);
 
