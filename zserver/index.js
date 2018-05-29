@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 const express =            require('express');
+const helmet =             require('helmet');
 const expressValidator =   require('express-validator');
 const path =               require('path');
 const bodyParser =         require('body-parser');
@@ -34,6 +35,7 @@ if ( process.env.isLive == 'false' ) {
 ////////////////////  Register Middleware       /////////////////////////
 ////////////////////////////////////////////////////////////////////////
 app.use(logger("dev"));
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(expressValidator());
@@ -42,11 +44,11 @@ app.use('/dist', express.static('public'));
 app.use('/form', express.static('public'));
 app.use('/machine', express.static('public'));
 app.use('/market', express.static('public'));
-app.use('/member', express.static('public'));
 app.use('/dashboard', express.static('public'));
-app.use('/', express.static('public/home'));
 app.use('/landing', express.static('public'));
 app.use('/client', express.static('public'));
+app.use('/member', express.static('public'));
+app.use('/', express.static('public/home'));
 app.use(favicon(path.join(__dirname, '..', '/public/assets/favicon.ico')));
 app.use(cors())
 
@@ -86,10 +88,10 @@ require('../routes/db')(db);
 require('../routes/git')(git);
 require('../routes/sms')(sms);
 //require('../routes/web')(web);
-require('../routes/unk')(unk);
 require('../routes/error')(errs);
 require('../routes/help')(help);
 require('../routes/home')(home);
+require('../routes/unk')(unk);
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////// API CATALOGUE /////////////////////////////
 ////////////////////////////////////////////////////////////////////////

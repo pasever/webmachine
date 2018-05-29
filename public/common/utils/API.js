@@ -1,44 +1,78 @@
+//////////////////////////////////////////////////////////////////////////////////
+////////////////////      Utils API.js         ///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+///  Handles making calls to the API.                                           //
+///  Authorized API calls require being called through Axios, from this file.   //
+///  Otherwise, the Authorization header needs to be manually attached.         //
+///  DGO                                                                        //
+//////////////////////////////////////////////////////////////////////////////////
+
 import axios from 'axios';
 
 const config = require('../../../config').init();
 
 
+
 axios.defaults.headers.common['Authorization'] = localStorage.id_token;
 
 export default {
-    /// USED TO GET A CLIENT BY ACCESS ID AND CLIENT ID
-    /// THIS WILL BE USED TO GRAB THE MOST UNIQUE CLIENT TO A USER FOR MAINTENANCE
-    getClientForMaintenance: () => {
-        /// HACK - REMOVE HARDCODED ID
-        console.log("We're in the API -- NOW DAMMIT WEBPACK");
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token + '&clientId=5af0bffed0e83c1b545b0309');
+    client: {
+        getClientForMaintenance: (id) => {
+            return axios.get('/api/db/client?clientId=' + id);
+        },
+        getJoinedNetworks: () => {
+            return axios.get('/api/db/client/joined');
+        },
+        /// USED TO GET ALL CLIENTS ONE INDIVIDUAL LOGIN MANAGES
+        getClientsByAccessId: () => {
+            return axios.get('/api/db/client');
+        },
+        getPublicClients: () => {
+            return axios.get('/api/db/client/public');
+        },
+        /// WE WILL NOT BE ADDING CLIENTS FROM THIS SECTION ANYMORE
+        addClient: (client) => {
+            return axios.put('/api/db/client', client);
+        },
+        updateClient: (client) => {
+            return axios.post('/api/db/client', client);
+        },
+        deleteClient: (client) => {
+            return axios.delete('/api/db/client', { data: { id: client.id }});
+        },
     },
-    
-    /// USED TO GET ALL CLIENTS ONE INDIVIDUAL LOGIN MANAGES
-    getClientsByAccessId: () => {
-        return axios.get('/api/db/client?accessToken=' + localStorage.id_token);
+    member: {
+      register: (memberPayload) => {
+        return axios.post('/api/db/member/register', memberPayload);
+      },
+      getProfileData: (clientId) => {
+        return axios.get('/api/db/member/profile/network/' + clientId);
+      },
+      updateProfileData: (updates) => {
+        
+      },
+      removeFromNetwork: (clientId) => {
+        return axios.delete('/api/db/member/profile/network/' + clientId)
+      }
     },
-    /// WE WILL NOT BE ADDING CLIENTS FROM THIS SECTION ANYMORE
-    //addClient: (client) => {
-        //localStorage.clientId = client.clientId;
-    //    return axios.put('/api/db/client', client);
-    //},
-    updateClient: (client) => {
-        return axios.post('/api/db/client', { client: client, token: localStorage.id_token});
+    stripe: {
+        addSourceToCustomer: (customerId, sourceId) => {
+            return axios.post('/api/db/client/addStripeSource', { cId: customerId, sId: sourceId });
+        },
+        setDefaultSource: (customerId, sourceId) => {
+            return axios.post('/api/db/client/setDefaultSource', { cId: customerId, sId: sourceId });
+        },
+        removeSource: (customerId, sourceId) => {
+            return axios.post('/api/db/client/removeSource', { cId: customerId, sId: sourceId });
+        },
     },
-    deleteClient: (client) => {
-        return axios.delete('/api/db/client', { data: { id: client.id }});
+    netlify: {
+        deployNetlify: (client, templateData) => {
+            return axios.post('/api/db/client/netlify', { client: client, templateData: templateData });
+        },
     },
-    addSourceToCustomer: (customerId, sourceId) => {
-        return axios.post('/api/db/client/addStripeSource', { cId: customerId, sId: sourceId });
-    },
-    setDefaultSource: (customerId, sourceId) => {
-        return axios.post('/api/db/client/setDefaultSource', { cId: customerId, sId: sourceId });
-    },
-    removeSource: (customerId, sourceId) => {
-        return axios.post('/api/db/client/removeSource', { cId: customerId, sId: sourceId });
-    },
-    deployNetlify: (client, templateData) => {
-        return axios.post('/api/db/client/netlify', { client: client, templateData: templateData });
-    },
+    market: {
+      getRepos: () => axios.get(config.githubrepo.repos_url),
+      getIssues: (repo) => axios.get(config.githubrepo.issues_url + '/' + repo)
+    }
 }

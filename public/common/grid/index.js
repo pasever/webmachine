@@ -1,3 +1,5 @@
 export * from "./Col";
 export * from "./Container";
 export * from "./Row";
+export * from './FlexWrapper';
+export * from './FlexItem';

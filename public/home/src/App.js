@@ -8,13 +8,12 @@ import Footer                 from './Component/Footer';
 import Header                 from './Component/Header';
 import Main                   from './Pages/Main';
 import Testimonials           from './Component/Testimonials';
-import { Switch, Route } from 'react-router-dom';
-import Modal from 'react-responsive-modal';
+import { withRouter }         from 'react-router-dom';
+import Modal                  from 'react-responsive-modal';
+import Auth                   from './Pages/Auth/Auth';
 import './App.css';
-import Auth from './Pages/Auth/Auth';
 
 const auth = new Auth();
-
 
 class App extends Component {
   constructor(props){
@@ -22,6 +21,7 @@ class App extends Component {
     this.state = {
       portfolioData: {},
       openModal: false,
+      mountedAuth: false,
     }
     this.onClose = this.onClose.bind(this);
   }
@@ -41,9 +41,9 @@ class App extends Component {
   onClose() {
     this.setState({ openModal: false });
   }
-
   componentDidMount(){
     this.getPortfolioData();
+    
     if(auth.isAuthenticated()) {
       this.setState({ openModal: true });
     }
@@ -55,10 +55,10 @@ class App extends Component {
     return (
       <div>
       <div className="App">
-        <Modal open={this.state.openModal} className="modal" onClose={this.onClose } center>
+        {/* <Modal open={this.state.openModal} className="modal" onClose={this.onClose } center>
           <h2>Welcome back, friend!</h2>
           <p>We see you're already logged in!<br />
-          We can take you directly to your <a href="/dashboarD"><strong>Dashboard</strong></a> if you'd like?</p>
+          We can take you directly to your <a href="/dashboard"><strong>Dashboard</strong></a> if you'd like?</p>
           
           <button className="btn btn-secondary btn-lg" onClick={ this.onClose }>No</button>
           <form action="/dashboard" method="GET" className="floating-form">
@@ -66,14 +66,14 @@ class App extends Component {
           </form>
             
           
-        </Modal>
-        <Header data={this.state.portfolioData.main} auth={auth}/>
-        <Main data={this.state.portfolioData}/>
-        <Footer/>
+        </Modal> */}
+          <Header data={this.state.portfolioData.main} auth={auth} />
+          <Main data={this.state.portfolioData} />        
+          <Footer />
       </div>
     </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

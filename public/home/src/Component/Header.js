@@ -1,26 +1,48 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import history from '../Pages/Auth/History'
 
 
+
+
 class Header extends Component {
-  
-//including functions from auth0 for login/logout button rendering
-goTo(route) {
-  this.props.history.replace(`/${route}`)
-}
 
-login() {
-  this.props.auth.login();
-}
+  constructor(props) {
+    super(props);
+    let tokenExists = localStorage.getItem("access_token");
+    this.state = {
+      authenticated: tokenExists !== null,
+    }
+    this.handleAuthentication = this.handleAuthentication.bind(this);
+  }
 
-logout() {
-  this.props.auth.logout();
-}
+
+  handleAuthentication = ({location, auth}) => {
+    if (/access_token|id_token|error/.test(location.hash)) {
+      auth.handleAuthentication();
+      this.setState({ authenticated: true });
+    }
+  }
+  componentDidMount() {
+    this.handleAuthentication(this.props);
+  }
+  //including functions from auth0 for login/logout button rendering
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
+    this.setState({ authenticated: false });
+  }
+
 
   render() {
-    const { isAuthenticated } = this.props.auth;
-
+    
     if(this.props.data){
         var name = this.props.data.name;
         var occupation = this.props.data.occupation;
@@ -42,25 +64,17 @@ logout() {
               <li><Link to='/products' >Products</Link></li>
               <li><Link to='/solution'>Solution</Link></li>
               <li><Link to='/market'>Market</Link></li>
-              {/*
-              <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-              <div id="myDropdown" class="dropdown-content">
-                <Link to='/marketitems'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
-                <Link to='/marketmywork'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
-                <Link to='/marketdocs'><li><a className="smoothscroll" href="#portfolio">Work Items</a></li></Link>
-              </div>
-              */}
               <li><Link to='/agents'>Agents</Link></li>
               <li><Link to='/pricing'>Pricing</Link></li>
               <li><Link to='/about'>About</Link></li>
               <li><Link to='/blog'>Blog</Link></li>
             </div>
             <div className="nav right">      
-            { !isAuthenticated() ? (
+            { !this.state.authenticated ? (
                 <li><a className="smoothscroll" id="signup" href="#" onClick={this.login.bind(this)}>Log In</a></li> ) :(                
                 <div>
                   <span><strong>User: </strong></span>
-                  <li><a href="/dashboarD">Dashboard</a></li>
+                  <li><a href="/dashboard">Dashboard</a></li>
                   <li><a className="smoothscroll" id="signup" href="#" onClick={this.logout.bind(this)}>Log Out</a></li>
                 </div>
             )}
@@ -74,4 +88,4 @@ logout() {
   }
 }
 
-export default Header;
+export default withRouter(Header);

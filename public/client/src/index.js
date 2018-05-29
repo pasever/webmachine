@@ -5,8 +5,14 @@
 import React            from 'react';
 import ReactDOM         from 'react-dom';
 import './index.css';
-import App              from './App';
+import ClientComponent  from './ClientComponent';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<ClientComponent />, document.getElementById('root'));
 
 module.hot.accept();
+
+/* 
+    Hello Dan, if you see this you can delete this comment.
+    Checking whether I can successfully push to your fork.
+    - Juan 
+ */

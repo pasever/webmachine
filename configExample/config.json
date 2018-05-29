@@ -88,10 +88,18 @@
 		"clientId": "",
 		"secret": ""
 	},
-	"auth0": { 
-		"clientID": ""
-	  },
-
+	"auth0": {
+		"clientID": "",
+		"clientSecret": "",
+		"jwksUri": "",
+		"domain": "",
+		"issuer": "",
+		"audience": ""
+	},
+	"cloudinary": {
+        "preset": "",
+        "url": ""
+    },
 	"port": 3000,
 	"token": ""
 }

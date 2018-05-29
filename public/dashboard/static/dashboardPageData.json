@@ -1,30 +1,26 @@
 {
     "main": {
-        "title": "Manage Your Platform"
-    },
-    "userMaintenance": {
-        "title": "General Information",
-        "body": "General platform information"
-    },
-    "dbMaintenance": {
-        "title": "Data Store Information",
-        "body": "Ensure you have a connection to a datastore."
-    },
-    "billingMaintenance": {
-        "title": "Billing information",
-        "body": "Add a payment method and view your current account details."
-    },
-    "header": {
-        "deleteButton": "Remove my platform"
-    },
-    "web": {
-        "title": "Manage your web presence",
-        "welcomeBody": "If a website already exists which details your partnership with Strategic Machines, please enter it below.  Or, Strategic Machines can deploy a new website for you!",
-        "getNetlify": "If you have a site, but prefer to let Strategic Machines take over, remove the URL.  Be advised, once your site is deployed the URL will be overwritten.",
-        "launchMessage": "Let's Launch A Site!",
-        "netlifyDeploy": {
-            "templateDisclaimer": "Templates are all provided for free from <a href='http://html5up.net' target='_blank'>HTML5Up</a>.",
-            "selectTemplate": "Please select a template you would like to use."
-        }
+        "title": "Get started with Networks",
+        "subTitle": [ 
+            "Networks are the heart and soul of our service.  ",
+            "You can browse a list of public networks and see private networks you've ",
+            "permission to join - or you can manage your Member Profile for a network you're",
+            "already a member of."
+        ],
+        "networkTitle": "Networks",
+        "memberTitle": "Memberships",
+        "noNetworks": "It appears you are not managing any networks.  Why don't you Launch one for your Business or Organization?",
+        "noMemberships": "It appears you are not a member of any networks.",
+        "ownedNetworksTitle": "Manage the networks you own",
+        "membershipTitle": "Manage your member profiles",
+        "searchNetworksButton": "Find Networks",
+        "launchNetworkButton": "Launch a new network",
+        "asideTitle": "Welcome to the Machine",
+        "asideParagraph": [
+            "Thank you for logging in.  From here, you can choose to launch or join a public network.",
+            "You can also become a client of strategic machines and create a new Network where you can pick and choose agents ",
+            "which will have intelligent text interactions with your customers and/or clients."
+        ]
     }
+
 }
