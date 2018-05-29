@@ -102,7 +102,6 @@ exports.getOneOwnedClient = (aId, cId) => {
     return new Promise((resolve, reject) => {
         Client.findOne({ accessToken: aId, _id: cId }).lean().then(response => {
             let client = response;
-            
             if(client.stripeCustomerId) {
                 stripe.customers.retrieve(client.stripeCustomerId, (err, stripeCust) => {                
                     if(err) 
