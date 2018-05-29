@@ -22,7 +22,7 @@
   padding: 10px;
 }
 
-.toggle, .set-default-src, .remove-src {
+.toggle {
   cursor: pointer;
 }
 .fa-toggle-on {
@@ -77,81 +77,3 @@ button {
 .delete-section > button {
   margin-top: 0;
 }
-
-.billing-form-section {
-  flex-grow: 1;
-  margin: 10px;
-  padding: 10px;
-}
-
-.billing-form-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
-.stripe-data-wrapper {
-  display: flex;
-  flex-direction: row;  
-}
-
-.stripe-item {
-  margin: 5px;
-  width: 50%;
-  box-sizing: border-box;
-}
-
-.light-shadow {
-  box-shadow: 0 0 15px #ccc;
-}
-
-.form-styles {
-  padding: 20px;
-}
-
-.form-group, .margin-top-10 {
-  margin-top: 10px;
-}
-small.form-text {
-  display: block;
-}
-.stripe-source {
-  width: 100%;
-  padding: 15px 0 5px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.card-info {
-  font-size: .8em;
-}
-
-
-table { border: none; width: 100%; }
-
-tr:nth-child(2) {
-	-webkit-box-shadow: 0 8px 6px -6px #aaa;
-	   -moz-box-shadow: 0 8px 6px -6px #aaa;
-	        box-shadow: 0 8px 6px -6px #aaa;}
-
-tr:nth-child(2) > td {
-  padding-bottom: 10px;
-}
-tr:nth-child(1) > td {
-  padding-top: 20px;
-}
-
-
-color-red {
-  color: darkred;
-}
-
-/* CC Colors */
-
-.fa-cc-amex { color: #007bc1; margin-right: 5px; vertical-align: middle; }
-.fa-cc-diners-club{ color: #004A97; margin-right: 5px; vertical-align: middle; }
-.fa-cc-discover {color : #f68121; margin-right: 5px; vertical-align: middle; }
-.fa-cc-jcb { color: #003A8F; margin-right: 5px; vertical-align: middle; }
-.fa-cc-mastercard { color: #0a3a82; margin-right: 5px; vertical-align: middle; }
-.fa-cc-paypal {color: #253b80; margin-right: 5px; vertical-align: middle; }
-.fa-cc-stripe { color: #00afe1; margin-right: 5px; vertical-align: middle; }
-.fa-cc-visa { color: #0157a2; margin-right: 5px; vertical-align: middle; }
-.fa-check { color: green; }

@@ -20,6 +20,9 @@
   .app-content {
     font-size: large;
   }
+  .btn:nth-child(even) {
+    margin-left: 10px;
+  }
   
   /* Repos Page and Repo Cards */
   

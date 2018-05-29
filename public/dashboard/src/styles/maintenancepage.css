@@ -1,0 +1,8 @@
+.control-label {
+    font-size: .75em;
+    font-weight: 600;
+}
+
+.form-group > .badge {
+    font-weight: 100;
+}
