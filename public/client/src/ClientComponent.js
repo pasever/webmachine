@@ -1,6 +1,13 @@
-///////////////////////////////////////////////////////////////////////
-////////////////////      Client APP.JS        ////////////////////////
-///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////      ClientComponent.js            /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+///  Base component Client maintenance                                          //
+///  REFACTOR 0.7 REMOVED UNNECESSARY IMPORTS                                   //
+///                                                                             //
+///  DGO                                                                        //
+//////////////////////////////////////////////////////////////////////////////////
+
+
 // 05/02/18 - REFACTOR 0.8
 // DGO
 
@@ -12,22 +19,23 @@ import URI from "../../common/utils/URI";
 import LoadingPage from "../../common/LoadingPage";
 import Auth from "../../home/src/Pages/Auth/Auth";
 import { MaintenanceHeader } from "./components/Partials/";
-import { Container, Row, Col } from "../../common/grid";
-import { Link } from "react-router-dom";
+import { Container, Row } from "../../common/grid";
 import { ErrorBoundary } from "../../common/error/ErrorBoundary";
 import MaintenanceWrapper from "./components/Maintenance/MaintenanceWrapper";
+
 import "react-tabs/style/react-tabs.css";
 import "./App.css";
 import "../../common/styles/animate.css";
 
-const config = require("../../../config").init();
 const auth = new Auth();
-//////// DEFAULT PLATFORM
-// Deprecated 04/30/18 for REFACTOR 0.7
-//const Platform = require('../../../config/').platform();
 
-// The APP class is currently the main hub for the Client.
-// It requires the client object, so it will handle all form changes and submits.
+
+/**
+ * @class ClientComponent
+ * @description The base component for Client Maintenance
+ * 
+ * @author DGO
+ */
 export default class ClientComponent extends Component {
   // ctor
   constructor(props) {
@@ -40,7 +48,10 @@ export default class ClientComponent extends Component {
     };
   }
 
-  /// GRABS OUR PAGE DATA.  THIS IS WHERE ALL THE TEXT EXISTS FOR THE PLATFORM PAGES.  TO MAKE CHANGES SEE ../static/platformPageData.json
+  /**
+   * @function getClientPageData
+   * @description gets the text for our entire component
+   */
   getClientPageData() {
     return new Promise((resolve, reject) => {
       fetch("/client/static/clientPageData.json")
@@ -52,39 +63,42 @@ export default class ClientComponent extends Component {
     });
   }
 
-  /// When the component mounts, we will try and get all of the platform text and the client object from token.
+  /**
+   * @description 
+   * STEPS:
+   * 1. Call for the page data
+   * 2. Grab the clientId which should be passed as a URI parameter
+   * 3. Grab the Client from the DB that references the _id.
+   */
   componentDidMount() {
-    // Gets our platform page data
+    // Gets our page data see /static/clientPageData.json
     const data = this.getClientPageData().then(resp => {
       return resp.json();
     });
 
-    // Grabs the Id in the query string, and tests if the User has permission to edit this client
-    // via their Id.
     let clientId = URI.getQuerystringValue("clientId")
     const client = API.client.getClientForMaintenance(clientId);
 
     // Waits till all promises are fulfilled to proceed.
-    Promise.all([data, client])
-      .then(values => {
-        let client = values[1];
-        // Checks to see if we got no data or if our token was rejected
-        if (
-          Object.keys(client.data).length === 0 ||
-          client === "TOKEN REJECTED"
-        ) {
-          auth.login();
-        } else {
-          this.setState({ pageData: values[0], client: client.data });
-        }
-      })
-      .catch(err => {
-        auth.login(clientId ? '/client?clientId=' + clientId : "");
-      });
+    Promise.all([data, client]).then(values => {
+      let client = values[1];
+      // Checks to see if we got no data or if our token was rejected
+      if (
+        Object.keys(client.data).length === 0 ||
+        client === "TOKEN REJECTED"
+      ) {
+        auth.login();
+      } else {
+        this.setState({ pageData: values[0], client: client.data });
+      }
+    }).catch(err => {
+      auth.login(clientId ? '/client?clientId=' + clientId : "");
+    });
   }
 
-  // Method that handles the clicking of the DELETE PLATFORM button.
-  ///  FUTURE - SOME MORE WARNING SHOULD BE GIVEN BEFORE THE USER ACTUALLY HAS THEIR PLATFORM FLAGGED FOR DELETION.
+  /**
+   * @todo run some security checks to make sure this is what the user wants to do.
+   */
   deletePlatform = event => {
     event.preventDefault();
     API.client.deleteClient(this.state.client).then(resp => {
@@ -92,18 +106,22 @@ export default class ClientComponent extends Component {
     });
   };
 
-  /// TOGGLES THE SYSTEM GOING LIVE.
-  /// NON-FUNCTIONAL
+  /**
+   * @function toggleSystem
+   * @description allows a user to make their system live
+   * @todo 
+   * Check to make sure: agents are selected, billing info is entered, db info is proper.
+   * Properly save isLive to the database.
+   */
   toggleSystem = () => {
-    //// RUN A TEST IF THE SYSTEM CAN GO LIVE!!
-    ////
     let client = this.state.client;
     client.isLive = !client.isLive;
 
     //// DON'T JUST UPDATE THE STATE - SAVE THE USER!
     this.setState({ client: client });
   };
-  /// Calls the URI utility function to redirect to the login page
+
+
   render() {
     return (
       <div className="app-container animated fadeIn">
