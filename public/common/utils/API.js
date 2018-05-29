@@ -47,6 +47,12 @@ export default {
       },
       getProfileData: (clientId) => {
         return axios.get('/api/db/member/profile/network/' + clientId);
+      },
+      updateProfileData: (updates) => {
+        
+      },
+      removeFromNetwork: (clientId) => {
+        return axios.delete('/api/db/member/profile/network/' + clientId)
       }
     },
     stripe: {

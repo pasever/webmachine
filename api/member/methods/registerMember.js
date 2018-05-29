@@ -1,5 +1,5 @@
 const mongoose            = require('mongoose');
-const { Client }          = require('../../../db/schemas/Member');
+const { Client }          = require('../../../db/schemas/Client');
 const { memberSchema }    = require('../../../db/schemas/Member');
 const utils               = require('../../../utils')
 
@@ -15,7 +15,7 @@ const utils               = require('../../../utils')
  * For each matching document (a Client), it pushes the Member's
  * auth0Id into that Client's members[Array].
  */
-module.exports = async function saveMemberIdIntoClientsMembersList(Member) {
+async function saveMemberIdIntoClientsMembersList(Member) {
   // Construct query
   let query = { "_id": { "$in": Member.networks } };
   // Set update operation
@@ -110,7 +110,7 @@ async function registerMemberInEachSelectedNetwork(memberObj, uris) {
   });
 }
 
-async function registerMember(Member) {
+module.exports = async function registerMember(Member) {
   // step1 - add member's id to clients' members array
   let result1 = await saveMemberIdIntoClientsMembersList(Member);
   if (result1.ok !== 1) return new Error('Error in step1');

@@ -26,7 +26,7 @@ const dbMember = (router) => {
 
   router.use(bodyParser.json());
 
-  router.post('/register', (req, res, next) => {
+  router.post('/', (req, res, next) => {
     console.log('got a request');
     // Grab payload from body
     let memberPayload = req.body;

@@ -23,6 +23,7 @@ import axios                      from 'axios';
 import NetworkSelection           from './components/Steps/NetworkSelection';
 import MemberForm                 from './components/Steps/MemberForm';
 import API                        from '../../common/utils/API';
+import URI                        from '../../common/utils/URI';
 import Auth                       from '../../home/src/Pages/Auth/Auth';
 
 const ls = window.localStorage;
@@ -137,7 +138,7 @@ class MemberRegistration extends Component {
         if ('memberForm' in ls)
           ls.removeItem('memberForm')
 
-        console.log(res)
+        URI.redirect('/dashboard')
       })
       .catch(err => {
         console.log(err);
