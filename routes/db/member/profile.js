@@ -1,14 +1,47 @@
-const { getIdFromToken }  = require('../../../api/auth/verifyJwtToken');
-
 const mongoose            = require('mongoose');
 const { Client }          = require('../../../db/schemas/Client');
 const { memberSchema }    = require('../../../db/schemas/Member');
+const {
+  verifyJWTToken,
+  getIdFromToken
+}                         = require('../../../utils/auth/verifyJwtToken');
+const { getProfile }      = require('../../../api/member');
 
-const removeFromNetwork = (router) => {
+/**
+ * @private {Route}
+ * @method GET
+ * @description
+ * Opens a connection to the specified Client's DB and
+ * returns the document ("profile") of the specified Member
+ */
 
-  router.delete('/:clientId', async (req, res) => {
-    const memberId = getIdFromToken(req.headers.authorization);
+const memberProfile = (router) => {
+
+  /** @method GET */
+  router.get('/:clientId', (req, res, next) => {
+    let { clientId } = req.params;
+    let memberId = getIdFromToken(req.headers.authorization);
+
+    getProfile(clientId, memberId)
+      .then(profile => {
+        res.status(200).json({
+          msg: 'Found profile',
+          profile
+        })
+      })
+      .catch(err => {
+        res.status(500).json({
+          msg: 'There was an error fetching the requested data',
+          err
+        })
+      })
+  })
+
+  /** @method DELETE */
+  router.delete('/:clientId', async (req, res, next) => {
+    console.log('ENTERED DELETE ROUTE')
     const { clientId } = req.params;
+    const memberId = getIdFromToken(req.headers.authorization);
 
     // Fetch Client's URI
     const query1 = { "_id": clientId };
@@ -26,14 +59,15 @@ const removeFromNetwork = (router) => {
     }
   
     // Establish connection and reference to Member Collection
-    const dbURI = dbKeys.uri + dbKeys.name;
+    const dbURI = dbKeys.uri + dbKeys.dbname;
+    console.log(dbURI)
     const db = mongoose.createConnection(dbURI, { poolSize: 10 });
     const Members = db.model('Member', memberSchema);
 
     // Remove Member Document from Client's Member Collection
     const query3 = { "auth0Id": memberId }
     try {
-      await Members.findByIdAndRemove(query3)
+      await Members.remove(query3)
     } catch (error) {
       let message = 'ERROR - Trouble removing Member from Client\'s Database';
       res.status(500).json({ error, message })
@@ -41,9 +75,12 @@ const removeFromNetwork = (router) => {
 
     res.status(200).json({
       message: 'Successfully removed Member from Network'
-    })
+    });
 
   });
 
+
 }
 
+
+module.exports = memberProfile
