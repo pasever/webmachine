@@ -107,9 +107,9 @@ export default class ReposPage extends Component {
         />
 
         {/* List of Cards */}
-        <ul id="repos-list">
+        <div id="repos-list">
           {this.renderPage()}
-        </ul>
+        </div>
       </div>
     );
   }
