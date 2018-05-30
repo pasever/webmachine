@@ -46,8 +46,8 @@ export default class ReposPage extends Component {
         });
       })
       .catch(err => {
-        // let auth = new Auth();
-        // auth.login();
+        let auth = new Auth();
+        auth.login('/market');
       });
   };
 
