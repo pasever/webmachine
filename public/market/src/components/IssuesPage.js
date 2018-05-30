@@ -174,9 +174,9 @@ export default class IssuesPage extends Component {
         {/* Render workitem cards only after issues have been
             loaded into state to avoid seeing "No workitems found"
             message for a split second upon initial component mount. */}
-        <ul id="issue-list" className="">
+        <div id="issue-list" className="container">
           {this.state.loaded ? this.renderPage() : null}
-        </ul>
+        </div>
       </div>
       
     );
