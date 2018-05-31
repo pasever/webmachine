@@ -10,8 +10,8 @@
 
 import React, {Component} from 'react';
 import { ClientsSection } from './';
-import { FlexItem } from '../../../common/grid';
-import { Button } from '../../../common/form';
+import { FlexItem } from 'Common/grid';
+import { Button } from 'Common/form';
 
 
 /**
