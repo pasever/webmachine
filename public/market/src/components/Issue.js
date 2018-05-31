@@ -15,7 +15,7 @@ function calculateDate(duration) {
 }
 
 const Issue = ({ issue, modalHandler }) => (
-  <li id={issue.id} number={issue.number} className="issue">
+  <div id={issue.id} number={issue.number} className="issue">
     <div className='card text-center issue-card'> 
       <div className='card-body issue-card-body'>
         <h5 className='card-title issue-title'>{issue.title}</h5>
@@ -48,7 +48,7 @@ const Issue = ({ issue, modalHandler }) => (
         />
       </div>
     </div>
-  </li>
+  </div>
 );
 
 const claim = {

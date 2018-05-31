@@ -27,7 +27,7 @@ const app =   express();;
 let envState = true
 if ( process.env.isLive == 'false' ) {
     envState = false
-    require('../db/seedTestDb')(envState)
+    require('../db/mongoose')(envState)
 }
 
 
@@ -58,7 +58,7 @@ app.use(cors())
 
 const mailObject = {
   from: '"ChaoticBots 👥" <chaoticbotshelp@gmail.com>',
-  to: 'dangorlov@yahoo.com',
+  to: 'patrick.howard@hotmail.com',
   subject: 'Platform Error',
   text: ''
 }

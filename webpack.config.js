@@ -1,5 +1,5 @@
 const webpack =           require('webpack');
-
+const path =              require('path');
 let commonsPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: "vendor"
   });
@@ -38,7 +38,11 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
+    alias: {
+      Common: path.resolve(__dirname, 'public/common/')
+    },
+  
   },
   output: {
     path: __dirname + '/public/dist',
