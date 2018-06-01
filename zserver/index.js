@@ -27,7 +27,7 @@ const app =   express();;
 let envState = true
 if ( process.env.isLive == 'false' ) {
     envState = false
-    require('../db/seedTestDb')(envState)
+    require('../db/mongoose')(envState)
 }
 
 
