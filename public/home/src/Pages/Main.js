@@ -21,9 +21,9 @@ const Main = ({data, history, profile}) => (
       <Switch>
         <Route exact path="/" render={ (props) => { return <Home auth={ auth } data={ data } {...props} profile={ profile }  /> }} />
         <Route path='/about' component={About} auth={ auth }/>
-        <Route path='/agents' component={Agents} auth={ auth }/>
+        {/*<Route path='/agents' component={Agents} auth={ auth }/>*/}
         <Route path='/blog' component={Blog} auth={ auth }/>
-        <Route path='/market' render={ (props) => <MarketPage data={ data } auth={ auth } {...props} /> }  />
+        {/* <Route path='/market' render={ (props) => <MarketPage data={ data } auth={ auth } {...props} /> }  /> */}
         <Route path='/pricing' component={Pricing} auth={ auth }/>
         <Route path='/products' component={Products} auth={ auth }/>
         <Route path='/registration' render={ (props) => <Login auth={ auth } {...props} /> } />

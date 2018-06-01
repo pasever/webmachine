@@ -63,8 +63,8 @@ class Header extends Component {
               <li className="current"><Link to='/'>Home</Link></li>
               <li><Link to='/products' >Products</Link></li>
               <li><Link to='/solution'>Solution</Link></li>
-              <li><Link to='/market'>Market</Link></li>
-              <li><Link to='/agents'>Agents</Link></li>
+              <li><a href='/market'>Market</a></li>
+              <li><a href='/agents'>Agents</a></li>
               <li><Link to='/pricing'>Pricing</Link></li>
               <li><Link to='/about'>About</Link></li>
               <li><Link to='/blog'>Blog</Link></li>

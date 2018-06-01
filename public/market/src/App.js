@@ -10,7 +10,7 @@ const auth = new Auth();
 
 export default class App extends Component {
   state = {
-    mounted: false,
+    mounted: false,   /// TRACKS WHETHER THE COMPONENT CAN/HAS MOUNTED, BASED ON AUTHENTICATION
   }
   componentWillMount() {
     if (!auth.isAuthenticated()) 
