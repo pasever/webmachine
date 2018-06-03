@@ -180,6 +180,7 @@ export default class DashboardComponent extends Component {
         ) : (
           <div>
             <DashHeader text={this.state.pageData.main} />
+            <a href="/"><i className="fa fa-arrow-left"></i> Return to Home</a>
             <FlexWrapper>
               {this.renderLeftColumn()}
               {this.renderRightColumn()}
