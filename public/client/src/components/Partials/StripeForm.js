@@ -107,7 +107,7 @@ class StripeForm extends Component {
             this.state.client.stripeCustomerId,
             resp.source.id
           ),
-          API.client.updatePlatform(this.state.client)
+          API.client.updateClient(this.state.client)
         ];
 
         Promise.all(promises).then(values => {
