@@ -132,6 +132,20 @@ exports.deleteClient = (token, id, conn, cb) => {
     }
 }
 
+exports.createStripeCustomer = (token, client, conn, cb) => {
+    thread(client, conn).then((result) => {
+        cb(result);
+    }).catch(err => {
+        console.log("ERROR IN CLIENT createStripeCustomer PROCESSING");
+        console.log(err);
+        cb(err);
+    });
+    async function thread(client, conn) {
+        let result = await db.createStripeCustomer(client, conn);
+        return result;
+    }
+}
+
 // Adds a stripe source
 exports.addStripeSource = (token, cId, sId, conn, cb) => {
     thread(cId, sId, conn).then((result) => {

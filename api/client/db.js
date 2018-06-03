@@ -16,7 +16,7 @@ const stripe = require('stripe')(config.stripe.secretKey);
 /// TESTS IF WE CAN CONNECT TO THE MONGODB SERVER
 const testDb = (client) => {
     //  Assign a new mongo client
-    let testClient = new MongoClient(client.uri);
+    let testClient = new MongoClient(client.uri + client.dbname);
     return new Promise((resolve, reject) => { 
         /// Attempts to connect
         testClient.connect((error, client) => {
@@ -29,6 +29,26 @@ const testDb = (client) => {
             return resolve(true);
         });
     });
+}
+
+const createStripeCustomer = async (client) => {
+    return new Promise((resolve, reject) =>{
+        stripe.customers.create({
+            email: client.email,
+            account_balance: 0,
+            description: client.description,
+        }, (err, customer) => {
+            if(err) {
+                console.log(r("Error when creating Stripe customer.  Bailing."));
+                console.log(err);
+                reject(err);
+            }
+            
+            client["stripeCustomerId"] = customer.id;
+            resolve(client);
+        });
+    })     
+    
 }
 
 /// Gets all Clients in the DB Collection
@@ -121,31 +141,37 @@ exports.getOneOwnedClient = (aId, cId) => {
 
 // Adds a client to the DB
 exports.putClient = (client) => {
-    // Creates a new client from the Mongo Schema
-    let c = new Client(client);
+    
     // Checks if we can connect to the DB provided
     return new Promise((resolve, reject) => {
         testDb(client).then(resp => { 
-            // Assign the boolean response to dbConnected
-            c.dbConnected = resp;
-            stripe.customers.create({
-                email: c.email,
-                account_balance: 0,
-                description: c.description,
-            }, (err, customer) => {
-                if(err) {
-                    console.log(r("Error when creating Stripe customer.  Bailing."));
-                    console.log(err);
-                }
-                c.stripeCustomerId = customer.id;
-                c.save().then(response => {
-                    resolve(c)
+            client.dbConnected = resp;
+            createStripeCustomer(client).then(resp => {            
+                let newClient = new Client(resp);
+                newClient.save().then(response => {
+                    resolve(newClient)
                 }).catch(err => reject(err));
-            })
+            });
         })
     })
 }
 
+exports.createStripeCustomer = (client) => {
+    return new Promise((resolve, reject) => {
+        createStripeCustomer(client).then(resp => {
+            Client.findOneAndUpdate({ _id: resp._id }, resp, {upsert: true, new: true}).lean().then(respClient => {
+                
+                stripe.customers.retrieve(respClient.stripeCustomerId, (err, stripeCust) => {       
+                    if(err) 
+                        respClient["stripeCustomer"] = null;
+                    else 
+                        respClient["stripeCustomer"] = stripeCust;
+                    return resolve(respClient);
+                })
+            }).catch(err => reject(err));
+        })
+    })
+}
 // Updates a client
 exports.updateClient = (client) => {
     return new Promise((resolve, reject) => {

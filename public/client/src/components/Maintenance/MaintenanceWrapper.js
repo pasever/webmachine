@@ -39,6 +39,9 @@ class MaintenanceWrapper extends Component {
         this.toggleCheckbox = this.toggleCheckbox.bind(this);
     }
 
+    updateClient = client => {
+        this.setState({ client })
+    }
 
     // HANDLES UPDATING
     updateFormField = event => {
@@ -137,7 +140,8 @@ class MaintenanceWrapper extends Component {
                         <BillingMaintenance 
                             text={ this.state.pageData.billingMaintenance } 
                             client={ this.state.client } 
-                            updateFormField={ this.updateFormField } />
+                            updateFormField={ this.updateFormField }
+                            updateClient={ this.updateClient } />
                     </Col>
                 </TabPanel>
             </Tabs>

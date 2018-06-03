@@ -9,7 +9,7 @@
 
 import axios from 'axios';
 
-const config = require('../../../config').init();
+const config = require('Config').init();
 
 
 
@@ -61,6 +61,9 @@ export default {
         },
         setDefaultSource: (customerId, sourceId) => {
             return axios.post('/api/db/client/setDefaultSource', { cId: customerId, sId: sourceId });
+        },
+        createStripeCustomer: (client) => {
+            return axios.post('/api/db/client/createStripeCustomer', client);
         },
         removeSource: (customerId, sourceId) => {
             return axios.post('/api/db/client/removeSource', { cId: customerId, sId: sourceId });
