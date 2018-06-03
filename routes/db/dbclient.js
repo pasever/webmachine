@@ -131,6 +131,19 @@ const dbclient = (router) => {
 
     });
 
+    router.post('/createStripeCustomer', (req, res, next) => {
+        if(!req.body) {
+            let err = new Error('Need a client object to create a Stripe customer');
+            res.status(403).send(err.message);
+            next(err);
+        }
+
+        clientApi.createStripeCustomer(req.token, req.body, req.conn, (response) => {
+            console.log(g("RESPONSE --- ", response));
+            res.status(200).send(response);
+        })
+    })
+
     // Sets a Stripe Source as the default source
     router.post('/setDefaultSource', (req, res, next) => {
         
