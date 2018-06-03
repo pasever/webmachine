@@ -18,7 +18,7 @@ import UpdateMemberProfile from './components/UpdateMemberProfile';
 import { DashHeader, LaunchClientForm } from "./partials";
 import { ErrorBoundary } from "../../common/error";
 import "./App.css";
-import "../../common/styles/animate.css";
+import "Common/styles/animate.css";
 
 const config = require("../../../config").init();
 const auth = new Auth("/dashboard");
@@ -180,7 +180,7 @@ export default class DashboardComponent extends Component {
         ) : (
           <div>
             <DashHeader text={this.state.pageData.main} />
-            <a href="/"><i className="fa fa-arrow-left"></i> Return to Home</a>
+            <a href="/"><i className="fa fa-arrow-left back-button"></i> Return to Home</a>
             <FlexWrapper>
               {this.renderLeftColumn()}
               {this.renderRightColumn()}
