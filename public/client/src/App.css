@@ -113,6 +113,16 @@ button {
 .form-styles {
   padding: 20px;
 }
+.alert-box {
+  position: fixed;
+  top: 0; left: 0;right:0;
+  z-index: 999;
+  height: 50px;
+}
+
+button.close {
+  margin-top: -3px;
+}
 
 .form-group, .margin-top-10 {
   margin-top: 10px;

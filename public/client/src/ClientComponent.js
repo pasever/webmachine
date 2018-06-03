@@ -143,7 +143,7 @@ export default class ClientComponent extends Component {
                     <Container>
                       <Row>
                         <a href="/dashboard">
-                          <i class="fa fa-arrow-left" /> Return to Dashboard
+                          <i className="fa fa-arrow-left" /> Return to Dashboard
                         </a>
                         <MaintenanceHeader
                           toggleSystem={this.toggleSystem}

@@ -40,7 +40,8 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx'],
     alias: {
-      Common: path.resolve(__dirname, 'public/common/')
+      Common: path.resolve(__dirname, 'public/common/'),
+      Config: path.resolve(__dirname, 'config/')
     },
   
   },

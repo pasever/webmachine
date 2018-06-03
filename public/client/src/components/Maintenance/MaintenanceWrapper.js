@@ -39,6 +39,9 @@ class MaintenanceWrapper extends Component {
         this.toggleCheckbox = this.toggleCheckbox.bind(this);
     }
 
+    updateClient = client => {
+        this.setState({ client })
+    }
 
     // HANDLES UPDATING
     updateFormField = event => {
@@ -86,61 +89,72 @@ class MaintenanceWrapper extends Component {
     
     render() {
         return (
-            <Tabs>
-                <TabList>
-                    <Tab>Organization</Tab>
-                    <Tab>Database</Tab>
-                    <Tab>Web</Tab>
-                    {this.state.client.isPrivate && ( <Tab>Members</Tab> )}
-                    <Tab>Agents</Tab>
-                    <Tab>Billing Info</Tab>
-                </TabList>
-            
-                <TabPanel>
-                    <Col size="12 md-8">
-                        <GeneralMaintenance
-                            client={ this.state.client } updateFormField={ this.updateFormField } 
-                            onSubmit={ this.submitForm } errors={ this.state.errors }
-                            text={ this.state.pageData.generalMaintenance } isSaving={this.state.isSaving }
-                            toggleCheckbox={ this.toggleCheckbox } />      
-                    </Col>
-                </TabPanel>
-                <TabPanel>
-                    <Col size="12 md-8">
-                        <DbMaintenance
-                            client={ this.state.client } updateFormField={ this.updateFormField } 
-                            onSubmit={ this.submitForm } errors={ this.state.errors }
-                            text={ this.state.pageData.dbMaintenance } isSaving={this.state.isSaving } />      
-                    </Col>
-                </TabPanel>
-                <TabPanel>
-                    <Col size="12">
-                        <WebMaintenance
-                            client={ this.state.client } updateFormField={ this.updateFormField } 
-                            onSubmit={ this.submitForm } errors={ this.state.errors }
-                            text={ this.state.pageData.web } isSaving={this.state.isSaving } />      
-                    </Col>
-                </TabPanel>
-                { this.state.client.isPrivate && (
+            <div className="container-fluid">
+                { this.state.isSaved && ( 
+                    <div className="alert alert-success alert-dismissable alert-box fade show" role="alert" data-dismiss="alert" aria-label="close">
+                        Changes have been saved
+                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>                
+                    </div>
+                )}
+                <Tabs>
+                    <TabList>
+                        <Tab>Organization</Tab>
+                        <Tab>Database</Tab>
+                        <Tab>Web</Tab>
+                        {this.state.client.isPrivate && ( <Tab>Members</Tab> )}
+                        <Tab>Agents</Tab>
+                        <Tab>Billing Info</Tab>
+                    </TabList>
+                
                     <TabPanel>
-                        <Col size='12'>
-                            <MembersMaintenance client={this.state.client} 
-                                text={ this.state.pageData.members } />
+                        <Col size="12 md-8">
+                            <GeneralMaintenance
+                                client={ this.state.client } updateFormField={ this.updateFormField } 
+                                onSubmit={ this.submitForm } errors={ this.state.errors }
+                                text={ this.state.pageData.generalMaintenance } isSaving={this.state.isSaving }
+                                toggleCheckbox={ this.toggleCheckbox } />      
                         </Col>
                     </TabPanel>
-                )}
-                <TabPanel>
-                    <h2>Agent maintenance</h2>
-                </TabPanel>
-                <TabPanel>
-                    <Col size="12">
-                        <BillingMaintenance 
-                            text={ this.state.pageData.billingMaintenance } 
-                            client={ this.state.client } 
-                            updateFormField={ this.updateFormField } />
-                    </Col>
-                </TabPanel>
-            </Tabs>
+                    <TabPanel>
+                        <Col size="12 md-8">
+                            <DbMaintenance
+                                client={ this.state.client } updateFormField={ this.updateFormField } 
+                                onSubmit={ this.submitForm } errors={ this.state.errors }
+                                text={ this.state.pageData.dbMaintenance } isSaving={this.state.isSaving } />      
+                        </Col>
+                    </TabPanel>
+                    <TabPanel>
+                        <Col size="12">
+                            <WebMaintenance
+                                client={ this.state.client } updateFormField={ this.updateFormField } 
+                                onSubmit={ this.submitForm } errors={ this.state.errors }
+                                text={ this.state.pageData.web } isSaving={this.state.isSaving } />      
+                        </Col>
+                    </TabPanel>
+                    { this.state.client.isPrivate && (
+                        <TabPanel>
+                            <Col size='12'>
+                                <MembersMaintenance client={this.state.client} 
+                                    text={ this.state.pageData.members } />
+                            </Col>
+                        </TabPanel>
+                    )}
+                    <TabPanel>
+                        <h2>Agent maintenance</h2>
+                    </TabPanel>
+                    <TabPanel>
+                        <Col size="12">
+                            <BillingMaintenance 
+                                text={ this.state.pageData.billingMaintenance } 
+                                client={ this.state.client } 
+                                updateFormField={ this.updateFormField }
+                                updateClient={ this.updateClient } />
+                        </Col>
+                    </TabPanel>
+                </Tabs>
+            </div>
         )
     }    
 }

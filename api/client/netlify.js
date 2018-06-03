@@ -9,7 +9,7 @@ const recursiveReadSync =       require('recursive-readdir-sync');
 const sha1 =                    require('sha1');
 const axios =                   require('axios');
 const config =                  require('../../config').init();
-const Platform =                require('./db');
+const Client =                  require('./db');
 const fs =                      require('fs');
 
 
@@ -30,7 +30,7 @@ const getDirectoryFiles = (readDir) => {
         if(err.errno === 34) {
             console.log("Path does not exist");
         } else {
-            console.log(err);
+            console.log(":::ERR:::", err);
             throw err;
         }
     }
@@ -64,7 +64,7 @@ const readFiles = (replaceDir, replacingWith) => {
         const handler = (current, err, content, utf=true) => {
             count++;
             if(err) {
-                return console.log(err);
+                return console.log("ERR in readFiles::::::", err);
             }
             if(utf) {
                 content = replaceContent(content, replacingWith);
@@ -107,12 +107,11 @@ const deployNetlifySite = (client, templateData) => {
             });
             
             axios.post('https://api.netlify.com/api/v1/sites?access_token=' + config.netlify.token + '&name=' + name).then(siteCreateResponse => {
-                console.log(siteCreateResponse);
                 client.netlifySiteId = siteCreateResponse.data.site_id;
                 client.web = "https://" + uri;
-                Platform.updatePlatform(client); // we can drop the promise here                
+                console.log("POSTED WEB:::" + client.web);
+                Client.updateClient(client); // we can drop the promise here                
                 axios.post('https://api.netlify.com/api/v1/sites/' + uri + '/deploys?access_token=' + config.netlify.token, { "files": fileDictionary }).then(deployResponse => {
-                    console.log(deployResponse);
                     let deployId = deployResponse.data.id;
                     deployResponse.data.required.forEach(currSha => {
                         dataFiles.map(current => {
