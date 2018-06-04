@@ -20,6 +20,7 @@
 
 import React, { Component }       from 'react';
 import axios                      from 'axios';
+import BackToDashboard            from './components/BackToDashboard'
 import NetworkSelection           from './components/Steps/NetworkSelection';
 import MemberForm                 from './components/Steps/MemberForm';
 import API                        from '../../common/utils/API';
@@ -148,6 +149,7 @@ class MemberRegistration extends Component {
   render() {
     return (
       <div className="container">
+        <BackToDashboard />
         {this.renderPage()}
       </div>
     )
