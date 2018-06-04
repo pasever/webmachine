@@ -1,0 +1,11 @@
+
+
+.template-selection {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.template {
+    max-width: 32%;
+    text-align: center;
+}

@@ -7,25 +7,26 @@ const uuidv1 = require('uuid/v1');
 const objStore = [
   {
 	name: "Acme Industries",
-	image: 'https://randomuser.me/api/portraits/men/7.jpg',
+	image: '',
   addr1: '1234 Main Street',
 	addr2: 'Suite 1235',
   city: 'Richmond',
-	state:'Virginia',
+  state:'Virginia',
 	zip: '12345',
 	contact: 'Bill Smith',
 	phone: '704-555-1212',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless1",
   },
   {
 	name: "Strategic Machines (test local)",
-  image: 'https://randomuser.me/api/portraits/men/14.jpg',
+  image: '',
   addr1: '1234 Main Street',
 	addr2: 'Suite 1235',
   city: 'Richmond',
 	state:'Virginia',
 	zip: '12345',
-	contact: 'ChaoticRoute',
+  contact: 'ChaoticRoute',
 	phone: '704-555-1212',
 	sms: "+17042289191",
 	web: "demo",
@@ -34,11 +35,12 @@ const objStore = [
 	uri: "mongodb://auto:B0ston@ds157057.mlab.com:57057/",
 	username: "auto",
 	password: "Bost0n",
-  isActivated: true
+  isActivated: true,
+  accessToken: "useless101",
 	},
 	{
 	name: "Strategic Machines (test cloud)",
-  image: 'https://randomuser.me/api/portraits/men/14.jpg',
+  image: '',
   addr1: '1234 Main Street',
 	addr2: 'Suite 1235',
   city: 'Richmond',
@@ -52,37 +54,41 @@ const objStore = [
 	uri: "mongodb://auto:B0ston@ds251889.mlab.com:51889/",
 	username: "auto",
 	password: "B0ston",
-  isActivated: true
+  isActivated: true,
+  accessToken: "useless102",
 },
   {
 	name: "Beta Industries",
-	image: 'https://randomuser.me/api/portraits/men/14.jpg',
+	image: '',
   addr1: '1234 Main Street',
 	addr2: 'Suite 1235',
   city: 'Richmond',
 	state:'Virginia',
-	zip: '12345',
+  zip: '12345',
+  accessToken: "7y54ueo4",
 	contact: 'Bill Jones',
 	phone: '704-555-1212',
   isPrivate: false,
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless4",
   },
   {
 	name: "Alpha Industries",
-	image: 'https://randomuser.me/api/portraits/men/91.jpg',
+	image: '',
   addr1: '1234 Main Street',
 	addr2: 'Suite 1235',
   city: 'Richmond',
 	state:'Virginia',
-	zip: '12345',
+  zip: '12345',
+  accessToken: "5aef0a1fe1f6ba712cfa47aa",
 	contact: 'Bill Alpha',
 	phone: '704-555-1212',
   isPrivate: false,
-  isActivated: false
+  isActivated: false,
   },
   {
 	name: "Mercy (test db)",
-  image: 'https://randomuser.me/api/portraits/men/91.jpg',
+  image: '',
   addr1: '1234 Main Street',
 	addr2: 'Suite 1235',
   city: 'Richmond',
@@ -97,11 +103,12 @@ const objStore = [
 	contact: 'Charlie King',
 	phone: '704-555-1212',
   isPrivate: false,
-  isActivated: true
+  isActivated: true,
+  accessToken: "useless6",
 	},
   {
   name: "Pivot and Scale",
-  image: 'https://randomuser.me/api/portraits/men/62.jpg',
+  image: '',
   addr1: '1234 Main Street',
   addr2: 'Suite 1235',
   city: 'Annapolis',
@@ -109,11 +116,12 @@ const objStore = [
   zip: '12345',
   contact: 'Dave',
   phone: '+17042282288',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless7",
   },
   {
   name: "Medical Center",
-  image: 'https://randomuser.me/api/portraits/women/94.jpg',
+  image: '',
   addr1: '1234 Main Street',
   addr2: 'Suite 1235',
   city: 'Annapolis',
@@ -121,11 +129,13 @@ const objStore = [
   zip: '12345',
   contact: 'Nurse',
   phone: '+17045551212',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless8",
+
   },
   {
   name: "Software company",
-  image: 'https://randomuser.me/api/portraits/men/73.jpg',
+  image: '',
   addr1: '1234 Main Street',
   addr2: 'Suite 1235',
   city: 'Charlotte',
@@ -133,11 +143,12 @@ const objStore = [
   zip: '12345',
   contact: 'Mike',
   phone: '+17045551111',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless9",
   },
   {
   name: "Utility",
-  image: 'https://randomuser.me/api/portraits/women/27.jpg',
+  image: '',
   addr1: '1234 Main Street',
   addr2: 'Suite 1235',
   city: 'Charlotte',
@@ -145,11 +156,12 @@ const objStore = [
   zip: '12345',
   contact: 'Uko',
   phone: '+19192223333',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless10",
   },
   {
   name: "IBM",
-  image: 'https://randomuser.me/api/portraits/women/36.jpg',
+  image: 'http://res.cloudinary.com/strategicmachinestest/image/upload/v1526233790/logos/640px-IBM_logo.svg_xd3fxs.png',
   addr1: '1234 Main Street',
   addr2: 'Suite 1235',
   city: 'Armonk',
@@ -157,11 +169,12 @@ const objStore = [
   zip: '12345',
   contact: 'Janna',
   phone: '+12124454444',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless11",
   },
   {
   name: "xio partners",
-  image: 'https://randomuser.me/api/portraits/men/83.jpg',
+  image: 'http://res.cloudinary.com/strategicmachinestest/image/upload/v1526342752/logos/XIOtechnologies_554x207_avmedn.jpg',
   addr1: '1234 Main Street',
   addr2: 'Suite 1235',
   city: 'Charlotte',
@@ -169,7 +182,8 @@ const objStore = [
   zip: '12345',
   contact: 'Pat',
   phone: '+17044445555',
-  isActivated: false
+  isActivated: false,
+  accessToken: "useless12",
   }
 
 ]

@@ -1,0 +1,24 @@
+{
+    "main": {
+        "title": "Manage Your Platform"
+    },
+    "userMaintenance": {
+        "title": "General Information",
+        "body": "General platform information"
+    },
+    "dbMaintenance": {
+        "title": "Data Store Information",
+        "body": "Ensure you have a connection to a datastore."
+    },
+    "billingMaintenance": {
+        "title": "Billing information",
+<<<<<<< Updated upstream:public/agents/static/platformPageData.json
+        "body": "Add a payment method and view your current account details."
+=======
+        "body": "Add or update billing information."
+>>>>>>> Stashed changes:public/platform/static/platformPageData.json
+    },
+    "header": {
+        "deleteButton": "Remove my platform"
+    }
+}

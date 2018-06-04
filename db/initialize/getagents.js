@@ -14,7 +14,11 @@ const limit = 1;
 function getAgents (conn) {
       let Agent = conn.model('Agent', agentObj.agentSchema);
       // always drop the collection and refresh with test data
-      Agent.collection.drop()
+      Agent.remove({}, function(e, removed){
+          if (e) console.log("Error removing test agent documents")
+          console.log("Test Agent Docs Removed " + removed.n)
+        })
+
 
       Agent.find({}).limit(limit).exec(function (err, collection){
           if (collection.length === 0) {

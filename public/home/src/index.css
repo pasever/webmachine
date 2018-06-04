@@ -1,0 +1,65 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html, body, .root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+body, .app {
+  background: #f5f5f5;
+}
+
+.conversation-container > .header {
+  background-color: red;
+}
+
+.message > .response {
+  background-color: black;
+  color: white;
+}
+.snippet {
+  background-color: black;
+  font-family: sans-serif;
+  font-size: 12x;
+  line-height: 30px;
+  line-height: 1.5;
+  color: white;
+}
+.snippet > .snippet-title {
+  background-color: black;
+  font-family: sans-serif;
+  font-size: 15px;
+  line-height: 30px;
+  line-height: 1.5;
+  color: white;
+}
+
+.snippet > .snippet-details {
+  background-color: black;
+  font-family: sans-serif;
+  font-size: 10px;
+  line-height: 30px;
+  line-height: 1.5;
+  color: white;
+}
+a.link {
+  background-color: black;
+  font-family: sans-serif;
+  font-size: 10px;
+  line-height: 30px;
+  line-height: 1.5;
+  color: white;
+}
+
+
+.floating-form {
+  display: inline;
+}

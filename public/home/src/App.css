@@ -1,0 +1,129 @@
+/* Wraps around everything */
+.app-container {
+    width: 100% !important;
+  }
+  
+  /* "Brand bar" at top of page */
+  
+  .app-header {
+    text-align: center;
+    background-color: #222;
+    padding: 20px;
+    color: #eee;
+  }
+  
+  .header-title {
+    font-size: 1.5em;
+  }
+   /* ====================== */
+  
+  .app-content {
+    font-size: large;
+  }
+  .btn:nth-child(even) {
+    margin-left: 10px;
+  }
+  
+  /* Repos Page and Repo Cards */
+  
+  #repos-count {
+    margin: 20px 0;
+  }
+  
+  #repos-list {
+    list-style: none;
+    padding: 20px 45px;
+    /* these two lines below make magic */
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, 19rem);
+    justify-content: center;
+  }
+  
+  #repos-list li {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  #repos-list .repo-card {
+    margin: 10px;
+    font-size: 17px;
+  }
+  
+  #repos-list .repo-card-body {
+    padding: 10px;
+  }
+  
+  #repos-list .repo-title {
+    text-decoration: none;
+  }
+  
+  #repo-card-wi-count {
+    font-size: 14px;
+  }
+  
+  #repos-list .repo-card-footer {
+    background: #222;
+    padding: 0;
+  }
+  
+  #repos-list .repo-view-issues {
+    color: #eee;
+    font-size: 25px;
+  }
+  
+  #repos-list 
+  .repo-view-issues:hover {
+    color: rgba(238, 238, 238, 0.63);
+  }
+  
+  /* ================================== */
+  
+  #issue-list {
+    list-style: none;
+    padding: 25px 40px;
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: repeat(auto-fit, 18rem);
+    justify-content: center;
+  }
+  
+  #issue-list li {
+    display: inline-block;
+    margin: 30px;
+  
+  }
+  
+  #issue-list .issue-card {
+    background: #eee;
+  }
+  
+  #issue-list .issue-card-body {
+    padding: 8px;
+  }
+  
+  #issue-list .issue-title {
+    font-size: 17px;
+  }
+  
+  #issue-list .issue-price {
+    color: green;
+    font-weight: bold;
+    padding: 3px;
+    font-size: 14px;
+  }
+  
+  #issue-list .issue-assignee {
+    font-size: 14px;
+  }
+  
+  #issue-list .issue-due-date,
+  .issue-card-footer {
+    font-size: 12px
+  }
+  
+  #issue-list .issue-card-footer {
+    background: none;
+  }
+  

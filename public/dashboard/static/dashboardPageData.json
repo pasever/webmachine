@@ -1,0 +1,26 @@
+{
+    "main": {
+        "title": "Get started with Networks",
+        "subTitle": [ 
+            "Networks are the heart and soul of our service.  ",
+            "You can browse a list of public networks and see private networks you've ",
+            "permission to join - or you can manage your Member Profile for a network you're",
+            "already a member of."
+        ],
+        "networkTitle": "Networks",
+        "memberTitle": "Memberships",
+        "noNetworks": "It appears you are not managing any networks.  Why don't you Launch one for your Business or Organization?",
+        "noMemberships": "It appears you are not a member of any networks.",
+        "ownedNetworksTitle": "Manage the networks you own",
+        "membershipTitle": "Manage your member profiles",
+        "searchNetworksButton": "Find Networks",
+        "launchNetworkButton": "Launch a new network",
+        "asideTitle": "Welcome to the Machine",
+        "asideParagraph": [
+            "Thank you for logging in.  From here, you can choose to launch or join a public network.",
+            "You can also become a client of strategic machines and create a new Network where you can pick and choose agents ",
+            "which will have intelligent text interactions with your customers and/or clients."
+        ]
+    }
+
+}

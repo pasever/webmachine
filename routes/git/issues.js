@@ -8,7 +8,7 @@
 const api = require('../../api/git/index');
 
 const issues = (router) => {
-  // Fetches issues of specified repository
+  // Fetches issues of specified repository for specified github user
   router.get('/:username/:repo', (req, res, next) => {
     console.log("ENTERED ISSUES")
     console.log(JSON.stringify(req.params))

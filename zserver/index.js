@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 const express =            require('express');
+const helmet =             require('helmet');
 const expressValidator =   require('express-validator');
 const path =               require('path');
 const bodyParser =         require('body-parser');
@@ -15,7 +16,6 @@ const logger =             require("morgan");
 const api =                require("../api")
 const keys =               require('../config').init();
 const transport =          require('../config/gmail')
-
 const { g, b, gr, r, y } = require('../console');
 
 const app =   express();;
@@ -27,13 +27,15 @@ const app =   express();;
 let envState = true
 if ( process.env.isLive == 'false' ) {
     envState = false
-    require('../db/seedTestDb')(envState)
-  }
+    require('../db/mongoose')(envState)
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////////  Register Middleware       /////////////////////////
 ////////////////////////////////////////////////////////////////////////
 app.use(logger("dev"));
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(expressValidator());
@@ -42,10 +44,11 @@ app.use('/dist', express.static('public'));
 app.use('/form', express.static('public'));
 app.use('/machine', express.static('public'));
 app.use('/market', express.static('public'));
-app.use('/member', express.static('public'));
-app.use('/web', express.static('public'));
+app.use('/dashboard', express.static('public'));
 app.use('/landing', express.static('public'));
-app.use('/platform', express.static('public'));
+app.use('/client', express.static('public'));
+app.use('/member', express.static('public'));
+app.use('/', express.static('public/home'));
 app.use(favicon(path.join(__dirname, '..', '/public/assets/favicon.ico')));
 app.use(cors())
 
@@ -55,7 +58,7 @@ app.use(cors())
 
 const mailObject = {
   from: '"ChaoticBots 👥" <chaoticbotshelp@gmail.com>',
-  to: 'dangorlov@yahoo.com',
+  to: 'patrick.howard@hotmail.com',
   subject: 'Platform Error',
   text: ''
 }
@@ -72,36 +75,35 @@ process.on('uncaughtException', function (er) {
 ////////// Register and Config Routes ///////////////
 ////////////////////////////////////////////////////
 
-const sms =      express.Router();
-const db =       express.Router();
-const git =      express.Router();
-const web =      express.Router();
-const auth =     express.Router();
-const errs =     express.Router();
-const unk =      express.Router();
-const help =     express.Router();
-
+const sms =       express.Router();
+const db =        express.Router();
+const git =       express.Router();
+const auth =      express.Router();
+const errs =      express.Router();
+const unk =       express.Router();
+const help =      express.Router();
+const home =      express.Router();
 require('../routes/auth')(auth);
 require('../routes/db')(db);
 require('../routes/git')(git);
 require('../routes/sms')(sms);
-require('../routes/web')(web);
-require('../routes/unk')(unk);
+//require('../routes/web')(web);
 require('../routes/error')(errs);
 require('../routes/help')(help);
-
+require('../routes/home')(home);
+require('../routes/unk')(unk);
 //////////////////////////////////////////////////////////////////////////
 ///////////////////////////// API CATALOGUE /////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 // auth test
 app.use(auth)
-// help
-app.get('/', help)
+// home route
+//app.use('/', home);
 // text > twilio > server process
 app.use('/api/sms', sms)
 // web > twilio > text
-app.use('/api/web', web)
+//app.use('/api/web', web)
 // db api
 app.use('/api/db', db)
 // github api

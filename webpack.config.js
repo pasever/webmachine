@@ -1,5 +1,5 @@
 const webpack =           require('webpack');
-
+const path =              require('path');
 let commonsPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: "vendor"
   });
@@ -7,9 +7,13 @@ let commonsPlugin = new webpack.optimize.CommonsChunkPlugin({
 module.exports = {
   entry: {  
     web: './public/web/src/index.js',
+    home: './public/home/src/index.js',
     market: './public/market/src/index.js',
     landing: './public/landing/src/index.js',
-    platform: './public/platform/src/index.js'
+    client: './public/client/src/index.js',
+    agents: './public/agents/src/index.js',
+    dashboard: './public/dashboard/src/index.js',
+    member_registration: './public/member/src/index.js'
     },
     devtool: 'source-map',
   module: {
@@ -34,7 +38,12 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
+    alias: {
+      Common: path.resolve(__dirname, 'public/common/'),
+      Config: path.resolve(__dirname, 'config/')
+    },
+  
   },
   output: {
     path: __dirname + '/public/dist',
