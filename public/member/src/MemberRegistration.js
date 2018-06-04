@@ -23,8 +23,8 @@ import axios                      from 'axios';
 import BackToDashboard            from './components/BackToDashboard'
 import NetworkSelection           from './components/Steps/NetworkSelection';
 import MemberForm                 from './components/Steps/MemberForm';
-import API                        from '../../common/utils/API';
-import URI                        from '../../common/utils/URI';
+import API                        from 'Common/utils/API';
+import URI                        from 'Common/utils/URI';
 import Auth                       from '../../home/src/Pages/Auth/Auth';
 
 const ls = window.localStorage;
