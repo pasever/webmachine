@@ -7,7 +7,8 @@ import React, { Component }    from 'react';
 import axios                   from 'axios';
 import Repo                    from './Repo';
 import SearchBar               from './SearchBar'; 
-import API                     from '../../../common/utils/API'
+import { BackHome }            from 'Common/navigation'
+import API                     from 'Common/utils/API'
 import Auth                    from '../../../home/src/Pages/Auth/Auth'
 /**
  * @namespace Developer_Marketplace
@@ -92,6 +93,7 @@ export default class ReposPage extends Component {
   render() {
     return (
       <div>
+        <BackHome />
         {/* Repos count message will display after data has been loaded in state
         and ONLY if there's data to render */}
         {this.state.loaded && this.state.repos.length > 0 ? (

@@ -34,7 +34,7 @@ async function fetchMemberProfile (client, memberId) {
   if (utils.isValidUrl(client.uri)) {
 
     // Construct Client's DB URI
-    let clientDbUri = client.uri + client.dbname;
+    let clientDbUri = client.connectionString; //client.uri + client.dbname;
 
     // Open connection to Client's DB
     let db = mongoose.createConnection(clientDbUri, { poolSize: 10 });
@@ -64,7 +64,7 @@ async function fetchMemberProfile (client, memberId) {
   } else {
     // If URI invalid, return throw error
 
-    console.log('Caution - Invalid Client URI ' + client.uri + client.dbname);
+    console.log('Caution - Invalid Client URI ' + client.connectionString); //client.uri + client.dbname);
 
     // return {
     //   type: 'ERROR',

@@ -13,18 +13,23 @@ const verifyToken = require('../../utils/auth/verifyJwtToken');
 const config = require('../../config').init();
 const stripe = require('stripe')(config.stripe.secretKey);
 
+
+
 /// TESTS IF WE CAN CONNECT TO THE MONGODB SERVER
-const testDb = (client) => {
+const buildConnString = (client) => {
     //  Assign a new mongo client
-    let testClient = new MongoClient(client.uri + client.dbname);
-    return new Promise((resolve, reject) => { 
+    return new Promise((resolve, reject) => {
+        // If there is no username or password, the : and @ need to be dropped.
+        let colon = client.username !== '' && client.password !== '' ? ':' : '';
+        let at = client.username !== '' && client.password !== '' ? '@' : ''
+        client.connectionString = `mongodb://${ client.username.trim() }${ colon }${ client.password.trim() }${ at }${ client.uri.trim() }/${ client.dbname }`;
+        console.log("CONNNECTIONSTRING::::::::\n" + client.connectionString);
+        let testClient = new MongoClient(client.connectionString);
         /// Attempts to connect
         testClient.connect((error, client) => {
-            if(error) {
-                /// In case of an error, we resolve false
-                return resolve(false);
-            }
+            if(error) return resolve(false);
             // Close the client and resolve we did connect.
+            console.log(g("CONNECTED TO THE DATABASE!!!!"));
             testClient.close();
             return resolve(true);
         });
@@ -144,15 +149,12 @@ exports.putClient = (client) => {
     
     // Checks if we can connect to the DB provided
     return new Promise((resolve, reject) => {
-        testDb(client).then(resp => { 
-            client.dbConnected = resp;
-            createStripeCustomer(client).then(resp => {            
-                let newClient = new Client(resp);
-                newClient.save().then(response => {
-                    resolve(newClient)
-                }).catch(err => reject(err));
-            });
-        })
+        createStripeCustomer(client).then(resp => {            
+            let newClient = new Client(resp);
+            newClient.save().then(response => {
+                resolve(newClient)
+            }).catch(err => reject(err));
+        });
     })
 }
 
@@ -176,8 +178,9 @@ exports.createStripeCustomer = (client) => {
 exports.updateClient = (client) => {
     return new Promise((resolve, reject) => {
         // Checks if we can connect to the database provided
-        testDb(client).then(resp => { 
+        buildConnString(client).then(resp => { 
             // Assigns the returned boolean to dbConnected
+            client.dbConnected = resp;
             // Finds the Client by ID, and performs an UPSERT.  LEAN() is used to attach new objects to the Schema.
             Client.findOneAndUpdate({ _id: client._id }, client, {upsert: true, new: true}).lean().then(respClient => {
                 // Try and retrieve Stripe's data.

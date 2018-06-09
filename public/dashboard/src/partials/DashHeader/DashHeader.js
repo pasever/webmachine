@@ -8,6 +8,6 @@ export const DashHeader = ({text}) =>
                 { text.title}
             </h1>
             <p className="paragraph animated fadeInRight">{ text.subTitle }</p>
-            <a href="/member" className="btn btn-default  animated fadeInUp">{ text.searchNetworksButton }</a>
+            <a href="/docs" className="btn btn-default  animated fadeInUp">{ text.documentationButton }</a>
         </div>
     </header>

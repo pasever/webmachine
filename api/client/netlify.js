@@ -96,8 +96,9 @@ const deployNetlifySite = (client, templateData) => {
         getDirectoryFiles(templateData.folderLoc);
         // Our Netlify Files dictionary
         let fileDictionary = {};
-        let name = client.name.replace(" ", "");
+        let name = client.name.replace(new RegExp(' ', 'g'), "-");
         let uri = `${ name }.netlify.com`.toLowerCase();
+        console.log("URI:::::\n" + uri)
         readFiles(templateData.folderReplace, [client.name, client.siteData.callToAction, client.siteData.shortDescription, client.siteData.longDescription]).then(resp => {
             let dataFiles = resp;
             

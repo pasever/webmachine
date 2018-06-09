@@ -13,7 +13,8 @@ const uuidv1 =  require('uuid/v1')
 const Schema = mongoose.Schema;
 
 const clientObject = {
-    // Org name
+  ///// GENERAL INFORMATION /////
+  // Org name
   name: {
     type: String,
     unique: true,
@@ -59,29 +60,35 @@ const clientObject = {
     type: String,
     default: "",
   },
-  // Web
-  web: {
-    type: String,
-    default: "",
-  },
   // Correspondence email
   email: { 
     type: String,
     default: "",
   },
+
+  ////// DATABASE INFORMATION //////////
   // Name of Client's datastore
   dbname:{ 
     type: String,
     default: "",
   },
+
   urilocal: String,
   // Db Uri.  I.E. mongodb://localhost
   uri:{ 
     type: String,
     default: "",
   },
+  dbConnected: {
+    type: Boolean,
+    default: false,
+  },
   // Db Username
   username:{ 
+    type: String,
+    default: "",
+  },
+  connectionString: {
     type: String,
     default: "",
   },
@@ -90,6 +97,7 @@ const clientObject = {
     type: String,
     default: "",
   },
+
   // For AuthO
   accessToken: { 
     type: String, 
@@ -99,6 +107,13 @@ const clientObject = {
   },
   // Stripe customer ID
   stripeCustomerId: {
+    type: String,
+    default: "",
+  },
+
+  /////// ONLINE PRESENCE INFORMATION ////////////
+  // Web
+  web: {
     type: String,
     default: "",
   },

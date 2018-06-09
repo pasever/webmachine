@@ -11,7 +11,7 @@ import Navigation             from './Navigation';
 import FilterBy               from './IssuesFilterBy';
 import SearchBar              from './SearchBar';
 import AdminLayer             from './admin/AdminLayer';
-import API                    from '../../../common/utils/API';
+import API                    from 'Common/utils/API';
 
 export default class IssuesPage extends Component {
   constructor(props) {
