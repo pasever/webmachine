@@ -24,9 +24,10 @@ REQUIRED PROPS:
 export const WebMaintenance = ({ errors, text, client, onSubmit, updateFormField,isSaving }) => (
     <ErrorBoundary>
         <div className="web-form-wrapper">
-            <div className="web-form-section light-shadow">
+            { /*<div className="web-form-section light-shadow">
                 {text.title ? <h2>{text.title}</h2> : ""}
                 {text.welcomeBody ? <p>{text.welcomeBody}</p> : ""}
+                
                 <form onSubmit={onSubmit}>
                     <Input
                         value={client.web}
@@ -45,14 +46,18 @@ export const WebMaintenance = ({ errors, text, client, onSubmit, updateFormField
                         <Button type="submit" text="Save" style="default" name="save" />
                     )}
                 </form>
-            </div>
+            </div>*/}
             <div className="web-form-section light-shadow">
-                { text.getNetlify && client.web ? ( <p><i className="fa fa-info-circle"></i> { text.getNetlify }</p> ) : ("") }
-                { client.web === "" ? (
-                    <div>{ text.launchMessage ? ( <h2>{text.launchMessage }</h2> ) : "" }
-                        <NetlifyDeploy client={ client } text={ text.netlifyDeploy }/>
+                
+                { client.web && (
+                    <div>
+                        <p>Your site url is: <a href={ client.web } target="_blank">{client.web}</a></p>
                     </div>
-                ) : "" }
+                )}
+                <div>{ text.launchMessage ? ( <h2>{text.launchMessage }</h2> ) : "" }
+                    <NetlifyDeploy client={ client } text={ text.netlifyDeploy }/>
+                </div>
+                
             
             </div>
         </div>

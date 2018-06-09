@@ -126,7 +126,7 @@ class MaintenanceWrapper extends Component {
                         </Col>
                     </TabPanel>
                     <TabPanel>
-                        <Col size="12">
+                        <Col size="12 md-8">
                             <WebMaintenance
                                 client={ this.state.client } updateFormField={ this.updateFormField } 
                                 onSubmit={ this.submitForm } errors={ this.state.errors }
