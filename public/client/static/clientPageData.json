@@ -1,6 +1,6 @@
 {
     "main": {
-        "title": "Manage Your Client"
+        "title": "Manage Your Network"
     },
     "generalMaintenance": {
         "title": "General Information",
@@ -16,7 +16,7 @@
         "body": "Add a payment method and view your current account details."
     },
     "header": {
-        "deleteButton": "Delete my client"
+        "deleteButton": "Delete my Network"
     },
     "members": {
         "title": "Manage your members",
