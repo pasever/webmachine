@@ -13,7 +13,7 @@ REQUIRED PROPS:
     hasErrors - boolean to tell us if we have errors and display a message 
     toggleSystem (method) - toggles when to go live, if we can go life
 */
-export const MaintenanceHeader = ({ headerText, client, hasErrors, toggleSystem, deletePlatform }) => (
+export const MaintenanceHeader = ({ headerText, client, hasErrors, toggleSystem, launchModal }) => (
   <div className="maintenance-header">
     <div className="toggle-section">
       {client.isLive ? (
@@ -35,7 +35,7 @@ export const MaintenanceHeader = ({ headerText, client, hasErrors, toggleSystem,
       )}
     </div>
     <div className="delete-section">
-      <button onClick={deletePlatform} className="btn btn-danger">
+      <button onClick={launchModal} className="btn btn-danger">
         {headerText.deleteButton}
       </button>
     </div>
