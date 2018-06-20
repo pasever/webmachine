@@ -1,6 +1,6 @@
 {
   "name": "strategicmachines",
-  "version": "0.7.61",
+  "version": "0.7.62",
   "description": "web portal for intelligent interactions",
   "main": "server.js",
   "engines": {
