@@ -22,12 +22,8 @@
 /* a. General Styles
 /* ------------------------------------------------------------------ */
 
-<<<<<<< HEAD
 body { background: #0f0f0f;
  }
-=======
-body { background: #0f0f0f; }
->>>>>>> upstream/master
 
 /* ------------------------------------------------------------------ */
 /* b. Header Styles
@@ -954,7 +950,6 @@ call-to-action .button {
 /* ------------------------------------------------------------------ */
 
 footer {
-<<<<<<< HEAD
   padding-top: 48px;
   color: #303030;
   font-size: 14px;
@@ -965,14 +960,6 @@ footer {
   width: 100%;
   margin-bottom: 0px;
   height: 18.5rem;
-=======
-   padding-top: 48px;
-   margin-bottom: 48px;
-   color: #303030;
-   font-size: 14px;
-   text-align: center;
-   position: relative;
->>>>>>> upstream/master
 }
 
 footer a, footer a:visited { color: #525252; }
@@ -1080,7 +1067,6 @@ footer .social-links li:first-child { margin-left: 42px; }
 
 .rightUl {
   float: right;
-<<<<<<< HEAD
 }
 
 .priceColumn {
@@ -1147,6 +1133,4 @@ footer .social-links li:first-child { margin-left: 42px; }
 
 main {
   margin-bottom: 185px;
-=======
->>>>>>> upstream/master
 }

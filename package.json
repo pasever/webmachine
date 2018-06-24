@@ -1,10 +1,6 @@
 {
   "name": "strategicmachines",
-<<<<<<< HEAD
   "version": "0.7.61",
-=======
-  "version": "0.7.62",
->>>>>>> upstream/master
   "description": "web portal for intelligent interactions",
   "main": "server.js",
   "engines": {
@@ -82,11 +78,7 @@
     "react-stripe-elements": "^1.6.0",
     "react-tabs": "^2.2.1",
     "recursive-readdir-sync": "^1.0.6",
-<<<<<<< HEAD
     "request": "^2.83.0",
-=======
-    "request": "2.83.0",
->>>>>>> upstream/master
     "serve-favicon": "2.4.5",
     "sha1": "^1.1.1",
     "sort-by": "^1.2.0",

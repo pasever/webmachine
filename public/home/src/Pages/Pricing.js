@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import React, { Component }   from 'react';
 import React from "react";
 import PricingTable                  from '../Component/PricingTable';
@@ -10,14 +9,6 @@ const Pricing = () =>
   <div>
     <h1 className="pageTitle">Pricing Page</h1>
     <p className="pageBody">
-=======
-import React from "react";
-
-const Pricing = () =>
-  <div>
-    <h1>Pricing Page</h1>
-    <p>
->>>>>>> upstream/master
       Nunc pharetra finibus est at efficitur. Praesent sed congue diam. Integer
       gravida dui mauris, ut interdum nunc egestas sed. Aenean sed mollis diam.
       Nunc aliquet risus ac finibus porta. Nam quis arcu non lectus tincidunt
@@ -25,7 +16,6 @@ const Pricing = () =>
       euismod mi justo, faucibus scelerisque risus cursus in. Sed rhoncus mollis
       diam, sit amet facilisis lectus blandit at.
     </p>
-<<<<<<< HEAD
     <PricingTable />
 
   </div>;
@@ -33,8 +23,4 @@ const Pricing = () =>
           
 
 
-=======
-  </div>;
-
->>>>>>> upstream/master
 export default Pricing;
