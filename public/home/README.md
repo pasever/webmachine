@@ -20,6 +20,7 @@
 
 ##React Router V4
 
+<<<<<<< HEAD
 
 ##6/23/18 Update
 
@@ -44,6 +45,8 @@
 
 1. Simple changes were made to About, Products, Solutions, Blog, and Pricing to have placeholder appearance until looked at fully.
 
+=======
+>>>>>>> upstream/master
 ##Bugs and Future Plans
 
 1. Add in some animations to make a more unique and modern style
@@ -51,5 +54,9 @@
 2. There is a bug with Juan's Market Page and React Router applying the correct style. This
 is not critical and to get Juan's original styled market page you can simply navigate directly
 to localhost:3000/market or simply refresh the market once react router has changed the URL.
+<<<<<<< HEAD
 We are working on finding what is casuing this to fix it.
 
+=======
+We are working on finding what is casuing this to fix it.
+>>>>>>> upstream/master

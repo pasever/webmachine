@@ -14,6 +14,7 @@
 "use strict";
 
 import React, { Component } from "react";
+<<<<<<< HEAD
 import API from "../../common/utils/API";
 import URI from "../../common/utils/URI";
 import LoadingPage from "../../common/LoadingPage";
@@ -23,6 +24,19 @@ import { Container, Row } from "../../common/grid";
 import { ErrorBoundary } from "../../common/error/ErrorBoundary";
 import MaintenanceWrapper from "./components/Maintenance/MaintenanceWrapper";
 
+=======
+import API from "Common/utils/API";
+import URI from "Common/utils/URI";
+import LoadingPage from "../../common/LoadingPage";
+import Auth from "../../home/src/Pages/Auth/Auth";
+import { MaintenanceHeader } from "./components/Partials/";
+import { Input, Button } from 'Common/form';
+import { Container, Row } from "Common/grid";
+import { ErrorBoundary } from "Common/error/ErrorBoundary";
+import MaintenanceWrapper from "./components/Maintenance/MaintenanceWrapper";
+
+import Modal from "react-responsive-modal";
+>>>>>>> upstream/master
 import "react-tabs/style/react-tabs.css";
 import "./App.css";
 import "../../common/styles/animate.css";
@@ -42,9 +56,18 @@ export default class ClientComponent extends Component {
     super(props);
 
     this.state = {
+<<<<<<< HEAD
       client: null, //  should be passed in the response from Authorization
       pageData: null, //  page data object
       hasErrors: false //  flags if we should display a message about errors
+=======
+      client: null,       //  should be passed in the response from Authorization
+      pageData: null,     //  page data object
+      hasErrors: false,   //  flags if we should display a message about errors
+      launchModal: false,
+      deleteName: "",
+      errorDelete: "",
+>>>>>>> upstream/master
     };
   }
 
@@ -63,6 +86,14 @@ export default class ClientComponent extends Component {
     });
   }
 
+<<<<<<< HEAD
+=======
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+>>>>>>> upstream/master
   /**
    * @description 
    * STEPS:
@@ -99,6 +130,7 @@ export default class ClientComponent extends Component {
   /**
    * @todo run some security checks to make sure this is what the user wants to do.
    */
+<<<<<<< HEAD
   deletePlatform = event => {
     event.preventDefault();
     API.client.deleteClient(this.state.client).then(resp => {
@@ -106,6 +138,20 @@ export default class ClientComponent extends Component {
     });
   };
 
+=======
+  deleteClient = event => {
+    event.preventDefault();
+    if(this.state.deleteName !== this.state.client.name) {
+      this.setState({ errorDelete: "Names do not match."});
+      return;
+    } else {
+      API.client.deleteClient(this.state.client).then(resp => {
+        //this.setState({ client: resp.data });
+        URI.redirect('/dashboard');
+      });
+    } 
+  };
+>>>>>>> upstream/master
   /**
    * @function toggleSystem
    * @description allows a user to make their system live
@@ -121,10 +167,18 @@ export default class ClientComponent extends Component {
     this.setState({ client: client });
   };
 
+<<<<<<< HEAD
+=======
+  toggleModal = () => {
+    const { launchModal } = this.state;
+    this.setState({ launchModal: !launchModal, errorDelete: "" })
+  }
+>>>>>>> upstream/master
 
   render() {
     return (
       <div className="app-container animated fadeIn">
+<<<<<<< HEAD
         <div>
           {this.state.pageData === null && !this.state.redirectToLogin ? (
             <LoadingPage />
@@ -145,12 +199,54 @@ export default class ClientComponent extends Component {
                         <a href="/dashboard">
                           <i className="fa fa-arrow-left" /> Return to Dashboard
                         </a>
+=======
+        {this.state.pageData === null && !this.state.redirectToLogin ? (
+          <LoadingPage />
+        ) : (
+          <div className="animated fadeIn">
+            <Modal open={this.state.launchModal} className="modal" onClose={this.toggleModal } center>
+              <h2>DANGER ZONE</h2>
+              <p>You are about to remove your Network<br />
+              This action <strong>cannot</strong> be undone!</p>
+              <p><strong>Type in the name of your network exactly as it appears</strong></p>
+              <h3 className="danger-text">{ this.state.client.name }</h3>
+              <form onSubmit={ this.deleteClient } method="GET" className="floating-form">
+                <Input name="deleteName" value={ this.state.deleteName }
+                  onChange={this.handleInputChange }
+                  errorText={ this.state.errorDelete }
+                />
+                <Button style="danger" type="submit" text="Continue and Delete" />
+              </form>
+                
+              
+            </Modal>
+            <header className="app-header">
+              <h1 className="header-title">
+                {this.state.pageData.main.title}
+              </h1>
+            </header>
+            <main className="app-content">
+              <ErrorBoundary>
+                <Container>
+                  <Row>
+                    <a href="/dashboard">
+                      <i className="fa fa-arrow-left" /> Return to Dashboard
+                    </a>
+                    {this.state.client.isDeleted ? (
+                      <h2>This platform has been deleted</h2>
+                    ) : (
+                      <div className="drop-row">
+>>>>>>> upstream/master
                         <MaintenanceHeader
                           toggleSystem={this.toggleSystem}
                           client={this.state.client}
                           hasErrors={this.state.hasErrors}
                           headerText={this.state.pageData.header}
+<<<<<<< HEAD
                           deletePlatform={this.deletePlatform}
+=======
+                          launchModal={this.toggleModal }
+>>>>>>> upstream/master
                         />
                         {this.state.isSaved ? (
                           <span className="badge badge-success">
@@ -161,6 +257,7 @@ export default class ClientComponent extends Component {
                           client={this.state.client}
                           pageData={this.state.pageData}
                         />
+<<<<<<< HEAD
                       </Row>
                     </Container>
                   </ErrorBoundary>
@@ -171,6 +268,17 @@ export default class ClientComponent extends Component {
             /* END pageData CHECK */
           )}
         </div>
+=======
+                      </div>
+                    )}
+                  </Row>
+                </Container>
+              </ErrorBoundary>
+            </main>
+          </div>
+          /* END pageData CHECK */
+        )}
+>>>>>>> upstream/master
       </div>
     );
   }

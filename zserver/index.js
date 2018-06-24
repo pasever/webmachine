@@ -4,7 +4,11 @@
 //////            mainline processing                 ///////
 //////       c xio 2016 - all rights reserved        ///////
 ///////////////////////////////////////////////////////////
+<<<<<<< HEAD
 const request =            require('request')
+=======
+
+>>>>>>> upstream/master
 const express =            require('express');
 const helmet =             require('helmet');
 const expressValidator =   require('express-validator');
@@ -52,6 +56,7 @@ app.use('/', express.static('public/home'));
 app.use(favicon(path.join(__dirname, '..', '/public/assets/favicon.ico')));
 app.use(cors())
 
+<<<<<<< HEAD
 
 ///////////////////////////////////////////////////////////////////////
 /////////////////// messaging alert for platform errors ///////////////
@@ -89,6 +94,8 @@ const callOpenWhisk = (route) => {
 	    });
 	  })
 }
+=======
+>>>>>>> upstream/master
 ///////////////////////////////////////////////////////////////////////
 /////////////////// messaging alert for platform errors ///////////////
 //////////////////////////////////////////////////////////////////////
@@ -156,5 +163,8 @@ let port = process.env.PORT || keys.port;
 app.listen(port, () => {
   console.log(b('listening on port '), port)
 });
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> upstream/master

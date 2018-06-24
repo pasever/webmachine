@@ -8,9 +8,15 @@ import config                 from '../../../../config'
 import logo                   from '../../../avatar/persona/mark.png';
 
 // chatwidget elements
+<<<<<<< HEAD
 let apiProfile = "https://strategicmessage.mybluemix.net"
 let user = "+17048984551"
 let platform = "+19148195104"
+=======
+let apiProfile = "http://localhost:3000"
+let user = "+12123334444"
+let platform = "+12125557777"
+>>>>>>> upstream/master
 
 let token = localStorage.token
 if (!token) token = localStorage.token = Math.random().toString(36).substr(-8)
@@ -50,24 +56,51 @@ const msgObj = {
   ApiVersion: "v1",
   PostDate: Date.now(),
   ChaoticSid: uuidv1(),
+<<<<<<< HEAD
   ChaoticSource: "web",
+=======
+  ChaoticSource: "home",
+>>>>>>> upstream/master
   Token: undefined
 }
 
 class ChatWidget extends Component {
         constructor(props){
           super(props);
+<<<<<<< HEAD
         }
     
 
         
 
 // function for handling the password submitted by the user
+=======
+          /*this.state = {
+            portfolioData: {}
+          }*/
+        }
+    
+
+        /* ALREADY GETTING PORTFOLIO DATA ONCE
+          getPortfolioData(){
+            //Ajax request
+            fetch(origin + '/home/static/portfolioData.json')
+             .then(r => r.json())
+             .then(json => {
+               this.db = json
+               this.setState({  portfolioData: json  });
+            })
+          }*/
+>>>>>>> upstream/master
           handleNewUserMessage = (newMessage) => {
            console.log(`New message incoming! ${newMessage}`);
            // validate the secret key from the array of platform configuration objects
            console.log(platformObj)
+<<<<<<< HEAD
            let tokenkey = platformObj.filter((p) => p.webpassword == newMessage)
+=======
+           let tokenkey = platformObj.filter((p) => p.web == newMessage)
+>>>>>>> upstream/master
        
            if (!msgObj.Token) {
                if (tokenkey.length>0) {
@@ -75,7 +108,11 @@ class ChatWidget extends Component {
                    console.log(tokenkey)
                    addResponseMessage("Thank you!")
                    addResponseMessage("How can I help you?")
+<<<<<<< HEAD
                    msgObj.Token = tokenkey[0].webpassword
+=======
+                   msgObj.Token = tokenkey[0].web
+>>>>>>> upstream/master
                } else {
                    console.log("Token Not Found")
                    console.log(tokenkey)
@@ -83,6 +120,7 @@ class ChatWidget extends Component {
                    addResponseMessage('Please try again')
                    addResponseMessage('Hint: demo')
                  }
+<<<<<<< HEAD
                  console.log(msgObj.Token)
                return
              }
@@ -113,6 +151,49 @@ class ChatWidget extends Component {
           
        // request user for password upon chat widget mount
          componentDidMount(){
+=======
+               return
+             }
+       
+           msgObj.Body = newMessage
+           fetch(`${apiProfile}/api/sms`, {
+               method: 'POST',
+               headers: {
+                 ...headers,
+                 'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(msgObj)
+             }).then(res => res.json()).then(response => {
+                 response.forEach((r) => {
+                     console.log(r)
+                     let rKey = Object.keys(r)[0]
+                     if (rKey == "link") {
+                         addLinkSnippet({
+                           title: 'You can learn more here:',
+                           link: r.link
+                         })
+                       } else {
+                     let message = r[rKey]
+                     addResponseMessage(message)
+                     }
+                 })
+               })
+                 //addResponseMessage(response.message)
+                 /*
+               if (response.link) {
+                   addLinkSnippet({
+                     title: 'Click on the link',
+                     link: response.link
+                   })
+                 }
+                 */
+       
+             }
+       
+       
+         componentDidMount(){
+           //this.getPortfolioData();
+>>>>>>> upstream/master
            addResponseMessage("Let's get started! Please enter your password");
          }
 
