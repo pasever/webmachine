@@ -1,0 +1,11 @@
+applications:
+-       name: strategicmachines
+        host: strategicmachines
+        buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+        memory: 512M
+        instances: 1
+        domain: mybluemix.net
+        path: .
+        command: npm run machine
+        env:
+          PRODUCTION: true

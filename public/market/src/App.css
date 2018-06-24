@@ -1,0 +1,152 @@
+/* Wraps around everything */
+.app-container {
+  width: 100% !important;
+}
+
+/* "Brand bar" at top of page */
+
+.app-header {
+  text-align: center;
+  background-color: #222;
+  padding: 20px;
+  color: #eee;
+}
+
+.header-title {
+  font-size: 1.5em;
+}
+ /* ====================== */
+
+.app-content {
+  font-size: large;
+}
+
+/* Repos Page and Repo Cards */
+
+#repos-count {
+  margin: 20px 0;
+}
+
+#repos-list {
+  padding: 20px 45px;
+  /* these two lines below make magic */
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
+  justify-content: center;
+}
+
+#repos-list .repo-card {
+  margin: 10px;
+  font-size: 17px;
+}
+
+#repos-list .repo-card-body {
+  padding: 10px;
+}
+
+#repos-list .repo-title {
+  text-decoration: none;
+}
+
+.repo-card-wi-count {
+  font-size: 18px;
+}
+
+#repos-list .repo-card-footer {
+  background: #222;
+  padding: 0;
+}
+
+#repos-list .repo-view-issues {
+  color: #eee;
+  font-size: 25px;
+}
+
+#repos-list 
+.repo-view-issues:hover {
+  color: rgba(238, 238, 238, 0.63);
+}
+
+/* ================================== */
+
+#issue-list {
+  padding: 25px 40px;
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
+  grid-auto-columns: minmax(10rem, auto);
+  justify-content: center;
+}
+
+#no-wi-found-alert {
+  text-align: center;
+}
+
+#issue-list .card-body {
+  padding: 10px 20px !important;
+}
+
+.fa-github {
+  color: #333;
+  font-size: 20px;
+  /* display: block; */
+  margin: 0 auto;
+}
+
+#issue-list .issue-card {
+  background: #eee;
+}
+
+#issue-list .issue-card-body {
+  padding: 8px;
+}
+
+#issue-list .issue-title {
+  font-size: 17px;
+  margin: 0 15px;
+}
+
+#issue-list .issue-price {
+  color: green;
+  font-weight: bold;
+  padding: 3px;
+  font-size: 14px;
+}
+
+#issue-list .issue-assignee {
+  font-size: 14px;
+}
+
+#issue-list .issue-due-date,
+.issue-card-footer {
+  font-size: 12px;
+}
+
+/* Highlight due date in red */
+.issue-due-date > span {
+  color: red;
+  font-weight: bold;
+}
+
+/* Workitem card edit button */
+.edit-workitem {
+  position: absolute;
+  top: 0; right: 0;
+  /* margin: 0; */
+  background: none;
+  border: none;
+  margin: 5px 5px 2px 0;
+  outline: none;
+}
+
+.fa-edit {
+  color: #333;
+}
+
+/* Notice about the workitem's assignee based on its stage */
+#editNotice {
+  font-size: 12px;
+  color: tomato;
+  padding: 3px;
+}
