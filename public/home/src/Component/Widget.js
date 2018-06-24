@@ -8,15 +8,9 @@ import config                 from '../../../../config'
 import logo                   from '../../../avatar/persona/mark.png';
 
 // chatwidget elements
-<<<<<<< HEAD
 let apiProfile = "https://strategicmessage.mybluemix.net"
 let user = "+17048984551"
 let platform = "+19148195104"
-=======
-let apiProfile = "http://localhost:3000"
-let user = "+12123334444"
-let platform = "+12125557777"
->>>>>>> upstream/master
 
 let token = localStorage.token
 if (!token) token = localStorage.token = Math.random().toString(36).substr(-8)
@@ -56,42 +50,19 @@ const msgObj = {
   ApiVersion: "v1",
   PostDate: Date.now(),
   ChaoticSid: uuidv1(),
-<<<<<<< HEAD
   ChaoticSource: "web",
-=======
-  ChaoticSource: "home",
->>>>>>> upstream/master
   Token: undefined
 }
 
 class ChatWidget extends Component {
         constructor(props){
           super(props);
-<<<<<<< HEAD
         }
     
 
         
 
 // function for handling the password submitted by the user
-=======
-          /*this.state = {
-            portfolioData: {}
-          }*/
-        }
-    
-
-        /* ALREADY GETTING PORTFOLIO DATA ONCE
-          getPortfolioData(){
-            //Ajax request
-            fetch(origin + '/home/static/portfolioData.json')
-             .then(r => r.json())
-             .then(json => {
-               this.db = json
-               this.setState({  portfolioData: json  });
-            })
-          }*/
->>>>>>> upstream/master
           handleNewUserMessage = (newMessage) => {
            console.log(`New message incoming! ${newMessage}`);
            // validate the secret key from the array of platform configuration objects
