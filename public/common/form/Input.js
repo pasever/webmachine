@@ -9,18 +9,12 @@ import React from "react";
 
 import InputMask from "react-input-mask";
 
-<<<<<<< HEAD
-=======
 // Hey Juan, if you see this - I don't really feel comfortable deleting your code.
 // So, I did read it, and when you see this go ahead and delete your comments first.
 // When I notice that, I will then go ahead and delete my comment.  
 // Hope you're having a good day/week/month - whatever length of time it is from now
 // until you see this.
 // -Dan
->>>>>>> upstream/master
-// Hey Dan, if you see this, you can delete this comment.
-// I'm just testing to ensure I can push to this branch.
-// - Juan
 
 /// Builds out a Bootstrap 4 (RELEASE) input group.
 /* 
@@ -89,15 +83,11 @@ export const Input = props => (
           </label>
         </p>
       ) : (
-<<<<<<< HEAD
-        ""
-=======
         <p>
           <label className="badge badge-danger">
             {props.errorText}
           </label>
         </p>
->>>>>>> upstream/master
       )
     ) : (
       ""

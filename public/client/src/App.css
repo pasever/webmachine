@@ -23,14 +23,10 @@ body {
   color: #eee;
   padding: 10px;
 }
-<<<<<<< HEAD
-
-=======
 .drop-row {
   margin-top: 45px;
   width: 100%;
 }
->>>>>>> upstream/master
 .toggle, .set-default-src, .remove-src {
   cursor: pointer;
 }
@@ -78,13 +74,10 @@ button {
 }
 .maintenance-header {
   width: 100%;
-<<<<<<< HEAD
-=======
   height: 45px;
 }
 .danger-text {
   color: red;
->>>>>>> upstream/master
 }
 .toggle-section {
   float: left;
