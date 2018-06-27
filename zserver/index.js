@@ -4,7 +4,7 @@
 //////            mainline processing                 ///////
 //////       c xio 2016 - all rights reserved        ///////
 ///////////////////////////////////////////////////////////
-
+const request =            require('request')
 const express =            require('express');
 const helmet =             require('helmet');
 const expressValidator =   require('express-validator');
@@ -52,6 +52,43 @@ app.use('/', express.static('public/home'));
 app.use(favicon(path.join(__dirname, '..', '/public/assets/favicon.ico')));
 app.use(cors())
 
+
+///////////////////////////////////////////////////////////////////////
+/////////////////// Server requet for chat widget ////////////////////
+//////////////////////////////////////////////////////////////////////
+
+let  chatApi = 'https://strategicmessage.mybluemix.net'
+
+app.use(bodyParser.json({
+	type: 'application/json',
+  extended: true
+  }));
+  
+  app.post('/api/sms', openHandler);
+//  function issues http call to server, testing the microservices and returning response
+async function openHandler(req, res) {
+  console.log("Call open handler called")
+	const {method, url, headers, body } = req
+	const result = await callOpenWhisk(url)
+	console.log("openhandler function ")
+	res.status(200).send(JSON.stringify(result))
+  return	
+  console.log(req);
+}
+
+const callOpenWhisk = (route) => {
+  console.log("Call open whisk called")
+	return new Promise((resolve, reject) => {
+	   request.post( chatApi + route, { json: data }, function (error, response, body) {
+	       if (error) {
+	          console.log("Error encountered calling - callOpenWhisk")
+	          console.log(error)
+            reject(error) }
+            console.log(data)
+	       resolve(body)
+	    });
+	  })
+}
 ///////////////////////////////////////////////////////////////////////
 /////////////////// messaging alert for platform errors ///////////////
 //////////////////////////////////////////////////////////////////////
@@ -119,3 +156,5 @@ let port = process.env.PORT || keys.port;
 app.listen(port, () => {
   console.log(b('listening on port '), port)
 });
+
+

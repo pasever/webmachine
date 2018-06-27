@@ -22,7 +22,8 @@
 /* a. General Styles
 /* ------------------------------------------------------------------ */
 
-body { background: #0f0f0f; }
+body { background: #0f0f0f;
+ }
 
 /* ------------------------------------------------------------------ */
 /* b. Header Styles
@@ -949,12 +950,16 @@ call-to-action .button {
 /* ------------------------------------------------------------------ */
 
 footer {
-   padding-top: 48px;
-   margin-bottom: 48px;
-   color: #303030;
-   font-size: 14px;
-   text-align: center;
-   position: relative;
+  padding-top: 48px;
+  color: #303030;
+  font-size: 14px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  width: 100%;
+  margin-bottom: 0px;
+  height: 18.5rem;
 }
 
 footer a, footer a:visited { color: #525252; }
@@ -1062,4 +1067,70 @@ footer .social-links li:first-child { margin-left: 42px; }
 
 .rightUl {
   float: right;
+}
+
+.priceColumn {
+  float: left;
+  width: 33.3%;
+  padding: 8px;
+}
+
+.price {
+  list-style-type: none;
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.price:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+.price .header {
+  background-color: #eee;
+  color: black;
+  font-size: 25px;
+}
+
+.price li {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+}
+
+.price .grey {
+  background-color: #eee;
+  font-size: 20px;
+  color: black;
+}
+
+#priceButton {
+  color: black;
+}
+.pageTitle {
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.pageBody {
+  margin: auto;
+  width: 75%;
+  line-height: 30px;
+  color: #7A7A7A;
+  padding-bottom: 15px;
+}
+
+.priceTable {
+  width: 75%;
+  margin: auto;
+}
+
+main {
+  margin-bottom: 185px;
 }

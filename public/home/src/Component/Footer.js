@@ -32,7 +32,6 @@ class Footer extends Component {
                <li>&copy; Copyright 2018 Strategic Machines</li>
             </ul>
          </div>
-         <div id="go-top"><a className="smoothscroll" title="Back to Top" href="#home"><i className="icon-up-open"></i></a></div>
       </div>
    </footer>
     );

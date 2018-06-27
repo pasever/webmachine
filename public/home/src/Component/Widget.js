@@ -8,9 +8,9 @@ import config                 from '../../../../config'
 import logo                   from '../../../avatar/persona/mark.png';
 
 // chatwidget elements
-let apiProfile = "http://localhost:3000"
-let user = "+12123334444"
-let platform = "+12125557777"
+let apiProfile = "https://strategicmessage.mybluemix.net"
+let user = "+17048984551"
+let platform = "+19148195104"
 
 let token = localStorage.token
 if (!token) token = localStorage.token = Math.random().toString(36).substr(-8)
@@ -50,34 +50,24 @@ const msgObj = {
   ApiVersion: "v1",
   PostDate: Date.now(),
   ChaoticSid: uuidv1(),
-  ChaoticSource: "home",
+  ChaoticSource: "web",
   Token: undefined
 }
 
 class ChatWidget extends Component {
         constructor(props){
           super(props);
-          /*this.state = {
-            portfolioData: {}
-          }*/
         }
     
 
-        /* ALREADY GETTING PORTFOLIO DATA ONCE
-          getPortfolioData(){
-            //Ajax request
-            fetch(origin + '/home/static/portfolioData.json')
-             .then(r => r.json())
-             .then(json => {
-               this.db = json
-               this.setState({  portfolioData: json  });
-            })
-          }*/
+        
+
+// function for handling the password submitted by the user
           handleNewUserMessage = (newMessage) => {
            console.log(`New message incoming! ${newMessage}`);
            // validate the secret key from the array of platform configuration objects
            console.log(platformObj)
-           let tokenkey = platformObj.filter((p) => p.web == newMessage)
+           let tokenkey = platformObj.filter((p) => p.webpassword == newMessage)
        
            if (!msgObj.Token) {
                if (tokenkey.length>0) {
@@ -85,7 +75,7 @@ class ChatWidget extends Component {
                    console.log(tokenkey)
                    addResponseMessage("Thank you!")
                    addResponseMessage("How can I help you?")
-                   msgObj.Token = tokenkey[0].web
+                   msgObj.Token = tokenkey[0].webpassword
                } else {
                    console.log("Token Not Found")
                    console.log(tokenkey)
@@ -93,47 +83,36 @@ class ChatWidget extends Component {
                    addResponseMessage('Please try again')
                    addResponseMessage('Hint: demo')
                  }
+                 console.log(msgObj.Token)
                return
              }
-       
+       //when the user submits a message after logged in, this runs to post the message to 
+       //the api server and recieve a response to post in the chat widget as a reply
+       //based on the array.
            msgObj.Body = newMessage
+           console.log(JSON.stringify(msgObj))
            fetch(`${apiProfile}/api/sms`, {
-               method: 'POST',
-               headers: {
-                 ...headers,
-                 'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(msgObj)
-             }).then(res => res.json()).then(response => {
-                 response.forEach((r) => {
-                     console.log(r)
-                     let rKey = Object.keys(r)[0]
-                     if (rKey == "link") {
-                         addLinkSnippet({
-                           title: 'You can learn more here:',
-                           link: r.link
-                         })
-                       } else {
-                     let message = r[rKey]
-                     addResponseMessage(message)
-                     }
-                 })
-               })
-                 //addResponseMessage(response.message)
-                 /*
-               if (response.link) {
-                   addLinkSnippet({
-                     title: 'Click on the link',
-                     link: response.link
-                   })
-                 }
-                 */
-       
-             }
-       
-       
+            method: 'POST',
+            headers: {
+              ...headers,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(msgObj)
+          }).then(res => res.json()).then(response => {      
+             console.log(response)
+             
+            response.forEach((r) => {
+              console.log(r)
+              let rKey = Object.keys(r)[0]
+              let message = r[rKey]
+              addResponseMessage(message)
+         
+           })
+         })
+        }
+          
+       // request user for password upon chat widget mount
          componentDidMount(){
-           //this.getPortfolioData();
            addResponseMessage("Let's get started! Please enter your password");
          }
 

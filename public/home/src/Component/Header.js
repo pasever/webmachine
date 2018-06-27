@@ -69,7 +69,9 @@ class Header extends Component {
               <li><Link to='/about'>About</Link></li>
               <li><Link to='/blog'>Blog</Link></li>
             </div>
-            <div className="nav right">      
+            <div className="nav right">  
+            <script async defer src="https://slack.strategicmachines.com/slackin.js"></script> 
+            <li><a href="https://slackin-wjhddkharc.now.sh/" target="blank">Chat</a></li>   
             { !this.state.authenticated ? (
                 <li><a className="smoothscroll" id="signup" href="#" onClick={this.login.bind(this)}>Log In</a></li> ) :(                
                 <div>
