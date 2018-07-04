@@ -117,16 +117,52 @@
   text-align: center;
 }
 .card-content-skills {
-  background-color: black;
-  padding: 0.75rem;
+  /* background-color: black; */
+  /* padding: 0.75rem; */
   border-radius: 0.25rem;
   margin: 0 0.75rem -0.25rem 0.25rem;
   text-align: center;
 }
 
+.card-content-skills {
+  margin-bottom: 0;
+}
+.card-content-skills button {
+  padding: 0.35rem;
+  margin: 0.35rem;
+}
+
+.card-content-social {
+  margin: 0.4rem;
+}
+.twitter {
+  margin: 0;
+}
+.slack {
+  margin-left: -0.8rem;
+}
+.sms {
+  margin-left: 1rem;
+  padding-top: 0.07rem;
+}
 .breadcrumbs {
    width: auto;
 }
+
+button {
+  border-radius: 0.25rem;
+}
+
+button:first-child {
+  color: rgb(24, 120, 179);
+}
+
+button:nth-child(2) {
+  color: red;
+}
+/* button .a{ 
+  background: grey;
+}  */
 
 .card-content-skills h5 {
     color: white; 
@@ -150,6 +186,21 @@
 
 .card-skill-ul {
   margin-top: 1.25rem;
+}
+
+.conversation-container > .header {
+  background-color: rgb(39, 212, 111);
+}
+
+.widget-container > .launcher {
+  display: none;
+}
+.widget-container > .launcher.hide-sm {
+  display: block;
+}
+
+.card-content-social {
+  margin-left: 3rem;
 }
 
 @media only screen 
@@ -179,3 +230,12 @@ and (orientation: landscape) {
     margin: 0 0 2rem 0;
   }
 }
+
+
+.widget-container > .launcher {
+  display: none;
+}
+.widget-container > .launcher.hide-sm {
+  display: block;
+}
+

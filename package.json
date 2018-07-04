@@ -34,6 +34,8 @@
     "conversational economy"
   ],
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.0",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
     "@octokit/rest": "^15.2.6",
     "axios": "^0.17.1",
     "babel-preset-env": "^1.6.1",
@@ -48,12 +50,14 @@
     "express": "^4.16.3",
     "express-validator": "^5.1.2",
     "form-serialize": "^0.7.2",
+    "i": "^0.3.6",
     "moment": "^2.21.0",
     "mongodb": "^3.0.7",
     "mongoose": "^5.0.14",
     "morgan": "^1.7.0",
     "nodemailer": "^2.6.0",
     "nodemon": "^1.17.3",
+    "npm": "^6.1.0",
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "react": "^16.3.1",
@@ -71,7 +75,7 @@
     "stripe": "^5.7.0",
     "styled-components": "2.4.0",
     "url": "0.11.0",
-    "uuid": "3.0.1",
+    "uuid": "^3.0.1",
     "valid-url": "1.0.9",
     "validator": "^9.3.0",
     "whatwg-fetch": "^2.0.4"
