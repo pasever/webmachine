@@ -4,7 +4,7 @@ import React from 'react';
 const SkillsAvailable = props => 
  
     <div className="agents-available skills-available">
-        <h1> { props.qty } skill(s) available for agent <span>{ props.name }</span></h1>
+        <h1> { props.qty } { (props.qty === 1) ? 'skill' : 'skills' } available for agent <span>{ props.name }</span></h1>
     </div>;
 
 export default SkillsAvailable;
